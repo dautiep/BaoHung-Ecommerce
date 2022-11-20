@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['prefix' => 'admin', 'namespace' => 'Auth'], function() {
+    Route::resource('login', 'LoginController');
+    Route::get('logout', 'LoginController@logout')->name('logout');
+    // Route::resource('reset-password', 'ResetPasswordController');
+});
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
+    Route::get('/home', 'HomeController@index')->name('dashboard');
 });
