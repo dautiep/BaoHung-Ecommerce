@@ -9,9 +9,16 @@ class TypeOfService extends Model
 {
     use HasFactory;
     protected $table = 'type_of_service';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'name',
         'created_date',
         'user_id'
     ];
+
+    public function getKeyName()
+    {
+        dd(1);
+        return 'id';
+    }
 }

@@ -8,10 +8,10 @@ use App\Repositories\Interfaces\GroupRepositoryInterface;
 use App\Repositories\Interfaces\OtherFagRepositoryInterface;
 use App\Repositories\Interfaces\QuestionAswerServiceInterface;
 use App\Repositories\Interfaces\RoleRepositoryInterface;
+use App\Repositories\Interfaces\TypeOfServiceRepositoryInterface;
 use App\Repositories\QuestionAswerServiceRepository;
 use App\Repositories\TypeOfServiceRepository;
 use Illuminate\Support\ServiceProvider;
-use TypeOfServiceRepositoryInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
 {

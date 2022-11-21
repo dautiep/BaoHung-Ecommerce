@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\TypeOfService;
-use TypeOfServiceRepositoryInterface;
+use App\Repositories\Interfaces\TypeOfServiceRepositoryInterface;
 
 class TypeOfServiceRepository extends BaseRepository implements TypeOfServiceRepositoryInterface
 {
@@ -12,4 +12,6 @@ class TypeOfServiceRepository extends BaseRepository implements TypeOfServiceRep
     {
         $this->_model = $model;
     }
+
+
 }

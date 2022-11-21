@@ -21,4 +21,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Auth'], function() {
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
     Route::get('/home', 'HomeController@index')->name('dashboard');
+
+    //services
+    Route::group(['prefix' => 'services'], function() {
+        Route::get('', 'TypeOfServiceController@index')->name('services.list');
+    });
+
 });

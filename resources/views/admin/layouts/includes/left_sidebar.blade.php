@@ -29,7 +29,7 @@
                     </li>
                 {{-- @endif --}}
                 <li class="nav-header">AZOFFICE SYSTEM</li>
-                @if ($activePage == 'list-building' || $activePage == 'list-building-feature' ||
+                @if ($activePage == 'list-service' || $activePage == 'list-building-feature' ||
                 $activePage == 'space-building' || $activePage == 'list-update-building' ||
                 $activePage == 'list-request-update-building')
                     @php
@@ -41,7 +41,7 @@
                     <a href="#" class="nav-link nav-main {{ (!empty($hasActivePage)) ? ' active' : '' }}">
                         <i class="nav-icon far fa-building"></i>
                         <p>
-                            Quản Lý Văn Phòng
+                            QL Câu hỏi - Dịch vụ
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -49,9 +49,9 @@
                     <ul class="nav nav-treeview" style="display: block">
                         {{-- @if (Auth::user()->role != App\Enums\ERole::MARKETING) --}}
                             <li class="nav-item">
-                                <a href="" class="nav-link {{ ($activePage === 'list-building') ? ' active' : '' }}">
+                                <a href="{{ route('services.list') }}" class="nav-link {{ ($activePage === 'list-service') ? ' active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Danh Sách Văn Phòng</p>
+                                    <p>Danh Sách Dịch vụ</p>
                                 </a>
                             </li>
                         {{-- @endif --}}
