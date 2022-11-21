@@ -11,5 +11,7 @@ class OtherFagRepository extends BaseRepository implements OtherFagRepositoryInt
     public function __construct(OtherFag $model)
     {
         $this->_model = $model;
+        parent::__construct($model);
+
     }
 }

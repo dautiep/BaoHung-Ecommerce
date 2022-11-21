@@ -11,6 +11,7 @@ class TypeOfServiceRepository extends BaseRepository implements TypeOfServiceRep
     public function __construct(TypeOfService $model)
     {
         $this->_model = $model;
+        parent::__construct($model);
     }
 
 

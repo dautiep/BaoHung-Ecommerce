@@ -24,10 +24,6 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         $repositories = [
             [
-                'interface' => BaseRepositoryInterface::class,
-                'repository'   => BaseRepository::class
-            ],
-            [
                 'interface' => GroupRepositoryInterface::class,
                 'repository' => GroupRepository::class,
             ],

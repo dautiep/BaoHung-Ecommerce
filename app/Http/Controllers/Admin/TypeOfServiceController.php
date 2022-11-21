@@ -8,14 +8,15 @@ use App\Repositories\Interfaces\TypeOfServiceRepositoryInterface;
 
 class TypeOfServiceController extends Controller
 {
-    private $typeOfServiceInterFace;
+    private $_typeOfServiceInterFace;
     public function __construct(TypeOfServiceRepositoryInterface $typeOfServiceInterFace)
     {
-        $this->typeOfServiceInterFace = $typeOfServiceInterFace;
+        $this->_typeOfServiceInterFace = $typeOfServiceInterFace;
     }
 
-    public function index() {
-        $services = $this->typeOfServiceInterFace->all();
+    public function index()
+    {
+        $services = $this->_typeOfServiceInterFace->all();
         dd($services);
     }
 }

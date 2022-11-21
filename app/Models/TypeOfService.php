@@ -15,10 +15,4 @@ class TypeOfService extends Model
         'created_date',
         'user_id'
     ];
-
-    public function getKeyName()
-    {
-        dd(1);
-        return 'id';
-    }
 }

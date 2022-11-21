@@ -11,5 +11,7 @@ class QuestionAswerServiceRepository extends BaseRepository implements QuestionA
     public function __construct(QuestionAswerService $model)
     {
         $this->_model = $model;
+        parent::__construct($model);
+
     }
 }

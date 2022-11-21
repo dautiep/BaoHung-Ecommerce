@@ -8,8 +8,9 @@ use App\Repositories\Interfaces\GroupRepositoryInterface;
 class GroupRepository extends BaseRepository implements GroupRepositoryInterface
 {
     private $_model;
-    public function __construct(Group $group)
+    public function __construct(Group $model)
     {
-        $this->_model = $group;
+        $this->_model = $model;
+        parent::__construct($model);
     }
 }

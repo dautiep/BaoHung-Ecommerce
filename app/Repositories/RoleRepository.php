@@ -11,5 +11,7 @@ class RoleRepository extends BaseRepository implements RoleRepositoryInterface
     public function __construct(Role $model)
     {
         $this->_model = $model;
+        parent::__construct($model);
+
     }
 }
