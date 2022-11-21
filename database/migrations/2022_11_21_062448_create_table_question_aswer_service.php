@@ -15,6 +15,7 @@ class CreateTableQuestionAswerService extends Migration
     {
         Schema::create('question_aswer_service', function (Blueprint $table) {
             $table->string('id', 5)->primary();
+            $table->string('question_content', 200);
             $table->string('consulting_content', 200);
             $table->timestamp('created_date')->useCurrent();
             $table->bigInteger('view')->default(0);
