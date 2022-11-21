@@ -34,7 +34,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="phoneSearch">Tên Dịch Vụ</label>
-                                            <input type="text" class="form-control" name="nameCategory" value="{{ $info['nameCategory'] }}">
+                                            <input type="text" class="form-control" name="nameCategory" value="{{ $info['serviceName'] }}">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -55,7 +55,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>&nbsp;</label>
-                                            <a href="{{ route('blog.category.create') }}" class="btn btn-block btn-warning">Thêm Danh Mục</a>
+                                            <a href="{{ route('services.create') }}" class="btn btn-block btn-warning">Thêm Dịch Vụ</a>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -68,7 +68,7 @@
                             </form>
                         </div>
                         <div class="card-body table-responsive pt-0">
-                            <div class="mb-3">Tổng số: <b> {{ $listCategory->total() }}   </b> records</div>
+                            <div class="mb-3">Tổng số: <b> {{ $services->total() }}   </b> records</div>
                             <table class="table table-bordered table-hover table-head-fixed">
                                 <thead>
                                     <tr>
@@ -79,32 +79,30 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($listCategory as $key => $category)
-                                        @if ($category->status != App\Enums\EStatusBlogCategory::LOCKED)
-                                            <tr>
-                                                <td class="align-middle" scope="row"> {{ $key + $listCategory->firstItem() }} </td>
-                                                <td class="align-middle">
-                                                    {{ $category->name }}
-                                                </td>
-                                                <td class="align-middle text-center">{{ date_format(date_create($category->created_at), 'H:i:s d-m-Y') }}</td>
-                                                <td class="align-middle text-center">
-                                                    <a class="btn btn-sm btn-primary" href="{{ route('blog.category.edit', $category->id) }}" title="Cập nhật thông tin">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    {{-- <button role="button" class="btn btn-sm btn-danger"
-                                                            onclick="cancelCategory('{{ $category->id }}')" data-toggle="tooltip"
-                                                            title="Xóa danh mục"><i class="fas fa-times"></i>
-                                                    </button> --}}
-                                                </td>
-                                            </tr>
-                                        @endif
+                                    @foreach ($services as $key => $service)
+                                        <tr>
+                                            <td class="align-middle" scope="row"> {{ $key + $services->firstItem() }} </td>
+                                            <td class="align-middle">
+                                                {{ $service->name }}
+                                            </td>
+                                            <td class="align-middle text-center">{{ date_format(date_create($service->created_at), 'H:i:s d-m-Y') }}</td>
+                                            <td class="align-middle text-center">
+                                                <a class="btn btn-sm btn-primary" href="" title="Cập nhật thông tin">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <button role="button" class="btn btn-sm btn-danger"
+                                                        onclick="cancelCategory('{{ $service->id }}')" data-toggle="tooltip"
+                                                        title="Xóa dịch vụ"><i class="fas fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer clearfix text-right">
-                            {{ $listCategory->appends($info)->onEachSide(2)->links() }}
+                            {{ $services->appends($info)->onEachSide(2)->links() }}
                         </div>
                     </div>
                 </div>
@@ -133,12 +131,12 @@
             $(this).val('');
         });
 
-        function cancelCategory(id_category) {
+        function cancelCategory(id_service) {
             var data = {
-                categoryId: id_category,
+                serviceId: id_service,
                 };
             Swal.fire({
-                title: 'Bạn có chắc xóa danh mục này không?',
+                title: 'Bạn có chắc xóa dịch vụ này không?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -149,7 +147,7 @@
                 if (result.value) {
                     $('.loader').show();
                     $.ajax({
-                        url: "{{ route('blog.category.delete') }}",
+                        url: "{{ route('services.delete') }}",
                         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                         type: 'POST',
                         data: data,

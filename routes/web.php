@@ -24,7 +24,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 
     //services
     Route::group(['prefix' => 'services'], function() {
-        Route::get('', 'TypeOfServiceController@index')->name('services.list');
+        Route::get('', 'TypeOfServiceController@list')->name('services.list');
+        Route::get('/create', 'TypeOfServiceController@create')->name('services.create');
+        Route::get('/store', 'TypeOfServiceController@store')->name('services.store');
+        Route::post('/delete', 'TypeOfServiceController@delete')->name('services.delete');
     });
 
 });
