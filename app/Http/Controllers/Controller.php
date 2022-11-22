@@ -9,5 +9,13 @@ use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
+    public static $TYPE_MESSAGES_SUCCESS = 'success';
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    public function getMessages($message = '', $type = 'success')
+    {
+        return [
+            'message' => $message,
+            'alert-type' => $type
+        ];
+    }
 }

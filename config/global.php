@@ -14,6 +14,23 @@ return [
                 'key' => 2,
                 'name' => 'Bị block'
             ],
+            'users' => [
+                [
+                    'key' => 1,
+                    'name' => 'Hoạt động'
+                ],
+                [
+                    'key' => 2,
+                    'name' => 'Khóa tài khoản'
+                ]
+            ]
+        ],
+        'messages' => [
+            'users' => [
+                'create' => [
+                    'message' => 'Thêm tài khoản thành công'
+                ]
+            ]
         ]
     ]
 ];
