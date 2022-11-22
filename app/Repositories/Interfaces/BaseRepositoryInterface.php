@@ -69,4 +69,7 @@ interface BaseRepositoryInterface
      * @return mixed
      */
     public function delete(string $id);
+    public function findByWith(array $data, $relationships = array('*'));
+
+
 }

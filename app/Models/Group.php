@@ -15,4 +15,9 @@ class Group extends Model
         'group_role_json',
         'status'
     ];
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'group_role', 'group_id', 'id');
+    }
 }

@@ -13,21 +13,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Auth'], function() {
+Route::group(['prefix' => 'admin', 'namespace' => 'Auth'], function () {
     Route::resource('login', 'LoginController');
     Route::get('logout', 'LoginController@logout')->name('logout');
     // Route::resource('reset-password', 'ResetPasswordController');
 });
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/home', 'HomeController@index')->name('dashboard');
 
     //services
-    Route::group(['prefix' => 'services'], function() {
+    Route::group(['prefix' => 'services'], function () {
         Route::get('', 'TypeOfServiceController@list')->name('services.list');
         Route::get('/create', 'TypeOfServiceController@create')->name('services.create');
         Route::get('/store', 'TypeOfServiceController@store')->name('services.store');
         Route::post('/delete', 'TypeOfServiceController@delete')->name('services.delete');
     });
-
+    // users
+    Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
+        Route::get('/', 'UserController@list')->name('list');
+        Route::get('create', 'UserController@create')->name('create');
+        Route::post('/delete', 'UserController@delete')->name('delete');
+        Route::post('store/{id?}', 'UserController@store')->name('store');
+    });
 });

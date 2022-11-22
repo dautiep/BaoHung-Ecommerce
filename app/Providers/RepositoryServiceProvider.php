@@ -9,8 +9,10 @@ use App\Repositories\Interfaces\OtherFagRepositoryInterface;
 use App\Repositories\Interfaces\QuestionAswerServiceInterface;
 use App\Repositories\Interfaces\RoleRepositoryInterface;
 use App\Repositories\Interfaces\TypeOfServiceRepositoryInterface;
+use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Repositories\QuestionAswerServiceRepository;
 use App\Repositories\TypeOfServiceRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -42,6 +44,10 @@ class RepositoryServiceProvider extends ServiceProvider
             [
                 'interface' => TypeOfServiceRepositoryInterface::class,
                 'repository' => TypeOfServiceRepository::class
+            ],
+            [
+                'interface' => UserRepositoryInterface::class,
+                'repository' => UserRepository::class,
             ]
         ];
         foreach ($repositories as $instance) {
