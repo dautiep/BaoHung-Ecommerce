@@ -27,9 +27,9 @@ return [
         ],
         'messages' => [
             'users' => [
-                'create' => [
-                    'message' => 'Thêm tài khoản thành công'
-                ]
+                'create' => 'Thêm tài khoản thành công',
+                'delete' => 'Xóa tài khoản thành công',
+                'edit'   => 'Chỉnh sửa tài khoản thành công',
             ]
         ]
     ]

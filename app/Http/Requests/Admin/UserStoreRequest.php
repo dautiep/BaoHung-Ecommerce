@@ -27,7 +27,10 @@ class UserStoreRequest extends FormRequest
         $rules = [];
         if (!request()->id) {
             return $this->onValidateCreate();
+        } else {
+            return $this->onValidateUpdate();
         }
+
         return $rules;
     }
 
@@ -45,5 +48,13 @@ class UserStoreRequest extends FormRequest
 
     public function onValidateUpdate()
     {
+        $is_active = collect(config('global.default.status.users'))->pluck('key')->toArray();
+
+        return [
+            'name' => ['required', 'unique:users,name,' . request()->id, 'max:200'],
+            'email' => ['required', 'unique:users,email,' . request()->id, 'max:200', 'email'],
+            'password' => ['required', 'min:6', 'max:100'],
+            'is_active' => ['required', Rule::in($is_active)]
+        ];
     }
 }
