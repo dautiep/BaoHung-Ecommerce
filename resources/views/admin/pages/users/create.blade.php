@@ -44,7 +44,7 @@
                                             <div class="form-group">
                                                 <label class="text-capitalize">Tên Tài khoản <sup
                                                         class="text-danger">*</sup></label>
-                                                <input type="text" name="name" value="{{ old('name') }}"
+                                                <input type="text" name="name" value="{{ old('name', @$data->name) }}"
                                                     class="form-control" placeholder="Tên Tài khoản">
                                             </div>
                                         </div>
@@ -54,8 +54,9 @@
                                             <div class="form-group">
                                                 <label class="text-capitalize">Email Tài khoản <sup
                                                         class="text-danger">*</sup></label>
-                                                <input type="text" name="email" value="{{ old('email') }}"
-                                                    class="form-control" placeholder="Email Tài khoản">
+                                                <input type="text" name="email"
+                                                    value="{{ old('email', @$data->email) }}" class="form-control"
+                                                    placeholder="Email Tài khoản">
                                             </div>
                                         </div>
                                     </div>
@@ -64,8 +65,8 @@
                                             <div class="form-group">
                                                 <label class="text-capitalize">Password Tài khoản <sup
                                                         class="text-danger">*</sup></label>
-                                                <input type="password" name="password" value="{{ old('email') }}"
-                                                    class="form-control" placeholder="Email Tài khoản">
+                                                <input type="password" name="password" value="{{ old('password') }}"
+                                                    class="form-control" placeholder="Password Tài khoản">
                                             </div>
                                         </div>
                                     </div>
@@ -74,12 +75,11 @@
                                             <div class="form-group">
                                                 <label class="text-capitalize">Trạng Thái <sup
                                                         class="text-danger">*</sup></label>
-                                                <select class="form-control select2" name="is_active"
-                                                    id="is_active">
-                                                    <option value="">--- Chọn status ---</option>
+                                                <select class="form-control select2" name="is_active" id="is_active">
+                                                    <option value="">--- Chọn Trạng thái ---</option>
                                                     @foreach (config('global.default.status.users') as $value)
                                                         <option value="{{ @$value['key'] }}"
-                                                            {{ @$value == @$service->status ? 'selected' : '' }}>
+                                                            {{ @$value['key'] == @$data->is_active || $value['key'] == old('is_active', @$data->is_active) ? 'selected' : '' }}>
                                                             {{ @$value['name'] }}
                                                         </option>
                                                     @endforeach

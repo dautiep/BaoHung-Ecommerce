@@ -34,7 +34,7 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="phoneSearch">Tên Tài khoản</label>
-                                                <input type="text" class="form-control" name="nameCategory"
+                                                <input type="text" class="form-control" name="keySearch"
                                                     value="{{ @$info['keySearch'] }}">
                                             </div>
                                         </div>
@@ -96,7 +96,8 @@
                                                 <td class="align-middle text-center">
                                                     {{ date_format(date_create($item->created_at), 'H:i:s d-m-Y') }}</td>
                                                 <td class="align-middle text-center">
-                                                    <a class="btn btn-sm btn-primary" href=""
+                                                    <a class="btn btn-sm btn-primary"
+                                                        href="{{ route('users.edit', ['id' => $item->id]) }}"
                                                         title="Cập nhật thông tin">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
@@ -165,11 +166,11 @@
                         data: data,
                         success: function(response) {
                             $('.loader').hide();
-                            if (response.success == 0) {
+                            if (response.status) {
                                 Swal.fire({
                                     title: 'Thành công',
-                                    text: "Đã xóa danh mục",
-                                    icon: 'success',
+                                    text: response.message ?? 'Xử lý thành công',
+                                    icon: response.icon ?? 'Success',
                                     confirmButtonColor: '#3085d6',
                                     confirmButtonText: 'Xác nhận'
                                 }).then((result) => {
