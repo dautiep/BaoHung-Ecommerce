@@ -79,7 +79,7 @@
                                                     <option value="">--- Chọn status ---</option>
                                                     @foreach (config('global.default.status.users') as $value)
                                                         <option value="{{ @$value['key'] }}"
-                                                            {{ @$value == @$service->status ? 'selected' : '' }}>
+                                                            {{ @$value == @$data->status || $value == old('is_active') ? 'selected' : '' }}>
                                                             {{ @$value['name'] }}
                                                         </option>
                                                     @endforeach

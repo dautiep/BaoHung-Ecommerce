@@ -26,6 +26,7 @@ class UserController extends Controller
             'type' => 'SEARCH'
         ];
         $data = $this->_userRepository->getLists($request);
+
         return view($this->_prefix . 'list', compact('info', 'data'));
     }
 

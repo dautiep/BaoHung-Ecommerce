@@ -17,15 +17,15 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function getLists($request)
     {
         $builder =  $this->findByWith([
-            'is_active' => User::USER_IS_ACTIVE
-        ]);
+            'is_active' => User::USER_IS_ACTIVE,
+        ], ['groups']);
         return $builder;
     }
 
     public function handleCreateOrUpdate($id, $request)
     {
         if ($id == null) {
-            return $this->_model->create($request->only('name', 'email', 'password', 'is_active'));
+            return $this->create($request->only('name', 'email', 'password', 'is_active'));
         }
         return $this->update($request->only('name', 'email', 'password', 'is_active'), $id);
     }

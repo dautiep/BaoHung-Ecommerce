@@ -20,7 +20,7 @@ return [
                     'name' => 'Hoạt động'
                 ],
                 [
-                    'key' => 2,
+                    'key' => 0,
                     'name' => 'Khóa tài khoản'
                 ]
             ]

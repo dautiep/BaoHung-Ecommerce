@@ -39,12 +39,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected function groups()
+    public function groups()
     {
         return $this->hasMany(Group::class, 'user_id', 'id');
     }
 
-    protected function setPasswordAttribute($value)
+    public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
     }
