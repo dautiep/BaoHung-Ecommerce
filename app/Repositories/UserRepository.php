@@ -42,10 +42,11 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function handleDelete($request): bool
     {
-        $builder = $this->_model->find($request->get('itemId'));
-        if (!$builder) {
-            return false;
-        }
-        return $builder->delete();
+        return $this->destroyGlobalByCondition($this->_model, [
+            'key' => 'id',
+            'arrId' => [
+                $request->get('itemId'),
+            ]
+        ], 'array');
     }
 }

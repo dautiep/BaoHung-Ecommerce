@@ -75,7 +75,6 @@ class TypeOfServiceController extends Controller
             $this->_typeOfServiceInterFace->destroyByID($input);
             return \Response::json(['success' => $this::$TYPE_MESSAGES_SUCCESS, 'message' => 'Xóa thành công']);
         } catch (Exception $e) {
-            dd($e->getMessage());
             logger($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
             return \Response::json(['success' => $this::$TYPE_MESSAGES_ERROR, 'message' => 'Lỗi! Xóa dịch vụ thất bại!']);
         }
