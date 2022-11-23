@@ -16,7 +16,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function getLists($request)
     {
-        $builder =  $this->_model->with('groups')->where([
+        $builder =  $this->_model->where([
             'is_active' => User::USER_IS_ACTIVE
         ])->where(function ($query) use ($request) {
             if (!empty($request->keySearch)) {

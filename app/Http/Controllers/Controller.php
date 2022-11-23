@@ -28,4 +28,14 @@ class Controller extends BaseController
             'status' => $boolean
         ];
     }
+
+    public function getBuilderSearch($request) {
+        return  [
+            'keySearch' => $request->get('keySearch', ''),
+            'fromTo' => $request->get('fromTo', ''),
+            'fromDate' => null,
+            'toDate' => null,
+            'type' => 'SEARCH'
+        ];
+    }
 }

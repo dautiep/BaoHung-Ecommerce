@@ -13,4 +13,20 @@ class GroupRepository extends BaseRepository implements GroupRepositoryInterface
         $this->_model = $model;
         parent::__construct($model);
     }
+
+    public function getList($request)
+    {
+
+        $builder =  $this->_model->where(function ($query) use ($request) {
+            if (!empty($request->keySearch)) {
+                $query->whereLike('name', $request->keySearch);
+            }
+
+            if (!empty($request->fromTo)) {
+                $query->whereExplodeDate('created_at', $request->fromTo);
+            }
+        })->paginate($this->page);
+        return $builder;
+    }
+
 }

@@ -15,7 +15,6 @@ class CreateTableGroups extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('user_id')->index();
             $table->string('name');
             $table->longText('group_role_json')->nullable();
             $table->tinyInteger('status')->nullable();
