@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class OtherFag extends Model
 {
     use HasFactory;
-    protected $table = 'other_faqs';
-    protected $fillable = [
+    public $table = 'other_faqs';
+    public $fillable = [
         'content_to_consult',
         'consulting_content',
         'created_date',

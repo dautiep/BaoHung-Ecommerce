@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class QuestionAswerService extends Model
 {
     use HasFactory;
-    protected $table = 'question_aswer_service';
-    protected $fillable = [
+    public $table = 'question_aswer_service';
+    public $fillable = [
         'consulting_content',
         'created_date',
         'view',
