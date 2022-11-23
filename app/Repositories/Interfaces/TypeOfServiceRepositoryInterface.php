@@ -20,4 +20,5 @@ interface TypeOfServiceRepositoryInterface extends BaseRepositoryInterface
     public function handleCreateOrUpdate(String $id, array $request);
 
 
+    public function destroyByID($id);
 }

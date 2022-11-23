@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class TypeOfService extends Model
 {
     use HasFactory;
-    protected $table = 'type_of_service';
-    protected $primaryKey = 'id';
-    protected $fillable = [
+    public $table = 'type_of_service';
+    public $primaryKey = 'id';
+    public $fillable = [
         'id',
         'name',
         'created_date',
