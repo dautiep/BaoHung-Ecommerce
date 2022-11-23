@@ -5,7 +5,8 @@
     <script type="text/javascript" src="{{ asset('plugin/jquery-easyui-1.10.8/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('plugin/jquery-easyui-1.10.8/jquery.easyui.min.js') }}"></script>
     <style type="text/css">
-        .tree-folder , .tree-file {
+        .tree-folder,
+        .tree-file {
             background-image: none !important;
         }
     </style>
@@ -61,8 +62,8 @@
                                     </div>
                                     <div class="easyui-panel" style="padding:40px 40px;">
                                         <div style="margin-bottom:20px">
-                                            <input id="permission" name="permission[]"  class="easyui-combotree"
-                                                data-options="url:'{{ route('roles.config') }}',method:'get',label:'Chọn quyền:',labelPosition:'top',multiple:true,value:{{ @$data->permission ?? '[]'}}"
+                                            <input id="permission" name="permission[]" class="easyui-combotree"
+                                                data-options="url:'{{ route('roles.config') }}',method:'get',label:'Chọn quyền:',labelPosition:'top',multiple:true,value:{{ @$data->permission ?? '[]' }}"
                                                 style="width:100%">
                                         </div>
                                     </div>
