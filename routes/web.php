@@ -39,4 +39,22 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('edit/{id}', 'UserController@edit')->name('edit');
         Route::post('store/{id?}', 'UserController@store')->name('store');
     });
+    // roles
+    Route::group(['prefix' => 'roles', 'as' => 'roles.'], function () {
+        Route::get('/', 'RoleController@list')->name('list');
+        Route::get('create', 'RoleController@create')->name('create');
+        Route::post('/delete', 'RoleController@delete')->name('delete');
+        Route::get('edit/{id}', 'RoleController@edit')->name('edit');
+        Route::post('store/{id?}', 'RoleController@store')->name('store');
+        Route::get('config', 'RoleController@config')->name('config');
+    });
+
+    // groups
+    Route::group(['prefix' => 'groups', 'as' => 'groups.'], function () {
+        Route::get('/', 'GroupController@list')->name('list');
+        Route::get('create', 'GroupController@create')->name('create');
+        Route::post('/delete', 'GroupController@delete')->name('delete');
+        Route::get('edit/{id}', 'GroupController@edit')->name('edit');
+        Route::post('store/{id?}', 'GroupController@store')->name('store');
+    });
 });

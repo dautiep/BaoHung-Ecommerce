@@ -70,6 +70,5 @@ interface BaseRepositoryInterface
      */
     public function delete(string $id);
     public function findByWith(array $data, $relationships = array('*'));
-
-
+    public function findWith(string $id, $relationships = array('*'));
 }

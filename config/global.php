@@ -35,14 +35,23 @@ return [
                     'name' => 'Đã khóa',
                     'action' => 'Mở khóa dịch vụ'
                 ]
+            ],
+            'groups' => [
+                [
+                    'key' => 1,
+                    'name' => 'Hoạt động'
+                ],
+                [
+                    'key' => 0,
+                    'name' => 'Khóa'
+                ]
             ]
 
         ],
         'messages' => [
             'users' => [
-                'create' => [
-                    'message' => 'Thêm tài khoản thành công'
-                ]
+                'create' => 'Thêm tài khoản thành công',
+                'edit' => 'Chỉnh sửa tài khoản thành công',
             ],
             'type_of_services' => [
                 'store' => 'Lưu thông tin dịch vụ thành công',
@@ -51,7 +60,17 @@ return [
                 'lock' => 'Đã khóa dịch vụ',
                 'unlock' => 'Đã mở khóa dịch vụ',
                 'edit'   => 'Chỉnh sửa dịch vụ thành công',
-            ]
+            ],
+            'roles' => [
+                'create' => 'Thêm bộ quyền thành công',
+                'edit' => 'Cập nhật quyền thành công',
+                'delete'   => 'Xóa quyền thành công',
+            ],
+            'groups' => [
+                'create' => 'Tạo nhóm quyền thành công',
+                'edit' => 'Cập nhật quyền thành công',
+                'delete'   => 'Xóa nhóm quyền thành công'
+            ],
         ]
     ]
 ];

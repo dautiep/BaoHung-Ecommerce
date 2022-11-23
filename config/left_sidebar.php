@@ -30,7 +30,7 @@ return [
         'icon' => 'nav-icon fas fa-address-book',
         'active' => true,
         'hasActivePage' => [
-            'users.list'
+            'users.list', 'roles.list', 'groups.list'
         ],
         'position' => 0,
         'authorize' => [],
@@ -46,6 +46,29 @@ return [
                 'authorize' => [],
                 'active' => true
             ],
+            [
+                'router' => 'groups.list',
+                'name' => 'Danh sách nhóm quyền',
+                'icon' => 'far fa-circle nav-icon',
+                'hasActivePage' => [
+                    'groups.list'
+                ],
+                'position' => 1,
+                'authorize' => [],
+                'active' => true
+            ],
+            [
+                'router' => 'roles.list',
+                'name' => 'Danh sách bộ quyền',
+                'icon' => 'far fa-circle nav-icon',
+                'hasActivePage' => [
+                    'roles.list'
+                ],
+                'position' => 1,
+                'authorize' => [],
+                'active' => true
+            ],
         ]
-    ]
+    ],
+
 ];
