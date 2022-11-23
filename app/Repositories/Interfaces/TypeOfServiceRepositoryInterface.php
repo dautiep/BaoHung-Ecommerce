@@ -19,6 +19,10 @@ interface TypeOfServiceRepositoryInterface extends BaseRepositoryInterface
      */
     public function handleCreateOrUpdate(String $id, array $request);
 
-
-    public function destroyByID($id);
+    /**
+     * lock or unlock data
+     * @param array $request
+     * @return mixed
+     */
+    public function lockOrUnlockByID(array $request);
 }

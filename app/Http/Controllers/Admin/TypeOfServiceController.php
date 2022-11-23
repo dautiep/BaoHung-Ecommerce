@@ -19,6 +19,7 @@ class TypeOfServiceController extends Controller
 
     public function list(Request $request)
     {
+        $status = config('global.default.status.type_of_services');
         $fromTo = $request->get('fromTo');
         $fromDate = NULL;
         $toDate = NULL;
@@ -35,7 +36,7 @@ class TypeOfServiceController extends Controller
             'type' => 'SEARCH'
         ];
         $services = $this->_typeOfServiceInterFace->searchWithInfo($info);
-        return view($this->_prefix . 'list', compact('services', 'info'));
+        return view($this->_prefix . 'list', compact('services', 'info', 'status'));
     }
 
     public function create()
@@ -68,15 +69,28 @@ class TypeOfServiceController extends Controller
         return view($this->_prefix . 'create', compact('service'));
     }
 
-    public function delete(Request $request)
+    public function lock(Request $request)
     {
         try {
             $input = $request->all();
-            $this->_typeOfServiceInterFace->destroyByID($input);
-            return \Response::json(['success' => $this::$TYPE_MESSAGES_SUCCESS, 'message' => 'Xóa thành công']);
+            $this->_typeOfServiceInterFace->lockOrUnlockByID($input);
+            return \Response::json(['success' => $this::$TYPE_MESSAGES_SUCCESS, 'message' => config('global.default.messages.type_of_services.lock')]);
+        } catch (Exception $e) {
+            dd($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
+            logger($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
+            return \Response::json(['success' => $this::$TYPE_MESSAGES_ERROR, 'message' => config('global.default.messages.type_of_services.error')]);
+        }
+    }
+
+    public function unlock(Request $request)
+    {
+        try {
+            $input = $request->all();
+            $this->_typeOfServiceInterFace->lockOrUnlockByID($input);
+            return \Response::json(['success' => $this::$TYPE_MESSAGES_SUCCESS, 'message' => config('global.default.messages.type_of_services.unlock')]);
         } catch (Exception $e) {
             logger($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
-            return \Response::json(['success' => $this::$TYPE_MESSAGES_ERROR, 'message' => 'Lỗi! Xóa dịch vụ thất bại!']);
+            return \Response::json(['success' => $this::$TYPE_MESSAGES_ERROR, 'message' => config('global.default.messages.type_of_services.error')]);
         }
     }
 }

@@ -28,7 +28,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('/create', 'TypeOfServiceController@create')->name('services.create');
         Route::post('/store/{id?}', 'TypeOfServiceController@store')->name('services.store');
         Route::get('/edit/{id}', 'TypeOfServiceController@edit')->name('services.edit');
-        Route::post('/delete', 'TypeOfServiceController@delete')->name('services.delete');
+        Route::post('/lock', 'TypeOfServiceController@lock')->name('services.lock');
+        Route::post('/unlock', 'TypeOfServiceController@unlock')->name('services.unlock');
     });
     // users
     Route::group(['prefix' => 'users', 'as' => 'users.'], function () {

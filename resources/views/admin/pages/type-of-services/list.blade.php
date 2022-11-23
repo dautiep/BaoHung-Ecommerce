@@ -73,7 +73,9 @@
                                 <thead>
                                     <tr>
                                         <th class="bg-info" style="width: 10px">#</th>
+                                        <th class="text-center bg-info">Mã DV</th>
                                         <th class="text-center bg-info w-50">Tên</th>
+                                        <th class="text-center bg-info">Trạng thái</th>
                                         <th class="text-center bg-info">Ngày Tạo</th>
                                         <th class="text-center bg-info">Hành Động</th>
                                     </tr>
@@ -82,18 +84,34 @@
                                     @foreach ($services as $key => $service)
                                         <tr>
                                             <td class="align-middle" scope="row"> {{ $key + $services->firstItem() }} </td>
+                                            <td class="align-middle text-center" scope="row"> {{ $service->id }} </td>
                                             <td class="align-middle">
                                                 {{ $service->name }}
                                             </td>
-                                            <td class="align-middle text-center">{{ date_format(date_create($service->created_at), 'H:i:s d-m-Y') }}</td>
                                             <td class="align-middle text-center">
-                                                <a class="btn btn-sm btn-primary" href="{{ route('services.edit', $service->id) }}" title="Cập nhật thông tin">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <button role="button" class="btn btn-sm btn-danger"
-                                                        onclick="cancelCategory('{{ $service->id }}')" data-toggle="tooltip"
-                                                        title="Xóa dịch vụ"><i class="fas fa-times"></i>
-                                                </button>
+                                                @if ($service->status == $status[0]['key'])
+                                                    <span class="badge bg-success">{{ $status[0]['name'] }}</span>
+                                                @else
+                                                    <span class="badge bg-danger">{{ $status[1]['name'] }}</span>
+                                                @endif
+                                            </td>
+                                            <td class="align-middle text-center">{{ date_format(date_create($service->created_at), 'd-m-Y') }}</td>
+                                            <td class="align-middle text-center">
+
+                                                @if ($service->status == $status[0]['key'])
+                                                    <a class="btn btn-sm btn-primary" href="{{ route('services.edit', $service->id) }}" title="Cập nhật thông tin">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    <button role="button" class="btn btn-sm btn-warning"
+                                                            onclick="deactiveService('{{ $service->id }}')" data-toggle="tooltip"
+                                                            title="{{ $status[0]['action'] }}"><i class="fa fa-key"></i>
+                                                    </button>
+                                                @else
+                                                    <button role="button" class="btn btn-sm btn-success"
+                                                            onclick="activeService('{{ $service->id }}')" data-toggle="tooltip"
+                                                            title="{{ $status[1]['action'] }}"><i class="fa fa-key"></i>
+                                                    </button>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
@@ -131,13 +149,13 @@
             $(this).val('');
         });
 
-        function cancelCategory(id_service) {
+        function deactiveService(id_service) {
             var data = {
                 serviceId: id_service,
+                serviceStatus: 0
                 };
-            console.log(data);
             Swal.fire({
-                title: 'Bạn có chắc xóa dịch vụ này không?',
+                title: 'Bạn có muốn khóa dịch vụ này không?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -148,16 +166,64 @@
                 if (result.value) {
                     $('.loader').show();
                     $.ajax({
-                        url: "{{ route('services.delete') }}",
+                        url: "{{ route('services.lock') }}",
                         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                         type: 'POST',
                         data: data,
                         success: function(response) {
                             $('.loader').hide();
-                            if (response.success == 0) {
+                            if (response.success == 'success') {
                                     Swal.fire({
                                     title: 'Thành công',
-                                    text: "Đã xóa danh mục",
+                                    text: "Đã khóa dịch vụ",
+                                    icon: 'success',
+                                    confirmButtonColor: '#3085d6',
+                                    confirmButtonText: 'Xác nhận'
+                                }).then((result) => {
+                                    if (result.value) {
+                                        window.location.reload();
+                                    }
+                                })
+                            } else {
+                                toastr.error('Có lỗi xảy ra vui lòng thử lại sau.')
+                            }
+                        },
+                        error: function(response) {
+                            toastr.error('Có lỗi xảy ra vui lòng thử lại sau.')
+                        }
+                    });
+
+                }
+            })
+        }
+
+        function activeService(id_service) {
+            var data = {
+                serviceId: id_service,
+                serviceStatus: 1
+                };
+            Swal.fire({
+                title: 'Bạn có chắc muốn kích hoạt dịch vụ này không?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Xác nhận',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Hủy'
+            }).then((result) => {
+                if (result.value) {
+                    $('.loader').show();
+                    $.ajax({
+                        url: "{{ route('services.unlock') }}",
+                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                        type: 'POST',
+                        data: data,
+                        success: function(response) {
+                            $('.loader').hide();
+                            if (response.success == 'success') {
+                                    Swal.fire({
+                                    title: 'Thành công',
+                                    text: "Đã kích hoạt dịch vụ",
                                     icon: 'success',
                                     confirmButtonColor: '#3085d6',
                                     confirmButtonText: 'Xác nhận'

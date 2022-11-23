@@ -34,11 +34,13 @@ class TypeOfServiceRepository extends BaseRepository implements TypeOfServiceRep
     public function handleCreateOrUpdate($id, $request)
     {
         if ($id == null) {
+            $status = config('global.default.status.type_of_services');
             $idValue = Str::random(3);
             return $this->_model->create(
                 [
                     'id' => $idValue,
                     'name' => $request['serviceName'],
+                    'status' => $status[0]['key'],
                     'user_id' => Auth::user()->id
                 ]
             );
@@ -47,8 +49,13 @@ class TypeOfServiceRepository extends BaseRepository implements TypeOfServiceRep
     }
 
 
-    public function destroyByID($input)
+    public function lockOrUnlockByID($input)
     {
-        return $this->_model->where('id', $input['serviceId'])->delete();
+        $status = config('global.default.status.type_of_services');
+        if ((int)$input['serviceStatus'] == $status[0]['key']) {
+            return $this->update(['status' => $status[1]['key']], $input['serviceId']);
+        } else {
+            return $this->update(['status' => $status[0]['key']], $input['serviceId']);
+        }
     }
 }
