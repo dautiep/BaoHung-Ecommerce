@@ -19,4 +19,13 @@ class Controller extends BaseController
             'alert-type' => $type
         ];
     }
+
+    public function responseAjax($message, $icon = 'success', $boolean = true)
+    {
+        return [
+            'message' => $message,
+            'icon' => $icon,
+            'status' => $boolean
+        ];
+    }
 }

@@ -16,17 +16,36 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function getLists($request)
     {
-        $builder =  $this->findByWith([
+        $builder =  $this->_model->with('groups')->where([
             'is_active' => User::USER_IS_ACTIVE
-        ]);
+        ])->where(function ($query) use ($request) {
+            if (!empty($request->keySearch)) {
+                $query->whereLike('name', $request->keySearch);
+            }
+
+            if (!empty($request->fromTo)) {
+                $query->whereExplodeDate('created_at', $request->fromTo);
+            }
+        })->paginate($this->page);
         return $builder;
     }
 
     public function handleCreateOrUpdate($id, $request)
     {
+        $fillable = $request->only('name', 'email', 'password', 'is_active');
         if ($id == null) {
-            return $this->_model->create($request->only('name', 'email', 'password', 'is_active'));
+            return $this->create($fillable);
         }
-        return $this->update($request->only('name', 'email', 'password', 'is_active'), $id);
+
+        return $this->update($fillable, $id);
+    }
+
+    public function handleDelete($request): bool
+    {
+        $builder = $this->_model->find($request->get('itemId'));
+        if (!$builder) {
+            return false;
+        }
+        return $builder->delete();
     }
 }

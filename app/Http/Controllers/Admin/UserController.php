@@ -26,6 +26,7 @@ class UserController extends Controller
             'type' => 'SEARCH'
         ];
         $data = $this->_userRepository->getLists($request);
+
         return view($this->_prefix . 'list', compact('info', 'data'));
     }
 
@@ -36,12 +37,20 @@ class UserController extends Controller
 
     public function delete(Request $request)
     {
+        $data = $this->_userRepository->handleDelete($request);
+        return response()->json($this->responseAjax(config('global.default.messages.users.delete'), $this::$TYPE_MESSAGES_SUCCESS));
     }
 
     public function store(UserStoreRequest $request, $id = null)
     {
-        $message = config('global.default.messages.users.create');
+        $message = $id == null ?  config('global.default.messages.users.create') : config('global.default.messages.users.edit');
         $data = $this->_userRepository->handleCreateOrUpdate($id, $request);
         return redirect()->back()->with($this->getMessages($message, $this::$TYPE_MESSAGES_SUCCESS));
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $data = $this->_userRepository->find($id);
+        return view($this->_prefix . 'create', compact('data'));
     }
 }
