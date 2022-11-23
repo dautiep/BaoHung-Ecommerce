@@ -31,7 +31,7 @@
                     </a>
                 </li>
                 {{-- @endif --}}
-                <li class="nav-header">AZOFFICE SYSTEM</li>
+                <li class="nav-header">CHATBOX SYSTEM</li>
 
                 @php
                     $sidebar = collect(config('left_sidebar'))->where('active', true);

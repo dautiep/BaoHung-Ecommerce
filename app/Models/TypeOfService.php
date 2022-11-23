@@ -11,6 +11,7 @@ class TypeOfService extends Model
     protected $table = 'type_of_service';
     protected $primaryKey = 'id';
     protected $fillable = [
+        'id',
         'name',
         'created_date',
         'user_id'

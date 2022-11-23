@@ -10,4 +10,14 @@ interface TypeOfServiceRepositoryInterface extends BaseRepositoryInterface
      * @return mixed
      */
     public function searchWithInfo(array $info);
+
+     /**
+     * handle save or update data
+     * @param string $id
+     * @param array $request
+     * @return mixed
+     */
+    public function handleCreateOrUpdate(String $id, array $request);
+
+
 }

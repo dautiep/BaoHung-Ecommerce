@@ -30,6 +30,10 @@ return [
                 'create' => [
                     'message' => 'Thêm tài khoản thành công'
                 ]
+            ],
+            'type_of_services' => [
+                'store' => 'Lưu thông tin dịch vụ thành công',
+                'error' => 'Lưu thông tin dịch vụ thất bại'
             ]
         ]
     ]

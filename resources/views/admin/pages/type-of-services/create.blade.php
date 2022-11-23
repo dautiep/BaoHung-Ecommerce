@@ -44,7 +44,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="text-capitalize">Tên Dịch Vụ <sup class="text-danger">*</sup></label>
-                                                <input type="text" name="serviceName" value="{{ old('serviceName') }}" class="form-control" placeholder="Kiến thức liên quan">
+                                                <input type="text" name="serviceName" value="{{ old('serviceName') }}" class="form-control" placeholder="Hướng dẫn mở tài khoản" autocomplete="off">
                                             </div>
                                         </div>
                                     </div>
@@ -61,7 +61,7 @@
                             </div>
                         </form>
                     @else
-                    <form action="{{ route('blog.category.update', $service->id) }}" method="POST">
+                    <form action="{{ route('services.store', $service->id) }}" method="POST">
                         @csrf
                         <div class="card card-success">
                             <div class="card-header">
@@ -72,20 +72,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="text-capitalize">Tên Dịch Vụ <sup class="text-danger">*</sup></label>
-                                            <input type="text" name="serviceName" value="{{ $service->name }}" class="form-control" placeholder="Kiến thức liên quan">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-4">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="text-capitalize">Trạng Thái <sup class="text-danger">*</sup></label>
-                                            <select class="form-control select2" name="statusBlogCategory" id="statusBlogCategory">
-                                                <option value="">--- Chọn status ---</option>
-                                                @foreach ($listStatus as $value)
-                                                    <option value="{{ $value }}" {{ ($value == $service->status) ? 'selected' : '' }}>{{ App\Enums\EStatusBlogCategory::valueToString($value) }}</option>
-                                                @endforeach
-                                            </select>
+                                            <input type="text" name="serviceName" value="{{ $service->name }}" class="form-control" placeholder="Hướng dẫn mở tài khoản" autocomplete="off">
                                         </div>
                                     </div>
                                 </div>
@@ -97,7 +84,7 @@
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-success">Lưu</button>
-                                <a href="{{ route("blog.category.list") }}" class="btn btn-primary ml-4">Trở Về</a>
+                                <a href="{{ route("services.list") }}" class="btn btn-primary ml-4">Trở Về</a>
                             </div>
                         </div>
                     </form>

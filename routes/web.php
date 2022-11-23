@@ -26,7 +26,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::group(['prefix' => 'services'], function () {
         Route::get('', 'TypeOfServiceController@list')->name('services.list');
         Route::get('/create', 'TypeOfServiceController@create')->name('services.create');
-        Route::get('/store', 'TypeOfServiceController@store')->name('services.store');
+        Route::post('/store/{id?}', 'TypeOfServiceController@store')->name('services.store');
+        Route::get('/edit/{id}', 'TypeOfServiceController@edit')->name('services.edit');
         Route::post('/delete', 'TypeOfServiceController@delete')->name('services.delete');
     });
     // users

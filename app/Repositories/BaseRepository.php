@@ -199,6 +199,7 @@ class BaseRepository implements BaseRepositoryInterface
      */
     public function delete(string $id): bool
     {
+        dd($id);
         return $this->model->find($id)->delete();
     }
 

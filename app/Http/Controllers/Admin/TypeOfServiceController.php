@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\TypeOfServiceRequest;
 use Illuminate\Http\Request;
 use App\Repositories\Interfaces\TypeOfServiceRepositoryInterface;
+use Exception;
 
 class TypeOfServiceController extends Controller
 {
+    private $_prefix = 'admin.pages.type-of-services.';
     private $_typeOfServiceInterFace;
     public function __construct(TypeOfServiceRepositoryInterface $typeOfServiceInterFace)
     {
@@ -32,18 +35,44 @@ class TypeOfServiceController extends Controller
             'type' => 'SEARCH'
         ];
         $services = $this->_typeOfServiceInterFace->searchWithInfo($info);
-        return view('admin.pages.type-of-services.list', compact('services', 'info'));
+        return view($this->_prefix . 'list', compact('services', 'info'));
     }
 
     public function create() {
-        return view('admin.pages.type-of-services.create');
+        return view($this->_prefix . 'create');
     }
 
-    public function store() {
-        dd(1);
+    public function store(TypeOfServiceRequest $request, $id = null) {
+        try {
+            $input = $request->all();
+            $data = $this->_typeOfServiceInterFace->handleCreateOrUpdate($id, $input);
+            if (!$data) {
+                $message = config('global.default.messages.type_of_services.error');
+                return redirect()->back()->with($this->getMessages($message, $this::$TYPE_MESSAGES_ERROR));
+            } else {
+                $message = config('global.default.messages.type_of_services.store');
+                return redirect()->route('services.list')->with($this->getMessages($message, $this::$TYPE_MESSAGES_SUCCESS));
+            }
+        } catch (Exception $e) {
+            logger($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
+            $message = config('global.default.messages.type_of_services.error');
+            return redirect()->back()->with($this->getMessages($message, $this::$TYPE_MESSAGES_ERROR));
+        }
+    }
+
+    public function edit($id) {
+        $service = $this->_typeOfServiceInterFace->find($id);
+        return view($this->_prefix . 'create', compact('service'));
     }
 
     public function delete(Request $request) {
-        dd(1);
+        try {
+            $input = $request->all();
+            $this->_typeOfServiceInterFace->delete($input['serviceId']);
+            return \Response::json(['success' => $this::$TYPE_MESSAGES_SUCCESS, 'message' => 'Lỗi! Xóa dịch vụ thất bại!']);
+        } catch (Exception $e) {
+            logger($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
+            return \Response::json(['success' => $this::$TYPE_MESSAGES_ERROR, 'message' => 'Lỗi! Xóa dịch vụ thất bại!']);
+        }
     }
 }

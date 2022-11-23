@@ -12,7 +12,7 @@ return [
         'authorize' => [],
         'children' => [
             [
-                'router' => '',
+                'router' => 'services.list',
                 'name' => 'Danh sách dịch vụ',
                 'icon' => 'far fa-circle nav-icon',
                 'hasActivePage' => [

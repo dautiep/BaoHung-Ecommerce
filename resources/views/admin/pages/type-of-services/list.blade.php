@@ -87,7 +87,7 @@
                                             </td>
                                             <td class="align-middle text-center">{{ date_format(date_create($service->created_at), 'H:i:s d-m-Y') }}</td>
                                             <td class="align-middle text-center">
-                                                <a class="btn btn-sm btn-primary" href="" title="Cập nhật thông tin">
+                                                <a class="btn btn-sm btn-primary" href="{{ route('services.edit', $service->id) }}" title="Cập nhật thông tin">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <button role="button" class="btn btn-sm btn-danger"
@@ -135,6 +135,7 @@
             var data = {
                 serviceId: id_service,
                 };
+            console.log(data);
             Swal.fire({
                 title: 'Bạn có chắc xóa dịch vụ này không?',
                 icon: 'warning',
