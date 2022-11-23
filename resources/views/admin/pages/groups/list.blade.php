@@ -57,7 +57,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>&nbsp;</label>
-                                                <a href="{{ route('roles.create') }}" class="btn btn-block btn-warning">Thêm
+                                                <a href="{{ route('groups.create') }}" class="btn btn-block btn-warning">Thêm
                                                     nhóm quyền</a>
                                             </div>
                                         </div>
@@ -94,7 +94,7 @@
                                                     {{ date_format(date_create($item->created_at), 'H:i:s d-m-Y') }}</td>
                                                 <td class="align-middle text-center">
                                                     <a class="btn btn-sm btn-primary"
-                                                        href="{{ route('roles.edit', ['id' => $item->id]) }}"
+                                                        href="{{ route('groups.edit', ['id' => $item->id]) }}"
                                                         title="Cập nhật thông tin">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
@@ -155,7 +155,7 @@
                 if (result.value) {
                     $('.loader').show();
                     $.ajax({
-                        url: "{{ route('roles.delete') }}",
+                        url: "{{ route('groups.delete') }}",
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },

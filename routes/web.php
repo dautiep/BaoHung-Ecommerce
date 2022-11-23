@@ -51,5 +51,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     // groups
     Route::group(['prefix' => 'groups', 'as' => 'groups.'], function () {
         Route::get('/', 'GroupController@list')->name('list');
+        Route::get('create', 'GroupController@create')->name('create');
+        Route::post('/delete', 'GroupController@delete')->name('delete');
+        Route::get('edit/{id}', 'GroupController@edit')->name('edit');
+        Route::post('store/{id?}', 'GroupController@store')->name('store');
     });
 });

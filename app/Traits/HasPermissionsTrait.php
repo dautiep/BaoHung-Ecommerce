@@ -46,4 +46,11 @@ trait HasPermissionsTrait
         }
         return $node_revert;
     }
+
+    public function getJsonPermissionToArray($permissions)
+    {
+        return collect($permissions)->map(function ($value) {
+            return json_decode($value);
+        })->unique();
+    }
 }

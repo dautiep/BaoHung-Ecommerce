@@ -23,6 +23,16 @@ return [
                     'key' => 0,
                     'name' => 'Khóa tài khoản'
                 ]
+            ],
+            'groups' => [
+                [
+                    'key' => 1,
+                    'name' => 'Hoạt động'
+                ],
+                [
+                    'key' => 0,
+                    'name' => 'Khóa'
+                ]
             ]
         ],
         'messages' => [
@@ -39,9 +49,14 @@ return [
             ],
             'roles' => [
                 'create' => 'Thêm bộ quyền thành công',
-                'edit' => 'Edit quyền thành công',
+                'edit' => 'Cập nhật quyền thành công',
                 'delete'   => 'Xóa quyền thành công',
-            ]
+            ],
+            'groups' => [
+                'create' => 'Tạo nhóm quyền thành công',
+                'edit' => 'Cập nhật quyền thành công',
+                'delete'   => 'Xóa nhóm quyền thành công'
+            ],
         ]
     ]
 ];

@@ -11,8 +11,6 @@ class Role extends Model
     use HasFactory, ScopeTrait;
     public $table = 'roles';
 
-
-
     public $fillable = [
         'permission',
         'name'

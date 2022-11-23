@@ -14,11 +14,12 @@ class Group extends Model
         'user_id',
         'name',
         'group_role_json',
-        'status'
+        'status',
+        'is_active'
     ];
 
     public function roles()
     {
-        return $this->belongsToMany(Role::class, 'group_role', 'group_id', 'id');
+        return $this->belongsToMany(Role::class, 'group_role', 'group_id', 'role_id');
     }
 }
