@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\ScopeTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
-    use HasFactory;
+    use HasFactory, ScopeTrait;
     public $table = 'groups';
     public $fillable = [
         'user_id',

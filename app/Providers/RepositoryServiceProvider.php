@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Repositories\BaseRepository;
+use App\Repositories\GroupRepository;
 use App\Repositories\Interfaces\BaseRepositoryInterface;
 use App\Repositories\Interfaces\GroupRepositoryInterface;
 use App\Repositories\Interfaces\OtherFagRepositoryInterface;
@@ -11,6 +12,7 @@ use App\Repositories\Interfaces\RoleRepositoryInterface;
 use App\Repositories\Interfaces\TypeOfServiceRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Repositories\QuestionAswerServiceRepository;
+use App\Repositories\RoleRepository;
 use App\Repositories\TypeOfServiceRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;

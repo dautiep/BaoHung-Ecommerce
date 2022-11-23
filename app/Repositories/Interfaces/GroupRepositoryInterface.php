@@ -6,4 +6,5 @@ use App\Repositories\Interfaces\BaseRepositoryInterface;
 
 interface GroupRepositoryInterface extends BaseRepositoryInterface
 {
+    public function getList($request);
 }

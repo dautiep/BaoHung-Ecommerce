@@ -27,9 +27,8 @@ return [
         ],
         'messages' => [
             'users' => [
-                'create' => [
-                    'message' => 'Thêm tài khoản thành công'
-                ]
+                'create' => 'Thêm tài khoản thành công',
+                'edit' => 'Chỉnh sửa tài khoản thành công',
             ],
             'type_of_services' => [
                 'store' => 'Lưu thông tin dịch vụ thành công',
@@ -37,6 +36,11 @@ return [
                 'create' => 'Thêm tài khoản thành công',
                 'delete' => 'Xóa tài khoản thành công',
                 'edit'   => 'Chỉnh sửa tài khoản thành công',
+            ],
+            'roles' => [
+                'create' => 'Thêm bộ quyền thành công',
+                'edit' => 'Edit quyền thành công',
+                'delete'   => 'Xóa quyền thành công',
             ]
         ]
     ]

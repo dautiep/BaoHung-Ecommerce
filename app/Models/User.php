@@ -40,10 +40,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function groups()
-    {
-        return $this->hasMany(Group::class, 'user_id', 'id');
-    }
 
     public function setPasswordAttribute($value)
     {
