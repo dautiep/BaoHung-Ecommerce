@@ -37,6 +37,7 @@ class Controller extends BaseController
             'fromDate' => null,
             'toDate' => null,
             'is_active' => $request->is_active ?? 1,
+            'status' => $request->status ?? 1,
             'type' => 'SEARCH'
         ];
     }

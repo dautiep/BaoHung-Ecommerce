@@ -35,6 +35,7 @@ class UserStoreRequest extends FormRequest
 
         return $rules;
     }
+
     public function getGroupRuleAll()
     {
         return
@@ -42,6 +43,7 @@ class UserStoreRequest extends FormRequest
                 'status' =>  Group::$STATUS_ACTIVE
             ])->pluck('id')->toArray());
     }
+
     public function onValidateCreate()
     {
         $groups = request()->groups;
