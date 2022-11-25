@@ -91,7 +91,7 @@
                                     <thead>
                                         <tr>
                                             <th class="bg-info" style="width: 10px">#</th>
-                                            <th class="text-center bg-info w-40">Tên</th>
+                                            <th class="text-center bg-info w-50">Tên</th>
                                             <th class="text-center bg-info">Email</th>
                                             <th class="text-center bg-info">Nhóm quyền</th>
                                             <th class="text-center bg-info">Trạng thái</th>

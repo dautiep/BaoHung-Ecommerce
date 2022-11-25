@@ -23,20 +23,14 @@
                         <p> Trang Chủ </p>
                         </a>
                 </li>
-                {{-- @if (Auth::user()->role == App\Enums\ERole::ADMIN) --}}
-                <li class="nav-item">
-                    <a href="" class="nav-link nav-main {{ $activePage === 'list-account' ? ' active' : '' }}">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p> Quản Lý Tài Khoản</p>
-                    </a>
-                </li>
-                {{-- @endif --}}
-                <li class="nav-header">CHATBOX SYSTEM</li>
 
                 @php
                     $sidebar = collect(config('left_sidebar'))->where('active', true);
                 @endphp
                 @foreach ($sidebar as $parent)
+                    @if ($loop->index == 1)
+                        <li class="nav-header">CHATBOX SYSTEM</li>
+                    @endif
                     <li class="nav-item has-treeview menu-open">
                         @php
 
@@ -75,6 +69,7 @@
                             @endif
                         @endif
                     </li>
+
                 @endforeach
             </ul>
         </nav>
