@@ -52,6 +52,21 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="text-capitalize">Trạng Thái <sup
+                                                        class="text-danger">*</sup></label>
+                                                <select class="form-control select2" name="is_active" id="is_active">
+                                                    <option value="">--- Chọn Trạng thái ---</option>
+                                                    @foreach (config('global.default.status.users') as $value)
+                                                        <option value="{{ @$value['key'] }}"
+                                                            {{ @$value['key'] == @$info['is_active'] ? 'selected' : '' }}>
+                                                            {{ @$value['name'] }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
@@ -76,13 +91,19 @@
                                     <thead>
                                         <tr>
                                             <th class="bg-info" style="width: 10px">#</th>
-                                            <th class="text-center bg-info w-50">Tên</th>
+                                            <th class="text-center bg-info w-40">Tên</th>
                                             <th class="text-center bg-info">Email</th>
+                                            <th class="text-center bg-info">Nhóm quyền</th>
+                                            <th class="text-center bg-info">Trạng thái</th>
                                             <th class="text-center bg-info">Ngày Tạo</th>
                                             <th class="text-center bg-info">Hành Động</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @php
+                                            $config_status = collect(config('global.default.status.users'));
+                                            $config_active = config('global.default.status.users.active.key');
+                                        @endphp
                                         @foreach ($data as $key => $item)
                                             <tr>
                                                 <td class="align-middle" scope="row"> {{ $key + $data->firstItem() }}
@@ -94,17 +115,31 @@
                                                     {{ $item->email }}
                                                 </td>
                                                 <td class="align-middle text-center">
+                                                    @foreach (@$item->groups as $group)
+                                                        <span class="badge bg-success">{{ $group->name }}</span>
+                                                    @endforeach
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span
+                                                        class="badge {{ $item->is_active == $config_active ? 'bg-success' : ' bg-danger' }}">{{ $config_status->firstWhere('key', $item->is_active)['name'] ?? '' }}</span>
+                                                </td>
+                                                <td class="align-middle text-center">
                                                     {{ date_format(date_create($item->created_at), 'H:i:s d-m-Y') }}</td>
                                                 <td class="align-middle text-center">
-                                                    <a class="btn btn-sm btn-primary"
-                                                        href="{{ route('users.edit', ['id' => $item->id]) }}"
-                                                        title="Cập nhật thông tin">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    <button role="button" class="btn btn-sm btn-danger"
-                                                        onclick="cancelCategory('{{ $item->id }}')"
-                                                        data-toggle="tooltip" title="Xóa Tài khoản"><i
-                                                            class="fas fa-times"></i>
+                                                    @if ($item->is_active == $config_active)
+                                                        <a class="btn btn-sm btn-primary"
+                                                            href="{{ route('users.edit', ['id' => $item->id]) }}"
+                                                            title="Cập nhật thông tin">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    @endif
+                                                    @php
+                                                        $lablel = $item->is_active == $config_active ? 'Khóa tài khoản' : 'Mở khóa tài khoản';
+                                                    @endphp
+                                                    <button role="button" class="btn btn-sm btn-warning"
+                                                        onclick="cancelCategory('{{ $item->id }}', '{{ $lablel }}')"
+                                                        data-toggle="tooltip" title="{{ $lablel }}"><i
+                                                            class="fas fa-key"></i>
                                                     </button>
                                                 </td>
                                             </tr>
@@ -142,12 +177,12 @@
             $(this).val('');
         });
 
-        function cancelCategory(id_item) {
+        function cancelCategory(id_item, message = null) {
             var data = {
                 itemId: id_item,
             };
             Swal.fire({
-                title: 'Bạn có chắc xóa Tài khoản này không?',
+                title: message ?? 'Bạn có chắc khóa tài khoản này không?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -158,7 +193,7 @@
                 if (result.value) {
                     $('.loader').show();
                     $.ajax({
-                        url: "{{ route('users.delete') }}",
+                        url: "{{ route('users.state') }}",
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },

@@ -9,4 +9,5 @@ interface UserRepositoryInterface extends BaseRepositoryInterface
     public function getLists($request);
     public function handleCreateOrUpdate($id, $request);
     public function handleDelete($request);
+    public function handleUpdateState($request);
 }

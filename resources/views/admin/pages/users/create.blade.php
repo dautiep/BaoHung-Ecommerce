@@ -60,28 +60,58 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mt-4">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label class="text-capitalize">Password Tài khoản <sup
-                                                        class="text-danger">*</sup></label>
-                                                <input type="password" name="password" value="{{ old('password') }}"
-                                                    class="form-control" placeholder="Password Tài khoản">
+                                    @if (empty(@$data))
+                                        <div class="row mt-4">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="text-capitalize">Nhập Password Tài khoản <sup
+                                                            class="text-danger">*</sup></label>
+                                                    <div class="input-group" id="show_hide_password">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><a href=""><i
+                                                                        class="fa fa-eye-slash"
+                                                                        aria-hidden="true"></i></a></span>
+                                                        </div>
+                                                        <input class="form-control" type="password" name="password"
+                                                            value="{{ old('password') }}" placeholder="Password Tài khoản">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+
+                                        <div class="row mt-4">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="text-capitalize">Nhập lại password Tài khoản <sup
+                                                            class="text-danger">*</sup></label>
+                                                    <div class="input-group" id="show_hide_password">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><a href=""><i
+                                                                        class="fa fa-eye-slash"
+                                                                        aria-hidden="true"></i></a></span>
+                                                        </div>
+                                                        <input class="form-control" type="password" name="password"
+                                                            value="{{ old('password') }}" placeholder="Password Tài khoản">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
                                     <div class="row mt-4">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="text-capitalize">Trạng Thái <sup
+                                                <label class="text-capitalize">Chọn nhóm quyền quản lý<sup
                                                         class="text-danger">*</sup></label>
-                                                <select class="form-control select2" name="is_active" id="is_active">
-                                                    <option value="">--- Chọn Trạng thái ---</option>
-                                                    @foreach (config('global.default.status.users') as $value)
-                                                        <option value="{{ @$value['key'] }}"
-                                                            {{ @$value['key'] == @$data->is_active || $value['key'] == old('is_active', @$data->is_active) ? 'selected' : '' }}>
-                                                            {{ @$value['name'] }}
-                                                        </option>
+                                                <select name="groups[]" id="groups" class="select2" multiple="multiple"
+                                                    data-placeholder="Chọn thẻ" style="width: 100%;">
+                                                    <option value="">--- Chọn nhóm quyền quản lý ---</option>
+                                                    @php
+                                                        $collect_group = @$data->groups ? @$data->groups->pluck('id')->toArray() : [];
+                                                    @endphp
+                                                    @foreach ($groups as $item)
+                                                        <option value="{{ $item->id }}"
+                                                            {{ in_array($item->id, old('groups', $collect_group ?: [])) ? 'selected' : '' }}>
+                                                            {{ $item->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -109,6 +139,25 @@
 
 @section('scripts')
     <script>
+        $(document).ready(function() {
+            $("#show_hide_password a").on('click', function(event) {
+                event.preventDefault();
+                if ($('#show_hide_password input').attr("type") == "text") {
+                    $('#show_hide_password input').attr('type', 'password');
+                    $('#show_hide_password i').addClass("fa-eye-slash");
+                    $('#show_hide_password i').removeClass("fa-eye");
+                } else if ($('#show_hide_password input').attr("type") == "password") {
+                    $('#show_hide_password input').attr('type', 'text');
+                    $('#show_hide_password i').removeClass("fa-eye-slash");
+                    $('#show_hide_password i').addClass("fa-eye");
+                }
+            });
+        });
+    </script>
+    <script>
+        $("#groups").select2({
+            theme: 'bootstrap4'
+        });
         $("#statusBlogCategory").select2({
             theme: 'bootstrap4'
         });

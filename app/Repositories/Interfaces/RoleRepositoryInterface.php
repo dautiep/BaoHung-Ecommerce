@@ -7,5 +7,5 @@ interface RoleRepositoryInterface extends BaseRepositoryInterface
     public function getList($request);
     public function handleCreateOrUpdate($id, $request);
     public function handleDelete($request): bool;
-    public function getAllByCondition();
+    public function getAllByCondition($condition = []);
 }

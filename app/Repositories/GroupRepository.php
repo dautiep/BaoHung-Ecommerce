@@ -27,23 +27,41 @@ class GroupRepository extends BaseRepository implements GroupRepositoryInterface
             if (!empty($request->fromTo)) {
                 $query->whereExplodeDate('created_at', $request->fromTo);
             }
+
+            if (isset($request->status)) {
+                $query->where('status', $request->status);
+            }
         })->paginate($this->page);
+        return $builder;
+    }
+
+    public function getAllByCondition($condition = [])
+    {
+        $builder = $this->_model->where(function ($query) use ($condition) {
+            if (isset($condition['status'])) {
+                $query->where('status', $condition['status']);
+            }
+        })->get();
         return $builder;
     }
 
 
     public function handleCreateOrUpdate($id, $request)
     {
-        $builder = $this->_model->create($request->only('name', 'status'));
-        if (!empty($request->get('roles'))) {
-            $builder->roles()->sync($request->get('roles'));
-            $roles = $builder->roles;
-            if (!$roles->isEmpty()) {
-                $json_role = $this->getJsonPermissionToArray($builder->roles->pluck('permission'))->toJson();
-                $builder->update([
-                    'group_role_json' => $json_role,
-                ]);
-            }
+        if ($id == null) {
+            $builder = $this->_model->create($request->only('name', 'status'));
+            return $builder;
+        } else {
+            $builder = $this->_model->find($id);
+        }
+        $builder->update($request->only('name', 'status'));
+        $builder->roles()->sync($request->get('roles'));
+        $roles = $builder->roles;
+        if (!$roles->isEmpty()) {
+            $json_role = $this->getJsonPermissionToArray($builder->roles->pluck('permission'))->toJson();
+            $builder->update([
+                'group_role_json' => $json_role,
+            ]);
         }
         return $builder;
     }
@@ -56,5 +74,17 @@ class GroupRepository extends BaseRepository implements GroupRepositoryInterface
         }
         $builder->roles()->detach();
         return $builder->delete();
+    }
+
+    public function handleUpdateState($request)
+    {
+
+        $builder = $this->_model->find($request->get('itemId'),);
+        if (!$builder) {
+            return false;
+        }
+        return $builder->update([
+            'status' => !$builder->status
+        ]);
     }
 }

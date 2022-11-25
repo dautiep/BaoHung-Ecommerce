@@ -10,12 +10,12 @@ class Group extends Model
 {
     use HasFactory, ScopeTrait;
     public $table = 'groups';
+    public static $STATUS_ACTIVE = 1;
     public $fillable = [
         'user_id',
         'name',
         'group_role_json',
         'status',
-        'is_active'
     ];
 
     public function roles()
