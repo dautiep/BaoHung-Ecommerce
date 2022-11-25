@@ -31,10 +31,26 @@ class GroupRepository extends BaseRepository implements GroupRepositoryInterface
         return $builder;
     }
 
+    public function getAllByCondition($condition = [])
+    {
+        $builder = $this->_model->where(function ($query) use ($condition) {
+            if (isset($condition['status'])) {
+                $query->where('status', $condition['status']);
+            }
+        })->get();
+        return $builder;
+    }
+
 
     public function handleCreateOrUpdate($id, $request)
     {
-        $builder = $this->_model->create($request->only('name', 'status'));
+        if ($id == null) {
+            $builder = $this->_model->create($request->only('name', 'status'));
+            return $builder;
+        } else {
+            $builder = $this->_model->find($id);
+        }
+        $builder = $builder->update($request->only('name', 'status'));
         if (!empty($request->get('roles'))) {
             $builder->roles()->sync($request->get('roles'));
             $roles = $builder->roles;

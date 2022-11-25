@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Models\Group;
+use App\Repositories\GroupRepository;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -33,28 +35,47 @@ class UserStoreRequest extends FormRequest
 
         return $rules;
     }
-
+    public function getGroupRuleAll()
+    {
+        return
+            collect(app(GroupRepository::class)->getAllByCondition([
+                'status' =>  Group::$STATUS_ACTIVE
+            ])->pluck('id')->toArray());
+    }
     public function onValidateCreate()
     {
-        $is_active = collect(config('global.default.status.users'))->pluck('key')->toArray();
+        $groups = request()->groups;
 
         return [
             'name' => ['required', 'unique:users,name', 'max:200'],
             'email' => ['required', 'unique:users,email', 'max:200', 'email'],
             'password' => ['required', 'min:6', 'max:100'],
-            'is_active' => ['required', Rule::in($is_active)]
+            'groups'  => [function ($attribute, $value, $fail) {
+                $contains = $this->getGroupRuleAll();
+                foreach ($value as $id) {
+                    if (!$contains->contains($id)) {
+                        return $fail('Danh sách nhóm quyền chứa không hợp lệ ');
+                    }
+                }
+            }],
         ];
     }
 
     public function onValidateUpdate()
     {
-        $is_active = collect(config('global.default.status.users'))->pluck('key')->toArray();
-
+        $groups = request()->groups;
         return [
             'name' => ['required', 'unique:users,name,' . request()->id, 'max:200'],
             'email' => ['required', 'unique:users,email,' . request()->id, 'max:200', 'email'],
-            'password' => ['required', 'min:6', 'max:100'],
-            'is_active' => ['required', Rule::in($is_active)]
+            'password' => ['min:6', 'max:100'],
+            'groups'  => [function ($attribute, $value, $fail) {
+                $contains = $this->getGroupRuleAll();
+                foreach ($value as $id) {
+                    if (!$contains->contains($id)) {
+                        return $fail('Danh sách nhóm quyền chứa không hợp lệ ');
+                    }
+                }
+            }],
         ];
     }
 }

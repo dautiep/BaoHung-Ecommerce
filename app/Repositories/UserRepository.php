@@ -16,15 +16,17 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function getLists($request)
     {
-        $builder =  $this->_model->where([
-            'is_active' => User::USER_IS_ACTIVE
-        ])->where(function ($query) use ($request) {
+        $builder =  $this->_model::with(['groups'])->where(function ($query) use ($request) {
             if (!empty($request->keySearch)) {
                 $query->whereLike('name', $request->keySearch);
             }
 
             if (!empty($request->fromTo)) {
                 $query->whereExplodeDate('created_at', $request->fromTo);
+            }
+
+            if (isset($request->is_active)) {
+                $query->where('is_active', $request->is_active);
             }
         })->paginate($this->page);
         return $builder;
@@ -34,10 +36,18 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         $fillable = $request->only('name', 'email', 'password', 'is_active');
         if ($id == null) {
-            return $this->create($fillable);
+            $builder = $this->create($fillable);
+            return $builder;
+        } else {
+            $builder = $this->_model->find($id);
+            if (!$builder) {
+                return false;
+            }
+            $builder->update($fillable);
         }
+        $builder->groups()->sync($request->get('groups'));
 
-        return $this->update($fillable, $id);
+        return $builder;
     }
 
     public function handleDelete($request): bool
@@ -48,5 +58,17 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
                 $request->get('itemId'),
             ]
         ], 'array');
+    }
+
+    public function handleUpdateState($request)
+    {
+
+        $builder = $this->_model->find($request->get('itemId'),);
+        if (!$builder) {
+            return false;
+        }
+        return $builder->update([
+            'is_active' => !$builder->is_active
+        ]);
     }
 }
