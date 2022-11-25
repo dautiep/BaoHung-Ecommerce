@@ -18,62 +18,27 @@ return [
                     [
                         'slug' => 'question_aswer_service_list',
                         'key' => 'question_aswer_service_list',
-                        'name' => "Xem",
-                        'children' => [
-                            [
-                                'slug' => 'question_aswer_service_detail_list',
-                                'key' => 'question_aswer_service_detail_list',
-                                'name' => "Xem Danh sách",
-                            ]
-                        ]
+                        'name' => "Xem danh sách",
+                        'children' => []
                     ],
-                    [
-                        'slug' => 'question_aswer_service_detail',
-                        'key' => 'question_aswer_service_detail',
-                        'name' => "Xem",
-                        'children' => [
-                            [
-                                'slug' => 'question_aswer_service_detail',
-                                'key' => 'question_aswer_service_detail',
-                                'name' => "Xem chi tiết",
-                            ]
-                        ]
-                    ],
+
                     [
                         'slug' => 'question_aswer_service_edit',
                         'key' => 'question_aswer_service_edit',
-                        'name' => "Cập nhật",
-                        'children' => [
-                            [
-                                'slug' => 'question_aswer_service_edit',
-                                'key' => 'question_aswer_service_edit',
-                                'name' => "Cập nhật",
-                            ],
-                        ]
+                        'name' => "Chỉnh sửa",
+                        'children' => []
                     ],
                     [
                         'slug' => 'question_aswer_service_create',
                         'key' => 'question_aswer_service_create',
-                        'name' => "Tạo mới",
-                        'children' => [
-                            [
-                                'slug' => 'question_aswer_service_create',
-                                'key' => 'question_aswer_service_create',
-                                'name' => "Tạo mới ",
-                            ],
-                        ]
+                        'name' => "Thêm mới",
+                        'children' => []
                     ],
                     [
                         'slug' => 'question_aswer_service_delete',
                         'key' => 'question_aswer_service_delete',
                         'name' => "Xóa",
-                        'children' => [
-                            [
-                                'slug' => 'question_aswer_service_delete',
-                                'key' => 'question_aswer_service_delete',
-                                'name' => "Xóa",
-                            ],
-                        ]
+                        'children' => []
                     ],
                 ]
             ]
