@@ -53,4 +53,6 @@ trait HasPermissionsTrait
             return json_decode($value);
         })->unique();
     }
+
+
 }

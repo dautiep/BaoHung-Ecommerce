@@ -23,6 +23,9 @@ class User extends Authenticatable
         'name', 'email', 'password', 'is_active'
     ];
 
+    public $appends  = [
+        'groups'
+    ];
     /**
      * The attributes that should be hidden for arrays.
      *
