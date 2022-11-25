@@ -26,7 +26,7 @@ class AddStatusColumnToTypeOfService extends Migration
     public function down()
     {
         Schema::table('type_of_service', function (Blueprint $table) {
-            $table->tinyInteger('status');
+            $table->drop('status');
         });
     }
 }

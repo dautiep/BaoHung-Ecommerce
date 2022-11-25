@@ -124,7 +124,7 @@
                                                         class="badge {{ $item->is_active == $config_active ? 'bg-success' : ' bg-danger' }}">{{ $config_status->firstWhere('key', $item->is_active)['name'] ?? '' }}</span>
                                                 </td>
                                                 <td class="align-middle text-center">
-                                                    {{ date_format(date_create($item->created_at), 'H:i:s d-m-Y') }}</td>
+                                                    {{ date_format(date_create($item->created_at), 'd-m-Y') }}</td>
                                                 <td class="align-middle text-center">
                                                     @if ($item->is_active == $config_active)
                                                         <a class="btn btn-sm btn-primary"
