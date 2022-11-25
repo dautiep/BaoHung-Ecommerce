@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Repositories\Interfaces\RoleRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\RoleRequest;
 use App\Traits\HasPermissionsTrait;
 
 class RoleController extends Controller
@@ -34,7 +35,7 @@ class RoleController extends Controller
         return response()->json($this->getPermissionConvertJson());
     }
 
-    public function store(Request $request, $id = null)
+    public function store(RoleRequest $request, $id = null)
     {
         $message = $id == null ?  config('global.default.messages.roles.create') : config('global.default.messages.roles.edit');
         $data = $this->_roleRepositoryInterface->handleCreateOrUpdate($id, $request);

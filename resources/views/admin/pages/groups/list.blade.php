@@ -52,12 +52,28 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="text-capitalize">Trạng Thái <sup
+                                                        class="text-danger">*</sup></label>
+                                                <select class="form-control select2" name="status" id="status">
+                                                    <option value="">--- Chọn Trạng thái ---</option>
+                                                    @foreach (config('global.default.status.groups') as $value)
+                                                        <option value="{{ @$value['key'] }}"
+                                                            {{ @$value['key'] == @$info['status'] ? 'selected' : '' }}>
+                                                            {{ @$value['name'] }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>&nbsp;</label>
-                                                <a href="{{ route('groups.create') }}" class="btn btn-block btn-warning">Thêm
+                                                <a href="{{ route('groups.create') }}"
+                                                    class="btn btn-block btn-warning">Thêm
                                                     nhóm quyền</a>
                                             </div>
                                         </div>
@@ -77,11 +93,17 @@
                                         <tr>
                                             <th class="bg-info" style="width: 10px">#</th>
                                             <th class="text-center bg-info w-50">Tên</th>
+                                            <th class="text-center bg-info">Bộ quyền</th>
+                                            <th class="text-center bg-info">Trạng thái</th>
                                             <th class="text-center bg-info">Ngày Tạo</th>
                                             <th class="text-center bg-info">Hành Động</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @php
+                                            $config_status = collect(config('global.default.status.groups'));
+                                            $config_active = config('global.default.status.groups.active.key');
+                                        @endphp
                                         @foreach ($data as $key => $item)
                                             <tr>
                                                 <td class="align-middle" scope="row"> {{ $key + $data->firstItem() }}
@@ -89,19 +111,32 @@
                                                 <td class="align-middle">
                                                     {{ $item->name }}
                                                 </td>
-
+                                                <td class="align-middle text-center">
+                                                    @foreach (@$item->roles as $role)
+                                                        <span class="badge bg-success">{{ $role->name }}</span>
+                                                    @endforeach
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span
+                                                        class="badge {{ $item->status == $config_active ? 'bg-success' : ' bg-danger' }}">{{ $config_status->firstWhere('key', $item->status)['name'] ?? '' }}</span>
+                                                </td>
                                                 <td class="align-middle text-center">
                                                     {{ date_format(date_create($item->created_at), 'H:i:s d-m-Y') }}</td>
                                                 <td class="align-middle text-center">
-                                                    <a class="btn btn-sm btn-primary"
-                                                        href="{{ route('groups.edit', ['id' => $item->id]) }}"
-                                                        title="Cập nhật thông tin">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    <button role="button" class="btn btn-sm btn-danger"
-                                                        onclick="cancelCategory('{{ $item->id }}')"
-                                                        data-toggle="tooltip" title="Xóa nhóm quyền"><i
-                                                            class="fas fa-times"></i>
+                                                    @if ($item->status == $config_active)
+                                                        <a class="btn btn-sm btn-primary"
+                                                            href="{{ route('groups.edit', ['id' => $item->id]) }}"
+                                                            title="Cập nhật thông tin">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    @endif
+                                                    @php
+                                                        $lablel = $item->status == $config_active ? 'Khóa nhóm quyền' : 'Mở khóa nhóm quyền';
+                                                    @endphp
+                                                    <button role="button" class="btn btn-sm btn-warning"
+                                                        onclick="cancelCategory('{{ $item->id }}', '{{ $lablel }}')"
+                                                        data-toggle="tooltip" title="{{ $lablel }}"><i
+                                                            class="fas fa-key"></i>
                                                     </button>
                                                 </td>
                                             </tr>
@@ -139,12 +174,12 @@
             $(this).val('');
         });
 
-        function cancelCategory(id_item) {
+        function cancelCategory(id_item, message = null) {
             var data = {
                 itemId: id_item,
             };
             Swal.fire({
-                title: 'Bạn có chắc xóa nhóm quyền này không?',
+                title: message ?? 'Bạn có chắc khóa nhóm quyền này không?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -155,7 +190,7 @@
                 if (result.value) {
                     $('.loader').show();
                     $.ajax({
-                        url: "{{ route('groups.delete') }}",
+                        url: "{{ route('groups.state') }}",
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },

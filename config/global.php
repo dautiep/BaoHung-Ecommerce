@@ -37,11 +37,11 @@ return [
                 ]
             ],
             'groups' => [
-                [
+                'active' => [
                     'key' => 1,
                     'name' => 'Hoạt động'
                 ],
-                [
+                'deactive' => [
                     'key' => 0,
                     'name' => 'Khóa'
                 ]
@@ -70,7 +70,8 @@ return [
             'groups' => [
                 'create' => 'Tạo nhóm quyền thành công',
                 'edit' => 'Cập nhật quyền thành công',
-                'delete'   => 'Xóa nhóm quyền thành công'
+                'delete'   => 'Xóa nhóm quyền thành công',
+                'edit_status' => 'Chỉnh sửa trạng thái nhóm quyền thành công',
             ],
             'errors' => [
                 'update' => 'Lỗi phát sinh khi cập nhật dữ liệu',

@@ -50,7 +50,7 @@ class RoleRepository extends BaseRepository implements RoleRepositoryInterface
         ], 'array');
     }
 
-    public function getAllByCondition() {
+    public function getAllByCondition($condition = []) {
         return $this->_model->all();
     }
 }
