@@ -15,11 +15,11 @@ return [
                 'name' => 'Bị block'
             ],
             'users' => [
-                [
+                'active' => [
                     'key' => 1,
                     'name' => 'Hoạt động'
                 ],
-                [
+                'deactive' => [
                     'key' => 0,
                     'name' => 'Khóa tài khoản'
                 ]
@@ -52,6 +52,7 @@ return [
             'users' => [
                 'create' => 'Thêm tài khoản thành công',
                 'edit' => 'Chỉnh sửa tài khoản thành công',
+                'edit_status' => 'Chỉnh sửa trạng thái tài khoản thành công',
             ],
             'type_of_services' => [
                 'store' => 'Lưu thông tin dịch vụ thành công',
@@ -71,6 +72,9 @@ return [
                 'edit' => 'Cập nhật quyền thành công',
                 'delete'   => 'Xóa nhóm quyền thành công'
             ],
+            'errors' => [
+                'update' => 'Lỗi phát sinh khi cập nhật dữ liệu',
+            ]
         ]
     ]
 ];

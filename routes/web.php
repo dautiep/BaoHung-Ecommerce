@@ -37,6 +37,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('create', 'UserController@create')->name('create');
         Route::post('/delete', 'UserController@delete')->name('delete');
         Route::get('edit/{id}', 'UserController@edit')->name('edit');
+        Route::post('state', 'UserController@state')->name('state');
         Route::post('store/{id?}', 'UserController@store')->name('store');
     });
     // roles
