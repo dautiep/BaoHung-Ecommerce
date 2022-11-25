@@ -33,7 +33,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     });
     // users
     Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
-        Route::get('/', 'UserController@list')->name('list');
+        Route::get('/', 'UserController@list')->name('list')->middleware('role:users.list');
         Route::get('create', 'UserController@create')->name('create');
         Route::post('/delete', 'UserController@delete')->name('delete');
         Route::get('edit/{id}', 'UserController@edit')->name('edit');

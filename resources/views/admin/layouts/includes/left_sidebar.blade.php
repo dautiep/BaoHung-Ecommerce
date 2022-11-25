@@ -42,31 +42,37 @@
 
                             $hasActivePage = in_array($activePage, $parent['hasActivePage']);
                             $router = !empty($parent['router']) ? route($parent['router']) : '#';
+                            $is_can = @is_can($parent['authorize']);
                         @endphp
-                        <a href="{{ @$router }}"
-                            class="nav-link nav-main {{ !empty($hasActivePage) ? ' active' : '' }}">
-                            <i class="{{ $parent['icon'] }}"></i>
-                            <p>
-                                {{ @$parent['name'] }}
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        @if (count(@$parent['children']) > 0)
-                            <ul class="nav nav-treeview" style="display: block">
-                                @foreach (collect($parent['children'])->where('active', true) as $sub_item)
-                                    @php
-                                        $router = !empty($sub_item['router']) ? route($sub_item['router']) : '#';
-                                        $hasActivePage = in_array($activePage, $sub_item['hasActivePage']);
-                                    @endphp
-                                    <li class="nav-item">
-                                        <a href="{{ @$router }}"
-                                            class="nav-link {{ !empty($hasActivePage) ? ' active' : '' }}">
-                                            <i class="{{ @$sub_item['icon'] }}"></i>
-                                            <p>{{ @$sub_item['name'] }}</p>
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
+                        @if ($is_can)
+                            <a href="{{ @$router }}"
+                                class="nav-link nav-main {{ !empty($hasActivePage) ? ' active' : '' }}">
+                                <i class="{{ $parent['icon'] }}"></i>
+                                <p>
+                                    {{ @$parent['name'] }}
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            @if (count(@$parent['children']) > 0)
+                                <ul class="nav nav-treeview" style="display: block">
+                                    @foreach (collect($parent['children'])->where('active', true) as $sub_item)
+                                        @php
+                                            $router = !empty($sub_item['router']) ? route($sub_item['router']) : '#';
+                                            $hasActivePage = in_array($activePage, $sub_item['hasActivePage']);
+                                            $is_can = @is_can($sub_item['authorize']);
+                                        @endphp
+                                        @if ($is_can)
+                                            <li class="nav-item">
+                                                <a href="{{ @$router }}"
+                                                    class="nav-link {{ !empty($hasActivePage) ? ' active' : '' }}">
+                                                    <i class="{{ @$sub_item['icon'] }}"></i>
+                                                    <p>{{ @$sub_item['name'] }}</p>
+                                                </a>
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            @endif
                         @endif
                     </li>
                 @endforeach

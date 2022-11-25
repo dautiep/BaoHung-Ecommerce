@@ -43,7 +43,7 @@ return [
                     'users.list'
                 ],
                 'position' => 1,
-                'authorize' => [],
+                'authorize' => ['users.list'],
                 'active' => true
             ],
             [
