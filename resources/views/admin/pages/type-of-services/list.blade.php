@@ -50,6 +50,17 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="phoneSearch">Trạng thái</label>
+                                            <select class="form-control select2" name="serviceStatus" id="serviceStatus">
+                                                <option value="">Tất cả</option>
+                                                @foreach ($status as $item)
+                                                    <option value="{{ $item['key'] }}" {{ ($info['serviceStatus'] == (string) $item['key']) ? 'selected' : '' }}>{{ $item['name'] }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
@@ -104,12 +115,12 @@
                                                     </a>
                                                     <button role="button" class="btn btn-sm btn-warning"
                                                             onclick="deactiveService('{{ $service->id }}')" data-toggle="tooltip"
-                                                            title="{{ $status[0]['action'] }}"><i class="fa fa-key"></i>
+                                                            title="{{ $status[1]['action'] }}"><i class="fa fa-key"></i>
                                                     </button>
                                                 @else
                                                     <button role="button" class="btn btn-sm btn-success"
                                                             onclick="activeService('{{ $service->id }}')" data-toggle="tooltip"
-                                                            title="{{ $status[1]['action'] }}"><i class="fa fa-key"></i>
+                                                            title="{{ $status[0]['action'] }}"><i class="fa fa-key"></i>
                                                     </button>
                                                 @endif
                                             </td>
@@ -120,7 +131,7 @@
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer clearfix text-right">
-                            {{ $services->appends($info)->onEachSide(2)->links() }}
+                            {{ $services->appends($info)->onEachSide(2)->links('vendor.pagination.custom') }}
                         </div>
                     </div>
                 </div>
@@ -132,6 +143,9 @@
 
 @section('scripts')
     <script>
+        $("#serviceStatus").select2({
+            theme: 'bootstrap4'
+        });
 
          $('#fromTo').daterangepicker({
             autoUpdateInput: false,
@@ -152,7 +166,7 @@
         function deactiveService(id_service) {
             var data = {
                 serviceId: id_service,
-                serviceStatus: 0
+                serviceStatus: 1
                 };
             Swal.fire({
                 title: 'Bạn có muốn khóa dịch vụ này không?',
@@ -200,7 +214,7 @@
         function activeService(id_service) {
             var data = {
                 serviceId: id_service,
-                serviceStatus: 1
+                serviceStatus: 0
                 };
             Swal.fire({
                 title: 'Bạn có chắc muốn kích hoạt dịch vụ này không?',

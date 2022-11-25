@@ -30,6 +30,7 @@ class TypeOfServiceController extends Controller
         }
         $info = [
             'serviceName' => $request->get('serviceName', ''),
+            'serviceStatus' => $request->get('serviceStatus', ''),
             'fromTo' => $request->get('fromTo', ''),
             'fromDate' => $fromDate,
             'toDate' => $toDate,

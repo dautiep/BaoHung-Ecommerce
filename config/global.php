@@ -26,12 +26,12 @@ return [
             ],
             'type_of_services' => [
                 [
-                    'key' => 0,
+                    'key' => 1,
                     'name' => 'Đang chạy',
                     'action' => 'Khóa dịch vụ'
                 ],
                 [
-                    'key' => 1,
+                    'key' => 0,
                     'name' => 'Đã khóa',
                     'action' => 'Mở khóa dịch vụ'
                 ]
