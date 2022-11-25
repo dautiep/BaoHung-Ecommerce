@@ -17,7 +17,7 @@ class CreateTableGroups extends Migration
             $table->id();
             $table->string('name');
             $table->longText('group_role_json')->nullable();
-            $table->tinyInteger('status')->nullable();
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

@@ -31,7 +31,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         })->where([[
             'id', '<>', auth()->user()->id
         ], [
-            'is_admin' , '<>', User::IS_ADMIN
+            'is_admin', '<>', User::IS_ADMIN
         ]])->paginate($this->page);
         return $builder;
     }

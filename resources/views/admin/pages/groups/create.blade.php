@@ -67,7 +67,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mt-4">
+                                    {{-- <div class="row mt-4">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="text-capitalize">Trạng Thái <sup
@@ -83,7 +83,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="row mt-2">
                                         <div class="col-md-12">
                                             <span><i>Lưu ý: Các trường có dấu <sup class="text-danger">*</sup> là các

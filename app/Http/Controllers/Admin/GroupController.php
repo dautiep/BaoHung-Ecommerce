@@ -39,7 +39,7 @@ class GroupController extends Controller
     {
         $message = $id == null ?  config('global.default.messages.groups.create') : config('global.default.messages.groups.edit');
         $data = $this->_groupRepositoryInterface->handleCreateOrUpdate($id, $request);
-        return redirect()->back()->with($this->getMessages($message, $this::$TYPE_MESSAGES_SUCCESS));
+        return redirect()->route('groups.list')->with($this->getMessages($message, $this::$TYPE_MESSAGES_SUCCESS));
     }
 
     public function delete(Request $request)
