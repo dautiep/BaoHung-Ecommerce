@@ -28,7 +28,11 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             if (isset($request->is_active)) {
                 $query->where('is_active', $request->is_active);
             }
-        })->paginate($this->page);
+        })->where([[
+            'id', '<>', auth()->user()->id
+        ], [
+            'is_admin' , '<>', User::IS_ADMIN
+        ]])->paginate($this->page);
         return $builder;
     }
 

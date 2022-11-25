@@ -8,7 +8,7 @@ if (!function_exists('is_can')) {
         if (!auth()->user()) {
             return false;
         }
-        if (empty($roles)) {
+        if (empty($roles) || auth()->user()->is_admin  == 1) {
             return true;
         }
         $role_group =

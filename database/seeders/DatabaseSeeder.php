@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => 123456,
-            'is_active' => true
+            'is_active' => true,
+            'is_admin'  => true,
         ]);
     }
 }

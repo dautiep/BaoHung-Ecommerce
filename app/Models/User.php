@@ -13,6 +13,7 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasPermissionsTrait, ScopeTrait;
     const USER_IS_ACTIVE = 1;
+    const IS_ADMIN = 1;
 
     /**
      * The attributes that are mass assignable.
