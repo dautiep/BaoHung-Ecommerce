@@ -27,6 +27,9 @@ class TypeOfServiceRepository extends BaseRepository implements TypeOfServiceRep
             $result = $result->where('created_at', '>=', $info['fromDate']);
             $result = $result->where('created_at', '<=', $info['toDate']);
         }
+        if ($info['serviceStatus'] != '') {
+            $result = $result->where('status', $info['serviceStatus']);
+        }
         return $result->orderBy('created_at', 'DESC')->paginate(10);
     }
 
@@ -40,7 +43,6 @@ class TypeOfServiceRepository extends BaseRepository implements TypeOfServiceRep
                 [
                     'id' => $idValue,
                     'name' => $request['serviceName'],
-                    'status' => $status[0]['key'],
                     'user_id' => Auth::user()->id
                 ]
             );
