@@ -22,15 +22,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Auth'], function () {
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/home', 'HomeController@index')->name('dashboard');
 
-    //services
-    Route::group(['prefix' => 'services'], function () {
-        Route::get('', 'TypeOfServiceController@list')->name('services.list');
-        Route::get('/create', 'TypeOfServiceController@create')->name('services.create');
-        Route::post('/store/{id?}', 'TypeOfServiceController@store')->name('services.store');
-        Route::get('/edit/{id}', 'TypeOfServiceController@edit')->name('services.edit');
-        Route::post('/lock', 'TypeOfServiceController@lock')->name('services.lock');
-        Route::post('/unlock', 'TypeOfServiceController@unlock')->name('services.unlock');
-    });
     // users
     Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
         Route::get('/', 'UserController@list')->name('list')->middleware('role:users.list');
@@ -58,5 +49,19 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('/delete', 'GroupController@delete')->name('delete');
         Route::get('edit/{id}', 'GroupController@edit')->name('edit');
         Route::post('store/{id?}', 'GroupController@store')->name('store');
+    });
+
+    //services
+    Route::group(['prefix' => 'services', 'as' => 'services.'], function () {
+        Route::get('', 'TypeOfServiceController@list')->name('list');
+        Route::get('/create', 'TypeOfServiceController@create')->name('create');
+        Route::post('/store/{id?}', 'TypeOfServiceController@store')->name('store');
+        Route::get('/edit/{id}', 'TypeOfServiceController@edit')->name('edit');
+        Route::post('/lock', 'TypeOfServiceController@lock')->name('lock');
+        Route::post('/unlock', 'TypeOfServiceController@unlock')->name('unlock');
+    });
+
+    Route::group(['prefix' => 'questions', 'as' => 'questions.'], function () {
+        Route::get('', 'QuestionAswerServiceController@list')->name('list');
     });
 });

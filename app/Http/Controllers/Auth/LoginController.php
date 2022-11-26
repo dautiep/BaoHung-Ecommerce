@@ -35,48 +35,18 @@ class LoginController extends Controller
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
         if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password'])))
         {
+            //check user lock
+            if(Auth::user()->is_active == config('global.default.status.users.deactive.key')) {
+                auth()->logout();
+                $notification = array(
+                    'message' => 'Tài khoản đã bị khóa hoặc không có quyền đăng nhập! Hãy liên hệ với Admin.',
+                    'alert-type' => 'error'
+                );
+                return redirect()->back()->withErrors($notification);
+
+            }
             $request->session()->regenerate();
             return redirect()->route('dashboard');
-            //check user lock
-            // if(Auth::user()->status == EStatus::LOCKED) {
-            //     auth()->logout();
-            //     $notification = array(
-            //         'message' => 'Tài khoản đã bị khóa hoặc không có quyền đăng nhập! Hãy liên hệ với Admin.',
-            //         'alert-type' => 'error'
-            //     );
-            //     return redirect()->back()->with($notification);
-
-            // }else{
-            //     if (Auth::user()->role != ERole::ADMIN) {
-            //         logger([$request->getClientIp()]);
-            //         $check = $this->azOfficeConfigService->checkConfig(ConfigKeySetting::CHECK_IP_ADDRESS_STATUS)->value_config;
-            //         if ($check == 'on') {
-            //             $allIp = $this->ipAddressAcceptService->getAll();
-            //             $flag = 0;
-            //             foreach ($allIp as $ip) {
-            //                 if ($ip->ip_address == $request->ip()) {
-            //                     $flag = 1;
-            //                     $request->session()->regenerate();
-            //                     return redirect()->route('dashboard');
-            //                 }
-            //             }
-            //             if ($flag == 0) {
-            //                 auth()->logout();
-            //                 $notification = array(
-            //                     'message' => 'Tài khoản không được phép truy cập! Hãy liên hệ với Admin!',
-            //                     'alert-type' => 'error'
-            //                 );
-            //                 return redirect()->back()->with($notification);
-            //             }
-            //         } else {
-            //             $request->session()->regenerate();
-            //             return redirect()->route('dashboard');
-            //         }
-            //     } else {
-            //         $request->session()->regenerate();
-            //         return redirect()->route('dashboard');
-            //     }
-            // }
         }
 
         $notification = array(
