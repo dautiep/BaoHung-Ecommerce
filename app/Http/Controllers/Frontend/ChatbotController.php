@@ -3,31 +3,81 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Interfaces\QuestionAswerServiceInterface;
+use App\Repositories\Interfaces\TypeOfServiceRepositoryInterface;
+use Exception;
 use Illuminate\Http\Request;
 
 class ChatbotController extends Controller
 {
     private $_prefix = 'frontend.pages.';
     private $_bot = 'frontend.messages.';
-    public function index(Request $request)
+    private $_questionAswerServiceInterface;
+    private $_typeOfServiceInterFace;
+    public function __construct(QuestionAswerServiceInterface $questionAswerServiceInterface, TypeOfServiceRepositoryInterface $typeOfServiceRepository)
+    {
+        $this->_questionAswerServiceInterface = $questionAswerServiceInterface;
+        $this->_typeOfServiceInterFace = $typeOfServiceRepository;
+    }
+
+    public function bot(Request $request)
     {
         return view($this->_prefix . 'index');
     }
 
-    public function actionBot(Request $request)
+    public function handleCallBot(Request $request)
     {
-        return view($this->_bot . 'bot')->render();
+        try {
+            switch ($request->action) {
+                case 'callBotById';
+                    return $this->actionClickBot($request);
+
+                case 'callBot':
+                    return $this->actionCallBot($request);
+            }
+        } catch (Exception $e) {
+            return $this->actionCallBot($request);
+        }
     }
 
-    public function actionSendMessage(Request $request)
+    public function actionCallBot($request, $message = 'Chào bạn. Mình là trợ lý ảo . Mình có thể giúp gì cho bạn không?')
+    {
+        $data = $this->_typeOfServiceInterFace->getTypeOfService();
+        $next = 'callBotById';
+        return view($this->_bot . 'bot', compact('data', 'message', 'next'))->render();
+    }
+
+    public function actionClickBot($request)
+    {
+        $next =  $request->get('next');
+        switch ($next) {
+            case 'callBotById':
+                $type_of_service = $this->_typeOfServiceInterFace->findWithRelation($request->get('id', ''), ['questionAswerService']);
+                $message = $type_of_service->name;
+                $data = collect($type_of_service->questionAswerService)->map(function ($item) {
+                    return (object) [
+                        'id' => $item->id,
+                        'name' => $item->question_content
+                    ];
+                });
+                $next =  'callBotAswer';
+                return view($this->_bot . 'bot', compact('data', 'message', 'next'))->render();
+            case 'callBotAswer';
+                $question = $this->_questionAswerServiceInterface->getQuestionAswerWithService($request->id);
+                $message = $question->consulting_content;
+                return view($this->_bot . 'bot', compact('message'))->render();
+            default:
+        }
+    }
+
+    public function handleBotUser(Request $request)
     {
         $message = $request->message ?? '';
         return view($this->_bot . 'user', compact('message'))->render();
     }
 
-    public function actionSendQuestion(Request $request)
+    public function handleSendQuestion(Request $request)
     {
-        $data = $request->all();
-        return response()->json($request->message);
+        return response()->json('Câu hỏi của bạn đã được gửi đi');
     }
 }

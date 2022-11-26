@@ -17,7 +17,6 @@ class QuestionAswerServiceRepository extends BaseRepository implements QuestionA
         $this->_model = $model;
         $this->_modelService = $modelService;
         parent::__construct($model);
-
     }
 
     //search with info from fe
@@ -38,7 +37,8 @@ class QuestionAswerServiceRepository extends BaseRepository implements QuestionA
     }
 
     //get all type of service
-    public function getTypeOfService() {
+    public function getTypeOfService()
+    {
         return $this->_modelService->where('status', config('global.default.status.type_of_services')[0]['key'])->get();
     }
 
@@ -76,5 +76,10 @@ class QuestionAswerServiceRepository extends BaseRepository implements QuestionA
         } else {
             return $this->update(['status' => $status[2]['key']], $input['questionId']);
         }
+    }
+
+    public function getQuestionAswerWithService($id)
+    {
+        return $this->_model->with('typeOfServices')->where('id', $id)->first();
     }
 }

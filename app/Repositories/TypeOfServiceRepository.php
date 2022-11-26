@@ -59,4 +59,19 @@ class TypeOfServiceRepository extends BaseRepository implements TypeOfServiceRep
             return $this->update(['status' => $status[0]['key']], $input['serviceId']);
         }
     }
+
+    public function getTypeOfService()
+    {
+        $status = config('global.default.status.type_of_services');
+        return $this->_model->where('status', '=', $status[0]['key'])->get();
+    }
+
+    public function findWithRelation(string $id, $relationships = [])
+    {
+        $status = config('global.default.status.type_of_services');
+        return $this->_model->where([
+            ['status', '=', $status[0]['key']],
+            ['id', '=', $id]
+        ])->with($relationships)->first();
+    }
 }

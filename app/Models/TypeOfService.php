@@ -18,4 +18,9 @@ class TypeOfService extends Model
         'created_date',
         'user_id'
     ];
+
+    public function questionAswerService()
+    {
+        return $this->hasMany(QuestionAswerService::class, 'type_of_service_id', 'id');
+    }
 }

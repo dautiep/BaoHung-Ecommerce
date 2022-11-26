@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Repositories\Interfaces;
+
 use App\Repositories\Interfaces\BaseRepositoryInterface;
 
 interface TypeOfServiceRepositoryInterface extends BaseRepositoryInterface
@@ -11,7 +13,7 @@ interface TypeOfServiceRepositoryInterface extends BaseRepositoryInterface
      */
     public function searchWithInfo(array $info);
 
-     /**
+    /**
      * handle save or update data
      * @param string $id
      * @param array $request
@@ -25,4 +27,7 @@ interface TypeOfServiceRepositoryInterface extends BaseRepositoryInterface
      * @return mixed
      */
     public function lockOrUnlockByID(array $request);
+
+    public function getTypeOfService();
+    public function findWithRelation(string $id, $relationships = []);
 }
