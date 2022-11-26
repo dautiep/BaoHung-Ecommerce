@@ -149,7 +149,7 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer clearfix text-right">
-                                {{ $data->appends($info)->onEachSide(2)->links() }}
+                                {{ $data->appends($info)->onEachSide(2)->links('vendor.pagination.custom') }}
                             </div>
                         </div>
                     </div>
@@ -161,6 +161,9 @@
 
 @section('scripts')
     <script>
+        $("#is_active").select2({
+            theme: 'bootstrap4'
+        });
         $('#fromTo').daterangepicker({
             autoUpdateInput: false,
             locale: {

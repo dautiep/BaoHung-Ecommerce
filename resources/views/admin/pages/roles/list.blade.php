@@ -91,7 +91,7 @@
                                                 </td>
 
                                                 <td class="align-middle text-center">
-                                                    {{ date_format(date_create($item->created_at), 'H:i:s d-m-Y') }}</td>
+                                                    {{ date_format(date_create($item->created_at), 'd-m-Y') }}</td>
                                                 <td class="align-middle text-center">
                                                     <a class="btn btn-sm btn-primary"
                                                         href="{{ route('roles.edit', ['id' => $item->id]) }}"
@@ -111,7 +111,7 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer clearfix text-right">
-                                {{ $data->appends($info)->onEachSide(2)->links() }}
+                                {{ $data->appends($info)->onEachSide(2)->links('vendor.pagination.custom') }}
                             </div>
                         </div>
                     </div>

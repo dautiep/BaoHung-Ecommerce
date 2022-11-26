@@ -18,7 +18,7 @@
                 </li>
                 <li class="nav-item">
                     <<a href="{{ route('dashboard') }}"
-                        class="nav-link nav-main {{ $activePage === 'dashboard' ? ' active' : '' }}">
+                        class="nav-link nav-main {{ @$activePage === 'dashboard' ? ' active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p> Trang Chủ </p>
                         </a>
@@ -34,7 +34,7 @@
                     <li class="nav-item has-treeview menu-open">
                         @php
 
-                            $hasActivePage = in_array($activePage, $parent['hasActivePage']);
+                            $hasActivePage = in_array(@$activePage, $parent['hasActivePage']);
                             $router = !empty($parent['router']) ? route($parent['router']) : '#';
                             $is_can = @is_can($parent['authorize']);
                         @endphp
@@ -52,7 +52,7 @@
                                     @foreach (collect($parent['children'])->where('active', true) as $sub_item)
                                         @php
                                             $router = !empty($sub_item['router']) ? route($sub_item['router']) : '#';
-                                            $hasActivePage = in_array($activePage, $sub_item['hasActivePage']);
+                                            $hasActivePage = in_array(@$activePage, $sub_item['hasActivePage']);
                                             $is_can = @is_can($sub_item['authorize']);
                                         @endphp
                                         @if ($is_can)

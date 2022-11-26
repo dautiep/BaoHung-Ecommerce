@@ -31,4 +31,6 @@ interface QuestionAswerServiceInterface extends BaseRepositoryInterface
      * @return mixed
      */
     public function changeStatus(array $request);
+
+    public function getQuestionAswerWithService($id);
 }

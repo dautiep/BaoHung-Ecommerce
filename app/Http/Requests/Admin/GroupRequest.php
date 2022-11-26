@@ -42,27 +42,35 @@ class GroupRequest extends FormRequest
             collect(app(RoleRepository::class)->getAllByCondition()->pluck('id')->toArray());
     }
 
-    public function getConfigStatus()
-    {
-        return collect(config('global.default.status.groups'))->pluck('key')->toArray();
-    }
+
 
     public function onValidateCreate()
     {
-        $config = $this->getConfigStatus();
-
         return [
             'name' => ['required', 'max:200', 'min:6'],
-            'status' => ['required', Rule::in($config)],
+            'roles'  => [function ($attribute, $value, $fail) {
+                $contains = $this->getRoleRuleAll();
+                foreach ($value as $id) {
+                    if (!$contains->contains($id)) {
+                        return $fail('Danh sách nhóm quyền chứa không hợp lệ ');
+                    }
+                }
+            }],
         ];
     }
 
     public function onValidateUpdate()
     {
-        $config = $this->getConfigStatus();
         return [
             'name' => ['required', 'max:200', 'min:6'],
-            'status' => ['required', Rule::in($config)],
+            'roles'  => [function ($attribute, $value, $fail) {
+                $contains = $this->getRoleRuleAll();
+                foreach ($value as $id) {
+                    if (!$contains->contains($id)) {
+                        return $fail('Danh sách nhóm quyền chứa không hợp lệ ');
+                    }
+                }
+            }],
         ];
     }
 }

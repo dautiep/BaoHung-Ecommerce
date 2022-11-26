@@ -39,7 +39,7 @@ class RoleController extends Controller
     {
         $message = $id == null ?  config('global.default.messages.roles.create') : config('global.default.messages.roles.edit');
         $data = $this->_roleRepositoryInterface->handleCreateOrUpdate($id, $request);
-        return redirect()->back()->with($this->getMessages($message, $this::$TYPE_MESSAGES_SUCCESS));
+        return redirect()->route('roles.list')->with($this->getMessages($message, $this::$TYPE_MESSAGES_SUCCESS));
     }
 
     public function edit(Request $request, $id)
