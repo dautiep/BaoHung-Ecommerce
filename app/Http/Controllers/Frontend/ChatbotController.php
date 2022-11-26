@@ -25,14 +25,14 @@ class ChatbotController extends Controller
         return view($this->_prefix . 'index');
     }
 
+    // when call bot when loaded pages
     public function handleCallBot(Request $request)
     {
         try {
             switch ($request->action) {
                 case 'callBotById';
                     return $this->actionClickBot($request);
-
-                case 'callBot':
+                case 'callBot': // load bot
                     return $this->actionCallBot($request);
             }
         } catch (Exception $e) {
@@ -76,8 +76,10 @@ class ChatbotController extends Controller
         return view($this->_bot . 'user', compact('message'))->render();
     }
 
+    // submit form question user
     public function handleSendQuestion(Request $request)
     {
+
         return response()->json('Câu hỏi của bạn đã được gửi đi');
     }
 }

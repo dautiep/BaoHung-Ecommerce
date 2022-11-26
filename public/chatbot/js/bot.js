@@ -1,16 +1,16 @@
 const ROUTE_SUBMIT_QUESITION = getDataScript('routerSubmitQuestion');
-const ROUTE_BOT              = getDataScript('routeBot');
-const ROUTER_USER            = getDataScript('routeSendMessageUser');
-const ID_INPUT_BOT           = '#chatbox';
-const ID_INPUT_QUESITION     = '#user_message';
-const ID_INPUT_EMAIL         = '#user_email';
-const ID_INPUT_PHONE         = '#user_phone';
-const ID_BOT_UI              = '#test';
-const BTN_SHOW_SERVICE       = '.service-plus';
-const BTN_GET_SERVICE        = '.get_service';
-const BTN_SUBMIT_QUESTION    = '.service-submit';
-const BTN_USER_SUBMIT        = '#user_submit';
-const TYPE_METHOD            = 'POST';
+const ROUTE_BOT = getDataScript('routeBot');
+const ROUTER_USER = getDataScript('routeSendMessageUser');
+const ID_INPUT_BOT = '#chatbox';
+const ID_INPUT_QUESITION = '#user_message';
+const ID_INPUT_EMAIL = '#user_email';
+const ID_INPUT_PHONE = '#user_phone';
+const ID_BOT_UI = '#test';
+const BTN_SHOW_SERVICE = '.service-plus';
+const BTN_GET_SERVICE = '.get_service';
+const BTN_SUBMIT_QUESTION = '.service-submit';
+const BTN_USER_SUBMIT = '#user_submit';
+const TYPE_METHOD = 'POST';
 
 function getDataScript(elemt) {
     var script = document.querySelector('script[data-id][data-name="bot_extenstion"]');
@@ -31,7 +31,7 @@ function request(url, data, type, callback) {
             callback(res);
         },
         error: function (res) {
-            console.log('error');
+            console.log('error'); // when error is returned
         }
     });
 }
@@ -66,6 +66,7 @@ function handleCallAction() {
 }
 
 function appendContentBlock(content) {
+    // load animation
     $(ID_BOT_UI).append(content);
     handleScrollBottom();
 }
@@ -146,11 +147,11 @@ function notify(message) {
 }
 
 function init() {
-    requestCallBot();
-    handleCallAction();
-    handleInputQuestion();
-    handleClickCallBot();
-    handleSubmitQuestion();
+    requestCallBot();  // init request call bot
+    handleCallAction(); // assign handle click button call action click axios
+    handleInputQuestion(); // assign handle submit input message user
+    handleClickCallBot(); // assign event call event click plus bot
+    handleSubmitQuestion(); // assign event submit form question
 
 }
 $(document).ready(function () {
