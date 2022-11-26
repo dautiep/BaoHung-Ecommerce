@@ -158,6 +158,9 @@
 
 @section('scripts')
     <script>
+        $("#status").select2({
+            theme: 'bootstrap4'
+        });
         $('#fromTo').daterangepicker({
             autoUpdateInput: false,
             locale: {
