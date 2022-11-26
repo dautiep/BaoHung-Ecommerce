@@ -4,11 +4,9 @@
              <div class="boxchat-head container"><a href=""><em class="ri-arrow-left-line"></em><span>Quay
                          lại trang chủ</span></a></div>
              <div class="boxchat-head-2 container"> <a href="" target="_blank" rel="noopener noreferrer">
-                     <xnxx>
-                         <xnxx-head></xnxx-head>
-                         <xnxx-body></xnxx-body>
-                         <xnxx-hand></xnxx-hand>
-                     </xnxx>
+                    <div class="icon-botchat">
+                        <img src="{{ asset('chatbot/img/botchat.jpg') }}">
+                    </div>
                      <div class="slogan">
                          <p>Trợ lý ảo BIDV </p>
                          <p>Online</p>
