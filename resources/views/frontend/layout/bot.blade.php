@@ -14,7 +14,7 @@
                  </a></div>
              <div class="boxchat-body container">
                  <div class="list-service" id="test">
-                     @yield('messages');
+                     @yield('messages')
                  </div>
              </div>
              <div class="boxchat-footer container">
