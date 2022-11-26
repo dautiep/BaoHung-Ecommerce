@@ -46,10 +46,9 @@ return [
             ],
         ]
     ],
-
     [
         'router' => '',
-        'name' => 'QL câu hỏi - Dịch vụ',
+        'name' => 'QL Dịch vụ',
         'icon' => 'nav-icon fas fa-address-book',
         'active' => true,
         'hasActivePage' => [
@@ -64,6 +63,31 @@ return [
                 'icon' => 'far fa-circle nav-icon',
                 'hasActivePage' => [
                     'list-blog-categories'
+                ],
+                'position' => 1,
+                'authorize' => [],
+                'active' => true
+            ],
+        ]
+    ],
+
+    [
+        'router' => '',
+        'name' => 'QL Câu hỏi tư vấn',
+        'icon' => 'nav-icon fa fa-question-circle',
+        'active' => true,
+        'hasActivePage' => [
+            'question.list'
+        ],
+        'position' => 0,
+        'authorize' => ['super-admin'],
+        'children' => [
+            [
+                'router' => 'questions.list',
+                'name' => 'Danh sách câu hỏi',
+                'icon' => 'far fa-circle nav-icon',
+                'hasActivePage' => [
+                    'question.list'
                 ],
                 'position' => 1,
                 'authorize' => [],

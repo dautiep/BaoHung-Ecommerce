@@ -18,7 +18,6 @@ class PerimissionMiddleware
      */
     public function handle(Request $request, Closure $next, ...$roles)
     {
-
         if (empty($roles)) {
             return $next($request);
         }
