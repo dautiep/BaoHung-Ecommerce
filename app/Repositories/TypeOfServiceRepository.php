@@ -37,7 +37,6 @@ class TypeOfServiceRepository extends BaseRepository implements TypeOfServiceRep
     public function handleCreateOrUpdate($id, $request)
     {
         if ($id == null) {
-            $status = config('global.default.status.type_of_services');
             $idValue = Str::random(3);
             return $this->_model->create(
                 [

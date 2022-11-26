@@ -36,6 +36,23 @@ return [
                     'action' => 'Mở khóa dịch vụ'
                 ]
             ],
+            'question' => [
+                [
+                    'key' => 2,
+                    'name' => 'Đang chờ duyệt',
+                    'action' => 'Duyệt câu hỏi'
+                ],
+                [
+                    'key' => 1,
+                    'name' => 'Đang chạy',
+                    'action' => 'Khóa câu hỏi'
+                ],
+                [
+                    'key' => 0,
+                    'name' => 'Đã khóa',
+                    'action' => 'Mở khóa câu hỏi'
+                ]
+            ],
             'groups' => [
                 'active' => [
                     'key' => 1,
@@ -57,10 +74,18 @@ return [
             'type_of_services' => [
                 'store' => 'Lưu thông tin dịch vụ thành công',
                 'error' => 'Đã xảy ra lỗi!',
-                'create' => 'Thêm tài khoản thành công',
                 'lock' => 'Đã khóa dịch vụ',
                 'unlock' => 'Đã mở khóa dịch vụ',
                 'edit'   => 'Chỉnh sửa dịch vụ thành công',
+            ],
+            'question_answer_service' => [
+                'store' => 'Lưu thông tin câu hỏi tư vấn thành công',
+                'error' => 'Đã xảy ra lỗi!',
+                'approved' => 'Đã duyệt câu hỏi tư vấn',
+                'lock' => 'Đã khóa câu hỏi',
+                'unlock' => 'Đã mở khóa câu hỏi',
+                'edit'   => 'Chỉnh sửa câu hỏi thành công',
+
             ],
             'roles' => [
                 'create' => 'Thêm bộ quyền thành công',

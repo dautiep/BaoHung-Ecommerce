@@ -63,5 +63,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
     Route::group(['prefix' => 'questions', 'as' => 'questions.'], function () {
         Route::get('', 'QuestionAswerServiceController@list')->name('list');
+        Route::get('/create', 'QuestionAswerServiceController@create')->name('create');
+        Route::post('/store{id?}', 'QuestionAswerServiceController@store')->name('store');
+        Route::post('/approve', 'QuestionAswerServiceController@approve')->name('approved');
+        Route::post('/upload-image', 'QuestionAswerServiceController@uploadImage')->name('upload-image');
     });
 });
