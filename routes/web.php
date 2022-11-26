@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::group([
+    'namespace' => 'Frontend'
+], function () {
+    Route::get('/', 'ChatbotController@index')->name('index');
+    Route::get('bot', 'ChatbotController@actionBot')->name('bot');
+    Route::get('send-message', 'ChatbotController@actionSendMessage')->name('sendMessageUser');
+    Route::post('send-question', 'ChatbotController@actionSendQuestion')->name('sendQuestionUser');
+});
 Route::group(['prefix' => 'admin', 'namespace' => 'Auth'], function () {
     Route::resource('login', 'LoginController');
     Route::get('logout', 'LoginController@logout')->name('logout');
