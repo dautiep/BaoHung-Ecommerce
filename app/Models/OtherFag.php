@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\ScopeTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class OtherFag extends Model
 {
-    use HasFactory;
+    use HasFactory, ScopeTrait;
     public $table = 'other_faqs';
     public $fillable = [
         'content_to_consult',

@@ -52,7 +52,7 @@ return [
         'icon' => 'nav-icon fas fa-address-book',
         'active' => true,
         'hasActivePage' => [
-            'list-blog-categories', 'question.list'
+            'list-blog-categories', 'question.list', 'other_faqs.edit'
         ],
         'position' => 0,
         'authorize' => [],
@@ -79,6 +79,17 @@ return [
                 'authorize' => [],
                 'active' => true
             ],
+            [
+                'router' => 'other_faqs.list',
+                'name' => 'Danh sách câu hỏi khách hàng',
+                'icon' => 'far fa-circle nav-icon',
+                'hasActivePage' => [
+                    'other_faqs.list'
+                ],
+                'position' => 1,
+                'authorize' => [],
+                'active' => true
+            ]
         ]
     ],
 ];

@@ -41,7 +41,6 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         $fillable = $request->only('name', 'email', 'password', 'is_active');
         if ($id == null) {
             $builder = $this->create($fillable);
-            return $builder;
         } else {
             $builder = $this->_model->find($id);
             if (!$builder) {
@@ -49,7 +48,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             }
             $builder->update($fillable);
         }
-        $builder->groups()->sync($request->get('groups'));
+        $builder->groups()->sync($request->get('groups', []));
 
         return $builder;
     }

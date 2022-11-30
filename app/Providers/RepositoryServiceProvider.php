@@ -11,6 +11,7 @@ use App\Repositories\Interfaces\QuestionAswerServiceInterface;
 use App\Repositories\Interfaces\RoleRepositoryInterface;
 use App\Repositories\Interfaces\TypeOfServiceRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
+use App\Repositories\OtherFagRepository;
 use App\Repositories\QuestionAswerServiceRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\TypeOfServiceRepository;

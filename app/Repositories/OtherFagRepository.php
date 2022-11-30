@@ -12,6 +12,46 @@ class OtherFagRepository extends BaseRepository implements OtherFagRepositoryInt
     {
         $this->_model = $model;
         parent::__construct($model);
+    }
 
+    public function getList($request) {
+        $builder =  $this->_model->where(function ($query) use ($request) {
+            if (!empty($request->keySearch)) {
+                $query->whereLike('consulting_content', $request->keySearch);
+            }
+
+            if (!empty($request->fromTo)) {
+                $query->whereExplodeDate('created_at', $request->fromTo);
+            }
+
+            if (isset($request->status)) {
+                $query->where('status', $request->status);
+            }
+        })->paginate($this->page);
+        return $builder;
+    }
+    /**
+     *   'unanswered',
+     *    'answered',
+     *    'refuses_answer'
+     */
+    public function configStatus($type, $action = 'key')
+    {
+        $config = 'global.default.status.orther_faqs.' . $type . '.' . $action;
+
+        return config($config);
+    }
+
+    public function createQuestion($request)
+    {
+        $data = [
+            'consulting_content' => $request->get('message'),
+            'status' => $this->configStatus('unanswered', 'key'),
+            'content_to_consult' => '',
+            'email' => $request->get('email'),
+            'phone' => $request->get('phone'),
+            'type_of_service_id' => 1
+        ];
+        return $this->_model->create($data);
     }
 }

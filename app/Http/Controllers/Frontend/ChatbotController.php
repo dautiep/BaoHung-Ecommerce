@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Interfaces\OtherFagRepositoryInterface;
 use App\Repositories\Interfaces\QuestionAswerServiceInterface;
 use App\Repositories\Interfaces\TypeOfServiceRepositoryInterface;
 use Exception;
@@ -14,10 +15,12 @@ class ChatbotController extends Controller
     private $_bot = 'frontend.messages.';
     private $_questionAswerServiceInterface;
     private $_typeOfServiceInterFace;
-    public function __construct(QuestionAswerServiceInterface $questionAswerServiceInterface, TypeOfServiceRepositoryInterface $typeOfServiceRepository)
+    private $_ortherRepositoryInterface;
+    public function __construct(QuestionAswerServiceInterface $questionAswerServiceInterface, TypeOfServiceRepositoryInterface $typeOfServiceRepository, OtherFagRepositoryInterface $otherFagRepositoryInterface)
     {
         $this->_questionAswerServiceInterface = $questionAswerServiceInterface;
         $this->_typeOfServiceInterFace = $typeOfServiceRepository;
+        $this->_ortherRepositoryInterface = $otherFagRepositoryInterface;
     }
 
     public function bot(Request $request)
@@ -80,6 +83,7 @@ class ChatbotController extends Controller
     public function handleSendQuestion(Request $request)
     {
 
+        // $data = $this->_ortherRepositoryInterface->createQuestion($request);
         return response()->json('Câu hỏi của bạn đã được gửi đi');
     }
 }

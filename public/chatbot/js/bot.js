@@ -128,7 +128,7 @@ function notify(message) {
     Toastify({
         text: message,
         duration: 5000,
-        destination: "https://github.com/apvarun/toastify-js",
+        // destination: "https://github.com/apvarun/toastify-js",
         newWindow: true,
         close: true,
         //avatar: 'https://dummyimage.com/50x50/000/fff',
