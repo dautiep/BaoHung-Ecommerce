@@ -33,6 +33,9 @@ class QuestionAswerServiceRepository extends BaseRepository implements QuestionA
         if ($info['questionStatus'] != '') {
             $result = $result->where('status', $info['questionStatus']);
         }
+        if ($info['questionService'] != '') {
+            $result = $result->where('type_of_service_id', $info['questionService']);
+        }
         return $result->with(['typeOfServices'])->orderBy('created_at', 'DESC')->paginate(10);
     }
 

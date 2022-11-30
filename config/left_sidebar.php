@@ -65,7 +65,7 @@ return [
                     'list-blog-categories'
                 ],
                 'position' => 1,
-                'authorize' => [],
+                'authorize' => ['services.list'],
                 'active' => true
             ],
             [

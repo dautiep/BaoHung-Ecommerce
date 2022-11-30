@@ -2,7 +2,7 @@
           @if (@$message)
               <li class="supporter">
                   <div class="content-img">
-                      <img src="{{ asset('chatbot/img/70.png') }}">
+                      <img src="{{ asset('chatbot/img/botchat.jpg') }}">
                   </div>
                   <div class="content-bot">{!! $message !!}</div>
               </li>

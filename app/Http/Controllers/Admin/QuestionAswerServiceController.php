@@ -18,7 +18,7 @@ class QuestionAswerServiceController extends Controller
     }
     public function list(Request $request)
     {
-
+        $services = $this->_questionAnswerServiceInterface->getTypeOfService();
         $status = config('global.default.status.question');
         $fromTo = $request->get('fromTo');
         $fromDate = NULL;
@@ -31,13 +31,14 @@ class QuestionAswerServiceController extends Controller
         $info = [
             'questionName' => $request->get('questionName', ''),
             'questionStatus' => $request->get('questionStatus', ''),
+            'questionService' => $request->get('questionService', ''),
             'fromTo' => $request->get('fromTo', ''),
             'fromDate' => $fromDate,
             'toDate' => $toDate,
             'type' => 'SEARCH'
         ];
         $questions = $this->_questionAnswerServiceInterface->searchWithInfo($info);
-        return view($this->_prefix . 'list', compact('questions', 'info', 'status'));
+        return view($this->_prefix . 'list', compact('questions', 'info', 'status', 'services'));
     }
 
     public function create() {

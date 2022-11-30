@@ -3,41 +3,119 @@ return [
     [
         'slug' => 'manage-dashboard',
         'key' => 'manage-dashboard',
-        'name' => "Quản Full Quyền",
+        'name' => "Quản lý Full Quyền",
         'group' => false,
         'required' => true,
         'position' => 11,
         'children' => [
             [
-                'slug' => 'question_aswer_service-manage',
-                'key' => 'question_aswer_service-manage',
+                'slug' => 'questions',
+                'key' => 'questions',
                 'name' => "Quản lý câu hỏi ",
                 'group' => true,
                 'required' => true,
                 'children' => [
                     [
-                        'slug' => 'question_aswer_service_list',
-                        'key' => 'question_aswer_service_list',
+                        'slug' => 'questions.list',
+                        'key' => 'questions.list',
                         'name' => "Xem danh sách",
                         'children' => []
                     ],
 
                     [
-                        'slug' => 'question_aswer_service_edit',
-                        'key' => 'question_aswer_service_edit',
+                        'slug' => 'questions.edit',
+                        'key' => 'questions.edit',
                         'name' => "Chỉnh sửa",
                         'children' => []
                     ],
                     [
-                        'slug' => 'question_aswer_service_create',
-                        'key' => 'question_aswer_service_create',
+                        'slug' => 'questions.create',
+                        'key' => 'questions.create',
                         'name' => "Thêm mới",
                         'children' => []
                     ],
                     [
-                        'slug' => 'question_aswer_service_delete',
-                        'key' => 'question_aswer_service_delete',
-                        'name' => "Xóa",
+                        'slug' => 'questions.lock',
+                        'key' => 'questions.lock',
+                        'name' => "Khóa",
+                        'children' => []
+                    ],
+                ]
+            ],
+            [
+                'slug' => 'services',
+                'key' => 'services',
+                'name' => "Quản lý dịch vụ",
+                'group' => true,
+                'required' => true,
+                'children' => [
+                    [
+                        'slug' => 'services.create',
+                        'key' => 'services.create',
+                        'name' => "Thêm mới",
+                        'children' => []
+                    ],
+                    [
+                        'slug' => 'services.list',
+                        'key' => 'services.list',
+                        'name' => "Xem danh sách",
+                        'children' => []
+                    ],
+                    [
+                        'slug' => 'services.edit',
+                        'key' => 'services.edit',
+                        'name' => "Chỉnh sửa",
+                        'children' => []
+                    ],
+                    [
+                        'slug' => 'services.lock',
+                        'key' => 'services.lock',
+                        'name' => "Khóa",
+                        'children' => []
+                    ],
+                    [
+                        'slug' => 'services.unlock',
+                        'key' => 'services.unlock',
+                        'name' => "Khóa",
+                        'children' => []
+                    ],
+                ]
+            ],
+            [
+                'slug' => 'faq',
+                'key' => 'faq',
+                'name' => "Quản lý câu hỏi tư vấn",
+                'group' => true,
+                'required' => true,
+                'children' => [
+                    [
+                        'slug' => 'faq.approved',
+                        'key' => 'faq.approved',
+                        'name' => "Phê duyệt",
+                        'children' => []
+                    ],
+                    [
+                        'slug' => 'faq.list',
+                        'key' => 'faq.list',
+                        'name' => "Xem danh sách",
+                        'children' => []
+                    ],
+                    [
+                        'slug' => 'faq.edit',
+                        'key' => 'faq.edit',
+                        'name' => "Chỉnh sửa",
+                        'children' => []
+                    ],
+                    [
+                        'slug' => 'faq.sendmail',
+                        'key' => 'faq.sendmail',
+                        'name' => "Gửi mail",
+                        'children' => []
+                    ],
+                    [
+                        'slug' => 'faq.lock',
+                        'key' => 'faq.lock',
+                        'name' => "Khóa",
                         'children' => []
                     ],
                 ]
