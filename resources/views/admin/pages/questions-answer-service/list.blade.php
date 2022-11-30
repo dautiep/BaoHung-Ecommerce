@@ -55,11 +55,22 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="phoneSearch">Trạng thái</label>
-                                            <select class="form-control select2" name="serviceStatus" id="serviceStatus">
+                                            <select class="form-control select2" name="questionStatus" id="questionStatus">
                                                 <option value="">Tất cả</option>
-                                                {{-- @foreach ($status as $item)
-                                                    <option value="{{ $item['key'] }}" {{ ($info['serviceStatus'] == (string) $item['key']) ? 'selected' : '' }}>{{ $item['name'] }}</option>
-                                                @endforeach --}}
+                                                @foreach ($status as $item)
+                                                    <option value="{{ $item['key'] }}" {{ ($info['questionStatus'] == (string) $item['key']) ? 'selected' : '' }}>{{ $item['name'] }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="phoneSearch">Dịch vụ</label>
+                                            <select class="form-control select2" name="questionService" id="questionService">
+                                                <option value="">Tất cả</option>
+                                                @foreach ($services as $item)
+                                                    <option value="{{ $item->id }}" {{ ($info['questionService'] == (string) $item->id) ? 'selected' : '' }}>{{ $item->name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -159,7 +170,11 @@
 
 @section('scripts')
     <script>
-        $("#serviceStatus").select2({
+        $("#questionStatus").select2({
+            theme: 'bootstrap4'
+        });
+
+        $("#questionService").select2({
             theme: 'bootstrap4'
         });
 

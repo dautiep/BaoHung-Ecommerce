@@ -15,8 +15,8 @@ class CreateTableOtherFaqs extends Migration
     {
         Schema::create('other_faqs', function (Blueprint $table) {
             $table->id();
-            $table->string('content_to_consult', 500);
-            $table->string('consulting_content', 500);
+            $table->text('content_to_consult');
+            $table->text('consulting_content');
             $table->timestamp('created_date')->useCurrent();
             $table->tinyInteger('status')->nullable();
             $table->string('email', 50);
