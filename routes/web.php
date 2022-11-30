@@ -51,7 +51,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
     // groups
     Route::group(['prefix' => 'groups', 'as' => 'groups.'], function () {
-        Route::get('/', 'GroupController@list')->name('list');
+        Route::get('/', 'GroupController@list')->name('list')->middleware('role:services.list');
         Route::get('create', 'GroupController@create')->name('create');
         Route::post('state', 'GroupController@state')->name('state');
         Route::post('/delete', 'GroupController@delete')->name('delete');
