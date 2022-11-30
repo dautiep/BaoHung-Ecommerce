@@ -36,6 +36,20 @@ return [
                     'action' => 'Mở khóa dịch vụ'
                 ]
             ],
+            'orther_faqs' => [
+                'unanswered' => [
+                    'key' => 0,
+                    'name' => 'Chưa giải đáp',
+                ],
+                'answered' => [
+                    'key' => 1,
+                    'name' => 'Đã giải đáp',
+                ],
+                'refuses_answer' => [
+                    'key' => 2,
+                    'name' => 'Bị block'
+                ],
+            ],
             'question' => [
                 [
                     'key' => 2,
@@ -100,6 +114,10 @@ return [
             ],
             'errors' => [
                 'update' => 'Lỗi phát sinh khi cập nhật dữ liệu',
+            ],
+            'orther_faqs' => [
+                'confirm_delete'   => 'Xác nhận có xóa câu hỏi',
+                'not_found' => 'Không tìm thấy kết quả',
             ]
         ]
     ]

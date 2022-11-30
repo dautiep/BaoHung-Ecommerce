@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 Route::group([
     'namespace' => 'Frontend'
@@ -75,5 +77,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('/store{id?}', 'QuestionAswerServiceController@store')->name('store');
         Route::post('/approve', 'QuestionAswerServiceController@approve')->name('approved');
         Route::post('/upload-image', 'QuestionAswerServiceController@uploadImage')->name('upload-image');
+    });
+
+    Route::group(['prefix' => 'other_faqs', 'as' => 'other_faqs.'], function () {
+        Route::get('/', 'OtherFaqController@index')->name('list');
+        Route::get('state')->name('state');
+        Route::post('/delete', 'OtherFaqController@delete')->name('delete');
+        Route::get('edit/{id}', 'OtherFaqController@edit')->name('edit');
     });
 });

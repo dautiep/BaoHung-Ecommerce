@@ -78,31 +78,13 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="row mt-4">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="text-capitalize">Nhập lại password Tài khoản <sup
-                                                            class="text-danger">*</sup></label>
-                                                    <div class="input-group" id="show_hide_password">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"><a href=""><i
-                                                                        class="fa fa-eye-slash"
-                                                                        aria-hidden="true"></i></a></span>
-                                                        </div>
-                                                        <input class="form-control" type="password" name="password"
-                                                            value="{{ old('password') }}" placeholder="Password Tài khoản">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     @endif
                                     <div class="row mt-4">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="text-capitalize">Chọn nhóm quyền quản lý<sup
                                                         class="text-danger">*</sup></label>
-                                                <select name="groups[]" id="groups" class="select2" multiple="multiple"
+                                                <select name="groups[]" id="groups" class="select2"
                                                     data-placeholder="Chọn thẻ" style="width: 100%;">
                                                     <option value="">--- Chọn nhóm quyền quản lý ---</option>
                                                     @php
