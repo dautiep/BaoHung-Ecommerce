@@ -55,10 +55,9 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label class="text-capitalize">Trạng Thái <sup
-                                                        class="text-danger">*</sup></label>
+                                                <label class="text-capitalize">Trạng Thái </label>
                                                 <select class="form-control select2" name="status" id="status">
-                                                    <option value="" active>Xem tất cả</option>
+                                                    <option value="" active>Tất cả</option>
                                                     @foreach (config('global.default.status.orther_faqs') as $value)
                                                         <option value="{{ @$value['key'] }}"
                                                             {{ (string) @$value['key'] == (string) @$info['status'] ? 'selected' : '' }}>
@@ -86,9 +85,9 @@
                                     <thead>
                                         <tr>
                                             <th class="bg-info" style="width: 10px">#</th>
-                                            <th class="text-center bg-info w-50">Câu hỏi</th>
+                                            <th class="text-center bg-info" style="width: 30%">Câu hỏi</th>
                                             <th class="text-center bg-info">Email</th>
-                                            <th class="text-center bg-info">Phone</th>
+                                            <th class="text-center bg-info" >Phone</th>
                                             <th class="text-center bg-info">Trạng thái</th>
                                             <th class="text-center bg-info">Ngày Tạo</th>
                                             <th class="text-center bg-info">Hành Động</th>
