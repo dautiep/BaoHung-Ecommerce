@@ -52,15 +52,33 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label class="text-capitalize">Trạng Thái <sup
                                                         class="text-danger">*</sup></label>
                                                 <select class="form-control select2" name="is_active" id="is_active">
-                                                    <option value="">--- Chọn Trạng thái ---</option>
+                                                    <option value="">Tất cả</option>
                                                     @foreach (config('global.default.status.users') as $value)
                                                         <option value="{{ @$value['key'] }}"
-                                                            {{ @$value['key'] == @$info['is_active'] ? 'selected' : '' }}>
+                                                            {{ (string) @$value['key'] == (string) @$info['is_active'] ? 'selected' : '' }}>
+                                                            {{ @$value['name'] }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="text-capitalize">Nhóm quyền <sup
+                                                        class="text-danger">*</sup></label>
+                                                <select class="form-control select2" name="groups" id="groups">
+                                                    <option value="">Tất cả</option>
+                                                    @foreach (@$groups as $value)
+                                                        <option value="{{ @$value['id'] }}"
+                                                            {{ (string) @$value['name'] == (string) @$info['groups'] ? 'selected' : '' }}>
                                                             {{ @$value['name'] }}
                                                         </option>
                                                     @endforeach
@@ -91,7 +109,7 @@
                                     <thead>
                                         <tr>
                                             <th class="bg-info" style="width: 10px">#</th>
-                                            <th class="text-center bg-info w-50">Tên</th>
+                                            <th class="text-center bg-info w-25">Tên</th>
                                             <th class="text-center bg-info">Email</th>
                                             <th class="text-center bg-info">Nhóm quyền</th>
                                             <th class="text-center bg-info">Trạng thái</th>

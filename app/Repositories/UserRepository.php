@@ -16,7 +16,11 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function getLists($request)
     {
-        $builder =  $this->_model::with(['groups'])->where(function ($query) use ($request) {
+        $builder =  $this->_model::with(['groups'])->whereHas('groups', function ($query) use ($request) {
+            if (!empty($request->get('groups'))) {
+                $query->where('group_id', $request->get('groups'));
+            }
+        })->where(function ($query) use ($request) {
             if (!empty($request->keySearch)) {
                 $query->whereLike('name', $request->keySearch);
             }

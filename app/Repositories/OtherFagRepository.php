@@ -56,6 +56,16 @@ class OtherFagRepository extends BaseRepository implements OtherFagRepositoryInt
         return $this->_model->create($data);
     }
 
+    public function handleDelete($request)
+    {
+        $builder = $this->_model->find($request->get('itemId'));
+
+        if ($builder) {
+            $builder = $builder->delete();
+        }
+        return $builder;
+    }
+
     public function updateContentToConsult($request, $id)
     {
 
