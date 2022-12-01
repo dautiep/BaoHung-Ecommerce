@@ -70,7 +70,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                           <div class="col-md-3">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label class="text-capitalize">Nhóm quyền <sup
                                                         class="text-danger">*</sup></label>
