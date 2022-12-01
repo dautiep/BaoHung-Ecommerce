@@ -55,7 +55,7 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label class="text-capitalize">Trạng Thái
-                                                        </label>
+                                                </label>
                                                 <select class="form-control select2" name="status" id="status">
                                                     <option value="">Tất cả</option>
                                                     @foreach (config('global.default.status.groups') as $value)
