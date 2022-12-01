@@ -32,14 +32,14 @@
                                 <form action="" method="GET">
                                     @csrf
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="phoneSearch">Tên câu hỏi khách hàng</label>
                                                 <input type="text" class="form-control" name="keySearch"
                                                     value="{{ @$info['keySearch'] }}">
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="fromTo">Thời Gian</label>
                                                 <div class="input-group">
@@ -100,6 +100,7 @@
                                             $keyBy = $config_status->keyBy('key');
                                             $label_delete = config('global.default.messages.orther_faqs.confirm_delete');
                                             $config_active = config('global.default.status.other_faqs.answered.key');
+                                            $bg_status = ['bg-warning', 'bg-success', 'bg-danger'];
                                         @endphp
                                         @foreach ($data as $key => $item)
                                             <tr>
@@ -115,7 +116,8 @@
                                                     {{ $item->phone }}
                                                 </td>
                                                 <td class="align-middle text-center">
-                                                    {{ @$keyBy[$item->status]['name'] }}
+                                                    <span class="badge {{ @$bg_status[$item->status] }}">
+                                                        {{ @$keyBy[$item->status]['name'] }}</span>
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     {{ date_format(date_create($item->created_at), 'd-m-Y') }}</td>
@@ -153,7 +155,7 @@
 
 @section('scripts')
     <script>
-        $("#is_active").select2({
+        $("#status").select2({
             theme: 'bootstrap4'
         });
         $('#fromTo').daterangepicker({
