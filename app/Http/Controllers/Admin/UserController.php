@@ -24,8 +24,8 @@ class UserController extends Controller
     {
         $info = $this->getBuilderSearch($request);
         $data = $this->_userRepository->getLists($request);
-
-        return view($this->_prefix . 'list', compact('info', 'data'));
+        $groups = $this->_groupRepository->getAllByCondition();
+        return view($this->_prefix . 'list', compact('info', 'data', 'groups'));
     }
 
     public function create(Request $request)

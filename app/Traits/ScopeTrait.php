@@ -19,4 +19,9 @@ trait ScopeTrait
             return $query->whereBetween($column, [$fromDate, $toDate]);
         }
     }
+    public function scopeWithWhereHas($query, $relation, $constraint)
+    {
+        return $query->whereHas($relation, $constraint)
+            ->with([$relation => $constraint]);
+    }
 }
