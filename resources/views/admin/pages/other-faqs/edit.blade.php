@@ -8,9 +8,9 @@
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             @if (empty(request()->id))
-                                <h1 class="m-0">Thêm Câu Hỏi</h1>
+                                <h1 class="m-0">Thêm Tư Vấn</h1>
                             @else
-                                <h1 class="m-0">Cập Nhật Câu Hỏi</h1>
+                                <h1 class="m-0">Cập Nhật Tư Vấn</h1>
                             @endif
                         </div>
                         <div class="col-sm-6">
@@ -32,11 +32,11 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
-                        <form action="{{ route('groups.store', ['id' => request()->id]) }}" method="POST">
+                        <form action="{{ route('other_faqs.content_to_consult', ['id' => request()->id]) }}" method="POST">
                             @csrf
                             <div class="card card-success">
                                 <div class="card-header">
-                                    <h3 class="card-title">Thông Tin Câu Hỏi</h3>
+                                    <h3 class="card-title">Thông Tin Tư Vấn</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="row mt-4">
@@ -86,31 +86,67 @@
                                     @php
                                         $config_status = collect(config('global.default.status.orther_faqs'))->values();
                                         $keyBy = $config_status->keyBy('key');
+                                        $status_unanswered = config('global.default.status.orther_faqs.unanswered');
+                                        $status_answered = config('global.default.status.orther_faqs.answered');
+
                                     @endphp
                                     <div class="row mt-4">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="text-capitalize">Trạng thái Câu Hỏi <sup
+                                                <label class="text-capitalize">Trạng thái Tư Vấn <sup
                                                         class="text-danger">*</sup></label>
                                                 <input type="text" name="status"
                                                     value="{{ old('status', @$keyBy[@$data->status]['name']) }}"
-                                                    class="form-control" placeholder="Trạng Thái Câu Hỏi" readonly>
+                                                    class="form-control" placeholder="Trạng Thái Tư Vấn" readonly>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="row mt-2">
-                                        <div class="col-md-12">
-                                            <span><i>Lưu ý: Các trường có dấu <sup class="text-danger">*</sup> là các
-                                                    trường bắt buộc nhập</i></span>
+                                    @if (@$status_unanswered['key'] == $data->status || @$status_answered['key'] == $data->status)
+                                        <div class="row mt-4">
+                                            <div class="col-md-12">
+                                                <label class="text-capitalize">Câu trả lời <sup
+                                                        class="text-danger">*</sup></label>
+                                                <textarea type="text" {{ @$status_answered['key'] == $data->status ? 'readonly' : '' }} name="content_to_consult"
+                                                    class="form-control" readonly>{{ old('content_to_consult', @$data->content_to_consult) }}</textarea>
+                                            </div>
                                         </div>
+                                    @endif
+                                    @if (@$status_unanswered['key'] == $data->status)
+                                        <div class="row mt-4">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="text-capitalize">Xét duyệt câu tư vấn<sup
+                                                            class="text-danger">*</sup></label>
+                                                    <select class="form-control select2" name="status" id="status">
+                                                        <option value="">-- Chọn dịch vụ --</option>
+                                                        @foreach ($config_status as $item)
+                                                            <option value="{{ @$item['key'] }}"
+                                                                {{ old('questionService') == @$item['key'] ? 'selected' : '' }}>
+                                                                {{ @$item['name'] }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-2">
+                                                <div class="col-md-12">
+                                                    <span><i>Lưu ý: Các trường có dấu <sup class="text-danger">*</sup>
+                                                            là
+                                                            các
+                                                            trường bắt buộc nhập</i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                    <div class="card-footer">
+                                        @if (@$status_unanswered['key'] == $data->status)
+                                            <button type="submit" class="btn btn-success">Lưu</button>
+                                        @endif
+
+                                        <a href="{{ route('other_faqs.list') }}" class="btn btn-primary ml-4">Trở
+                                            Về</a>
                                     </div>
                                 </div>
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-success">Lưu</button>
-                                    <a href="{{ route('groups.list') }}" class="btn btn-primary ml-4">Trở Về</a>
-                                </div>
-                            </div>
                         </form>
                     </div>
                 </div>
@@ -121,7 +157,7 @@
 
 @section('scripts')
     <script>
-        $("#roles").select2({
+        $("#status").select2({
             theme: 'bootstrap4'
         });
     </script>

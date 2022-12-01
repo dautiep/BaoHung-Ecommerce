@@ -84,5 +84,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('state')->name('state');
         Route::post('/delete', 'OtherFaqController@delete')->name('delete');
         Route::get('edit/{id}', 'OtherFaqController@edit')->name('edit');
+        Route::post('content-to-consult/{id}', 'OtherFaqController@postContentToConsult')->name('content_to_consult');
     });
 });
