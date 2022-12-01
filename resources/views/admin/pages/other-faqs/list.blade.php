@@ -58,10 +58,10 @@
                                                 <label class="text-capitalize">Trạng Thái <sup
                                                         class="text-danger">*</sup></label>
                                                 <select class="form-control select2" name="status" id="status">
-                                                    <option value="">--- Chọn Trạng thái ---</option>
+                                                    <option value="" active>Xem tất cả</option>
                                                     @foreach (config('global.default.status.orther_faqs') as $value)
                                                         <option value="{{ @$value['key'] }}"
-                                                            {{ @$value['key'] == @$info['status'] ? 'selected' : '' }}>
+                                                            {{ (string) @$value['key'] == (string) @$info['status'] ? 'selected' : '' }}>
                                                             {{ @$value['name'] }}
                                                         </option>
                                                     @endforeach

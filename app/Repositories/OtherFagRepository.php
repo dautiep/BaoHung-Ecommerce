@@ -14,7 +14,8 @@ class OtherFagRepository extends BaseRepository implements OtherFagRepositoryInt
         parent::__construct($model);
     }
 
-    public function getList($request) {
+    public function getList($request)
+    {
         $builder =  $this->_model->where(function ($query) use ($request) {
             if (!empty($request->keySearch)) {
                 $query->whereLike('consulting_content', $request->keySearch);
@@ -53,5 +54,27 @@ class OtherFagRepository extends BaseRepository implements OtherFagRepositoryInt
             'type_of_service_id' => 1
         ];
         return $this->_model->create($data);
+    }
+
+    public function updateContentToConsult($request, $id)
+    {
+
+        $builder = $this->_model->find($id);
+        if (!$builder) {
+            return false;
+        }
+
+        if ($request->get('status') == config('global.default.status.orther_faqs.answered')) {
+            $data = [
+                'content_to_consult' => $request->get('content_to_consult'),
+                'status' => $request->get('status')
+            ];
+        } else {
+            $data = [
+                'status' => $request->get('status')
+            ];
+        }
+        $builder = $builder->update($data);
+        return $builder;
     }
 }

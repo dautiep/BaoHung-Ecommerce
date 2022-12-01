@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\OtherFaqRequest;
 use App\Repositories\Interfaces\OtherFagRepositoryInterface;
 
 class OtherFaqController extends Controller
@@ -24,7 +25,7 @@ class OtherFaqController extends Controller
 
     public function delete(Request $request)
     {
-        dd($request->all());
+
     }
 
     public function edit($id)
@@ -34,5 +35,14 @@ class OtherFaqController extends Controller
             return redirect()->route('other_faqs.list')->with($this->getMessages(config('global.default.messages.orther_faqs.not_found'), $this::$TYPE_MESSAGES_ERROR));
         }
         return view($this->_prefix . 'edit', compact('data'));
+    }
+
+    public function postContentToConsult(OtherFaqRequest $request, $id)
+    {
+        $data = $this->_otherFaqRespositoryInterface->updateContentToConsult($request, $id);
+        if (!$data) {
+            return redirect()->route('other_faqs.list')->with($this->getMessages(config('global.default.messages.orther_faqs.not_found'), $this::$TYPE_MESSAGES_ERROR));
+        }
+        return redirect()->route('other_faqs.list')->with($this->getMessages(config('global.default.messages.orther_faqs.content_to_consult'), $this::$TYPE_MESSAGES_SUCCESS));
     }
 }
