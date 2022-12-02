@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Group;
+use App\Models\Role;
 use App\Repositories\Interfaces\GroupRepositoryInterface;
 use App\Traits\HasPermissionsTrait;
 
@@ -10,9 +11,11 @@ class GroupRepository extends BaseRepository implements GroupRepositoryInterface
 {
     use HasPermissionsTrait;
     public $_model;
-    public function __construct(Group $model)
+    public $_modelRole;
+    public function __construct(Group $model, Role $modelRole)
     {
         $this->_model = $model;
+        $this->_modelRole = $modelRole;
         parent::__construct($model);
     }
 
@@ -50,13 +53,13 @@ class GroupRepository extends BaseRepository implements GroupRepositoryInterface
     {
         if ($id == null) {
             $builder = $this->_model->create($request->only('name', 'status'));
-            return $builder;
+            $roles = $this->_modelRole->find($request['roles']);
         } else {
             $builder = $this->_model->find($id);
+            $builder->update($request->only('name', 'status'));
+            $roles = $builder->roles;
         }
-        $builder->update($request->only('name', 'status'));
         $builder->roles()->sync($request->get('roles'));
-        $roles = $builder->roles;
         if (!$roles->isEmpty()) {
             $json_role = $this->getJsonPermissionToArray($builder->roles->pluck('permission'))->toJson();
             $builder->update([
