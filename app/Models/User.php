@@ -21,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'is_active'
+        'name', 'email', 'password', 'is_active', 'department_id'
     ];
 
     public $appends  = [
@@ -57,4 +57,8 @@ class User extends Authenticatable
     /**
      * Relationship.
      */
+    public function department()
+    {
+        return $this->hasOne(Department::class, 'id', 'department_id');
+    }
 }

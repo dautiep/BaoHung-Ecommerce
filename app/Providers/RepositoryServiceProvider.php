@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Repositories\BaseRepository;
+use App\Repositories\DepartmentRepository;
 use App\Repositories\GroupRepository;
 use App\Repositories\Interfaces\BaseRepositoryInterface;
+use App\Repositories\Interfaces\DepartmentRepositoryInterface;
 use App\Repositories\Interfaces\GroupRepositoryInterface;
 use App\Repositories\Interfaces\OtherFagRepositoryInterface;
 use App\Repositories\Interfaces\QuestionAswerServiceInterface;
@@ -51,8 +53,13 @@ class RepositoryServiceProvider extends ServiceProvider
             [
                 'interface' => UserRepositoryInterface::class,
                 'repository' => UserRepository::class,
+            ],
+            [
+                'interface' => DepartmentRepositoryInterface::class,
+                'repository' => DepartmentRepository::class
             ]
         ];
+
         foreach ($repositories as $instance) {
             $this->app->bind(
                 $instance['interface'],
