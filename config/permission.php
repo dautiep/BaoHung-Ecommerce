@@ -40,6 +40,12 @@ return [
                         'name' => "Khóa",
                         'children' => []
                     ],
+                    [
+                        'slug' => 'questions.approved',
+                        'key' => 'questions.approved',
+                        'name' => "Phê duyệt",
+                        'children' => []
+                    ],
                 ]
             ],
             [

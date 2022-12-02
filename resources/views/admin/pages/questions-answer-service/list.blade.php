@@ -76,14 +76,16 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    @if(is_can(['questions.create']))
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>&nbsp;</label>
                                             <a href="{{ route('questions.create') }}" class="btn btn-block btn-warning">Thêm Câu Hỏi</a>
                                         </div>
                                     </div>
+                                    @endif
                                     <div class="col-md-4">
-                                        <div class="form-group">
+                                    <div class="form-group">
                                             <label>&nbsp;</label>
                                             <button type="submit" class="btn btn-block btn-primary">Tìm Kiếm</button>
                                         </div>
@@ -126,27 +128,37 @@
                                             <td class="align-middle text-center">
 
                                                 @if ($question->status == $status[0]['key'])
-                                                    <a class="btn btn-sm btn-primary" href="{{ route('questions.edit', $question->id) }}" title="Cập nhật thông tin">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    <button role="button" class="btn btn-sm btn-info"
-                                                            onclick="approvedQuestion('{{ $question->id }}')" data-toggle="tooltip"
-                                                            title="{{ $status[0]['action'] }}"><i class="fa fa-key"></i>
-                                                    </button>
+                                                    @if (is_can(['questions.edit']))
+                                                        <a class="btn btn-sm btn-primary" href="{{ route('questions.edit', $question->id) }}" title="Cập nhật thông tin">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    @endif
+                                                    @if (is_can(['questions.approved']))
+                                                        <button role="button" class="btn btn-sm btn-info"
+                                                                onclick="approvedQuestion('{{ $question->id }}')" data-toggle="tooltip"
+                                                                title="{{ $status[0]['action'] }}"><i class="fa fa-key"></i>
+                                                        </button>
+                                                    @endif
                                                 @elseif ($question->status == $status[1]['key'])
-                                                    <a class="btn btn-sm btn-primary" href="{{ route('questions.edit', $question->id) }}" title="Cập nhật thông tin">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    <button role="button" class="btn btn-sm btn-danger"
-                                                            onclick="deactiveService('{{ $question->id }}')" data-toggle="tooltip"
-                                                            title="{{ $status[1]['action'] }}"><i class="fa fa-key"></i>
-                                                    </button>
+                                                    @if (is_can(['questions.edit']))
+                                                        <a class="btn btn-sm btn-primary" href="{{ route('questions.edit', $question->id) }}" title="Cập nhật thông tin">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    @endif
+                                                    @if (is_can(['questions.lock']))
+                                                        <button role="button" class="btn btn-sm btn-danger"
+                                                                onclick="deactiveService('{{ $question->id }}')" data-toggle="tooltip"
+                                                                title="{{ $status[1]['action'] }}"><i class="fa fa-key"></i>
+                                                        </button>
+                                                    @endif
 
                                                 @else
-                                                    <button role="button" class="btn btn-sm btn-success"
-                                                        onclick="activeService('{{ $question->id }}')" data-toggle="tooltip"
-                                                        title="{{ $status[2]['action'] }}"><i class="fa fa-key"></i>
-                                                    </button>
+                                                    @if (is_can(['questions.lock']))
+                                                        <button role="button" class="btn btn-sm btn-success"
+                                                            onclick="activeService('{{ $question->id }}')" data-toggle="tooltip"
+                                                            title="{{ $status[2]['action'] }}"><i class="fa fa-key"></i>
+                                                        </button>
+                                                    @endif
                                                 @endif
                                             </td>
                                         </tr>
