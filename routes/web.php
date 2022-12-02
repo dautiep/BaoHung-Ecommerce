@@ -86,4 +86,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('edit/{id}', 'OtherFaqController@edit')->name('edit');
         Route::post('content-to-consult/{id}', 'OtherFaqController@postContentToConsult')->name('content_to_consult');
     });
+
+    Route::group(['prefix' => 'department', 'as' => 'department.'], function () {
+        Route::get('/', 'DepartmentController@index')->name('list');
+        Route::get('/create', 'DepartmentController@create')->name('create');
+        Route::get('/edit/{id}', 'DepartmentController@edit')->name('edit');
+        Route::post('/store/{id?}', 'DepartmentController@store')->name('store');
+    });
 });

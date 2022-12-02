@@ -1,4 +1,4 @@
-@extends('admin.layouts.app', ['activePage' => 'users.list'])
+@extends('admin.layouts.app', ['activePage' => 'department.list'])
 
 @section('content')
     <div class="content">
@@ -7,13 +7,10 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Danh Sách tài khoản</h1>
+                            <x-title-page :title="$title" :class="'m-0'" />
                         </div>
                         <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a class="text-fibo" href="#">QL Tài khoản</a></li>
-                                <li class="breadcrumb-item active">List</li>
-                            </ol>
+                            <x-breadcrumb />
                         </div>
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
@@ -25,93 +22,64 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Danh Sách tài khoản</h3>
+                                <x-title-page :title="$title" :class="'card-title'" />
                             </div>
                             <div class="card-body">
                                 <form action="" method="GET">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="phoneSearch">Tên Tài khoản</label>
-                                                <input type="text" class="form-control" name="keySearch"
-                                                    value="{{ @$info['keySearch'] }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="fromTo">Thời Gian</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">
-                                                            <i class="far fa-calendar-alt"></i>
-                                                        </span>
-                                                    </div>
-                                                    <input type="text" class="form-control float-right" name="fromTo"
-                                                        id="fromTo" value="{{ $info['fromTo'] }}" autocomplete="off">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label class="text-capitalize">Trạng Thái <sup
-                                                        class="text-danger">*</sup></label>
-                                                <select class="form-control select2" name="is_active" id="is_active">
-                                                    <option value="">Tất cả</option>
-                                                    @foreach (config('global.default.status.users') as $value)
-                                                        <option value="{{ @$value['key'] }}"
-                                                            {{ (string) @$value['key'] == (string) @$info['is_active'] ? 'selected' : '' }}>
-                                                            {{ @$value['name'] }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <x-input-control :input="'select2'" :control="[
-                                                'for' => 'department_id',
-                                                'label' => 'Phòng ban',
-                                                'name' => 'department_id',
-                                                'value' => @request()->department_id,
-                                                'selected' => @$department,
-                                                'required' => true,
-                                                'first' => true,
-                                                'first_value' => '',
-                                                'first_name' => 'Tất cả',
-                                                'id' => 'department_id',
+                                            <x-input-control :input="'input'" :control="[
+                                                'for' => 'name',
+                                                'label' => 'Tên phòng ban',
+                                                'type' => 'text',
+                                                'class' => '',
+                                                'name' => 'keySearch',
+                                                'value' => $info['keySearch'],
+                                                'property' => '',
                                             ]" />
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label class="text-capitalize">Nhóm quyền <sup
-                                                        class="text-danger">*</sup></label>
-                                                <select class="form-control select2" name="groups" id="groups">
-                                                    <option value="">Tất cả</option>
-                                                    @foreach (@$groups as $value)
-                                                        <option value="{{ @$value['id'] }}"
-                                                            {{ (string) @$value['name'] == (string) @$info['groups'] ? 'selected' : '' }}>
-                                                            {{ @$value['name'] }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
+                                            <x-input-control :input="'calendar'" :control="[
+                                                'for' => 'name',
+                                                'label' => 'Thời Gian',
+                                                'type' => 'text',
+                                                'class' => '',
+                                                'name' => 'fromTo',
+                                                'value' => $info['fromTo'],
+                                                'property' => '',
+                                            ]" />
+                                        </div>
+                                        <div class="col-md-3">
+                                            <x-input-control :input="'select2'" :control="[
+                                                'for' => 'status',
+                                                'label' => 'Trạng thái',
+                                                'name' => 'status',
+                                                'value' => $info['status'],
+                                                'selected' => collect(
+                                                    config('global.default.status.department'),
+                                                )->values(),
+                                                'first' => true,
+                                                'first_value' => '',
+                                                'first_name' => 'Xem tất cả',
+                                                'id' => 'status',
+                                            ]" />
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>&nbsp;</label>
-                                                <a href="{{ route('users.create') }}" class="btn btn-block btn-warning">Thêm
-                                                    Tài khoản</a>
+                                                <a href="{{ route('department.create') }}"
+                                                    class="btn btn-block btn-warning">Thêm
+                                                    phòng ban</a>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>&nbsp;</label>
-                                                <button type="submit" class="btn btn-block btn-primary">Tìm Kiếm</button>
+                                                <button type="submit" class="btn btn-block btn-primary">Tìm
+                                                    Kiếm</button>
                                             </div>
                                         </div>
                                     </div>
@@ -123,10 +91,8 @@
                                     <thead>
                                         <tr>
                                             <th class="bg-info" style="width: 10px">#</th>
-                                            <th class="text-center bg-info w-25">Tên</th>
-                                            <th class="text-center bg-info w-25">Phòng ban</th>
-                                            <th class="text-center bg-info">Email</th>
-                                            <th class="text-center bg-info">Nhóm quyền</th>
+                                            <th class="text-center bg-info" style="width:35%">Tên</th>
+                                            <th class="text-center bg-info">Số lượng thành viên</th>
                                             <th class="text-center bg-info">Trạng thái</th>
                                             <th class="text-center bg-info">Ngày Tạo</th>
                                             <th class="text-center bg-info">Hành Động</th>
@@ -134,8 +100,11 @@
                                     </thead>
                                     <tbody>
                                         @php
-                                            $config_status = collect(config('global.default.status.users'));
-                                            $config_active = config('global.default.status.users.active.key');
+                                            $config_status = collect(config('global.default.status.department'))->values();
+                                            $keyBy = $config_status->keyBy('key');
+                                            $label_delete = config('global.default.messages.orther_faqs.confirm_delete');
+                                            $config_active = config('global.default.status.department.active.key');
+                                            $bg_status = ['bg-warning', 'bg-success', 'bg-danger'];
                                         @endphp
                                         @foreach ($data as $key => $item)
                                             <tr>
@@ -144,33 +113,25 @@
                                                 <td class="align-middle">
                                                     {{ $item->name }}
                                                 </td>
-                                                <td>
-                                                    {{ @$item->department->name ?? '' }}
-                                                </td>
-                                                <td class="align-middle">
-                                                    {{ $item->email }}
+                                                <td class="align-middle text-center">
+                                                    {{ $item->total_users }}
                                                 </td>
                                                 <td class="align-middle text-center">
-                                                    @foreach (@$item->groups as $group)
-                                                        <span class="badge bg-success">{{ $group->name }}</span>
-                                                    @endforeach
-                                                </td>
-                                                <td class="align-middle text-center">
-                                                    <span
-                                                        class="badge {{ $item->is_active == $config_active ? 'bg-success' : ' bg-danger' }}">{{ $config_status->firstWhere('key', $item->is_active)['name'] ?? '' }}</span>
+                                                    <span class="badge {{ @$bg_status[$item->status] }}">
+                                                        {{ @$keyBy[$item->status]['name'] }}</span>
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     {{ date_format(date_create($item->created_at), 'd-m-Y') }}</td>
                                                 <td class="align-middle text-center">
-                                                    @if ($item->is_active == $config_active)
+                                                    @if ($item->status == $config_active)
                                                         <a class="btn btn-sm btn-primary"
-                                                            href="{{ route('users.edit', ['id' => $item->id]) }}"
+                                                            href="{{ route('department.edit', ['id' => $item->id]) }}"
                                                             title="Cập nhật thông tin">
                                                             <i class="fas fa-edit"></i>
                                                         </a>
                                                     @endif
                                                     @php
-                                                        $lablel = $item->is_active == $config_active ? 'Khóa tài khoản' : 'Mở khóa tài khoản';
+                                                        $lablel = $item->status == $config_active ? 'Khóa ' : 'Mở khóa ';
                                                     @endphp
                                                     <button role="button" class="btn btn-sm btn-warning"
                                                         onclick="cancelCategory('{{ $item->id }}', '{{ $lablel }}')"
@@ -197,13 +158,9 @@
 
 @section('scripts')
     <script>
-        $("#is_active").select2({
+        $("#status").select2({
             theme: 'bootstrap4'
         });
-        $("#department_id").select2({
-            theme: 'bootstrap4'
-        });
-
         $('#fromTo').daterangepicker({
             autoUpdateInput: false,
             locale: {
@@ -225,7 +182,7 @@
                 itemId: id_item,
             };
             Swal.fire({
-                title: message ?? 'Bạn có chắc khóa tài khoản này không?',
+                title: message ?? 'Bạn có chắc khóa nhóm quyền này không?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -236,7 +193,7 @@
                 if (result.value) {
                     $('.loader').show();
                     $.ajax({
-                        url: "{{ route('users.state') }}",
+                        url: "{{ route('groups.state') }}",
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },

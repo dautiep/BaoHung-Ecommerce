@@ -25,7 +25,8 @@ class User extends Authenticatable
     ];
 
     public $appends  = [
-        'groups'
+        'groups',
+        'department'
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -54,11 +55,13 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($value);
     }
+
+
     /**
      * Relationship.
      */
     public function department()
     {
-        return $this->hasOne(Department::class, 'id', 'department_id');
+        return $this->belongsTo(Department::class, 'department_id', 'id');
     }
 }

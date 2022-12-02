@@ -60,6 +60,7 @@ class UserStoreRequest extends FormRequest
                     }
                 }
             }],
+            'department_id' => ['required', 'exists:department,id']
         ];
     }
 
@@ -78,6 +79,7 @@ class UserStoreRequest extends FormRequest
                     }
                 }
             }],
+            'department_id' => ['required', 'exists:department,id']
         ];
     }
 }

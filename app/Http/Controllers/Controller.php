@@ -39,6 +39,7 @@ class Controller extends BaseController
             'is_active' => $request->is_active ?? 1,
             'status' => $request->get('status', ''),
             'groups' => $request->get('groups', ''),
+            'department_id' => $request->get('department_id', ''),
             'type' => 'SEARCH'
         ];
     }
