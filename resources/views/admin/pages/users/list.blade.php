@@ -82,6 +82,7 @@
                                                 'id' => 'department_id',
                                             ]" />
                                         </div>
+
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label class="text-capitalize">Quyền</label>
@@ -120,14 +121,8 @@
                                     <thead>
                                         <tr>
                                             <th class="bg-info" style="width: 10px">#</th>
-<<<<<<< HEAD
                                             <th class="text-center bg-info w-25">Tên</th>
-                                            <th class="text-center bg-info w-25">Phòng ban</th>
-                                            <th class="text-center bg-info">Email</th>
-=======
                                             <th class="text-center bg-info w-25">Thông tin</th>
-                                            <th class="text-center bg-info">Phòng ban</th>
->>>>>>> 858667f4a1727f01f41bd8112142e63c3ba9c7cf
                                             <th class="text-center bg-info">Nhóm quyền</th>
                                             <th class="text-center bg-info">Trạng thái</th>
                                             <th class="text-center bg-info">Ngày Tạo</th>
@@ -147,10 +142,9 @@
                                                     Tên: {{ $item->name }} <br>
                                                     Email {{ $item->email }}
                                                 </td>
-                                                <td>
-                                                    {{ @$item->department->name ?? '' }}
-                                                </td>
+
                                                 <td class="align-middle">
+                                                    Phòng ban : {{ @$item->department->name ?? '' }}
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     @foreach (@$item->groups as $group)
@@ -201,79 +195,87 @@
     <script>
         $("#is_active").select2({
             theme: 'bootstrap4'
-        });
-<<<<<<< HEAD
+        }); <<
+        <<
+        <<
+        < HEAD
         $("#department_id").select2({
-=======
+                    ===
+                    ===
+                    =
 
-        $("#groups").select2({
->>>>>>> 858667f4a1727f01f41bd8112142e63c3ba9c7cf
-            theme: 'bootstrap4'
-        });
+                    $("#groups").select2({
+                        >>>
+                        >>>
+                        >
+                        858667 f4a1727f01f41bd8112142e63c3ba9c7cf
+                        theme: 'bootstrap4'
+                    });
 
-        $('#fromTo').daterangepicker({
-            autoUpdateInput: false,
-            locale: {
-                format: 'YYYY-MM-DD',
-                cancelLabel: 'Clear'
-            }
-        });
-
-        $('input[name="fromTo"]').on('apply.daterangepicker', function(ev, picker) {
-            $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
-        });
-
-        $('input[name="fromTo"]').on('cancel.daterangepicker', function(ev, picker) {
-            $(this).val('');
-        });
-
-        function cancelCategory(id_item, message = null) {
-            var data = {
-                itemId: id_item,
-            };
-            Swal.fire({
-                title: message ?? 'Bạn có chắc khóa tài khoản này không?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'Xác nhận',
-                cancelButtonColor: '#d33',
-                cancelButtonText: 'Hủy'
-            }).then((result) => {
-                if (result.value) {
-                    $('.loader').show();
-                    $.ajax({
-                        url: "{{ route('users.state') }}",
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        type: 'POST',
-                        data: data,
-                        success: function(response) {
-                            $('.loader').hide();
-                            if (response.status) {
-                                Swal.fire({
-                                    title: 'Thành công',
-                                    text: response.message ?? 'Xử lý thành công',
-                                    icon: response.icon ?? 'Success',
-                                    confirmButtonColor: '#3085d6',
-                                    confirmButtonText: 'Xác nhận'
-                                }).then((result) => {
-                                    if (result.value) {
-                                        window.location.reload();
-                                    }
-                                })
-                            } else {
-                                toastr.error('Có lỗi xảy ra vui lòng thử lại sau.')
-                            }
-                        },
-                        error: function(response) {
-                            toastr.error('Có lỗi xảy ra vui lòng thử lại sau.')
+                    $('#fromTo').daterangepicker({
+                        autoUpdateInput: false,
+                        locale: {
+                            format: 'YYYY-MM-DD',
+                            cancelLabel: 'Clear'
                         }
                     });
 
-                }
-            })
-        }
+                    $('input[name="fromTo"]').on('apply.daterangepicker', function(ev, picker) {
+                        $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format(
+                            'YYYY-MM-DD'));
+                    });
+
+                    $('input[name="fromTo"]').on('cancel.daterangepicker', function(ev, picker) {
+                        $(this).val('');
+                    });
+
+                    function cancelCategory(id_item, message = null) {
+                        var data = {
+                            itemId: id_item,
+                        };
+                        Swal.fire({
+                            title: message ?? 'Bạn có chắc khóa tài khoản này không?',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Xác nhận',
+                            cancelButtonColor: '#d33',
+                            cancelButtonText: 'Hủy'
+                        }).then((result) => {
+                            if (result.value) {
+                                $('.loader').show();
+                                $.ajax({
+                                    url: "{{ route('users.state') }}",
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    },
+                                    type: 'POST',
+                                    data: data,
+                                    success: function(response) {
+                                        $('.loader').hide();
+                                        if (response.status) {
+                                            Swal.fire({
+                                                title: 'Thành công',
+                                                text: response.message ?? 'Xử lý thành công',
+                                                icon: response.icon ?? 'Success',
+                                                confirmButtonColor: '#3085d6',
+                                                confirmButtonText: 'Xác nhận'
+                                            }).then((result) => {
+                                                if (result.value) {
+                                                    window.location.reload();
+                                                }
+                                            })
+                                        } else {
+                                            toastr.error('Có lỗi xảy ra vui lòng thử lại sau.')
+                                        }
+                                    },
+                                    error: function(response) {
+                                        toastr.error('Có lỗi xảy ra vui lòng thử lại sau.')
+                                    }
+                                });
+
+                            }
+                        })
+                    }
     </script>
 @endsection
