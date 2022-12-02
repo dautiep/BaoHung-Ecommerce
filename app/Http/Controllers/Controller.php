@@ -38,6 +38,7 @@ class Controller extends BaseController
             'toDate' => null,
             'is_active' => $request->is_active ?? 1,
             'status' => $request->get('status', ''),
+            'groups' => $request->get('groups', ''),
             'type' => 'SEARCH'
         ];
     }

@@ -54,10 +54,10 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label class="text-capitalize">Trạng Thái <sup
-                                                        class="text-danger">*</sup></label>
+                                                <label class="text-capitalize">Trạng Thái
+                                                </label>
                                                 <select class="form-control select2" name="status" id="status">
-                                                    <option value="">--- Chọn Trạng thái ---</option>
+                                                    <option value="">Tất cả</option>
                                                     @foreach (config('global.default.status.groups') as $value)
                                                         <option value="{{ @$value['key'] }}"
                                                             {{ @$value['key'] == @$info['status'] ? 'selected' : '' }}>
@@ -121,7 +121,7 @@
                                                         class="badge {{ $item->status == $config_active ? 'bg-success' : ' bg-danger' }}">{{ $config_status->firstWhere('key', $item->status)['name'] ?? '' }}</span>
                                                 </td>
                                                 <td class="align-middle text-center">
-                                                    {{ date_format(date_create($item->created_at), 'H:i:s d-m-Y') }}</td>
+                                                    {{ date_format(date_create($item->created_at), 'd-m-Y') }}</td>
                                                 <td class="align-middle text-center">
                                                     @if ($item->status == $config_active)
                                                         <a class="btn btn-sm btn-primary"

@@ -56,6 +56,16 @@ class OtherFagRepository extends BaseRepository implements OtherFagRepositoryInt
         return $this->_model->create($data);
     }
 
+    public function handleDelete($request)
+    {
+        $builder = $this->_model->find($request->get('itemId'));
+
+        if ($builder) {
+            $builder = $builder->delete();
+        }
+        return $builder;
+    }
+
     public function updateContentToConsult($request, $id)
     {
 
@@ -63,12 +73,12 @@ class OtherFagRepository extends BaseRepository implements OtherFagRepositoryInt
         if (!$builder) {
             return false;
         }
-
-        if ($request->get('status') == config('global.default.status.orther_faqs.answered')) {
+        if ($request->get('status') == config('global.default.status.orther_faqs.answered.key')) {
             $data = [
                 'content_to_consult' => $request->get('content_to_consult'),
                 'status' => $request->get('status')
             ];
+
         } else {
             $data = [
                 'status' => $request->get('status')

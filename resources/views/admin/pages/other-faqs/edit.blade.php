@@ -107,7 +107,7 @@
                                                 <label class="text-capitalize">Câu trả lời <sup
                                                         class="text-danger">*</sup></label>
                                                 <textarea type="text" {{ @$status_answered['key'] == $data->status ? 'readonly' : '' }} name="content_to_consult"
-                                                    class="form-control" readonly>{{ old('content_to_consult', @$data->content_to_consult) }}</textarea>
+                                                    class="form-control">{{ old('content_to_consult', @$data->content_to_consult) }}</textarea>
                                             </div>
                                         </div>
                                     @endif

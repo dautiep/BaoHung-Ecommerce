@@ -25,7 +25,8 @@ class OtherFaqController extends Controller
 
     public function delete(Request $request)
     {
-
+        $data = $this->_otherFaqRespositoryInterface->handleDelete($request);
+        return response()->json($this->responseAjax(config('global.default.messages.orther_faqs.delete'), $this::$TYPE_MESSAGES_SUCCESS));
     }
 
     public function edit($id)
