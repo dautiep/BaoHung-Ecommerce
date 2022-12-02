@@ -75,7 +75,7 @@
                                                 'name' => 'department_id',
                                                 'value' => @request()->department_id,
                                                 'selected' => @$department,
-                                                'required' => true,
+                                                'required' => false,
                                                 'first' => true,
                                                 'first_value' => '',
                                                 'first_name' => 'Tất cả',
