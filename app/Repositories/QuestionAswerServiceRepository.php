@@ -28,6 +28,7 @@ class QuestionAswerServiceRepository extends BaseRepository implements QuestionA
     public function searchWithInfo($info)
     {
         $result = $this->_model;
+        //check filter search
         if (!empty($info['questionName'])) {
             $result = $result->where('question_content', 'like', "%" . $info['questionName'] . "%");
         }
@@ -40,6 +41,12 @@ class QuestionAswerServiceRepository extends BaseRepository implements QuestionA
         }
         if ($info['questionService'] != '') {
             $result = $result->where('type_of_service_id', $info['questionService']);
+        }
+
+        //check permission
+        $roles = Auth::user()->groups->pluck('name');
+        if ($roles[0] == 'Nhân viên') {
+            $result = $result->where('');
         }
         return $result->with(['typeOfServices'])->orderBy('created_at', 'DESC')->paginate(10);
     }

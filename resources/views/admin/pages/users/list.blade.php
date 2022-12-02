@@ -55,8 +55,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label class="text-capitalize">Trạng Thái <sup
-                                                        class="text-danger">*</sup></label>
+                                                <label class="text-capitalize">Trạng Thái</label>
                                                 <select class="form-control select2" name="is_active" id="is_active">
                                                     <option value="">Tất cả</option>
                                                     @foreach (config('global.default.status.users') as $value)
@@ -68,12 +67,10 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
+
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label class="text-capitalize">Nhóm quyền <sup
-                                                        class="text-danger">*</sup></label>
+                                                <label class="text-capitalize">Quyền</label>
                                                 <select class="form-control select2" name="groups" id="groups">
                                                     <option value="">Tất cả</option>
                                                     @foreach (@$groups as $value)
@@ -109,8 +106,8 @@
                                     <thead>
                                         <tr>
                                             <th class="bg-info" style="width: 10px">#</th>
-                                            <th class="text-center bg-info w-25">Tên</th>
-                                            <th class="text-center bg-info">Email</th>
+                                            <th class="text-center bg-info w-25">Thông tin</th>
+                                            <th class="text-center bg-info">Phòng ban</th>
                                             <th class="text-center bg-info">Nhóm quyền</th>
                                             <th class="text-center bg-info">Trạng thái</th>
                                             <th class="text-center bg-info">Ngày Tạo</th>
@@ -127,10 +124,10 @@
                                                 <td class="align-middle" scope="row"> {{ $key + $data->firstItem() }}
                                                 </td>
                                                 <td class="align-middle">
-                                                    {{ $item->name }}
+                                                    Tên: {{ $item->name }} <br>
+                                                    Email {{ $item->email }}
                                                 </td>
                                                 <td class="align-middle">
-                                                    {{ $item->email }}
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     @foreach (@$item->groups as $group)
@@ -182,6 +179,11 @@
         $("#is_active").select2({
             theme: 'bootstrap4'
         });
+
+        $("#groups").select2({
+            theme: 'bootstrap4'
+        });
+
         $('#fromTo').daterangepicker({
             autoUpdateInput: false,
             locale: {

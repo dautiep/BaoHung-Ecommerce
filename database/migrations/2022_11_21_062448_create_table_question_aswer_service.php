@@ -20,6 +20,7 @@ class CreateTableQuestionAswerService extends Migration
             $table->timestamp('created_date')->useCurrent();
             $table->bigInteger('view')->default(0);
             $table->string('type_of_service_id', 3)->index();
+            $table->unsignedInteger('user_id')->index();
             $table->timestamps();
         });
     }

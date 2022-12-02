@@ -54,7 +54,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="phoneSearch">Trạng thái</label>
+                                            <label for="phoneSearch">Trạng Thái</label>
                                             <select class="form-control select2" name="questionStatus" id="questionStatus">
                                                 <option value="">Tất cả</option>
                                                 @foreach ($status as $item)
@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="phoneSearch">Dịch vụ</label>
+                                            <label for="phoneSearch">Dịch Vụ</label>
                                             <select class="form-control select2" name="questionService" id="questionService">
                                                 <option value="">Tất cả</option>
                                                 @foreach ($services as $item)
@@ -101,6 +101,7 @@
                                         <th class="bg-info" style="width: 10px">#</th>
                                         <th class="text-center bg-info">Mã Câu Hỏi</th>
                                         <th class="text-center bg-info w-40">Thông Tin</th>
+                                        <th class="text-center bg-info">Người Phụ Trách</th>
                                         <th class="text-center bg-info">Trạng Thái</th>
                                         <th class="text-center bg-info">Ngày cập nhật</th>
                                         <th class="text-center bg-info">Hành động</th>
@@ -114,6 +115,9 @@
                                             <td class="align-middle">
                                                 Tiêu đề: {{ @$question->question_content }} <br>
                                                 Dịch vụ: {{ @$question->typeOfServices->name }}
+                                            </td>
+                                            <td class="align-middle text-center">
+
                                             </td>
                                             <td class="align-middle text-center">
                                                 @if ($question->status == $status[0]['key'])
