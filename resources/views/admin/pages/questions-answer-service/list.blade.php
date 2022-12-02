@@ -126,28 +126,26 @@
                                             <td class="align-middle text-center">
 
                                                 @if ($question->status == $status[0]['key'])
-                                                    <a class="btn btn-sm btn-primary" href="{{ route('services.edit', $question->id) }}" title="Cập nhật thông tin">
+                                                    <a class="btn btn-sm btn-primary" href="{{ route('questions.edit', $question->id) }}" title="Cập nhật thông tin">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    {{-- <button role="button" class="btn btn-sm btn-warning"
-                                                            onclick="deactiveService('{{ $question->id }}')" data-toggle="tooltip"
-                                                            title="{{ $status[1]['action'] }}"><i class="fa fa-key"></i>
-                                                    </button> --}}
-
                                                     <button role="button" class="btn btn-sm btn-info"
                                                             onclick="approvedQuestion('{{ $question->id }}')" data-toggle="tooltip"
                                                             title="{{ $status[0]['action'] }}"><i class="fa fa-key"></i>
                                                     </button>
                                                 @elseif ($question->status == $status[1]['key'])
-                                                    {{-- <button role="button" class="btn btn-sm btn-danger"
+                                                    <a class="btn btn-sm btn-primary" href="{{ route('questions.edit', $question->id) }}" title="Cập nhật thông tin">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    <button role="button" class="btn btn-sm btn-danger"
                                                             onclick="deactiveService('{{ $question->id }}')" data-toggle="tooltip"
                                                             title="{{ $status[1]['action'] }}"><i class="fa fa-key"></i>
-                                                    </button> --}}
+                                                    </button>
 
                                                 @else
                                                     <button role="button" class="btn btn-sm btn-success"
                                                         onclick="activeService('{{ $question->id }}')" data-toggle="tooltip"
-                                                        title="{{ $status[0]['action'] }}"><i class="fa fa-key"></i>
+                                                        title="{{ $status[2]['action'] }}"><i class="fa fa-key"></i>
                                                     </button>
                                                 @endif
                                             </td>
@@ -220,7 +218,7 @@
                             if (response.success == 'success') {
                                     Swal.fire({
                                     title: 'Thành công',
-                                    text: "Đã duyệt câu hỏi",
+                                    text: response.message,
                                     icon: 'success',
                                     confirmButtonColor: '#3085d6',
                                     confirmButtonText: 'Xác nhận'
@@ -245,10 +243,10 @@
         function deactiveService(id_question) {
             var data = {
                 questionId: id_question,
-                serviceStatus: 1
+                questionStatus: 1
                 };
             Swal.fire({
-                title: 'Bạn có muốn khóa dịch vụ này không?',
+                title: 'Bạn có muốn khóa câu hỏi này không?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -259,7 +257,7 @@
                 if (result.value) {
                     $('.loader').show();
                     $.ajax({
-                        url: "{{ route('services.lock') }}",
+                        url: "{{ route('questions.lock') }}",
                         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                         type: 'POST',
                         data: data,
@@ -268,7 +266,7 @@
                             if (response.success == 'success') {
                                     Swal.fire({
                                     title: 'Thành công',
-                                    text: "Đã khóa dịch vụ",
+                                    text: response.message,
                                     icon: 'success',
                                     confirmButtonColor: '#3085d6',
                                     confirmButtonText: 'Xác nhận'
@@ -293,10 +291,10 @@
         function activeService(id_question) {
             var data = {
                 questionId: id_question,
-                serviceStatus: 0
+                questionStatus: 0
                 };
             Swal.fire({
-                title: 'Bạn có chắc muốn kích hoạt dịch vụ này không?',
+                title: 'Bạn có chắc muốn kích hoạt câu hỏi này không?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -307,7 +305,7 @@
                 if (result.value) {
                     $('.loader').show();
                     $.ajax({
-                        url: "{{ route('services.unlock') }}",
+                        url: "{{ route('questions.unlock') }}",
                         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                         type: 'POST',
                         data: data,
@@ -316,7 +314,7 @@
                             if (response.success == 'success') {
                                     Swal.fire({
                                     title: 'Thành công',
-                                    text: "Đã kích hoạt dịch vụ",
+                                    text: response.message,
                                     icon: 'success',
                                     confirmButtonColor: '#3085d6',
                                     confirmButtonText: 'Xác nhận'

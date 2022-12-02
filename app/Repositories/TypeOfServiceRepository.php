@@ -16,6 +16,11 @@ class TypeOfServiceRepository extends BaseRepository implements TypeOfServiceRep
         parent::__construct($model);
     }
 
+    //get all data
+    public function getAllData() {
+        return $this->_model->select('name')->get();
+    }
+
     //search with info from fe
     public function searchWithInfo($info)
     {

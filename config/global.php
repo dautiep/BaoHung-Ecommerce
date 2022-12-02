@@ -93,9 +93,9 @@ return [
                 'edit'   => 'Chỉnh sửa dịch vụ thành công',
             ],
             'question_answer_service' => [
-                'store' => 'Lưu thông tin câu hỏi tư vấn thành công',
+                'store' => 'Lưu thông tin câu hỏi thành công',
                 'error' => 'Đã xảy ra lỗi!',
-                'approved' => 'Đã duyệt câu hỏi tư vấn',
+                'approved' => 'Đã duyệt câu hỏi',
                 'lock' => 'Đã khóa câu hỏi',
                 'unlock' => 'Đã mở khóa câu hỏi',
                 'edit'   => 'Chỉnh sửa câu hỏi thành công',

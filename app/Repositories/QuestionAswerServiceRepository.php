@@ -19,6 +19,11 @@ class QuestionAswerServiceRepository extends BaseRepository implements QuestionA
         parent::__construct($model);
     }
 
+    //get all data
+    public function getAllData() {
+        return $this->_model->select('question_content')->get();
+    }
+
     //search with info from fe
     public function searchWithInfo($info)
     {
@@ -77,7 +82,7 @@ class QuestionAswerServiceRepository extends BaseRepository implements QuestionA
         } else if ((int)$input['questionStatus'] == $status[1]['key']) {
             return $this->update(['status' => $status[2]['key']], $input['questionId']);
         } else {
-            return $this->update(['status' => $status[2]['key']], $input['questionId']);
+            return $this->update(['status' => $status[1]['key']], $input['questionId']);
         }
     }
 

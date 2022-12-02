@@ -33,16 +33,26 @@ class QuestionAnswerServiceRequest extends FormRequest
     {
         if (!request()->id) {
             return [
-                'questionName' => 'required|unique:question_aswer_service,question_content|max:200',
+                'questionName' => ['required','unique:question_aswer_service,question_content'],
                 'questionService' => 'required',
-                'questionAnswer' => 'required|max:200',
+                'questionAnswer' => 'required|',
             ];
         }
+        $questions = $this->_questionAnswerServiceInterface->getAllData();
         $question = $this->_questionAnswerServiceInterface->find(request()->id);
         return [
-            'questionName' => 'required|max:200|unique:question_aswer_service,question_content, '.$question->id,
+            'questionName' => [
+                'required',
+                function ($attribute, $value, $fail) use ($question, $questions) {
+                    foreach ($questions as $item) {
+                        if ($item->question_content == $value && $value != $question->name) {
+                            return $fail('Câu hỏi đã tồn tại trong hệ thống');
+                        }
+                    }
+                }
+            ],
             'questionService' => 'required',
-            'questionAnswer' => 'required|max:200',
+            'questionAnswer' => 'required',
         ];
     }
 }

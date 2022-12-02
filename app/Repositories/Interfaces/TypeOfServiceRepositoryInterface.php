@@ -7,6 +7,12 @@ use App\Repositories\Interfaces\BaseRepositoryInterface;
 interface TypeOfServiceRepositoryInterface extends BaseRepositoryInterface
 {
     /**
+     * get all data
+     * @return mixed
+     */
+    public function getAllData();
+
+    /**
      * search with info
      * @param array $info
      * @return mixed

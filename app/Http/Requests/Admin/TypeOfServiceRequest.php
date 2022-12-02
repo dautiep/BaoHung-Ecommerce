@@ -31,9 +31,21 @@ class TypeOfServiceRequest extends FormRequest
     public function rules()
     {
         if (!request()->id) {
-            return ['serviceName' => 'required|unique:type_of_service,name|max:200'];
+            return ['serviceName' => ['required','unique:type_of_service,name,','max:200']];
         }
         $service = $this->_typeOfServiceInterFace->find(request()->id);
-        return ['serviceName' => 'required|max:200|unique:type_of_service,name, '.$service->id];
+        $services = $this->_typeOfServiceInterFace->getAllData();
+        return ['serviceName' => [
+                    'required',
+                    'max:191',
+                    function ($attribute, $value, $fail) use ($service, $services) {
+                        foreach ($services as $item) {
+                            if ($item->name == $value && $value != $service->name) {
+                                return $fail('Dịch vụ đã tồn tại trong hệ thống');
+                            }
+                        }
+                    }
+                    ]
+                ];
     }
 }

@@ -16,6 +16,31 @@ class QuestionAswerServiceController extends Controller
     {
         $this->_questionAnswerServiceInterface = $questionAswerServiceInterface;
     }
+
+    public function listApprove(Request $request) {
+        $services = $this->_questionAnswerServiceInterface->getTypeOfService();
+        $status = config('global.default.status.question');
+        $fromTo = $request->get('fromTo');
+        $fromDate = NULL;
+        $toDate = NULL;
+        $res = explode(' - ', $fromTo);
+        if (count($res) == 2) {
+            $fromDate = $res[0];
+            $toDate = $res[1] . ' 23:59:59';
+        }
+        $info = [
+            'questionName' => $request->get('questionName', ''),
+            'questionStatus' => $request->get('questionStatus', ''),
+            'questionService' => $request->get('questionService', ''),
+            'fromTo' => $request->get('fromTo', ''),
+            'fromDate' => $fromDate,
+            'toDate' => $toDate,
+            'type' => 'SEARCH'
+        ];
+        $questions = $this->_questionAnswerServiceInterface->searchWithInfo($info);
+        return view($this->_prefix . 'list', compact('questions', 'info', 'status', 'services'));
+    }
+
     public function list(Request $request)
     {
         $services = $this->_questionAnswerServiceInterface->getTypeOfService();
@@ -68,11 +93,41 @@ class QuestionAswerServiceController extends Controller
         }
     }
 
+    public function edit($id) {
+        $services = $this->_questionAnswerServiceInterface->getTypeOfService();
+        $question = $this->_questionAnswerServiceInterface->find($id);
+        return view($this->_prefix . 'create', compact('services', 'question'));
+    }
+
     public function approve(Request $request) {
         try {
             $input = $request->all();
             $this->_questionAnswerServiceInterface->changeStatus($input);
             return \Response::json(['success' => $this::$TYPE_MESSAGES_SUCCESS, 'message' => config('global.default.messages.question_answer_service.approved')]);
+        } catch (Exception $e) {
+            dd($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
+            logger($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
+            return \Response::json(['success' => $this::$TYPE_MESSAGES_ERROR, 'message' => config('global.default.messages.question_answer_service.error')]);
+        }
+    }
+
+    public function lock(Request $request) {
+        try {
+            $input = $request->all();
+            $this->_questionAnswerServiceInterface->changeStatus($input);
+            return \Response::json(['success' => $this::$TYPE_MESSAGES_SUCCESS, 'message' => config('global.default.messages.question_answer_service.lock')]);
+        } catch (Exception $e) {
+            dd($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
+            logger($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
+            return \Response::json(['success' => $this::$TYPE_MESSAGES_ERROR, 'message' => config('global.default.messages.question_answer_service.error')]);
+        }
+    }
+
+    public function unlock(Request $request) {
+        try {
+            $input = $request->all();
+            $this->_questionAnswerServiceInterface->changeStatus($input);
+            return \Response::json(['success' => $this::$TYPE_MESSAGES_SUCCESS, 'message' => config('global.default.messages.question_answer_service.unlock')]);
         } catch (Exception $e) {
             dd($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
             logger($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
