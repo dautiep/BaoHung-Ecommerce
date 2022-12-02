@@ -81,6 +81,22 @@
                                     @endif
                                     <div class="row mt-4">
                                         <div class="col-md-12">
+                                            <x-input-control :input="'select2'" :control="[
+                                                'for' => 'department_id',
+                                                'label' => 'Phòng ban',
+                                                'name' => 'department_id',
+                                                'value' => @$data->department_id,
+                                                'selected' => @$department,
+                                                'required' => true,
+                                                'first' => false,
+                                                'first_value' => '',
+                                                'first_name' => 'Tất cả',
+                                                'id' => 'department_id',
+                                            ]" />
+                                        </div>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="text-capitalize">Chọn nhóm quyền quản lý<sup
                                                         class="text-danger">*</sup></label>
@@ -138,6 +154,9 @@
     </script>
     <script>
         $("#groups").select2({
+            theme: 'bootstrap4'
+        });
+        $('#department_id').select2({
             theme: 'bootstrap4'
         });
         $("#statusBlogCategory").select2({

@@ -25,6 +25,10 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
                 $query->whereLike('name', $request->keySearch);
             }
 
+            if (isset($request->department_id)) {
+                $query->where('department_id', $request->department_id);
+            }
+
             if (!empty($request->fromTo)) {
                 $query->whereExplodeDate('created_at', $request->fromTo);
             }
@@ -42,7 +46,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function handleCreateOrUpdate($id, $request)
     {
-        $fillable = $request->only('name', 'email', 'password', 'is_active');
+        $fillable = $request->only('name', 'email', 'password', 'is_active', 'department_id');
         if ($id == null) {
             $builder = $this->create($fillable);
         } else {

@@ -25,7 +25,8 @@ class User extends Authenticatable
     ];
 
     public $appends  = [
-        'groups'
+        'groups',
+        'department'
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -49,6 +50,7 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($value);
     }
+
 
     /**
      * Relationship.

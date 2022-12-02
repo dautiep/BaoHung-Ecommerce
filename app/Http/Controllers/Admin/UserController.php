@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserStoreRequest;
 use App\Models\Group;
+use App\Repositories\Interfaces\DepartmentRepositoryInterface;
 use App\Repositories\Interfaces\GroupRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Http\Request;
@@ -13,11 +14,13 @@ class UserController extends Controller
 {
     private $_userRepository;
     private $_groupRepository;
+    private $_departmentRepositoryInterface;
     private $_prefix = 'admin.pages.users.';
-    public function __construct(UserRepositoryInterface $userRepositoryInterface, GroupRepositoryInterface $groupRepositoryInterface)
+    public function __construct(UserRepositoryInterface $userRepositoryInterface, GroupRepositoryInterface $groupRepositoryInterface, DepartmentRepositoryInterface $departmentRepositoryInterface)
     {
         $this->_userRepository = $userRepositoryInterface;
         $this->_groupRepository = $groupRepositoryInterface;
+        $this->_departmentRepositoryInterface = $departmentRepositoryInterface;
     }
 
     public function list(Request $request)
@@ -25,7 +28,9 @@ class UserController extends Controller
         $info = $this->getBuilderSearch($request);
         $data = $this->_userRepository->getLists($request);
         $groups = $this->_groupRepository->getAllByCondition();
-        return view($this->_prefix . 'list', compact('info', 'data', 'groups'));
+        $department = $this->_departmentRepositoryInterface->getSelectedAll();
+
+        return view($this->_prefix . 'list', compact('info', 'data', 'groups', 'department'));
     }
 
     public function create(Request $request)
@@ -33,7 +38,8 @@ class UserController extends Controller
         $groups = $this->_groupRepository->getAllByCondition([
             'status' => Group::$STATUS_ACTIVE
         ]);
-        return view($this->_prefix . 'create', compact('groups'));
+        $department = $this->_departmentRepositoryInterface->getSelectedAll();
+        return view($this->_prefix . 'create', compact('groups', 'department'));
     }
 
     public function delete(Request $request)
@@ -55,7 +61,9 @@ class UserController extends Controller
         $groups = $this->_groupRepository->getAllByCondition([
             'status' => Group::$STATUS_ACTIVE
         ]);
-        return view($this->_prefix . 'create', compact('data', 'groups'));
+        $department = $this->_departmentRepositoryInterface->getSelectedAll();
+
+        return view($this->_prefix . 'create', compact('data', 'groups', 'department'));
     }
 
     public function state(Request $request)

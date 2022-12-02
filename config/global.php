@@ -76,6 +76,16 @@ return [
                     'key' => 0,
                     'name' => 'Khóa'
                 ]
+            ],
+            'department' => [
+                'active' => [
+                    'key' => '1',
+                    'name' => 'Hoạt động'
+                ],
+                'deactive' => [
+                    'key' => 0,
+                    'name' => 'Khóa'
+                ]
             ]
 
         ],

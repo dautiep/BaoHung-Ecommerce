@@ -6,7 +6,7 @@ return [
         'icon' => 'nav-icon fas fa-users',
         'active' => true,
         'hasActivePage' => [
-            'users.list', 'roles.list', 'groups.list'
+            'users.list', 'roles.list', 'groups.list', 'department.list'
         ],
         'position' => 0,
         'authorize' => ['super-admin'],
@@ -20,6 +20,17 @@ return [
                 ],
                 'position' => 1,
                 'authorize' => ['users.list'],
+                'active' => true
+            ],
+            [
+                'router' => 'department.list',
+                'name' => 'Danh sách phòng ban',
+                'icon' => 'far fa-circle nav-icon',
+                'hasActivePage' => [
+                    'department.list'
+                ],
+                'position' => 1,
+                'authorize' => ['department.list'],
                 'active' => true
             ],
             [
