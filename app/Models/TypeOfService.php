@@ -11,6 +11,7 @@ class TypeOfService extends Model
     public $keyType = 'string';
     public $table = 'type_of_service';
     public $primaryKey = 'id';
+    public $incrementing = false;
     public $fillable = [
         'id',
         'name',

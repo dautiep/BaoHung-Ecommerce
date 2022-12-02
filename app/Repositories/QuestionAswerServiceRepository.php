@@ -19,10 +19,16 @@ class QuestionAswerServiceRepository extends BaseRepository implements QuestionA
         parent::__construct($model);
     }
 
+    //get all data
+    public function getAllData() {
+        return $this->_model->select('question_content')->get();
+    }
+
     //search with info from fe
     public function searchWithInfo($info)
     {
         $result = $this->_model;
+        //check filter search
         if (!empty($info['questionName'])) {
             $result = $result->where('question_content', 'like', "%" . $info['questionName'] . "%");
         }
@@ -35,6 +41,12 @@ class QuestionAswerServiceRepository extends BaseRepository implements QuestionA
         }
         if ($info['questionService'] != '') {
             $result = $result->where('type_of_service_id', $info['questionService']);
+        }
+
+        //check permission
+        $roles = Auth::user()->groups->pluck('name');
+        if ($roles[0] == 'Nhân viên') {
+            $result = $result->where('');
         }
         return $result->with(['typeOfServices'])->orderBy('created_at', 'DESC')->paginate(10);
     }
@@ -77,7 +89,7 @@ class QuestionAswerServiceRepository extends BaseRepository implements QuestionA
         } else if ((int)$input['questionStatus'] == $status[1]['key']) {
             return $this->update(['status' => $status[2]['key']], $input['questionId']);
         } else {
-            return $this->update(['status' => $status[2]['key']], $input['questionId']);
+            return $this->update(['status' => $status[1]['key']], $input['questionId']);
         }
     }
 

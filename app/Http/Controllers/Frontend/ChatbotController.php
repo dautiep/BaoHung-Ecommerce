@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Http\Requests\Admin\TypeOfServiceRequest;
 use App\Http\Controllers\Controller;
 use App\Repositories\Interfaces\OtherFagRepositoryInterface;
 use App\Repositories\Interfaces\QuestionAswerServiceInterface;

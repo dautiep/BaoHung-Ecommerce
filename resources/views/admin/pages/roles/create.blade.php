@@ -56,7 +56,7 @@
                                                 <label class="text-capitalize">Tên phân quyền <sup
                                                         class="text-danger">*</sup></label>
                                                 <input type="text" name="name" value="{{ old('name', @$data->name) }}"
-                                                    class="form-control" placeholder="Tên phân quyền">
+                                                    class="form-control" placeholder="Tên phân quyền" autocomplete="off">
                                             </div>
                                         </div>
                                     </div>

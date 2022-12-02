@@ -55,8 +55,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label class="text-capitalize">Trạng Thái <sup
-                                                        class="text-danger">*</sup></label>
+                                                <label class="text-capitalize">Trạng Thái</label>
                                                 <select class="form-control select2" name="is_active" id="is_active">
                                                     <option value="">Tất cả</option>
                                                     @foreach (config('global.default.status.users') as $value)
@@ -68,8 +67,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
+
                                         <div class="col-md-3">
                                             <x-input-control :input="'select2'" :control="[
                                                 'for' => 'department_id',
@@ -86,8 +84,7 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label class="text-capitalize">Nhóm quyền <sup
-                                                        class="text-danger">*</sup></label>
+                                                <label class="text-capitalize">Quyền</label>
                                                 <select class="form-control select2" name="groups" id="groups">
                                                     <option value="">Tất cả</option>
                                                     @foreach (@$groups as $value)
@@ -123,9 +120,14 @@
                                     <thead>
                                         <tr>
                                             <th class="bg-info" style="width: 10px">#</th>
+<<<<<<< HEAD
                                             <th class="text-center bg-info w-25">Tên</th>
                                             <th class="text-center bg-info w-25">Phòng ban</th>
                                             <th class="text-center bg-info">Email</th>
+=======
+                                            <th class="text-center bg-info w-25">Thông tin</th>
+                                            <th class="text-center bg-info">Phòng ban</th>
+>>>>>>> 858667f4a1727f01f41bd8112142e63c3ba9c7cf
                                             <th class="text-center bg-info">Nhóm quyền</th>
                                             <th class="text-center bg-info">Trạng thái</th>
                                             <th class="text-center bg-info">Ngày Tạo</th>
@@ -142,13 +144,13 @@
                                                 <td class="align-middle" scope="row"> {{ $key + $data->firstItem() }}
                                                 </td>
                                                 <td class="align-middle">
-                                                    {{ $item->name }}
+                                                    Tên: {{ $item->name }} <br>
+                                                    Email {{ $item->email }}
                                                 </td>
                                                 <td>
                                                     {{ @$item->department->name ?? '' }}
                                                 </td>
                                                 <td class="align-middle">
-                                                    {{ $item->email }}
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     @foreach (@$item->groups as $group)
@@ -200,7 +202,12 @@
         $("#is_active").select2({
             theme: 'bootstrap4'
         });
+<<<<<<< HEAD
         $("#department_id").select2({
+=======
+
+        $("#groups").select2({
+>>>>>>> 858667f4a1727f01f41bd8112142e63c3ba9c7cf
             theme: 'bootstrap4'
         });
 

@@ -12,6 +12,7 @@ class Department extends Model
     public $appends = [
         'total_users'
     ];
+
     public $fillable = [
         'name',
         'status'

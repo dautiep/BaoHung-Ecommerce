@@ -16,6 +16,7 @@ class QuestionAswerServiceController extends Controller
     {
         $this->_questionAnswerServiceInterface = $questionAswerServiceInterface;
     }
+
     public function list(Request $request)
     {
         $services = $this->_questionAnswerServiceInterface->getTypeOfService();
@@ -68,11 +69,41 @@ class QuestionAswerServiceController extends Controller
         }
     }
 
+    public function edit($id) {
+        $services = $this->_questionAnswerServiceInterface->getTypeOfService();
+        $question = $this->_questionAnswerServiceInterface->find($id);
+        return view($this->_prefix . 'create', compact('services', 'question'));
+    }
+
     public function approve(Request $request) {
         try {
             $input = $request->all();
             $this->_questionAnswerServiceInterface->changeStatus($input);
             return \Response::json(['success' => $this::$TYPE_MESSAGES_SUCCESS, 'message' => config('global.default.messages.question_answer_service.approved')]);
+        } catch (Exception $e) {
+            dd($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
+            logger($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
+            return \Response::json(['success' => $this::$TYPE_MESSAGES_ERROR, 'message' => config('global.default.messages.question_answer_service.error')]);
+        }
+    }
+
+    public function lock(Request $request) {
+        try {
+            $input = $request->all();
+            $this->_questionAnswerServiceInterface->changeStatus($input);
+            return \Response::json(['success' => $this::$TYPE_MESSAGES_SUCCESS, 'message' => config('global.default.messages.question_answer_service.lock')]);
+        } catch (Exception $e) {
+            dd($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
+            logger($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
+            return \Response::json(['success' => $this::$TYPE_MESSAGES_ERROR, 'message' => config('global.default.messages.question_answer_service.error')]);
+        }
+    }
+
+    public function unlock(Request $request) {
+        try {
+            $input = $request->all();
+            $this->_questionAnswerServiceInterface->changeStatus($input);
+            return \Response::json(['success' => $this::$TYPE_MESSAGES_SUCCESS, 'message' => config('global.default.messages.question_answer_service.unlock')]);
         } catch (Exception $e) {
             dd($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
             logger($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());

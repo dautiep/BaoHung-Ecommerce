@@ -11,6 +11,7 @@ class QuestionAswerService extends Model
     public $table = 'question_aswer_service';
     public $keyType = 'string';
     public $primaryKey = 'id';
+    public $incrementing = false;
     public $fillable = [
         'id',
         'question_content',
@@ -18,6 +19,7 @@ class QuestionAswerService extends Model
         'created_date',
         'view',
         'type_of_service_id',
+        'user_id',
         'status'
     ];
 

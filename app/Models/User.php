@@ -46,11 +46,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function groups()
-    {
-        return $this->belongsToMany(Group::class, 'user_groups', 'user_id', 'group_id');
-    }
-
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
@@ -63,5 +58,10 @@ class User extends Authenticatable
     public function department()
     {
         return $this->belongsTo(Department::class, 'department_id', 'id');
+    }
+
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class, 'user_groups', 'user_id', 'group_id');
     }
 }

@@ -54,7 +54,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="phoneSearch">Trạng thái</label>
+                                            <label for="phoneSearch">Trạng Thái</label>
                                             <select class="form-control select2" name="questionStatus" id="questionStatus">
                                                 <option value="">Tất cả</option>
                                                 @foreach ($status as $item)
@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="phoneSearch">Dịch vụ</label>
+                                            <label for="phoneSearch">Dịch Vụ</label>
                                             <select class="form-control select2" name="questionService" id="questionService">
                                                 <option value="">Tất cả</option>
                                                 @foreach ($services as $item)
@@ -76,14 +76,16 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    @if(is_can(['questions.create']))
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>&nbsp;</label>
                                             <a href="{{ route('questions.create') }}" class="btn btn-block btn-warning">Thêm Câu Hỏi</a>
                                         </div>
                                     </div>
+                                    @endif
                                     <div class="col-md-4">
-                                        <div class="form-group">
+                                    <div class="form-group">
                                             <label>&nbsp;</label>
                                             <button type="submit" class="btn btn-block btn-primary">Tìm Kiếm</button>
                                         </div>
@@ -99,6 +101,7 @@
                                         <th class="bg-info" style="width: 10px">#</th>
                                         <th class="text-center bg-info">Mã Câu Hỏi</th>
                                         <th class="text-center bg-info w-40">Thông Tin</th>
+                                        <th class="text-center bg-info">Người Phụ Trách</th>
                                         <th class="text-center bg-info">Trạng Thái</th>
                                         <th class="text-center bg-info">Ngày cập nhật</th>
                                         <th class="text-center bg-info">Hành động</th>
@@ -114,6 +117,9 @@
                                                 Dịch vụ: {{ @$question->typeOfServices->name }}
                                             </td>
                                             <td class="align-middle text-center">
+
+                                            </td>
+                                            <td class="align-middle text-center">
                                                 @if ($question->status == $status[0]['key'])
                                                     <span class="badge bg-warning">{{ $status[0]['name'] }}</span>
                                                 @elseif ($question->status == $status[1]['key'])
@@ -126,29 +132,37 @@
                                             <td class="align-middle text-center">
 
                                                 @if ($question->status == $status[0]['key'])
-                                                    <a class="btn btn-sm btn-primary" href="{{ route('services.edit', $question->id) }}" title="Cập nhật thông tin">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    {{-- <button role="button" class="btn btn-sm btn-warning"
-                                                            onclick="deactiveService('{{ $question->id }}')" data-toggle="tooltip"
-                                                            title="{{ $status[1]['action'] }}"><i class="fa fa-key"></i>
-                                                    </button> --}}
-
-                                                    <button role="button" class="btn btn-sm btn-info"
-                                                            onclick="approvedQuestion('{{ $question->id }}')" data-toggle="tooltip"
-                                                            title="{{ $status[0]['action'] }}"><i class="fa fa-key"></i>
-                                                    </button>
+                                                    @if (is_can(['questions.edit']))
+                                                        <a class="btn btn-sm btn-primary" href="{{ route('questions.edit', $question->id) }}" title="Cập nhật thông tin">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    @endif
+                                                    @if (is_can(['questions.approved']))
+                                                        <button role="button" class="btn btn-sm btn-info"
+                                                                onclick="approvedQuestion('{{ $question->id }}')" data-toggle="tooltip"
+                                                                title="{{ $status[0]['action'] }}"><i class="fa fa-key"></i>
+                                                        </button>
+                                                    @endif
                                                 @elseif ($question->status == $status[1]['key'])
-                                                    {{-- <button role="button" class="btn btn-sm btn-danger"
-                                                            onclick="deactiveService('{{ $question->id }}')" data-toggle="tooltip"
-                                                            title="{{ $status[1]['action'] }}"><i class="fa fa-key"></i>
-                                                    </button> --}}
+                                                    @if (is_can(['questions.edit']))
+                                                        <a class="btn btn-sm btn-primary" href="{{ route('questions.edit', $question->id) }}" title="Cập nhật thông tin">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    @endif
+                                                    @if (is_can(['questions.lock']))
+                                                        <button role="button" class="btn btn-sm btn-danger"
+                                                                onclick="deactiveService('{{ $question->id }}')" data-toggle="tooltip"
+                                                                title="{{ $status[1]['action'] }}"><i class="fa fa-key"></i>
+                                                        </button>
+                                                    @endif
 
                                                 @else
-                                                    <button role="button" class="btn btn-sm btn-success"
-                                                        onclick="activeService('{{ $question->id }}')" data-toggle="tooltip"
-                                                        title="{{ $status[0]['action'] }}"><i class="fa fa-key"></i>
-                                                    </button>
+                                                    @if (is_can(['questions.lock']))
+                                                        <button role="button" class="btn btn-sm btn-success"
+                                                            onclick="activeService('{{ $question->id }}')" data-toggle="tooltip"
+                                                            title="{{ $status[2]['action'] }}"><i class="fa fa-key"></i>
+                                                        </button>
+                                                    @endif
                                                 @endif
                                             </td>
                                         </tr>
@@ -220,7 +234,7 @@
                             if (response.success == 'success') {
                                     Swal.fire({
                                     title: 'Thành công',
-                                    text: "Đã duyệt câu hỏi",
+                                    text: response.message,
                                     icon: 'success',
                                     confirmButtonColor: '#3085d6',
                                     confirmButtonText: 'Xác nhận'
@@ -245,10 +259,10 @@
         function deactiveService(id_question) {
             var data = {
                 questionId: id_question,
-                serviceStatus: 1
+                questionStatus: 1
                 };
             Swal.fire({
-                title: 'Bạn có muốn khóa dịch vụ này không?',
+                title: 'Bạn có muốn khóa câu hỏi này không?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -259,7 +273,7 @@
                 if (result.value) {
                     $('.loader').show();
                     $.ajax({
-                        url: "{{ route('services.lock') }}",
+                        url: "{{ route('questions.lock') }}",
                         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                         type: 'POST',
                         data: data,
@@ -268,7 +282,7 @@
                             if (response.success == 'success') {
                                     Swal.fire({
                                     title: 'Thành công',
-                                    text: "Đã khóa dịch vụ",
+                                    text: response.message,
                                     icon: 'success',
                                     confirmButtonColor: '#3085d6',
                                     confirmButtonText: 'Xác nhận'
@@ -293,10 +307,10 @@
         function activeService(id_question) {
             var data = {
                 questionId: id_question,
-                serviceStatus: 0
+                questionStatus: 0
                 };
             Swal.fire({
-                title: 'Bạn có chắc muốn kích hoạt dịch vụ này không?',
+                title: 'Bạn có chắc muốn kích hoạt câu hỏi này không?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -307,7 +321,7 @@
                 if (result.value) {
                     $('.loader').show();
                     $.ajax({
-                        url: "{{ route('services.unlock') }}",
+                        url: "{{ route('questions.unlock') }}",
                         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                         type: 'POST',
                         data: data,
@@ -316,7 +330,7 @@
                             if (response.success == 'success') {
                                     Swal.fire({
                                     title: 'Thành công',
-                                    text: "Đã kích hoạt dịch vụ",
+                                    text: response.message,
                                     icon: 'success',
                                     confirmButtonColor: '#3085d6',
                                     confirmButtonText: 'Xác nhận'

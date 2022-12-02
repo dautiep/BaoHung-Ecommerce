@@ -45,7 +45,7 @@
                                                 <label class="text-capitalize">Tên nhóm quyền <sup
                                                         class="text-danger">*</sup></label>
                                                 <input type="text" name="name" value="{{ old('name', @$data->name) }}"
-                                                    class="form-control" placeholder="Tên nhóm quyền">
+                                                    class="form-control" placeholder="Tên nhóm quyền" autocomplete="off">
                                             </div>
                                         </div>
                                     </div>

@@ -20,4 +20,9 @@ class Role extends Model
     {
         $this->attributes['permission'] = json_encode($value);
     }
+
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class, 'group_role', 'role_id', 'group_id');
+    }
 }
