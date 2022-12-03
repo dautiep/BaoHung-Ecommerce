@@ -90,4 +90,20 @@ class GroupRepository extends BaseRepository implements GroupRepositoryInterface
             'status' => !$builder->status
         ]);
     }
+
+    public function updateRoleJson($role_id)
+    {
+        $builder = $this->model->whereHas('roles', function ($query) use ($role_id) {
+            if ($role_id) {
+                $query->where('role_id', $role_id);
+            }
+        })->get();
+        foreach ($builder as $item) {
+            $json_role = $this->getJsonPermissionToArray($item->roles->pluck('permission'))->toJson();
+            $item->update([
+                'group_role_json' => $json_role,
+            ]);
+        }
+        return $builder;
+    }
 }
