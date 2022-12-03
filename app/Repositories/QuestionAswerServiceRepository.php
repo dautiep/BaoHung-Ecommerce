@@ -20,7 +20,8 @@ class QuestionAswerServiceRepository extends BaseRepository implements QuestionA
     }
 
     //get all data
-    public function getAllData() {
+    public function getAllData()
+    {
         return $this->_model->select('question_content')->get();
     }
 
@@ -45,6 +46,7 @@ class QuestionAswerServiceRepository extends BaseRepository implements QuestionA
 
         //check permission
         $roles = Auth::user()->groups->pluck('name');
+
         if ($roles[0] == 'Nhân viên') {
             $result = $result->where('');
         }

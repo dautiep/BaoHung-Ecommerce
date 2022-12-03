@@ -48,7 +48,8 @@
         <div class="form-group">
             <label class="text-capitalize">{{ @$control['label'] }} {!! @$required !!}
             </label>
-            <select class="form-control select2 {{ @$control['class'] }}" name="{{ @$control['name'] }}" id="{{ @$control['id'] }}">
+            <select class="form-control select2 {{ @$control['class'] }}" name="{{ @$control['name'] }}"
+                id="{{ @$control['id'] }}">
                 @if (@$control['first'])
                     <option value="{{ $control['first_value'] }}">{{ @$control['first_name'] }}</option>
                 @endif
