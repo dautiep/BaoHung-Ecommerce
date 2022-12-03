@@ -45,17 +45,17 @@ class DatabaseSeeder extends Seeder
         //roles
         Role::truncate();
         $roleStaff = Role::create([
-            'permission' => ["questions.list","questions.edit","questions.create","faq.edit","faq.sendmail"],
+            'permission' => ["questions.list", "questions.edit", "questions.create", "faq.edit", "faq.sendmail"],
             'name' => 'Nhân viên',
         ]);
 
         $roleStaff1 = Role::create([
-            'permission' => ["questions.list","questions.approved","faq.approved","faq.list"],
+            'permission' => ["questions.list", "questions.approved", "faq.approved", "faq.list"],
             'name' => 'Lãnh đạo phòng',
         ]);
 
         $roleStaff2 = Role::create([
-            'permission' => ["questions.list","faq.list"],
+            'permission' => ["questions.list", "faq.list"],
             'name' => 'Lãnh đạo chi nhánh',
         ]);
 

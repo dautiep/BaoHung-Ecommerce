@@ -11,7 +11,7 @@ const BTN_GET_SERVICE = '.get_service';
 const BTN_SUBMIT_QUESTION = '.service-submit';
 const BTN_USER_SUBMIT = '#user_submit';
 const TYPE_METHOD = 'POST';
-
+const _this = this;
 function getDataScript(elemt) {
     var script = document.querySelector('script[data-id][data-name="bot_extenstion"]');
     var data = script.getAttribute(`data-${elemt}`);
@@ -28,10 +28,25 @@ function request(url, data, type, callback) {
         data: data,
         type: type,
         success: function (res) {
-            callback(res);
+            try {
+                callback(res);
+            } catch (err) {
+                _this.notify('Lỗi phát sinh vui lòng refresh trình duyệt');
+            }
         },
         error: function (res) {
-            console.log('error'); // when error is returned
+            try {
+                let logger = res?.responseJSON;
+                if (logger.message == 'error') {
+                    let errors = Object.values(logger.error);
+                    errors.forEach((messages, key) => {
+                        _this.notify(messages);
+                    })
+                }
+            } catch (err) {
+                _this.notify('Lỗi phát sinh vui lòng refresh trình duyệt');
+            }
+
         }
     });
 }

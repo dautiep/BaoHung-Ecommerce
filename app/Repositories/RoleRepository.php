@@ -35,9 +35,19 @@ class RoleRepository extends BaseRepository implements RoleRepositoryInterface
             $builder = $this->_model->create($request->only('name', 'permission'));
         } else {
             $builder = $this->_model->find($id)->update($request->only('name', 'permission'));
+            if($builder) {
+                // sync role update group json
+                $this->handSyncRoleGroupJson($id);
+            }
         }
 
         return $builder;
+    }
+
+    public function handSyncRoleGroupJson($id_role)
+    {
+        $group_intansce = app(GroupRepository::class)->updateRoleJson($id_role);
+        return $group_intansce;
     }
 
     public function handleDelete($request): bool
@@ -50,7 +60,8 @@ class RoleRepository extends BaseRepository implements RoleRepositoryInterface
         ], 'array');
     }
 
-    public function getAllByCondition($condition = []) {
+    public function getAllByCondition($condition = [])
+    {
         return $this->_model->all();
     }
 }
