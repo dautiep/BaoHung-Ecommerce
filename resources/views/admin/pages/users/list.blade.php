@@ -195,87 +195,79 @@
     <script>
         $("#is_active").select2({
             theme: 'bootstrap4'
-        }); <<
-        <<
-        <<
-        < HEAD
+        });
         $("#department_id").select2({
-                    ===
-                    ===
-                    =
+            theme: 'bootstrap4'
+        });
 
-                    $("#groups").select2({
-                        >>>
-                        >>>
-                        >
-                        858667 f4a1727f01f41bd8112142e63c3ba9c7cf
-                        theme: 'bootstrap4'
-                    });
+        $("#groups").select2({
+            theme: 'bootstrap4'
+        });
 
-                    $('#fromTo').daterangepicker({
-                        autoUpdateInput: false,
-                        locale: {
-                            format: 'YYYY-MM-DD',
-                            cancelLabel: 'Clear'
+        $('#fromTo').daterangepicker({
+            autoUpdateInput: false,
+            locale: {
+                format: 'YYYY-MM-DD',
+                cancelLabel: 'Clear'
+            }
+        });
+
+        $('input[name="fromTo"]').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format(
+                'YYYY-MM-DD'));
+        });
+
+        $('input[name="fromTo"]').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+        });
+
+        function cancelCategory(id_item, message = null) {
+            var data = {
+                itemId: id_item,
+            };
+            Swal.fire({
+                title: message ?? 'Bạn có chắc khóa tài khoản này không?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Xác nhận',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Hủy'
+            }).then((result) => {
+                if (result.value) {
+                    $('.loader').show();
+                    $.ajax({
+                        url: "{{ route('users.state') }}",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        type: 'POST',
+                        data: data,
+                        success: function(response) {
+                            $('.loader').hide();
+                            if (response.status) {
+                                Swal.fire({
+                                    title: 'Thành công',
+                                    text: response.message ?? 'Xử lý thành công',
+                                    icon: response.icon ?? 'Success',
+                                    confirmButtonColor: '#3085d6',
+                                    confirmButtonText: 'Xác nhận'
+                                }).then((result) => {
+                                    if (result.value) {
+                                        window.location.reload();
+                                    }
+                                })
+                            } else {
+                                toastr.error('Có lỗi xảy ra vui lòng thử lại sau.')
+                            }
+                        },
+                        error: function(response) {
+                            toastr.error('Có lỗi xảy ra vui lòng thử lại sau.')
                         }
                     });
 
-                    $('input[name="fromTo"]').on('apply.daterangepicker', function(ev, picker) {
-                        $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format(
-                            'YYYY-MM-DD'));
-                    });
-
-                    $('input[name="fromTo"]').on('cancel.daterangepicker', function(ev, picker) {
-                        $(this).val('');
-                    });
-
-                    function cancelCategory(id_item, message = null) {
-                        var data = {
-                            itemId: id_item,
-                        };
-                        Swal.fire({
-                            title: message ?? 'Bạn có chắc khóa tài khoản này không?',
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'Xác nhận',
-                            cancelButtonColor: '#d33',
-                            cancelButtonText: 'Hủy'
-                        }).then((result) => {
-                            if (result.value) {
-                                $('.loader').show();
-                                $.ajax({
-                                    url: "{{ route('users.state') }}",
-                                    headers: {
-                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                    },
-                                    type: 'POST',
-                                    data: data,
-                                    success: function(response) {
-                                        $('.loader').hide();
-                                        if (response.status) {
-                                            Swal.fire({
-                                                title: 'Thành công',
-                                                text: response.message ?? 'Xử lý thành công',
-                                                icon: response.icon ?? 'Success',
-                                                confirmButtonColor: '#3085d6',
-                                                confirmButtonText: 'Xác nhận'
-                                            }).then((result) => {
-                                                if (result.value) {
-                                                    window.location.reload();
-                                                }
-                                            })
-                                        } else {
-                                            toastr.error('Có lỗi xảy ra vui lòng thử lại sau.')
-                                        }
-                                    },
-                                    error: function(response) {
-                                        toastr.error('Có lỗi xảy ra vui lòng thử lại sau.')
-                                    }
-                                });
-
-                            }
-                        })
-                    }
+                }
+            })
+        }
     </script>
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Requests\Admin\TypeOfServiceRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Chatbot\ChatRequest;
 use App\Repositories\Interfaces\OtherFagRepositoryInterface;
 use App\Repositories\Interfaces\QuestionAswerServiceInterface;
 use App\Repositories\Interfaces\TypeOfServiceRepositoryInterface;
@@ -81,9 +82,9 @@ class ChatbotController extends Controller
     }
 
     // submit form question user
-    public function handleSendQuestion(Request $request)
+    public function handleSendQuestion(ChatRequest $request)
     {
-
+        dd($request->all());
         $data = $this->_ortherRepositoryInterface->createQuestion($request);
         return response()->json('Câu hỏi của bạn đã được gửi đi');
     }

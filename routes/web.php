@@ -29,7 +29,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Auth'], function () {
     // Route::resource('reset-password', 'ResetPasswordController');
 });
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth.admin'], function () {
     Route::get('/home', 'HomeController@index')->name('dashboard');
 
     // users
