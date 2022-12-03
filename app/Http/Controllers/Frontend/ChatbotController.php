@@ -84,7 +84,6 @@ class ChatbotController extends Controller
     // submit form question user
     public function handleSendQuestion(ChatRequest $request)
     {
-        dd($request->all());
         $data = $this->_ortherRepositoryInterface->createQuestion($request);
         return response()->json('Câu hỏi của bạn đã được gửi đi');
     }
