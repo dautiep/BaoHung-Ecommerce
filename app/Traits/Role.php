@@ -1,8 +1,11 @@
 <?php
+
 namespace App\Traits;
+
 use App\Repositories\UserRepository;
 
-trait Role {
+trait Role
+{
     public function scopeStaffRole($query, $column, $value)
     {
         return $query->where($column, $value);

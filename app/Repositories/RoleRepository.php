@@ -35,7 +35,7 @@ class RoleRepository extends BaseRepository implements RoleRepositoryInterface
             $builder = $this->_model->create($request->only('name', 'permission'));
         } else {
             $builder = $this->_model->find($id)->update($request->only('name', 'permission'));
-            if($builder) {
+            if ($builder) {
                 // sync role update group json
                 $this->handSyncRoleGroupJson($id);
             }

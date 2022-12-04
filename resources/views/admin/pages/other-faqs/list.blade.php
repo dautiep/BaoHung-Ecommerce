@@ -86,8 +86,8 @@
                                         <tr>
                                             <th class="bg-info" style="width: 10px">#</th>
                                             <th class="text-center bg-info" style="width: 30%">Câu hỏi</th>
-                                            <th class="text-center bg-info">Email</th>
-                                            <th class="text-center bg-info" >Phone</th>
+                                            <th class="text-center bg-info">Thông tin</th>
+                                            <th class="text-center bg-info">Người phụ trách</th>
                                             <th class="text-center bg-info">Trạng thái</th>
                                             <th class="text-center bg-info">Ngày Tạo</th>
                                             <th class="text-center bg-info">Hành Động</th>
@@ -109,10 +109,11 @@
                                                     {{ $item->consulting_content }}
                                                 </td>
                                                 <td class="align-middle">
-                                                    {{ $item->email }}
+                                                    Email : {{ $item->email }} </br>
+                                                    Phone : {{ $item->phone }}
                                                 </td>
                                                 <td class="align-middle text-center">
-                                                    {{ $item->phone }}
+                                                    {{ @$item->users->name ?? '' }}
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span class="badge {{ @$bg_status[$item->status] }}">

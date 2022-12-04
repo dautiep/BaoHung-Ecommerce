@@ -106,4 +106,19 @@ class GroupRepository extends BaseRepository implements GroupRepositoryInterface
         }
         return $builder;
     }
+
+    public function getGroupRoleKey($roles)
+    {
+        $builder = $this->_model->whereJsonContains('group_role_json', $roles)->with('users')->get();
+        $user_role = [];
+        $builder = $builder->map(function ($item, $value) use (&$user_role) {
+            if (!@$item->users->isEmpty()) {
+                foreach ($item->users as $user) {
+                    $user_role[] = $user->id;
+                }
+            }
+        });
+
+        return $user_role;
+    }
 }
