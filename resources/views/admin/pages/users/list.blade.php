@@ -121,10 +121,10 @@
                                     <thead>
                                         <tr>
                                             <th class="bg-info" style="width: 10px">#</th>
-                                            <th class="text-center bg-info w-25">Tên</th>
-                                            <th class="text-center bg-info w-25">Thông tin</th>
-                                            <th class="text-center bg-info">Nhóm quyền</th>
-                                            <th class="text-center bg-info">Trạng thái</th>
+                                            <th class="text-center bg-info w-40">Thông Tin</th>
+                                            <th class="text-center bg-info">Phòng Ban</th>
+                                            <th class="text-center bg-info">Quyền</th>
+                                            <th class="text-center bg-info">Trạng Thái</th>
                                             <th class="text-center bg-info">Ngày Tạo</th>
                                             <th class="text-center bg-info">Hành Động</th>
                                         </tr>
@@ -143,8 +143,8 @@
                                                     Email {{ $item->email }}
                                                 </td>
 
-                                                <td class="align-middle">
-                                                    Phòng ban : {{ @$item->department->name ?? '' }}
+                                                <td class="align-middle text-center">
+                                                    {{ @$item->department->name ?? '' }}
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     @foreach (@$item->groups as $group)

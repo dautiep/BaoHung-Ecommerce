@@ -23,6 +23,26 @@ return [
                     ],
 
                     [
+                        'slug' => 'questions.listRole',
+                        'key' => 'questions.listRole',
+                        'name' => "Xem danh sách theo quyền",
+                        'children' => [
+                            [
+                                'slug' => 'questions.listStaff',
+                                'key' => 'questions.listStaff',
+                                'name' => "Xem danh sách theo quyền nhân viên",
+                                'children' => []
+                            ],
+                            [
+                                'slug' => 'questions.listBoss',
+                                'key' => 'questions.listBoss',
+                                'name' => "Xem danh sách theo quyền lãnh đạo phòng",
+                                'children' => []
+                            ]
+                        ]
+                    ],
+
+                    [
                         'slug' => 'questions.edit',
                         'key' => 'questions.edit',
                         'name' => "Chỉnh sửa",

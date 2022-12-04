@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\Role;
 
 class QuestionAswerService extends Model
 {
-    use HasFactory;
+    use HasFactory, Role;
     public $table = 'question_aswer_service';
     public $keyType = 'string';
     public $primaryKey = 'id';

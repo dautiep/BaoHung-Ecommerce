@@ -45,11 +45,17 @@ class QuestionAswerServiceRepository extends BaseRepository implements QuestionA
         }
 
         //check permission
-        $roles = Auth::user()->groups->pluck('name');
-
-        if ($roles[0] == 'Nhân viên') {
-            $result = $result->where('');
-        }
+        $result = $result->where(function($query){
+            if (!Auth::user()->is_admin) {
+                if (is_can(['questions.listStaff'])) {
+                    $query->staffRole('user_id', Auth::user()->id);
+                }
+                if (is_can(['questions.listBoss'])) {
+                    $queryIdUsers = app(UserRepository::class)->getListIdByDepartmentId(Auth::user()->department_id);
+                    $query->bossRole('user_id', $queryIdUsers);
+                }
+            }
+        });
         return $result->with(['typeOfServices'])->orderBy('created_at', 'DESC')->paginate(10);
     }
 

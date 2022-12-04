@@ -82,4 +82,9 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             'is_active' => !$builder->is_active
         ]);
     }
+
+    public function getListIdByDepartmentId($departmentId)
+    {
+        return $this->_model->where('department_id', $departmentId)->pluck('id')->toArray();
+    }
 }
