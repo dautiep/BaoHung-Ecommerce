@@ -127,6 +127,25 @@ return [
                         'children' => []
                     ],
                     [
+                        'slug' => 'faq.listRole',
+                        'key' => 'faq.listRole',
+                        'name' => "Xem danh sách theo quyền",
+                        'children' => [
+                            [
+                                'slug' => 'faq.listStaff',
+                                'key' => 'faq.listStaff',
+                                'name' => "Xem danh sách theo quyền nhân viên",
+                                'children' => []
+                            ],
+                            [
+                                'slug' => 'faq.listBoss',
+                                'key' => 'faq.listBoss',
+                                'name' => "Xem danh sách theo quyền lãnh đạo phòng",
+                                'children' => []
+                            ]
+                        ]
+                    ],
+                    [
                         'slug' => 'faq.edit',
                         'key' => 'faq.edit',
                         'name' => "Chỉnh sửa",

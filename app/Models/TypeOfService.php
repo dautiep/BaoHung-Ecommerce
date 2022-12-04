@@ -24,4 +24,10 @@ class TypeOfService extends Model
     {
         return $this->hasMany(QuestionAswerService::class, 'type_of_service_id', 'id');
     }
+
+    public function questionAswerServiceActive()
+    {
+        $status = config('global.default.status.type_of_services');
+        return $this->hasMany(QuestionAswerService::class, 'type_of_service_id', 'id')->where('status', $status[0]['key']);
+    }
 }

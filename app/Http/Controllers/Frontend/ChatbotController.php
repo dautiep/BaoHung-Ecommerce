@@ -57,9 +57,9 @@ class ChatbotController extends Controller
         $next =  $request->get('next');
         switch ($next) {
             case 'callBotById':
-                $type_of_service = $this->_typeOfServiceInterFace->findWithRelation($request->get('id', ''), ['questionAswerService']);
+                $type_of_service = $this->_typeOfServiceInterFace->findWithRelation($request->get('id', ''), ['questionAswerServiceActive']);
                 $message = $type_of_service->name;
-                $data = collect($type_of_service->questionAswerService)->map(function ($item) {
+                $data = collect($type_of_service->questionAswerServiceActive)->map(function ($item) {
                     return (object) [
                         'id' => $item->id,
                         'name' => $item->question_content

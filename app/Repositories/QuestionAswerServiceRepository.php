@@ -102,7 +102,10 @@ class QuestionAswerServiceRepository extends BaseRepository implements QuestionA
     }
 
     public function getQuestionAswerWithService($id)
-    {
-        return $this->_model->with('typeOfServices')->where('id', $id)->first();
+    {   $status = config('global.default.status.question');
+        return $this->_model->where('status', $status[1]['key'])->with(['typeOfServices' => function ($q) {
+            $status = config('global.default.status.type_of_services');
+            $q->where('status', $status);
+        }])->where('id', $id)->first();
     }
 }
