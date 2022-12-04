@@ -6,14 +6,17 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\OtherFaqRequest;
 use App\Repositories\Interfaces\OtherFagRepositoryInterface;
+use App\Repositories\Interfaces\UserRepositoryInterface;
 
 class OtherFaqController extends Controller
 {
     private $_otherFaqRespositoryInterface;
+    private $_userRespositoryInterface;
     private $_prefix = 'admin.pages.other-faqs.';
-    public function __construct(OtherFagRepositoryInterface $otherFagRepositoryInterface)
+    public function __construct(OtherFagRepositoryInterface $otherFagRepositoryInterface, UserRepositoryInterface $userRepositoryInterface)
     {
         $this->_otherFaqRespositoryInterface = $otherFagRepositoryInterface;
+        $this->_userRespositoryInterface = $userRepositoryInterface;
     }
 
     public function index(Request $request)
@@ -32,10 +35,11 @@ class OtherFaqController extends Controller
     public function edit($id)
     {
         $data = $this->_otherFaqRespositoryInterface->find($id);
+        $users_assign = $this->_userRespositoryInterface->getListUserByFaqAssginment();
         if (!$data) {
             return redirect()->route('other_faqs.list')->with($this->getMessages(config('global.default.messages.orther_faqs.not_found'), $this::$TYPE_MESSAGES_ERROR));
         }
-        return view($this->_prefix . 'edit', compact('data'));
+        return view($this->_prefix . 'edit', compact('data', 'users_assign'));
     }
 
     public function postContentToConsult(OtherFaqRequest $request, $id)

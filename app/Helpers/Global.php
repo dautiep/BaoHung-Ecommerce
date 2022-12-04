@@ -37,4 +37,16 @@ if (!function_exists('is_json')) {
     }
 }
 
+if (!function_exists('is_admin')) {
+    function is_admin()
+    {
+        return auth()->user()->is_admin;
+    }
+}
 
+if (!function_exists('auth_user')) {
+    function auth_user()
+    {
+        return auth()->user();
+    }
+}

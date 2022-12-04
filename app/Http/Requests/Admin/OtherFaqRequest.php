@@ -24,11 +24,10 @@ class OtherFaqRequest extends FormRequest
     public function rules()
     {
         return [
-            'status' => ['required'],
+
             'content_to_consult' => ['max:200', function ($attribute, $value, $fail) {
-                $status_answered = config('global.default.status.orther_faqs.answered');
-                if ((request()->get('status') == @$status_answered['key']) && empty($value)) {
-                    $message = config('global.default.messages.orther_faqs.not_required_answer') ?? '';
+                if (empty(request()->get('assigned_user_id')) && !empty($value)) {
+                    $message = config('global.default.messages.orther_faqs.not_assgiment_answer') ?? '';
                     $fail($message);
                 }
             }]

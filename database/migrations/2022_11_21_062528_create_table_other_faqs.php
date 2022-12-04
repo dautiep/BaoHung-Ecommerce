@@ -22,6 +22,7 @@ class CreateTableOtherFaqs extends Migration
             $table->string('email', 50);
             $table->string('phone', 20)->nullable();
             $table->string('type_of_service_id', 3)->index();
+            $table->unsignedInteger('user_id')->nullable()->index();
             $table->timestamps();
         });
     }

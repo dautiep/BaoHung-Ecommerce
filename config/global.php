@@ -131,6 +131,7 @@ return [
                 'content_to_consult' => 'Cập nhật câu trả lời thành công',
                 'not_required_answer' => 'Vui lòng điền câu trả lời',
                 'delete' => 'Đã xóa thành công',
+                'not_assgiment_answer' => 'Vui lòng chọn người phụ trách',
             ]
         ]
     ]
