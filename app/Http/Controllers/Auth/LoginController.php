@@ -13,6 +13,9 @@ use App\Services\IpAddressAcceptService;
 class LoginController extends Controller
 {
     public function index() {
+        if(auth()->check()) {
+            return redirect()->route('dashboard');
+        }
         $preLoader = false;
         $page = 'login';
         return view('admin.auth.login', compact('preLoader', 'page'));
