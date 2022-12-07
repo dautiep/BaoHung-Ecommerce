@@ -1,12 +1,26 @@
  <section class="boxchat">
      <div class="container">
          <div class="wrapper">
-             <div class="boxchat-head container"><a href=""><em class="ri-arrow-left-line"></em><span>Quay
-                         lại trang chủ</span></a></div>
+             <div class="boxchat-head container">
+                 <a href="">
+                     <em class="ri-arrow-left-line"></em>
+                     <span>Quay lại trang chủ</span>
+                 </a>
+                 <a href="{{ route('dashboard') }}"
+                     style="display: inline-block;
+                        position: absolute;
+                        margin:0;
+                        left: 10px;
+                        padding:10px;
+                        width:40px;
+                    ">
+                     <i class="ri-home-8-line"></i>
+                 </a>
+             </div>
              <div class="boxchat-head-2 container"> <a href="" target="_blank" rel="noopener noreferrer">
-                    <div class="icon-botchat">
-                        <img src="{{ asset('chatbot/img/botchat.jpg') }}">
-                    </div>
+                     <div class="icon-botchat">
+                         <img src="{{ asset('chatbot/img/botchat.jpg') }}">
+                     </div>
                      <div class="slogan">
                          <p>Trợ lý ảo BIDV </p>
                          <p>Online</p>
