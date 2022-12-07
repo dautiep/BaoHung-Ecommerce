@@ -84,7 +84,6 @@
                                 <thead>
                                     <tr>
                                         <th class="bg-info" style="width: 10px">#</th>
-                                        <th class="text-center bg-info">Mã DV</th>
                                         <th class="text-center bg-info w-50">Tên</th>
                                         <th class="text-center bg-info">Trạng thái</th>
                                         <th class="text-center bg-info">Ngày Tạo</th>
@@ -95,7 +94,6 @@
                                     @foreach ($services as $key => $service)
                                         <tr>
                                             <td class="align-middle" scope="row"> {{ $key + $services->firstItem() }} </td>
-                                            <td class="align-middle text-center" scope="row"> {{ $service->id }} </td>
                                             <td class="align-middle">
                                                 {{ $service->name }}
                                             </td>

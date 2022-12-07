@@ -99,7 +99,6 @@
                                 <thead>
                                     <tr>
                                         <th class="bg-info" style="width: 10px">#</th>
-                                        <th class="text-center bg-info">Mã Câu Hỏi</th>
                                         <th class="text-center bg-info w-40">Thông Tin</th>
                                         <th class="text-center bg-info">Người Phụ Trách</th>
                                         <th class="text-center bg-info">Trạng Thái</th>
@@ -113,7 +112,6 @@
                                     @foreach ($questions as $key => $question)
                                         <tr>
                                             <td class="align-middle" scope="row"> {{ $key + $questions->firstItem() }} </td>
-                                            <td class="align-middle text-center" scope="row"> {{ $question->id }} </td>
                                             <td class="align-middle">
                                                 Tiêu đề: {{ @$question->question_content }} <br>
                                                 Dịch vụ: {{ @$question->typeOfServices->name }}

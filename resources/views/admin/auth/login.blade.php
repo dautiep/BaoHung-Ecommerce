@@ -15,7 +15,7 @@
                 {!! Form::open(array('route' => 'login.store', 'method' => 'POST')) !!}
                     <div class="input-group mb-3">
                         {!! Form::hidden('submitCount', @$errors->get('submitCount') ? $errors->get('submitCount')[0] : 0)!!}
-                        {!! Form::text('username', null, array('placeholder' => 'Email hoặc Tên Đăng Nhập', 'class' => 'form-control')) !!}
+                        {!! Form::text('username', null, array('placeholder' => 'Email hoặc Tên Đăng Nhập', 'class' => 'form-control', 'autocomplete' => 'off')) !!}
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
