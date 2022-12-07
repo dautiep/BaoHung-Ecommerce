@@ -96,8 +96,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
         Route::get('/edit/{id}', 'DepartmentController@edit')->name('edit');
         Route::post('/store/{id?}', 'DepartmentController@store')->name('store');
     });
-
-});
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => 'auth.admin'], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
+    Route::group(['prefix' => 'filemanager'], function () {
+        \UniSharp\LaravelFilemanager\Lfm::routes();
+    });
 });

@@ -174,7 +174,7 @@
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <span class="input-group-btn">
-                                                            <a id="lfm" data-input="thumbnail"
+                                                            <a id="fileManager" data-input="thumbnail"
                                                                 data-preview="holder" class="btn btn-primary">
                                                                 <i class="fa fa-picture-o"></i> Choose
                                                             </a>
