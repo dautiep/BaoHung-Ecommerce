@@ -31,10 +31,13 @@ class OtherFagRepository extends BaseRepository implements OtherFagRepositoryInt
             if (!is_admin()) {
                 if (is_can(['faq.listStaff'])) {
                     $query->staffRole('user_id', auth_user()->id);
-                }
-                if (is_can(['faq.listBoss'])) {
+                } else if (is_can(['faq.listBoss'])) {
                     $queryIdUsers = app(UserRepository::class)->getListIdByDepartmentId(auth_user()->department_id);
                     $query->bossRole('user_id', $queryIdUsers);
+                } else if (is_can(['faq.list'])) {
+                    $query = $query;
+                } else {
+                    $query = $query->where('status', -1);
                 }
             }
         })->paginate($this->page);
@@ -87,10 +90,14 @@ class OtherFagRepository extends BaseRepository implements OtherFagRepositoryInt
                 'content_to_consult' => $request->get('content_to_consult'),
                 'status' => config('global.default.status.orther_faqs.answered.key')
             ];
+        } else if (is_admin()) {
+            $data = [
+                'status' => config('global.default.status.orther_faqs.unanswered.key'),
+                'user_id' => $request->get('assigned_user_id'),
+            ];
         } else {
             $data = [
-                'status' => $request->get('status'),
-                'user_id' => $request->get('assigned_user_id'),
+                'status' => config('global.default.status.orther_faqs.unanswered.key'),
             ];
         }
         $builder = $builder->update($data);

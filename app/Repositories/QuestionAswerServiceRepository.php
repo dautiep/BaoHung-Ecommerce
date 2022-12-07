@@ -49,14 +49,17 @@ class QuestionAswerServiceRepository extends BaseRepository implements QuestionA
             if (!Auth::user()->is_admin) {
                 if (is_can(['questions.listStaff'])) {
                     $query->staffRole('user_id', Auth::user()->id);
-                }
-                if (is_can(['questions.listBoss'])) {
+                } else if (is_can(['questions.listBoss'])) {
                     $queryIdUsers = app(UserRepository::class)->getListIdByDepartmentId(Auth::user()->department_id);
                     $query->bossRole('user_id', $queryIdUsers);
+                } else if (is_can(['questions.list'])) {
+                    $query = $query;
+                } else {
+                    $query = $query->where('status', -1);
                 }
             }
         });
-        return $result->with(['typeOfServices'])->orderBy('created_at', 'DESC')->paginate(10);
+        return $result->with(['typeOfServices', 'user'])->orderBy('created_at', 'DESC')->paginate(10);
     }
 
     //get all type of service

@@ -39,7 +39,7 @@
                                                     value="{{ @$info['keySearch'] }}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="fromTo">Thời Gian</label>
                                                 <div class="input-group">
@@ -135,6 +135,11 @@
                                                         data-toggle="tooltip" title="{{ $lablel }}"><i
                                                             class="fas fa-times"></i>
                                                     </button>
+                                                    @if (is_can(['faq.sendmail']))
+                                                        <a href="https://mail.bidv.com.vn/owa" target="_blank" class="btn btn-sm btn-info">
+                                                            <i class="fa fa-reply"></i>
+                                                        </a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

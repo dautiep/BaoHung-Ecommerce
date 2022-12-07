@@ -206,25 +206,25 @@
     }
 
     .nav-main.active {
-        background-color: #275C26 !important;
+        background-color: #00524e !important;
     }
 
     .color-azoffice {
-        background-color: #275C26 !important;
+        background-color: #00524e !important;
     }
 
     .btn-azoffice {
-        background-color: #275C26;
+        background-color: #00524e;
         color: white;
     }
 
     .btn-azoffice:hover {
-        background-color: #3d913b;
-        border-color: #3d913b;
+        background-color: #00524e;
+        border-color: #00524e;
     }
 
     .card-azoffice {
-        border-top: 3px solid #275C26;
+        border-top: 3px solid #00524e;
     }
 
     .thumb-Images {

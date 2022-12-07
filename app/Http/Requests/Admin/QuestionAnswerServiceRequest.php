@@ -45,7 +45,7 @@ class QuestionAnswerServiceRequest extends FormRequest
                 'required',
                 function ($attribute, $value, $fail) use ($question, $questions) {
                     foreach ($questions as $item) {
-                        if ($item->question_content == $value && $value != $question->name) {
+                        if ($item->question_content == $value && $value != $question->question_content) {
                             return $fail('Câu hỏi đã tồn tại trong hệ thống');
                         }
                     }

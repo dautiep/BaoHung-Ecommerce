@@ -8,12 +8,13 @@
         <!-- /.login-logo -->
         <div class="card card-azoffice">
             <div class="card-header text-center">
-                <div><img src="{{ asset('image/logo/logo.png') }}" alt="logo" width="90"></div>
+                <div><img src="{{ asset('admin/images/logo.png') }}" alt="logo" width="90"></div>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
                 {!! Form::open(array('route' => 'login.store', 'method' => 'POST')) !!}
                     <div class="input-group mb-3">
+                        {!! Form::hidden('submitCount', @$errors->get('submitCount') ? $errors->get('submitCount')[0] : 0)!!}
                         {!! Form::text('username', null, array('placeholder' => 'Email hoặc Tên Đăng Nhập', 'class' => 'form-control')) !!}
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -42,7 +43,7 @@
                 {!! Form::close() !!}
                 <div class="row mt-4">
                     <div class="col">
-                        <p>©2021 BIDV SYSTEM.</p>
+                        <p>©2022 DUYLTT SYSTEM.</p>
                     </div>
                 </div>
             </div>

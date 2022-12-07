@@ -26,8 +26,14 @@ class ChatRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required', 'email'],
-            'phone' => ['required', 'min:10', 'max:11'],
+            'email' => [
+                function ($attribute, $value, $fail) {
+                    if (empty(request()->email) && empty(request()->phone)) {
+                        return $fail('Vui lòng nhập số điện thoại hoặc email!');
+                    }
+                },
+                'email'
+            ],
         ];
     }
 

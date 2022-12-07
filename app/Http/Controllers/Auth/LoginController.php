@@ -20,6 +20,7 @@ class LoginController extends Controller
 
     public function store(Request $request) {
         $input = $request->all();
+        $count = (int) $request->submitCount;
         $this->validate($request, [
             'username' => 'required',
             'password' => 'required',
@@ -31,7 +32,6 @@ class LoginController extends Controller
             'username' => 'Tên đăng nhập hoặc email',
             'password' => 'Mật khẩu',
         ]);
-
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
         if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password'])))
         {
@@ -48,11 +48,18 @@ class LoginController extends Controller
             $request->session()->regenerate();
             return redirect()->route('dashboard');
         }
-
-        $notification = array(
-            'message' => 'Sai thông tin đăng nhập. Vui lòng thử lại!',
-            'alert-type' => 'error'
-        );
+        if ($count == 2) {
+            $notification = array(
+                'message' => 'Có vẻ bạn đã quên thông tin đăng nhập. Vui lòng liên hệ admin!',
+                'alert-type' => 'error'
+            );
+        } else {
+            $notification = array(
+                'message' => 'Sai thông tin đăng nhập. Vui lòng thử lại!',
+                'alert-type' => 'error',
+                'submitCount' => ++$count
+            );
+        }
         return redirect()->back()->withErrors($notification);
     }
 

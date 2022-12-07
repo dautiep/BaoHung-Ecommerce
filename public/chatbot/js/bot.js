@@ -36,12 +36,10 @@ function request(url, data, type, callback) {
         },
         error: function (res) {
             try {
-                let logger = res?.responseJSON;
+                let logger = res ? res.responseJSON : '';
                 if (logger.message == 'error') {
                     let errors = Object.values(logger.error);
-                    errors.forEach((messages, key) => {
-                        _this.notify(messages);
-                    })
+                    return _this.notify(errors[0][0]);
                 }
             } catch (err) {
                 _this.notify('Lỗi phát sinh vui lòng refresh trình duyệt');

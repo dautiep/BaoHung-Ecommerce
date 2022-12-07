@@ -26,10 +26,10 @@ class OtherFaqRequest extends FormRequest
         return [
 
             'content_to_consult' => ['max:200', function ($attribute, $value, $fail) {
-                if (empty(request()->get('assigned_user_id')) && !empty($value)) {
-                    $message = config('global.default.messages.orther_faqs.not_assgiment_answer') ?? '';
-                    $fail($message);
-                }
+                // if (isset(request()->assigned_user_id) && empty($value)) {
+                //     $message = config('global.default.messages.orther_faqs.not_assgiment_answer') ?? '';
+                //     $fail($message);
+                // }
             }]
         ];
     }

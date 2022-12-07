@@ -1,8 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
-        <img src="{{ asset('image/logo/logo.png') }}" alt="AdminPTTT Logo" class=""
-            style="opacity: 1; width:90px; height:70px;">
+        <img src="{{ asset('admin/images/logo.png') }}" alt="AdminPTTT Logo" class=""
+            style="opacity: 1; width:100px;">
         <span class="brand-text font-weight-light"><em></em></span>
     </a>
     <!-- Sidebar -->
@@ -33,7 +33,6 @@
                     @endif
                     <li class="nav-item has-treeview menu-open">
                         @php
-
                             $hasActivePage = in_array(@$activePage, $parent['hasActivePage']);
                             $router = !empty($parent['router']) ? route($parent['router']) : '#';
                             $is_can = @is_can($parent['authorize']);
@@ -71,6 +70,14 @@
                     </li>
 
                 @endforeach
+                <li class="nav-header">REPORT SYSTEM</li>
+                <li class="nav-item">
+                    <a href="{{ route('dashboard') }}"
+                        class="nav-link nav-main {{ @$activePage === 'dashboard' ? ' active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p> Báo cáo </p>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>

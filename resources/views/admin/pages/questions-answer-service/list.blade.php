@@ -104,7 +104,9 @@
                                         <th class="text-center bg-info">Người Phụ Trách</th>
                                         <th class="text-center bg-info">Trạng Thái</th>
                                         <th class="text-center bg-info">Ngày cập nhật</th>
-                                        <th class="text-center bg-info">Hành động</th>
+                                        @if(is_can(['questions.approved']) || is_can(['questions.edit']) || is_can(['questions.unlock']) || is_can(['questions.lock']))
+                                            <th class="text-center bg-info">Hành động</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -117,7 +119,7 @@
                                                 Dịch vụ: {{ @$question->typeOfServices->name }}
                                             </td>
                                             <td class="align-middle text-center">
-
+                                                {{ @$question->user->name }}
                                             </td>
                                             <td class="align-middle text-center">
                                                 @if ($question->status == $status[0]['key'])
@@ -129,42 +131,43 @@
                                                 @endif
                                             </td>
                                             <td class="align-middle text-center">{{ date_format(date_create($question->created_at), 'd-m-Y') }}</td>
-                                            <td class="align-middle text-center">
+                                            @if(is_can(['questions.approved']) || is_can(['questions.edit']) || is_can(['questions.unlock']) || is_can(['questions.lock']))
+                                                <td class="align-middle text-center">
+                                                    @if ($question->status == $status[0]['key'])
+                                                        @if (is_can(['questions.edit']))
+                                                            <a class="btn btn-sm btn-primary" href="{{ route('questions.edit', $question->id) }}" title="Cập nhật thông tin">
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+                                                        @endif
+                                                        @if (is_can(['questions.approved']))
+                                                            <button role="button" class="btn btn-sm btn-info"
+                                                                    onclick="approvedQuestion('{{ $question->id }}')" data-toggle="tooltip"
+                                                                    title="{{ $status[0]['action'] }}"><i class="fa fa-key"></i>
+                                                            </button>
+                                                        @endif
+                                                    @elseif ($question->status == $status[1]['key'])
+                                                        @if (is_can(['questions.edit']))
+                                                            <a class="btn btn-sm btn-primary" href="{{ route('questions.edit', $question->id) }}" title="Cập nhật thông tin">
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+                                                        @endif
+                                                        @if (is_can(['questions.lock']))
+                                                            <button role="button" class="btn btn-sm btn-danger"
+                                                                    onclick="deactiveService('{{ $question->id }}')" data-toggle="tooltip"
+                                                                    title="{{ $status[1]['action'] }}"><i class="fa fa-key"></i>
+                                                            </button>
+                                                        @endif
 
-                                                @if ($question->status == $status[0]['key'])
-                                                    @if (is_can(['questions.edit']))
-                                                        <a class="btn btn-sm btn-primary" href="{{ route('questions.edit', $question->id) }}" title="Cập nhật thông tin">
-                                                            <i class="fas fa-edit"></i>
-                                                        </a>
+                                                    @else
+                                                        @if (is_can(['questions.unlock']))
+                                                            <button role="button" class="btn btn-sm btn-success"
+                                                                onclick="activeService('{{ $question->id }}')" data-toggle="tooltip"
+                                                                title="{{ $status[2]['action'] }}"><i class="fa fa-key"></i>
+                                                            </button>
+                                                        @endif
                                                     @endif
-                                                    @if (is_can(['questions.approved']))
-                                                        <button role="button" class="btn btn-sm btn-info"
-                                                                onclick="approvedQuestion('{{ $question->id }}')" data-toggle="tooltip"
-                                                                title="{{ $status[0]['action'] }}"><i class="fa fa-key"></i>
-                                                        </button>
-                                                    @endif
-                                                @elseif ($question->status == $status[1]['key'])
-                                                    @if (is_can(['questions.edit']))
-                                                        <a class="btn btn-sm btn-primary" href="{{ route('questions.edit', $question->id) }}" title="Cập nhật thông tin">
-                                                            <i class="fas fa-edit"></i>
-                                                        </a>
-                                                    @endif
-                                                    @if (is_can(['questions.lock']))
-                                                        <button role="button" class="btn btn-sm btn-danger"
-                                                                onclick="deactiveService('{{ $question->id }}')" data-toggle="tooltip"
-                                                                title="{{ $status[1]['action'] }}"><i class="fa fa-key"></i>
-                                                        </button>
-                                                    @endif
-
-                                                @else
-                                                    @if (is_can(['questions.lock']))
-                                                        <button role="button" class="btn btn-sm btn-success"
-                                                            onclick="activeService('{{ $question->id }}')" data-toggle="tooltip"
-                                                            title="{{ $status[2]['action'] }}"><i class="fa fa-key"></i>
-                                                        </button>
-                                                    @endif
-                                                @endif
-                                            </td>
+                                                </td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                 </tbody>

@@ -62,7 +62,7 @@ class DatabaseSeeder extends Seeder
         //groups
         Group::truncate();
         $groupStaff = Group::create([
-            'name' => 'Nhân viên test',
+            'name' => 'Nhân viên',
             'group_role_json' => '[["questions.list","questions.edit","questions.create","faq.edit","faq.sendmail"]]',
             'status' => 1
         ]);
