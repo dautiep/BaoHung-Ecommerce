@@ -81,24 +81,8 @@
                                     @endif
                                     <div class="row mt-4">
                                         <div class="col-md-12">
-                                            <x-input-control :input="'select2'" :control="[
-                                                'for' => 'department_id',
-                                                'label' => 'Phòng ban',
-                                                'name' => 'department_id',
-                                                'value' => @$data->department_id,
-                                                'selected' => @$department,
-                                                'required' => true,
-                                                'first' => false,
-                                                'first_value' => '',
-                                                'first_name' => 'Tất cả',
-                                                'id' => 'department_id',
-                                            ]" />
-                                        </div>
-                                    </div>
-                                    <div class="row mt-4">
-                                        <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="text-capitalize">Chọn nhóm quyền quản lý<sup
+                                                <label class="text-capitalize">Chọn quyền quản lý<sup
                                                         class="text-danger">*</sup></label>
                                                 <select name="groups[]" id="groups" class="select2"
                                                     data-placeholder="Chọn thẻ" style="width: 100%;">
@@ -113,6 +97,22 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-4" id="department">
+                                        <div class="col-md-12">
+                                            <x-input-control :input="'select2'" :control="[
+                                                'for' => 'department_id',
+                                                'label' => 'Phòng ban',
+                                                'name' => 'department_id',
+                                                'value' => @$data->department_id,
+                                                'selected' => @$department,
+                                                'required' => true,
+                                                'first' => false,
+                                                'first_value' => '',
+                                                'first_name' => 'Tất cả',
+                                                'id' => 'department_id',
+                                            ]" />
                                         </div>
                                     </div>
                                     <div class="row mt-2">
@@ -161,6 +161,13 @@
         });
         $("#statusBlogCategory").select2({
             theme: 'bootstrap4'
+        });
+        $('#groups').on('select2:selecting', function(e) {
+            var role = e.params.args.data.text;
+            role = role.trim();
+            if (role == 'Lãnh đạo chi nhánh') {
+                $('#department').css('display', 'none');
+            }
         });
     </script>
 @endsection

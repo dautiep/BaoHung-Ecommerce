@@ -113,7 +113,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $userBigBoss = User::create([
-            'name' => 'Big Boss1',
+            'name' => 'BigBoss1',
             'email' => 'bigboss1@gmail.com',
             'password' => 123456,
             'is_active' => true,
@@ -121,7 +121,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $userBigBoss1 = User::create([
-            'name' => 'Big Boss2',
+            'name' => 'BigBoss2',
             'email' => 'bigboss2@gmail.com',
             'password' => 123456,
             'is_active' => true,
@@ -194,13 +194,9 @@ class DatabaseSeeder extends Seeder
         $user->save();
         $userBoss->department()->associate($department);
         $userBoss->save();
-        $userBigBoss->department()->associate($department);
-        $userBigBoss->save();
         $user1->department()->associate($department1);
         $user1->save();
         $userBoss1->department()->associate($department1);
         $userBoss1->save();
-        $userBigBoss1->department()->associate($department1);
-        $userBigBoss1->save();
     }
 }
