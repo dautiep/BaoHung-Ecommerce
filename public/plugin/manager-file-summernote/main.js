@@ -1,8 +1,9 @@
 $(document).ready(function () {
 
+    const _prefix = '/admin/filemanager';
     // Define function to open filemanager window
     var lfm = function (options, cb) {
-        var route_prefix = (options && options.prefix) ? options.prefix : '/laravel-filemanager';
+        var route_prefix = (options && options.prefix) ? options.prefix :_prefix;
         window.open(route_prefix + '?type=' + options.type || 'file', 'FileManager', 'width=900,height=600');
         window.SetUrl = cb;
     };
@@ -15,7 +16,7 @@ $(document).ready(function () {
             tooltip: 'Insert image with filemanager',
             click: function () {
 
-                lfm({ type: 'image', prefix: '/laravel-filemanager' }, function (lfmItems, path) {
+                lfm({ type: 'image', prefix:_prefix }, function (lfmItems, path) {
                     lfmItems.forEach(function (lfmItem) {
                         context.invoke('insertImage', lfmItem.url);
                     });
@@ -30,7 +31,7 @@ $(document).ready(function () {
         let button = document.getElementById(id);
 
         button.addEventListener('click', function () {
-            var route_prefix = (options && options.prefix) ? options.prefix : '/laravel-filemanager';
+            var route_prefix = (options && options.prefix) ? options.prefix :_prefix;
             var target_input = document.getElementById(button.getAttribute('data-input'));
             var target_preview = document.getElementById(button.getAttribute('data-preview'));
 
@@ -60,7 +61,7 @@ $(document).ready(function () {
             };
         });
     };
-    callOpenFile('lfm', 'file', { prefix: '/laravel-filemanager' })
+    callOpenFile('fileManager', 'file', { prefix:_prefix, type: 'file' })
 
     $('.summernote').summernote({
         toolbar: [
