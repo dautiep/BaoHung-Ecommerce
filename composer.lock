@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0b98148a55664e7f237e1dd249ef8560",
+    "content-hash": "20abb4aa432e878ac16caef84b519009",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4442,6 +4442,45 @@
                 "dump"
             ],
             "time": "2022-10-07T08:01:20+00:00"
+        },
+        {
+            "name": "taylorpmt/short-code",
+            "version": "v0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TaylorPMT/laravel-short-code.git",
+                "reference": "ac61073202cca5dbff4b3ba3c6dfeaad9f9fcd10"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TaylorPMT/laravel-short-code/zipball/ac61073202cca5dbff4b3ba3c6dfeaad9f9fcd10",
+                "reference": "ac61073202cca5dbff4b3ba3c6dfeaad9f9fcd10",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "5.6.x|5.7.x|5.8.x|^6.0|^7.0|^8.0|^9.0",
+                "illuminate/support": "5.6.x|5.7.x|5.8.x|^6.0|^7.0|^8.0|^9.0",
+                "illuminate/view": "5.6.x|5.7.x|5.8.x|^6.0|^7.0|^8.0|^9.0",
+                "php": "^7.2|^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Taylorpmt\\ShortCode\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "TaylorPMT",
+                    "email": "thien.phamminhstu@gmail.com"
+                }
+            ],
+            "description": "Laravel support",
+            "time": "2022-04-06T14:02:42+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",

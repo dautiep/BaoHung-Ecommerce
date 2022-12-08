@@ -3,7 +3,7 @@ $(document).ready(function () {
     const _prefix = '/admin/filemanager';
     // Define function to open filemanager window
     var lfm = function (options, cb) {
-        var route_prefix = (options && options.prefix) ? options.prefix :_prefix;
+        var route_prefix = (options && options.prefix) ? options.prefix : _prefix;
         window.open(route_prefix + '?type=' + options.type || 'file', 'FileManager', 'width=900,height=600');
         window.SetUrl = cb;
     };
@@ -16,7 +16,7 @@ $(document).ready(function () {
             tooltip: 'Insert image with filemanager',
             click: function () {
 
-                lfm({ type: 'image', prefix:_prefix }, function (lfmItems, path) {
+                lfm({ type: 'image', prefix: _prefix }, function (lfmItems, path) {
                     lfmItems.forEach(function (lfmItem) {
                         context.invoke('insertImage', lfmItem.url);
                     });
@@ -26,15 +26,28 @@ $(document).ready(function () {
         });
         return button.render();
     };
+    var downFileButton = function (context) {
+        var ui = $.summernote.ui;
+        var button = ui.button({
+            contents: '<i class="fa fa-child"/> Button',
+            tooltip: 'Button',
+            click: function () {
+                // invoke insertText method with 'hello' on editor module.
+                context.invoke('editor.insertText', '[button-download]');
+            }
+        });
+
+        return button.render();   // return button as jquery object
+    }
 
     var callOpenFile = function (id, type, options) {
         let button = document.getElementById(id);
 
         button.addEventListener('click', function () {
-            var route_prefix = (options && options.prefix) ? options.prefix :_prefix;
+            var route_prefix = (options && options.prefix) ? options.prefix : _prefix;
             var target_input = document.getElementById(button.getAttribute('data-input'));
             var target_preview = document.getElementById(button.getAttribute('data-preview'));
-
+            var target_file = button.getAttribute('data-file');
             window.open(route_prefix + '?type=' + options.type || 'file', 'FileManager', 'width=900,height=600');
             window.SetUrl = function (items) {
                 var file_path = items.map(function (item) {
@@ -50,19 +63,24 @@ $(document).ready(function () {
 
                 // set or change the preview image src
                 items.forEach(function (item) {
-                    let img = document.createElement('img')
-                    img.setAttribute('style', 'height: 5rem')
-                    img.setAttribute('src', item.thumb_url)
-                    target_preview.appendChild(img);
+                    // target_preview.setAttribute('src', item.url);
+                    let checkFileUrl = checkURL(item.url);
+                    if (checkFileUrl) {
+                        target_preview.setAttribute('src', item.url);
+                    } else {
+                        target_preview.setAttribute('src', target_file);
+                    }
+                    target_preview.classList.add('d-block');
                 });
 
                 // trigger change event
-                target_preview.dispatchEvent(new Event('change'));
             };
         });
     };
-    callOpenFile('fileManager', 'file', { prefix:_prefix, type: 'file' })
-
+    callOpenFile('fileManager', 'file', { prefix: _prefix, type: 'file' })
+    function checkURL(url) {
+        return (url.match(/\.(jpeg|jpg|gif|png)$/) != null);
+    }
     $('.summernote').summernote({
         toolbar: [
             ['style', ['style']],
@@ -73,13 +91,14 @@ $(document).ready(function () {
             ['para', ['ul', 'ol', 'paragraph']],
             ['height', ['height']],
             ['table', ['table']],
-            ['insert', ['link', 'lfm', 'hr']],
+            ['insert', ['link', 'lfm', 'hr', 'fileDownload']],
             ['view', ['fullscreen', 'codeview']],
             ['help', ['help']]
             ['popovers', ['lfm']],
         ],
         buttons: {
-            lfm: LFMButton
+            lfm: LFMButton,
+            fileDownload: downFileButton
         },
         popover: {
             image: [

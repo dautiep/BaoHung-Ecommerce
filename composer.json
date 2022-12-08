@@ -15,6 +15,7 @@
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
         "laravelcollective/html": "^6.3",
+        "taylorpmt/short-code": "^0.0.1",
         "unisharp/laravel-filemanager": "^2.5"
     },
     "require-dev": {

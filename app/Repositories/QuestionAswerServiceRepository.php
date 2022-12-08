@@ -45,7 +45,7 @@ class QuestionAswerServiceRepository extends BaseRepository implements QuestionA
         }
 
         //check permission
-        $result = $result->where(function($query){
+        $result = $result->where(function ($query) {
             if (!Auth::user()->is_admin) {
                 if (is_can(['questions.listStaff'])) {
                     $query->staffRole('user_id', Auth::user()->id);
@@ -79,15 +79,16 @@ class QuestionAswerServiceRepository extends BaseRepository implements QuestionA
                     'question_content' => $request['questionName'],
                     'type_of_service_id' => $request['questionService'],
                     'consulting_content' => $request['questionAnswer'],
-                    'user_id' => Auth::user()->id
+                    'user_id' => Auth::user()->id,
+                    'attach_files' => @$request['attach_files'],
                 ]
             );
         }
         return $this->update([
             'question_content' => $request['questionName'],
             'type_of_service_id' => $request['questionService'],
-            'consulting_content' => $request['questionAnswer']
-
+            'consulting_content' => $request['questionAnswer'],
+            'attach_files' => @$request['attach_files']
         ], $id);
     }
 
@@ -105,10 +106,15 @@ class QuestionAswerServiceRepository extends BaseRepository implements QuestionA
     }
 
     public function getQuestionAswerWithService($id)
-    {   $status = config('global.default.status.question');
+    {
+        $status = config('global.default.status.question');
         return $this->_model->where('status', $status[1]['key'])->with(['typeOfServices' => function ($q) {
             $status = config('global.default.status.type_of_services');
             $q->where('status', $status);
         }])->where('id', $id)->first();
+    }
+
+    public function getQuestionBotAppendDownload($builder) {
+        return @$builder->content;
     }
 }
