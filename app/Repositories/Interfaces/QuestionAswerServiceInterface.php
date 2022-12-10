@@ -39,4 +39,5 @@ interface QuestionAswerServiceInterface extends BaseRepositoryInterface
     public function changeStatus(array $request);
 
     public function getQuestionAswerWithService($id);
+    public function getQuestionBotAppendDownload($builder);
 }

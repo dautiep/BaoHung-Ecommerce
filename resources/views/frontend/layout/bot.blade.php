@@ -1,5 +1,5 @@
  <section class="boxchat">
-     <div class="container">
+     <div class="container p-x__0">
          <div class="wrapper">
              <div class="boxchat-head container">
                  <a href="">

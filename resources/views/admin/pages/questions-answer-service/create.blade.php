@@ -175,14 +175,17 @@
                                                     <div class="input-group">
                                                         <span class="input-group-btn">
                                                             <a id="fileManager" data-input="thumbnail"
+                                                                data-file="{{ asset('admin/images/file.png') }}"
                                                                 data-preview="holder" class="btn btn-primary">
                                                                 <i class="fa fa-picture-o"></i> Choose
                                                             </a>
                                                         </span>
                                                         <input id="thumbnail" class="form-control" type="text"
-                                                            name="filepath">
+                                                            name="attach_files"
+                                                            value="{{ old('attach_files', @$question->attach_files) }}">
                                                     </div>
-                                                    <img id="holder" style="margin-top:15px;max-height:100px;">
+                                                    <img id="holder" style="margin-top:15px;max-height:100px;"
+                                                        class="img-thumbnail d-none">
                                                 </div>
                                             </div>
                                         </div>

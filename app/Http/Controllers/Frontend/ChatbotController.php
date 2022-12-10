@@ -69,7 +69,8 @@ class ChatbotController extends Controller
                 return view($this->_bot . 'bot', compact('data', 'message', 'next'))->render();
             case 'callBotAswer';
                 $question = $this->_questionAswerServiceInterface->getQuestionAswerWithService($request->id);
-                $message = $question->consulting_content;
+
+                $message = $this->_questionAswerServiceInterface->getQuestionBotAppendDownload($question);
                 return view($this->_bot . 'bot', compact('message'))->render();
             default:
         }

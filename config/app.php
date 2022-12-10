@@ -167,6 +167,8 @@ return [
          */
         UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Taylorpmt\ShortCode\Providers\ShortcodesServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -228,6 +230,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Shortcode' => Taylorpmt\ShortCode\Facades\Shortcode::class,
 
     ],
 

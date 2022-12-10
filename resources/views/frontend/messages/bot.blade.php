@@ -11,7 +11,7 @@
               {{-- src="{{ asset('chatbot/img/30.png') }}" --}}
               @foreach (@$data as $item)
                   <li><a href="javascript:void(0)" class="get_service" data-service="{{ $item->id }}"
-                          data-next="{{ @$next }}"> <span> <img></span><span>{{ $item->name }}</span></a>
+                          data-next="{{ @$next }}"> <span> <img></span><span class="span-get_service">{{ $item->name }}</span></a>
                   </li>
               @endforeach
           @endif
