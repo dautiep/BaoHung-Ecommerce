@@ -13,7 +13,8 @@ class OtherFaqController extends Controller
     private $_otherFaqRespositoryInterface;
     private $_userRespositoryInterface;
     private $_prefix = 'admin.pages.other-faqs.';
-    public function __construct(OtherFagRepositoryInterface $otherFagRepositoryInterface, UserRepositoryInterface $userRepositoryInterface)
+    public function __construct(OtherFagRepositoryInterface $otherFagRepositoryInterface,
+                                UserRepositoryInterface $userRepositoryInterface)
     {
         $this->_otherFaqRespositoryInterface = $otherFagRepositoryInterface;
         $this->_userRespositoryInterface = $userRepositoryInterface;
@@ -34,12 +35,16 @@ class OtherFaqController extends Controller
 
     public function edit($id)
     {
+        $users_assign = [];
         $data = $this->_otherFaqRespositoryInterface->find($id);
-        $users_assign = $this->_userRespositoryInterface->getListUserByFaqAssginment();
+        $department_assign = $this->_otherFaqRespositoryInterface->getAllDepartment();
+        if (!empty($data->department_id_responsibility)) {
+            $users_assign = $this->_userRespositoryInterface->getListUserByFaqAssginment($data->department_id_responsibility);
+        }
         if (!$data) {
             return redirect()->route('other_faqs.list')->with($this->getMessages(config('global.default.messages.orther_faqs.not_found'), $this::$TYPE_MESSAGES_ERROR));
         }
-        return view($this->_prefix . 'edit', compact('data', 'users_assign'));
+        return view($this->_prefix . 'edit', compact('data', 'users_assign', 'department_assign'));
     }
 
     public function postContentToConsult(OtherFaqRequest $request, $id)

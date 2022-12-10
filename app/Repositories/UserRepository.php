@@ -88,13 +88,14 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return $this->_model->where('department_id', $departmentId)->pluck('id')->toArray();
     }
 
-    public function getListUserByFaqAssginment()
+    public function getListUserByFaqAssginment($partmentId)
     {
 
-        $builder = $this->_model->select('id', 'name')->where(function ($query) {
-            if (is_can(['faq.listStaff'])) {
+        $builder = $this->_model->select('id', 'name')->where(function ($query) use($partmentId) {
+            if (is_can(['faq.assignUser'])) {
                 $user_id = app(GroupRepository::class)->getGroupRoleKey('faq.listStaff');
                 $query->whereIn('id', $user_id);
+                $query->where('department_id', $partmentId);
             }
         })->get()->map(function($item,$value) {
             return [

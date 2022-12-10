@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFieldDepartmentIdResponsibilityToQuestionAswerService extends Migration
+class AddFieldDepartmentIdResponsibilityToOtherFaqs extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddFieldDepartmentIdResponsibilityToQuestionAswerService extends Migration
      */
     public function up()
     {
-        Schema::table('question_aswer_service', function (Blueprint $table) {
+        Schema::table('other_faqs', function (Blueprint $table) {
             $table->unsignedBigInteger('department_id_responsibility')->nullable();
         });
     }
@@ -25,7 +25,7 @@ class AddFieldDepartmentIdResponsibilityToQuestionAswerService extends Migration
      */
     public function down()
     {
-        Schema::table('question_aswer_service', function (Blueprint $table) {
+        Schema::table('other_faqs', function (Blueprint $table) {
             $table->dropColumn('department_id_responsibility');
         });
     }
