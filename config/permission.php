@@ -146,6 +146,12 @@ return [
                         ]
                     ],
                     [
+                        'slug' => 'faq.assignUser',
+                        'key' => 'faq.assignUser',
+                        'name' => "Chuyển câu hỏi cho người phụ trách",
+                        'children' => []
+                    ],
+                    [
                         'slug' => 'faq.edit',
                         'key' => 'faq.edit',
                         'name' => "Chỉnh sửa",

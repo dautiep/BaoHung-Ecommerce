@@ -87,6 +87,24 @@
                                         <div class="row mt-4">
                                             <div class="col-md-12">
                                                 <x-input-control :input="'select2'" :control="[
+                                                    'for' => 'assigned_partment_id',
+                                                    'label' => 'Phòng phụ trách',
+                                                    'name' => 'assigned_partment_id',
+                                                    'value' => @$data->department_id_responsibility,
+                                                    'selected' => @$department_assign,
+                                                    'first' => true,
+                                                    'first_value' => '',
+                                                    'first_name' => 'Chọn phòng ban',
+                                                    'id' => 'status',
+                                                ]" />
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    @if (!is_admin() && is_can(['faq.assignUser']) && !empty($data->department_id_responsibility))
+                                        <div class="row mt-4">
+                                            <div class="col-md-12">
+                                                <x-input-control :input="'select2'" :control="[
                                                     'for' => 'assigned_user_id',
                                                     'label' => 'Người phụ trách',
                                                     'name' => 'assigned_user_id',
@@ -100,6 +118,8 @@
                                             </div>
                                         </div>
                                     @endif
+
+
                                     @php
                                         $config_status = collect(config('global.default.status.orther_faqs'))->values();
                                         $keyBy = $config_status->keyBy('key');

@@ -11,5 +11,5 @@ interface UserRepositoryInterface extends BaseRepositoryInterface
     public function handleDelete($request);
     public function handleUpdateState($request);
     public function getListIdByDepartmentId($departmentId);
-    public function getListUserByFaqAssginment();
+    public function getListUserByFaqAssginment($partmentId);
 }

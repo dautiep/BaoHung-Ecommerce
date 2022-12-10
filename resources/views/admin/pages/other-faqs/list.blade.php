@@ -87,7 +87,7 @@
                                             <th class="bg-info" style="width: 10px">#</th>
                                             <th class="text-center bg-info" style="width: 30%">Câu hỏi</th>
                                             <th class="text-center bg-info">Thông tin</th>
-                                            <th class="text-center bg-info">Người phụ trách</th>
+                                            <th class="text-center bg-info">Thông tin phụ trách</th>
                                             <th class="text-center bg-info">Trạng thái</th>
                                             <th class="text-center bg-info">Ngày Tạo</th>
                                             <th class="text-center bg-info">Hành Động</th>
@@ -112,7 +112,8 @@
                                                     Email : {{ $item->email }} </br>
                                                     Phone : {{ $item->phone }}
                                                 </td>
-                                                <td class="align-middle text-center">
+                                                <td class="align-middle text-left">
+                                                    {{ @$item->departments->name ?? ''}} <br>
                                                     {{ @$item->users->name ?? '' }}
                                                 </td>
                                                 <td class="align-middle text-center">

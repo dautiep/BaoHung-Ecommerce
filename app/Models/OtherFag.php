@@ -22,11 +22,17 @@ class OtherFag extends Model
         'email',
         'phone',
         'type_of_service_id',
+        'department_id_responsibility',
         'user_id'
     ];
 
     public function users()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function departments()
+    {
+        return $this->belongsTo(Department::class, 'department_id_responsibility', 'id');
     }
 }
