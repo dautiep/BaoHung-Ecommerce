@@ -3,6 +3,7 @@
 namespace App\ShortCode;
 
 use App\Repositories\QuestionAswerServiceRepository;
+use Exception;
 
 class DownloadButtonShortCode
 {
@@ -19,7 +20,7 @@ class DownloadButtonShortCode
             $attach_files =  $builder->attach_files;
         }
         if (!empty($attach_files)) {
-            $html = '<a class="btn btn-sm btn-info text-left" style="justify-content: flex-end" ' . "href='$attach_files'" . 'download> Tên file</a>';
+            $html = '<a class="btn btn-sm btn-info text-left" style="justify-content: flex-end" ' . "href='$attach_files'" . 'download>' . $this->getPathFile($attach_files) . '</a>';
         }
         return $html;
     }
@@ -27,5 +28,15 @@ class DownloadButtonShortCode
     public function getAttachFiles($id)
     {
         return app(QuestionAswerServiceRepository::class)->find($id);
+    }
+
+    public function getPathFile($attach_files)
+    {
+        try {
+            $fileInfo = pathinfo($attach_files);
+            return $fileInfo['basename'];
+        } catch (Exception $e) {
+            return 'Tải về';
+        }
     }
 }

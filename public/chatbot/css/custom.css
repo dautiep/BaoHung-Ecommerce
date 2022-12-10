@@ -1,0 +1,27 @@
+.p-x__0 {
+  padding-left: 0;
+  padding-right: 0;
+}
+.homepage::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url('../img/bg.jpg');
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+  z-index: -1;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: contain;
+}
+.get_service {
+  background-color: #00524e;
+}
+.span-get_service {
+  color: #fff;
+  text-align: center;
+}

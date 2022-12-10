@@ -29,7 +29,7 @@ $(document).ready(function () {
     var downFileButton = function (context) {
         var ui = $.summernote.ui;
         var button = ui.button({
-            contents: '<i class="fa fa-child"/> Button',
+            contents: '<i class="fa fa-download"/> File Download',
             tooltip: 'Button',
             click: function () {
                 // invoke insertText method with 'hello' on editor module.
@@ -91,10 +91,11 @@ $(document).ready(function () {
             ['para', ['ul', 'ol', 'paragraph']],
             ['height', ['height']],
             ['table', ['table']],
-            ['insert', ['link', 'lfm', 'hr', 'fileDownload']],
             ['view', ['fullscreen', 'codeview']],
             ['help', ['help']]
             ['popovers', ['lfm']],
+            ['insert', ['link', 'lfm', 'hr', 'fileDownload']],
+
         ],
         buttons: {
             lfm: LFMButton,
