@@ -32,7 +32,7 @@ class DownloadButtonShortCode
         if (@$attributes['attach_files'] && is_json(@$attributes['attach_files'])) {
             collect(json_decode(@$attributes['attach_files']))->map(function ($item) use (&$btn_download) {
                 $btn_download = $btn_download .
-                    '<a class="btn btn-sm btn-info text-right" style="justify-content: flex-start"  href=' . $this->getFileUrl($item) . '" download>' . @$item->name . '</a>';
+                    '<a class="btn btn-sm btn-info text-right" style="justify-content: flex-start"  href=' . $this->getFileUrl($item) . ' download>' . @$item->name . '</a>';
             });
         }
         return $html_answer . $btn_download;
