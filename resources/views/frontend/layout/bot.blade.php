@@ -6,14 +6,7 @@
                      <em class="ri-arrow-left-line"></em>
                      <span>Quay lại trang chủ</span>
                  </a>
-                 <a href="{{ route('dashboard') }}"
-                     style="display: inline-block;
-                        position: absolute;
-                        margin:0;
-                        left: 10px;
-                        padding:10px;
-                        width:40px;
-                    ">
+                 <a class="btn-admin" href="{{ route('dashboard') }}" >
                      <i class="ri-home-8-line"></i>
                  </a>
              </div>

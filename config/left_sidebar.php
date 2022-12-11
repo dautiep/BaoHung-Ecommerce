@@ -63,7 +63,7 @@ return [
         'icon' => 'nav-icon fas fa-address-book',
         'active' => true,
         'hasActivePage' => [
-            'list-blog-categories', 'question.list', 'other_faqs.edit'
+            'list-blog-categories', 'question.list', 'other_faqs.list'
         ],
         'position' => 0,
         'authorize' => [],

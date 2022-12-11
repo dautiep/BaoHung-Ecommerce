@@ -1,4 +1,4 @@
-@extends('admin.layouts.app', ['activePage' => 'groups.create'])
+@extends('admin.layouts.app', ['activePage' => 'groups.list'])
 
 @section('content')
     <div class="content">

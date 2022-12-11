@@ -1,4 +1,4 @@
-@extends('admin.layouts.app', ['activePage' => 'users.create'])
+@extends('admin.layouts.app', ['activePage' => 'users.list'])
 
 @section('content')
     <div class="content">
@@ -45,7 +45,7 @@
                                                 <label class="text-capitalize">Tên Tài khoản <sup
                                                         class="text-danger">*</sup></label>
                                                 <input type="text" name="name" value="{{ old('name', @$data->name) }}"
-                                                    class="form-control" placeholder="Tên Tài khoản">
+                                                    class="form-control" placeholder="Tên Tài khoản" autocomplete="off">
                                             </div>
                                         </div>
                                     </div>
@@ -56,7 +56,7 @@
                                                         class="text-danger">*</sup></label>
                                                 <input type="text" name="email"
                                                     value="{{ old('email', @$data->email) }}" class="form-control"
-                                                    placeholder="Email Tài khoản">
+                                                    placeholder="Email Tài khoản" autocomplete="off">
                                             </div>
                                         </div>
                                     </div>
@@ -108,9 +108,9 @@
                                                 'value' => @$data->department_id,
                                                 'selected' => @$department,
                                                 'required' => true,
-                                                'first' => false,
+                                                'first' => true,
                                                 'first_value' => '',
-                                                'first_name' => 'Tất cả',
+                                                'first_name' => 'Chọn phòng ban',
                                                 'id' => 'department_id',
                                             ]" />
                                         </div>
@@ -167,6 +167,8 @@
             role = role.trim();
             if (role == 'Lãnh đạo chi nhánh') {
                 $('#department').css('display', 'none');
+            } else {
+                $('#department').css('display', 'block');
             }
         });
     </script>

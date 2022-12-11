@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     const _prefix = '/admin/filemanager';
     // Define function to open filemanager window
     var lfm = function (options, cb) {
@@ -40,14 +39,13 @@ $(document).ready(function () {
         return button.render();   // return button as jquery object
     }
 
-    var callOpenFile = function (id, type, options) {
-        let button = document.getElementById(id);
-
-        button.addEventListener('click', function () {
+    var callOpenFile = function (options) {
+        var button = $("#fileManager");
+        $("#fileManager").click(function() {
             var route_prefix = (options && options.prefix) ? options.prefix : _prefix;
-            var target_input = document.getElementById(button.getAttribute('data-input'));
-            var target_preview = document.getElementById(button.getAttribute('data-preview'));
-            var target_file = button.getAttribute('data-file');
+            var target_input = document.getElementById(button.data('input'));
+            var target_preview = document.getElementById(button.data('preview'));
+            var target_file = button.data('file');
             window.open(route_prefix + '?type=' + options.type || 'file', 'FileManager', 'width=900,height=600');
             window.SetUrl = function (items) {
                 var file_path = items.map(function (item) {
@@ -77,7 +75,7 @@ $(document).ready(function () {
             };
         });
     };
-    callOpenFile('fileManager', 'file', { prefix: _prefix, type: 'file' })
+    callOpenFile({ prefix: _prefix, type: 'file' })
     function checkURL(url) {
         return (url.match(/\.(jpeg|jpg|gif|png)$/) != null);
     }

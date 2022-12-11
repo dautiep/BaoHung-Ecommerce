@@ -46,7 +46,11 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function handleCreateOrUpdate($id, $request)
     {
-        $fillable = $request->only('name', 'email', 'password', 'is_active', 'department_id');
+        if ($request->get('groups')[0] == '3') {
+            $fillable = $request->only('name', 'email', 'password', 'is_active');
+        } else {
+            $fillable = $request->only('name', 'email', 'password', 'is_active', 'department_id');
+        }
         if ($id == null) {
             $builder = $this->create($fillable);
         } else {

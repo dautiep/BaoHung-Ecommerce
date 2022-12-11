@@ -1,4 +1,4 @@
-@extends('admin.layouts.app', ['activePage' => 'users.create'])
+@extends('admin.layouts.app', ['activePage' => 'roles.list'])
 @section('scripts')
     <link rel="stylesheet" type="text/css" href="{{ asset('plugin/jquery-easyui-1.10.8/themes/default/easyui.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('plugin/jquery-easyui-1.10.8/themes/icon.css') }}">

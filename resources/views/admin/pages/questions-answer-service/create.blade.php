@@ -1,4 +1,4 @@
-@extends('admin.layouts.app', ['activePage' => 'questions.list'])
+@extends('admin.layouts.app', ['activePage' => 'question.list'])
 
 @section('content')
     <div class="content">
@@ -90,6 +90,26 @@
                                                                 style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('questionAnswer') }}</textarea>
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-btn">
+                                                            <a id="fileManager" data-input="thumbnail"
+                                                                data-file="{{ asset('admin/images/file.png') }}"
+                                                                data-preview="holder" class="btn btn-primary">
+                                                                <i class="fa fa-picture-o"></i> Chọn file
+                                                            </a>
+                                                        </span>
+                                                        <input id="thumbnail" class="form-control" type="text"
+                                                            name="attach_files"
+                                                            value="{{ old('attach_files', @$question->attach_files) }}">
+                                                    </div>
+                                                    <img id="holder" style="margin-top:15px;max-height:100px;"
+                                                        class="img-thumbnail d-none">
                                                 </div>
                                             </div>
                                         </div>
