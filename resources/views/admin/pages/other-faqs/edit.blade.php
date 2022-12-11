@@ -1,4 +1,4 @@
-@extends('admin.layouts.app', ['activePage' => 'other_faqs.edit'])
+@extends('admin.layouts.app', ['activePage' => 'other_faqs.list'])
 
 @section('content')
     <div class="content">

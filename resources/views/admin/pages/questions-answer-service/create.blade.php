@@ -1,4 +1,4 @@
-@extends('admin.layouts.app', ['activePage' => 'questions.list'])
+@extends('admin.layouts.app', ['activePage' => 'question.list'])
 @section('styles')
     <link rel="stylesheet" href="{{ asset('admin/css/custom.css') }}">
 @endsection
