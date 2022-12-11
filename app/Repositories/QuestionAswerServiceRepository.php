@@ -80,7 +80,7 @@ class QuestionAswerServiceRepository extends BaseRepository implements QuestionA
                     'type_of_service_id' => $request['questionService'],
                     'consulting_content' => $request['questionAnswer'],
                     'user_id' => Auth::user()->id,
-                    'attach_files' => @$request['attach_files'],
+                    'attach_files' => request()->file('file'),
                 ]
             );
         }
@@ -88,10 +88,9 @@ class QuestionAswerServiceRepository extends BaseRepository implements QuestionA
             'question_content' => $request['questionName'],
             'type_of_service_id' => $request['questionService'],
             'consulting_content' => $request['questionAnswer'],
-            'attach_files' => @$request['attach_files']
+            'attach_files' => request()->file('file')
         ], $id);
     }
-
 
     public function changeStatus($input)
     {

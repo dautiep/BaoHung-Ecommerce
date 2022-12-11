@@ -1,5 +1,7 @@
 @extends('admin.layouts.app', ['activePage' => 'questions.list'])
-
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('admin/css/custom.css') }}">
+@endsection
 @section('content')
     <div class="content">
         <section class="content-header">
@@ -93,6 +95,33 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row mt-3">
+                                            <div class="col-md-12">
+                                                <p class="mt-5 text-center">
+                                                    <label for="attachment">
+                                                        <a class="btn btn-primary text-light" role="button"
+                                                            aria-disabled="false">+ Chọn file</a>
+
+                                                    </label>
+                                                    <input type="file" name="file[]"
+                                                        accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain, application/pdf, application/*"
+                                                        id="attachment" style="visibility: hidden; position: absolute;"
+                                                        multiple />
+
+                                                </p>
+                                                <p id="files-area">
+                                                    <span id="filesList">
+                                                        <span id="files-names">
+
+                                                        </span>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                            <div class="col-md-12 text-center">
+                                                <img id="holder" style="margin-top:15px;max-height:100px;"
+                                                    class="img-thumbnail d-none" src="{{ asset('admin/images/file.png') }}">
+                                            </div>
+                                        </div>
                                         <div class="row mt-2">
                                             <div class="col-md-12">
                                                 <span><i>Lưu ý: Các trường có dấu <sup class="text-danger">*</sup> là các
@@ -171,22 +200,53 @@
                                         </div>
                                         <div class="row mt-3">
                                             <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <span class="input-group-btn">
-                                                            <a id="fileManager" data-input="thumbnail"
-                                                                data-file="{{ asset('admin/images/file.png') }}"
-                                                                data-preview="holder" class="btn btn-primary">
-                                                                <i class="fa fa-picture-o"></i> Choose
-                                                            </a>
+
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-md-12">
+                                                <p class="mt-5 text-center">
+                                                    <label for="attachment">
+                                                        <a class="btn btn-primary text-light" role="button"
+                                                            aria-disabled="false">+ Chọn file</a>
+
+                                                    </label>
+
+                                                    <input type="file" name="file[]"
+                                                        accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain, application/pdf, application/*"
+                                                        id="attachment" style="visibility: hidden; position: absolute;"
+                                                        multiple />
+
+                                                </p>
+                                                <p id="files-area">
+                                                    <span id="filesList">
+                                                        <span id="files-names">
+                                                            @if (!empty(@$question->attach_files) && is_json(@$question->attach_files))
+                                                                @foreach (json_decode(@$question->attach_files) as $item)
+                                                                    <span class="file-block"
+                                                                        data-url="{{ $item->url }}"><span
+                                                                            class="file-delete"><span>+</span></span><span
+                                                                            class="name">{{ $item->name }}</span></span>
+                                                                @endforeach
+                                                            @endif
                                                         </span>
-                                                        <input id="thumbnail" class="form-control" type="text"
-                                                            name="attach_files"
-                                                            value="{{ old('attach_files', @$question->attach_files) }}">
-                                                    </div>
-                                                    <img id="holder" style="margin-top:15px;max-height:100px;"
-                                                        class="img-thumbnail d-none">
-                                                </div>
+                                                    </span>
+                                                    <x-input-control :input="'input'" :control="[
+                                                        'for' => 'name',
+                                                        'label' => '',
+                                                        'type' => 'hidden',
+                                                        'class' => 'd-none',
+                                                        'id' => 'deleteInput',
+                                                        'required' => false,
+                                                        'name' => 'file_delete',
+                                                        'value' => '[]',
+                                                    ]" />
+                                                </p>
+                                            </div>
+                                            <div class="col-md-12 text-center">
+                                                <img id="holder" style="margin-top:15px;max-height:100px;"
+                                                    class="img-thumbnail d-none"
+                                                    src="{{ asset('admin/images/file.png') }}">
                                             </div>
                                         </div>
                                         <div class="row mt-2">
@@ -213,7 +273,8 @@
 @section('scripts')
     <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
 
-    <script src="{{ asset('plugin/manager-file-summernote/main.js') }}"></script>
+    <script id="file_manager" data-route="{{ route('file_manager.file_upload') }}"
+        src="{{ asset('plugin/manager-file-summernote/main.js') }}" type="text/javascript"></script>
     <script>
         //select 2
         $('.select2').select2()
