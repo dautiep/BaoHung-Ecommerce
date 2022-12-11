@@ -16,7 +16,9 @@
         <div class="form-group">
             <label for="{{ @$control['for'] }}">{{ @$control['label'] }} {!! @$required !!}</label>
             <input type="{{ @$control['type'] }}" class="form-control {{ @$control['class'] }}" name="{{ @$control['name'] }}"
-                value="{{ @$control['value'] }}" {{ @$control['property'] }} placeholder="{{ @$control['placeholder'] }}">
+                id="{{ @$control['id'] }}" value="{{ @$control['value'] }}" {{ @$control['property'] }}
+                accept="{{ @$control['accept'] }}"
+                placeholder="{{ @$control['placeholder'] }}">
         </div>
     @break
 
