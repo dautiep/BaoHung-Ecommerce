@@ -56,4 +56,16 @@ class DepartmentRepository extends BaseRepository implements DepartmentRepositor
             ];
         });
     }
+
+    public function handleUpdateState($request)
+    {
+
+        $builder = $this->_model->find($request->get('itemId'),);
+        if (!$builder) {
+            return false;
+        }
+        return $builder->update([
+            'status' => !$builder->status
+        ]);
+    }
 }

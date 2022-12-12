@@ -95,6 +95,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
         Route::get('/create', 'DepartmentController@create')->name('create');
         Route::get('/edit/{id}', 'DepartmentController@edit')->name('edit');
         Route::post('/store/{id?}', 'DepartmentController@store')->name('store');
+        Route::post('state', 'DepartmentController@state')->name('state');
+
     });
     Route::group(['prefix' => 'file_upload', 'as' => 'file_manager.'], function () {
         Route::post('upload', 'FileManagerController@fileUpload')->name('file_upload');

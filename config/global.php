@@ -132,6 +132,12 @@ return [
                 'not_required_answer' => 'Vui lòng điền câu trả lời',
                 'delete' => 'Đã xóa thành công',
                 'not_assgiment_answer' => 'Vui lòng chọn người phụ trách',
+            ],
+            'department' => [
+                'create' => 'Tạo phòng ban thành công',
+                'edit' => 'Cập nhật phòng ban thành công',
+                'delete'   => 'Xóa phòng ban thành công',
+                'edit_status' => 'Chỉnh sửa trạng thái phòng ban thành công',
             ]
         ]
     ]

@@ -44,4 +44,14 @@ class DepartmentController extends Controller
         $data = $this->_departmentRepositoryInterface->find((string)$id);
         return view($this->_prefix . 'create', compact('title', 'data'));
     }
+
+    public function state(Request $request)
+    {
+        $messages = config('global.default.messages.errors.update');
+        $data = $this->_departmentRepositoryInterface->handleUpdateState($request);
+        if (!$data) {
+            return response()->json($this->responseAjax($messages, $this::$TYPE_MESSAGES_SUCCESS));
+        }
+        return response()->json($this->responseAjax(config('global.default.messages.department.edit_status'), $this::$TYPE_MESSAGES_SUCCESS));
+    }
 }

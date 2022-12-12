@@ -131,7 +131,7 @@
                                                         </a>
                                                     @endif
                                                     @php
-                                                        $lablel = $item->status == $config_active ? 'Khóa ' : 'Mở khóa ';
+                                                        $lablel = $item->status == $config_active ? 'Khóa phòng ban' : 'Mở khóa phòng ban ';
                                                     @endphp
                                                     <button role="button" class="btn btn-sm btn-warning"
                                                         onclick="cancelCategory('{{ $item->id }}', '{{ $lablel }}')"
@@ -193,7 +193,7 @@
                 if (result.value) {
                     $('.loader').show();
                     $.ajax({
-                        url: "{{ route('groups.state') }}",
+                        url: "{{ route('department.state') }}",
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },

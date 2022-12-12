@@ -90,7 +90,7 @@
                                                     <option value="">Tất cả</option>
                                                     @foreach (@$groups as $value)
                                                         <option value="{{ @$value['id'] }}"
-                                                            {{ (string) @$value['name'] == (string) @$info['groups'] ? 'selected' : '' }}>
+                                                            {{ (string) @$value['id'] == (string) @$info['groups'] ? 'selected' : '' }}>
                                                             {{ @$value['name'] }}
                                                         </option>
                                                     @endforeach
