@@ -26,7 +26,8 @@ class User extends Authenticatable
 
     public $appends  = [
         'groups',
-        'department'
+        'department',
+        'group_role'
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -51,6 +52,16 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($value);
     }
 
+
+    public function getGroupRoleAttribute()
+    {
+        return
+            collect($this->groups->pluck('group_role_json'))->map(function ($value) {
+                if (is_json($value)) {
+                    return json_decode($value);
+                }
+            });
+    }
 
     /**
      * Relationship.

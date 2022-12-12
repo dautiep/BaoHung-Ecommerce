@@ -11,12 +11,8 @@ if (!function_exists('is_can')) {
         if (empty($roles) || auth()->user()->is_admin  == 1) {
             return true;
         }
-        $role_group =
-            collect(auth()->user()->groups->pluck('group_role_json'))->map(function ($value) {
-                if (is_json($value)) {
-                    return json_decode($value);
-                }
-            });
+        $role_group = auth()->user()->groupRole;
+
         if ($role_group->isEmpty()) {
             return false;
         }

@@ -137,7 +137,7 @@
                                                             class="fas fa-times"></i>
                                                     </button>
                                                     @if (is_can(['faq.sendmail']))
-                                                        <a href="https://mail.bidv.com.vn/owa" target="_blank" class="btn btn-sm btn-info">
+                                                        <a href="{{ config('button.btn_send_mail') }}" target="_blank" class="btn btn-sm btn-info">
                                                             <i class="fa fa-reply"></i>
                                                         </a>
                                                     @endif

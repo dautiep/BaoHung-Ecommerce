@@ -48,7 +48,7 @@ class UserStoreRequest extends FormRequest
     {
         $groups = request()->groups;
 
-        return [
+        $rules = [
             'name' => ['required', 'unique:users,name', 'max:200'],
             'email' => ['required', 'unique:users,email', 'max:200', 'email'],
             'password' => ['required', 'min:6', 'max:100'],
@@ -60,14 +60,20 @@ class UserStoreRequest extends FormRequest
                     }
                 }
             }],
-            'department_id' => ['required', 'exists:department,id']
+
         ];
+        if (!empty(request()->get('groups')) && request()->get('groups')[0] != '3') {
+            $rules = array_merge($rules, [
+                'department_id' => ['required', 'exists:department,id']
+            ]);
+        }
+        return $rules;
     }
 
     public function onValidateUpdate()
     {
         $groups = request()->groups;
-        return [
+        $rules = [
             'name' => ['required', 'unique:users,name,' . request()->id, 'max:200'],
             'email' => ['required', 'unique:users,email,' . request()->id, 'max:200', 'email'],
             'password' => ['min:6', 'max:100'],
@@ -79,7 +85,13 @@ class UserStoreRequest extends FormRequest
                     }
                 }
             }],
-            'department_id' => ['required', 'exists:department,id']
+
         ];
+        if (!empty(request()->get('groups')) && request()->get('groups')[0] != '3') {
+            $rules = array_merge($rules, [
+                'department_id' => ['required', 'exists:department,id']
+            ]);
+        }
+        return $rules;
     }
 }
