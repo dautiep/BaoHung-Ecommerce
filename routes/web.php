@@ -25,6 +25,8 @@ Route::group([
 Route::group(['prefix' => 'admin', 'namespace' => 'Auth'], function () {
     Route::resource('login', 'LoginController');
     Route::get('logout', 'LoginController@logout')->name('logout');
+    Route::any('resetPassword/{id?}', 'LoginController@resetPassword')->name('user.resetPassword');
+
     // Route::resource('reset-password', 'ResetPasswordController');
 });
 
@@ -100,6 +102,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     });
     Route::group(['prefix' => 'file_upload', 'as' => 'file_manager.'], function () {
         Route::post('upload', 'FileManagerController@fileUpload')->name('file_upload');
+    });
+
+    Route::group(['prefix' => 'config_cache', 'as' => 'config_cache.'], function(){
+        Route::get('clear/cache', 'ConfigController@artisanCache')->name('artisanCache');
     });
     Route::group(['prefix' => 'filemanager'], function () {
         \UniSharp\LaravelFilemanager\Lfm::routes();

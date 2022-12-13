@@ -47,13 +47,13 @@ class QuestionAswerServiceRepository extends BaseRepository implements QuestionA
         //check permission
         $result = $result->where(function ($query) {
             if (!Auth::user()->is_admin) {
-                if (is_can(['questions.listStaff'])) {
-                    $query->staffRole('user_id', Auth::user()->id);
+                if (is_can(['questions.list'])) {
+
                 } else if (is_can(['questions.listBoss'])) {
                     $queryIdUsers = app(UserRepository::class)->getListIdByDepartmentId(Auth::user()->department_id);
                     $query->bossRole('user_id', $queryIdUsers);
-                } else if (is_can(['questions.list'])) {
-                    $query = $query;
+                } else if (is_can(['questions.listStaff'])) {
+                    $query->staffRole('user_id', Auth::user()->id);
                 } else {
                     $query = $query->where('status', -1);
                 }
@@ -113,7 +113,8 @@ class QuestionAswerServiceRepository extends BaseRepository implements QuestionA
         }])->where('id', $id)->first();
     }
 
-    public function getQuestionBotAppendDownload($builder) {
+    public function getQuestionBotAppendDownload($builder)
+    {
         return @$builder->content;
     }
 }

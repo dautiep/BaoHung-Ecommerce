@@ -103,4 +103,24 @@ return [
             ]
         ]
     ],
+    [
+        'router' => '',
+        'name' => 'QL Cache hệ thống',
+        'icon' => 'nav-icon fas fa-address-book',
+        'active' => true,
+        'hasActivePage' => [],
+        'position' => 0,
+        'authorize' => ['config_cache'],
+        'children' => [
+            [
+                'router' => 'config_cache.artisanCache',
+                'name' => 'Cập nhật cache hệ thống',
+                'icon' => 'far fa-circle nav-icon',
+                'hasActivePage' => [],
+                'position' => 1,
+                'authorize' => ['config_cache.artisanCache'],
+                'active' => true
+            ]
+        ]
+    ]
 ];

@@ -130,8 +130,7 @@
                                     @if (@$status_unanswered['key'] == $data->status || @$status_answered['key'] == $data->status)
                                         <div class="row mt-4">
                                             <div class="col-md-12">
-                                                <label class="text-capitalize">Câu trả lời <sup
-                                                        class="text-danger">*</sup></label>
+                                                <label class="text-capitalize">Câu trả lời </label>
                                                 <textarea type="text" {{ @$status_answered['key'] == $data->status ? 'readonly' : '' }} name="content_to_consult"
                                                     class="form-control">{{ old('content_to_consult', @$data->content_to_consult) }}</textarea>
                                             </div>

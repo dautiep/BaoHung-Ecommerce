@@ -133,6 +133,7 @@
                                         @php
                                             $config_status = collect(config('global.default.status.users'));
                                             $config_active = config('global.default.status.users.active.key');
+                                            $is_admin = is_admin();
                                         @endphp
                                         @foreach ($data as $key => $item)
                                             <tr>
@@ -158,6 +159,17 @@
                                                 <td class="align-middle text-center">
                                                     {{ date_format(date_create($item->created_at), 'd-m-Y') }}</td>
                                                 <td class="align-middle text-center">
+                                                    @if ($is_admin)
+                                                        <x-button-link : :control="[
+                                                            'action' => 'resertPassword',
+                                                            'router' => route('user.resetPassword', [
+                                                                'id' => $item->id,
+                                                            ]),
+                                                            'name' => 'Thay đổi mật khẩu',
+                                                            'class' => 'btn btn-sm bg-success',
+                                                            'icon' => 'fas fa-unlock',
+                                                        ]" />
+                                                    @endif
                                                     @if ($item->is_active == $config_active)
                                                         <a class="btn btn-sm btn-primary"
                                                             href="{{ route('users.edit', ['id' => $item->id]) }}"
@@ -165,6 +177,7 @@
                                                             <i class="fas fa-edit"></i>
                                                         </a>
                                                     @endif
+
                                                     @php
                                                         $lablel = $item->is_active == $config_active ? 'Khóa tài khoản' : 'Mở khóa tài khoản';
                                                     @endphp
