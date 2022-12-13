@@ -12,7 +12,7 @@
              </div>
              <div class="boxchat-head-2 container"> <a href="" target="_blank" rel="noopener noreferrer">
                      <div class="icon-botchat">
-                         <img src="{{ asset('chatbot/img/botchat.jpg') }}">
+                         <img src="{{ addVersionTo('chatbot/img/botchat.jpg') }}">
                      </div>
                      <div class="slogan">
                          <p>Trợ lý ảo BIDV </p>

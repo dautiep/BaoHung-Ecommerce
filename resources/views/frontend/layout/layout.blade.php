@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{ asset('chatbot/css/main.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('chatbot/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ addVersionTo('chatbot/css/main.min.css') }}">
+    <link rel="stylesheet" href="{{ addVersionTo('chatbot/css/custom.css') }}">
 
     @include('frontend.scripts.scripts')
     <meta name="csrf-token" content="{{ csrf_token() }}" />

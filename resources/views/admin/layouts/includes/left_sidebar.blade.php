@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
-        <img src="{{ asset('admin/images/logo.png') }}" alt="AdminPTTT Logo" class=""
+        <img src="{{ addVersionTo('admin/images/logo.png') }}" alt="AdminPTTT Logo" class=""
             style="opacity: 1; width:100px;">
         <span class="brand-text font-weight-light"><em></em></span>
     </a>

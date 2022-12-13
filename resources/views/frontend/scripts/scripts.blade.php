@@ -1,6 +1,6 @@
-  <script src="{{ asset('chatbot/js/plugins.min.js') }}"></script>
-  <script src="{{ asset('chatbot/js/main.min.js') }}"></script>
-  <script src="{{ asset('chatbot/js/toastify-js.js') }}"></script>
+  <script src="{{ addVersionTo('chatbot/js/plugins.min.js') }}"></script>
+  <script src="{{ addVersionTo('chatbot/js/main.min.js') }}"></script>
+  <script src="{{ addVersionTo('chatbot/js/toastify-js.js') }}"></script>
 
   <script>
       LazyLoad = function(doc) {
@@ -110,7 +110,7 @@
 
 
       LazyLoad.css([
-          "{{ asset('chatbot/css/plugins.min.css') }}",
-          "{{ asset('chatbot/fonts/main.min.css') }}"
+          "{{ addVersionTo('chatbot/css/plugins.min.css') }}",
+          "{{ addVersionTo('chatbot/fonts/main.min.css') }}"
       ], function() {});
   </script>

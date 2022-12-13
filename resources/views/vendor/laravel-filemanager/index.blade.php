@@ -13,16 +13,16 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="#333844">
 
   <title>{{ trans('laravel-filemanager::lfm.title-page') }}</title>
-  <link rel="shortcut icon" type="image/png" href="{{ asset('vendor/laravel-filemanager/img/72px color.png') }}">
+  <link rel="shortcut icon" type="image/png" href="{{ addVersionTo('vendor/laravel-filemanager/img/72px color.png') }}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-ui-dist@1.12.1/jquery-ui.min.css">
-  <link rel="stylesheet" href="{{ asset('vendor/laravel-filemanager/css/cropper.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('vendor/laravel-filemanager/css/dropzone.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('vendor/laravel-filemanager/css/mime-icons.min.css') }}">
+  <link rel="stylesheet" href="{{ addVersionTo('vendor/laravel-filemanager/css/cropper.min.css') }}">
+  <link rel="stylesheet" href="{{ addVersionTo('vendor/laravel-filemanager/css/dropzone.min.css') }}">
+  <link rel="stylesheet" href="{{ addVersionTo('vendor/laravel-filemanager/css/mime-icons.min.css') }}">
   <style>{!! \File::get(base_path('vendor/unisharp/laravel-filemanager/public/css/lfm.css')) !!}</style>
   {{-- Use the line below instead of the above if you need to cache the css. --}}
-  {{-- <link rel="stylesheet" href="{{ asset('/vendor/laravel-filemanager/css/lfm.css') }}"> --}}
+  {{-- <link rel="stylesheet" href="{{ addVersionTo('/vendor/laravel-filemanager/css/lfm.css') }}"> --}}
 </head>
 <body>
   <nav class="navbar sticky-top navbar-expand-lg navbar-dark" id="nav">
@@ -192,8 +192,8 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.3/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.0/dist/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery-ui-dist@1.12.1/jquery-ui.min.js"></script>
-  <script src="{{ asset('vendor/laravel-filemanager/js/cropper.min.js') }}"></script>
-  <script src="{{ asset('vendor/laravel-filemanager/js/dropzone.min.js') }}"></script>
+  <script src="{{ addVersionTo('vendor/laravel-filemanager/js/cropper.min.js') }}"></script>
+  <script src="{{ addVersionTo('vendor/laravel-filemanager/js/dropzone.min.js') }}"></script>
   <script>
     var lang = {!! json_encode(trans('laravel-filemanager::lfm')) !!};
     var actions = [
@@ -262,7 +262,7 @@
   </script>
   <script>{!! \File::get(base_path('vendor/unisharp/laravel-filemanager/public/js/script.js')) !!}</script>
   {{-- Use the line below instead of the above if you need to cache the script. --}}
-  {{-- <script src="{{ asset('vendor/laravel-filemanager/js/script.js') }}"></script> --}}
+  {{-- <script src="{{ addVersionTo('vendor/laravel-filemanager/js/script.js') }}"></script> --}}
   <script>
     Dropzone.options.uploadForm = {
       paramName: "upload[]", // The name that will be used to transfer the file

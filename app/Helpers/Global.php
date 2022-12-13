@@ -46,3 +46,13 @@ if (!function_exists('auth_user')) {
         return auth()->user();
     }
 }
+if (!function_exists('addVersionTo')) {
+    function addVersionTo($pathFile, $timestamp = '')
+    {
+        $path            = public_path($pathFile);
+        $timestamp       = !empty($timestamp) ? $timestamp : \File::lastModified($path);
+        $url             = asset($pathFile);
+        $param_separator = (strpos($url, '?') !== false) ? '&' : '?';
+        return $url . $param_separator . 'v=' . $timestamp;
+    }
+}

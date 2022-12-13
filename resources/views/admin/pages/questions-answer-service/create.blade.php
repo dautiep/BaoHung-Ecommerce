@@ -1,6 +1,6 @@
 @extends('admin.layouts.app', ['activePage' => 'question.list'])
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('admin/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ addVersionTo('admin/css/custom.css') }}">
 @endsection
 @section('content')
     <div class="content">
@@ -119,7 +119,7 @@
                                             </div>
                                             <div class="col-md-12 text-center">
                                                 <img id="holder" style="margin-top:15px;max-height:100px;"
-                                                    class="img-thumbnail d-none" src="{{ asset('admin/images/file.png') }}">
+                                                    class="img-thumbnail d-none" src="{{ addVersionTo('admin/images/file.png') }}">
                                             </div>
                                         </div>
                                         <div class="row mt-2">
@@ -246,7 +246,7 @@
                                             <div class="col-md-12 text-center">
                                                 <img id="holder" style="margin-top:15px;max-height:100px;"
                                                     class="img-thumbnail d-none"
-                                                    src="{{ asset('admin/images/file.png') }}">
+                                                    src="{{ addVersionTo('admin/images/file.png') }}">
                                             </div>
                                         </div>
                                         <div class="row mt-2">
@@ -274,7 +274,7 @@
     <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
 
     <script id="file_manager" data-route="{{ route('file_manager.file_upload') }}"
-        src="{{ asset('plugin/manager-file-summernote/main.js') }}" type="text/javascript"></script>
+        src="{{ addVersionTo('plugin/manager-file-summernote/main.js') }}" type="text/javascript"></script>
     <script>
         //select 2
         $('.select2').select2()

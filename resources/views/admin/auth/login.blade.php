@@ -8,7 +8,7 @@
         <!-- /.login-logo -->
         <div class="card card-azoffice">
             <div class="card-header text-center">
-                <div><img src="{{ asset('admin/images/logo.png') }}" alt="logo" width="90"></div>
+                <div><img src="{{ addVersionTo('admin/images/logo.png') }}" alt="logo" width="90"></div>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
@@ -56,7 +56,7 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('admin/admin-lte/plugins/jquery/jquery.min.js') }}"></script>
+<script src="{{ addVersionTo('admin/admin-lte/plugins/jquery/jquery.min.js') }}"></script>
 <script>
     window.setTimeout(function() {
         $(".alert").fadeTo(500, 0).slideUp(500, function(){

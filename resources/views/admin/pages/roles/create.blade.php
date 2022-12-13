@@ -1,9 +1,9 @@
 @extends('admin.layouts.app', ['activePage' => 'roles.list'])
 @section('scripts')
-    <link rel="stylesheet" type="text/css" href="{{ asset('plugin/jquery-easyui-1.10.8/themes/default/easyui.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('plugin/jquery-easyui-1.10.8/themes/icon.css') }}">
-    <script type="text/javascript" src="{{ asset('plugin/jquery-easyui-1.10.8/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('plugin/jquery-easyui-1.10.8/jquery.easyui.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ addVersionTo('plugin/jquery-easyui-1.10.8/themes/default/easyui.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ addVersionTo('plugin/jquery-easyui-1.10.8/themes/icon.css') }}">
+    <script type="text/javascript" src="{{ addVersionTo('plugin/jquery-easyui-1.10.8/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ addVersionTo('plugin/jquery-easyui-1.10.8/jquery.easyui.min.js') }}"></script>
     <style type="text/css">
         .tree-folder,
         .tree-file {

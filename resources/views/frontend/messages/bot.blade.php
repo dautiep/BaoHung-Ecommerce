@@ -2,13 +2,13 @@
           @if (@$message)
               <li class="supporter">
                   <div class="content-img">
-                      <img src="{{ asset('chatbot/img/botchat.jpg') }}">
+                      <img src="{{ addVersionTo('chatbot/img/botchat.jpg') }}">
                   </div>
                   <div class="content-bot">{!! $message !!}</div>
               </li>
           @endif
           @if (@$data)
-              {{-- src="{{ asset('chatbot/img/30.png') }}" --}}
+              {{-- src="{{ addVersionTo('chatbot/img/30.png') }}" --}}
               @foreach (@$data as $item)
                   <li><a href="javascript:void(0)" class="get_service" data-service="{{ $item->id }}"
                           data-next="{{ @$next }}"> <span> <img></span><span class="span-get_service">{{ $item->name }}</span></a>
