@@ -9,4 +9,7 @@ interface OtherFagRepositoryInterface extends BaseRepositoryInterface
     public function getAllDepartment();
     public function updateContentToConsult($request, $id);
     public function handleDelete($request);
+    public function countQuestionByStatus();
+    public function getAllQuestions();
+    public function countQuestionsByDate($date);
 }

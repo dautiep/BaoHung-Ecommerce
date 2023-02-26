@@ -70,14 +70,6 @@
                     </li>
 
                 @endforeach
-                <li class="nav-header">REPORT SYSTEM</li>
-                <li class="nav-item">
-                    <a href="{{ route('dashboard') }}"
-                        class="nav-link nav-main {{ @$activePage === 'dashboard' ? ' active' : '' }}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p> Báo cáo </p>
-                    </a>
-                </li>
             </ul>
         </nav>
     </div>

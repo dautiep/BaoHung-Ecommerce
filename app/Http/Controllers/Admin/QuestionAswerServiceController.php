@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\QuestionAnswerServiceRequest;
 use App\Repositories\Interfaces\QuestionAswerServiceInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Exception;
 
 class QuestionAswerServiceController extends Controller
 {
@@ -79,11 +81,11 @@ class QuestionAswerServiceController extends Controller
         try {
             $input = $request->all();
             $this->_questionAnswerServiceInterface->changeStatus($input);
-            return \Response::json(['success' => $this::$TYPE_MESSAGES_SUCCESS, 'message' => config('global.default.messages.question_answer_service.approved')]);
+            return Response::json(['success' => $this::$TYPE_MESSAGES_SUCCESS, 'message' => config('global.default.messages.question_answer_service.approved')]);
         } catch (Exception $e) {
             dd($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
             logger($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
-            return \Response::json(['success' => $this::$TYPE_MESSAGES_ERROR, 'message' => config('global.default.messages.question_answer_service.error')]);
+            return Response::json(['success' => $this::$TYPE_MESSAGES_ERROR, 'message' => config('global.default.messages.question_answer_service.error')]);
         }
     }
 
@@ -91,11 +93,11 @@ class QuestionAswerServiceController extends Controller
         try {
             $input = $request->all();
             $this->_questionAnswerServiceInterface->changeStatus($input);
-            return \Response::json(['success' => $this::$TYPE_MESSAGES_SUCCESS, 'message' => config('global.default.messages.question_answer_service.lock')]);
+            return Response::json(['success' => $this::$TYPE_MESSAGES_SUCCESS, 'message' => config('global.default.messages.question_answer_service.lock')]);
         } catch (Exception $e) {
             dd($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
             logger($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
-            return \Response::json(['success' => $this::$TYPE_MESSAGES_ERROR, 'message' => config('global.default.messages.question_answer_service.error')]);
+            return Response::json(['success' => $this::$TYPE_MESSAGES_ERROR, 'message' => config('global.default.messages.question_answer_service.error')]);
         }
     }
 
@@ -103,11 +105,11 @@ class QuestionAswerServiceController extends Controller
         try {
             $input = $request->all();
             $this->_questionAnswerServiceInterface->changeStatus($input);
-            return \Response::json(['success' => $this::$TYPE_MESSAGES_SUCCESS, 'message' => config('global.default.messages.question_answer_service.unlock')]);
+            return Response::json(['success' => $this::$TYPE_MESSAGES_SUCCESS, 'message' => config('global.default.messages.question_answer_service.unlock')]);
         } catch (Exception $e) {
             dd($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
             logger($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
-            return \Response::json(['success' => $this::$TYPE_MESSAGES_ERROR, 'message' => config('global.default.messages.question_answer_service.error')]);
+            return Response::json(['success' => $this::$TYPE_MESSAGES_ERROR, 'message' => config('global.default.messages.question_answer_service.error')]);
         }
     }
 }

@@ -32,6 +32,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Auth'], function () {
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth.admin'], function () {
     Route::get('/home', 'HomeController@index')->name('dashboard');
+    Route::post('get-data-chart', 'HomeController@getDataChart')->name('dashboard.get.data.chart');
 
     // users
     Route::group(['prefix' => 'users', 'as' => 'users.'], function () {

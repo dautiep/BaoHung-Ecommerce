@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Department;
 use App\Models\OtherFag;
 use App\Repositories\Interfaces\OtherFagRepositoryInterface;
+use Illuminate\Support\Facades\DB;
 
 class OtherFagRepository extends BaseRepository implements OtherFagRepositoryInterface
 {
@@ -123,6 +124,27 @@ class OtherFagRepository extends BaseRepository implements OtherFagRepositoryInt
             ];
         }
         $builder = $builder->update($data);
+        return $builder;
+    }
+
+    public function countQuestionByStatus() {
+        $builder = $this->_model->groupBy('status')->select('status', DB::raw('count(*) as total'))->get();
+        return $builder;
+    }
+
+    public function getAllQuestions() {
+        $builder = $this->_model->select('id')->get();
+        return $builder;
+    }
+
+    public function countQuestionsByDate($date)
+    {
+        $builder = $this->_model->select('id', 'status', 'created_at');
+        if (!empty($date)) {
+            $builder = $builder->where('created_at', '>=', $date)
+                        ->where('created_at', '<=', $date . ' 23:59:59');
+        }
+        $builder = $builder->count();
         return $builder;
     }
 }
