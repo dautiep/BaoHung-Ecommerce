@@ -111,7 +111,7 @@ class OtherFagRepository extends BaseRepository implements OtherFagRepositoryInt
                 'status' => config('global.default.status.orther_faqs.unanswered.key'),
                 'department_id_responsibility' => $request->get('assigned_partment_id'),
             ];
-        } else if (!is_admin() && is_can('faq.assignUser')) {
+        } else if (!is_admin() && is_can(['faq.assignUser'])) {
             if (!empty($request->get('assigned_user_id'))) {
                 $data = [
                     'user_id' => $request->get('assigned_user_id'),
