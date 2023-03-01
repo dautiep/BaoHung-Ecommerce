@@ -56,3 +56,23 @@ if (!function_exists('addVersionTo')) {
         return $url . $param_separator . 'v=' . $timestamp;
     }
 }
+
+if (!function_exists('templateAsset')) {
+    function templateAsset($fileName, $timestamp = '')
+    {
+        $pathFile        = config('template.config.base_dir') . $fileName;
+        $path            = public_path($pathFile);
+        $timestamp       = !empty($timestamp) ? $timestamp : \File::lastModified($path);
+        $url             = asset($pathFile);
+        $param_separator = (strpos($url, '?') !== false) ? '&' : '?';
+        return $url . $param_separator . 'v=' . $timestamp;
+    }
+}
+
+if (!function_exists('templateAsset')) {
+    function bladeAsset($fileName)
+    {
+        $pathFile        = config('template.config.blade_dir') . $fileName;
+        return $pathFile;
+    }
+}

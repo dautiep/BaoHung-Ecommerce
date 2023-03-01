@@ -17,10 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::group([
     'namespace' => 'Frontend'
 ], function () {
-    Route::get('/', 'ChatbotController@bot')->name('index');
-    Route::post('chatbot/bot', 'ChatbotController@handleCallBot')->name('bot');
-    Route::post('chatbot/send-message', 'ChatbotController@handleBotUser')->name('sendMessageUser');
-    Route::post('chatbot/send-question', 'ChatbotController@handleSendQuestion')->name('sendQuestionUser');
+    Route::get('/', 'PageController@index')->name('index');
 });
 Route::group(['prefix' => 'admin', 'namespace' => 'Auth'], function () {
     Route::resource('login', 'LoginController');
@@ -99,13 +96,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
         Route::get('/edit/{id}', 'DepartmentController@edit')->name('edit');
         Route::post('/store/{id?}', 'DepartmentController@store')->name('store');
         Route::post('state', 'DepartmentController@state')->name('state');
-
     });
     Route::group(['prefix' => 'file_upload', 'as' => 'file_manager.'], function () {
         Route::post('upload', 'FileManagerController@fileUpload')->name('file_upload');
     });
 
-    Route::group(['prefix' => 'config_cache', 'as' => 'config_cache.'], function(){
+    Route::group(['prefix' => 'config_cache', 'as' => 'config_cache.'], function () {
         Route::get('clear/cache', 'ConfigController@artisanCache')->name('artisanCache');
     });
     Route::group(['prefix' => 'filemanager'], function () {
