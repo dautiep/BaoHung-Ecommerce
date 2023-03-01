@@ -59,7 +59,7 @@ return [
     ],
     [
         'router' => '',
-        'name' => 'QL Dịch vụ - Câu hỏi',
+        'name' => 'Dịch vụ - Sản phẩm',
         'icon' => 'nav-icon fas fa-address-book',
         'active' => true,
         'hasActivePage' => [
@@ -70,7 +70,7 @@ return [
         'children' => [
             [
                 'router' => 'services.list',
-                'name' => 'Danh sách dịch vụ',
+                'name' => 'QL dịch vụ',
                 'icon' => 'far fa-circle nav-icon',
                 'hasActivePage' => [
                     'list-blog-categories'
@@ -81,7 +81,7 @@ return [
             ],
             [
                 'router' => 'questions.list',
-                'name' => 'Danh sách câu hỏi',
+                'name' => 'QL danh mục',
                 'icon' => 'far fa-circle nav-icon',
                 'hasActivePage' => [
                     'question.list'
@@ -92,7 +92,7 @@ return [
             ],
             [
                 'router' => 'other_faqs.list',
-                'name' => 'Danh sách câu hỏi khách hàng',
+                'name' => 'QL sản phẩm',
                 'icon' => 'far fa-circle nav-icon',
                 'hasActivePage' => [
                     'other_faqs.list'

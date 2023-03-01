@@ -11,7 +11,7 @@
                 <div><img src="{{ addVersionTo('admin/images/logo.png') }}" alt="logo" width="90"></div>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                <p class="login-box-msg">Đăng nhập vào hệ thống</p>
                 {!! Form::open(array('route' => 'login.store', 'method' => 'POST')) !!}
                     <div class="input-group mb-3">
                         {!! Form::hidden('submitCount', @$errors->get('submitCount') ? $errors->get('submitCount')[0] : 0)!!}
