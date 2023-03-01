@@ -69,7 +69,7 @@ if (!function_exists('templateAsset')) {
     }
 }
 
-if (!function_exists('templateAsset')) {
+if (!function_exists('bladeAsset')) {
     function bladeAsset($fileName)
     {
         $pathFile        = config('template.config.blade_dir') . $fileName;
