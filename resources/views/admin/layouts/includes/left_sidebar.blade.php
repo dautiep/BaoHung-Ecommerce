@@ -29,7 +29,7 @@
                 @endphp
                 @foreach ($sidebar as $parent)
                     @if ($loop->index == 1)
-                        <li class="nav-header">CHATBOX SYSTEM</li>
+                        <li class="nav-header">ECOMMERCE SYSTEM</li>
                     @endif
                     <li class="nav-item has-treeview menu-open">
                         @php
