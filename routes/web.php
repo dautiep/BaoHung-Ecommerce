@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group([
-    'namespace' => 'Frontend'
+    'namespace' => 'Frontend',
+    'as' => 'frontend.'
 ], function () {
     Route::get('/', 'PageController@index')->name('index');
     Route::get('category', 'PageController@category')->name('category');
