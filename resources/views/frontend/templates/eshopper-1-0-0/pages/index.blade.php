@@ -1,8 +1,6 @@
 @extends(bladeAsset('layout.layout'))
 
 @section('content')
-    @include(bladeAsset('components.topbar'))
-    @include(bladeAsset('components.navbar'))
     @include(bladeAsset('components.featured'))
     @include(bladeAsset('components.categories'))
     @include(bladeAsset('components.offer'))
@@ -10,6 +8,4 @@
     @include(bladeAsset('components.subscribe'))
     @include(bladeAsset('components.product'))
     @include(bladeAsset('components.vendor'))
-    @include(bladeAsset('components.footer'))
-    @include(bladeAsset('components.scroll_top'))
 @endsection

@@ -18,6 +18,9 @@ Route::group([
     'namespace' => 'Frontend'
 ], function () {
     Route::get('/', 'PageController@index')->name('index');
+    Route::get('category', 'PageController@category')->name('category');
+    Route::get('product/detail', 'PageController@productDetail')->name('product.detail');
+    Route::get('contact', 'PageController@contact')->name('contact');
 });
 Route::group(['prefix' => 'admin', 'namespace' => 'Auth'], function () {
     Route::resource('login', 'LoginController');

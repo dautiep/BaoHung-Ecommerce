@@ -18,4 +18,19 @@ class PageController extends Controller
     {
         return view($this->_prefix . 'index');
     }
+
+    public function category()
+    {
+        return view($this->_prefix . 'category');
+    }
+
+    public function productDetail()
+    {
+        return view($this->_prefix . 'product_detail');
+    }
+
+    public function contact()
+    {
+        return view($this->_prefix . 'contact');
+    }
 }

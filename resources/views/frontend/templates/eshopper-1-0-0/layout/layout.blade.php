@@ -28,9 +28,12 @@
 </head>
 
 <body>
+    @include(bladeAsset('components.topbar'))
+    @include(bladeAsset('components.navbar'))
     @yield('content')
+    @include(bladeAsset('components.footer'))
+    @include(bladeAsset('components.scroll_top'))
     @yield('scripts')
-
 </body>
 
 </html>
