@@ -13,6 +13,7 @@ class Category extends Model
     public $fillable = [
         'id',
         'name',
+        'slug',
         'status'
     ];
 }
