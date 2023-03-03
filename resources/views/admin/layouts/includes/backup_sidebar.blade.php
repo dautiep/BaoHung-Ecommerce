@@ -137,7 +137,7 @@
                         {{-- @endif --}}
                     </ul>
                 </li>
-                @if ($activePage == 'list-blog-posts' || $activePage == 'list-blog-categories' ||$activePage == 'list-blog-tags')
+                @if ($activePage == 'list-blog-posts' || $activePage == 'list-services' ||$activePage == 'list-blog-tags')
                     @php
                         $hasActivePageBlog = true
                     @endphp

@@ -24,7 +24,7 @@ return [
                     'name' => 'Khóa tài khoản'
                 ]
             ],
-            'type_of_services' => [
+            'services' => [
                 [
                     'key' => 1,
                     'name' => 'Đang chạy',
@@ -95,7 +95,7 @@ return [
                 'edit' => 'Chỉnh sửa tài khoản thành công',
                 'edit_status' => 'Chỉnh sửa trạng thái tài khoản thành công',
             ],
-            'type_of_services' => [
+            'services' => [
                 'store' => 'Lưu thông tin dịch vụ thành công',
                 'error' => 'Đã xảy ra lỗi!',
                 'lock' => 'Đã khóa dịch vụ',
