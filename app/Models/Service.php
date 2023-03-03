@@ -9,7 +9,6 @@ class Service extends Model
 {
     use HasFactory;
     public $table = 'services';
-    public $primaryKey = 'id';
     public $fillable = [
         'id',
         'name',

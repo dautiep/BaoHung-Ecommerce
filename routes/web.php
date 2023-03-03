@@ -65,19 +65,19 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 
     //services
     Route::group(['prefix' => 'services', 'as' => 'services.'], function () {
-        Route::get('', 'TypeOfServiceController@list')->name('list');
-        Route::get('/create', 'TypeOfServiceController@create')->name('create');
-        Route::post('/store/{id?}', 'TypeOfServiceController@store')->name('store');
-        Route::get('/edit/{id}', 'TypeOfServiceController@edit')->name('edit');
-        Route::post('/lock', 'TypeOfServiceController@lock')->name('lock');
-        Route::post('/unlock', 'TypeOfServiceController@unlock')->name('unlock');
+        Route::get('', 'ServiceController@list')->name('list');
+        Route::get('/create', 'ServiceController@create')->name('create');
+        Route::post('/save/{id?}', 'ServiceController@save')->name('save');
+        Route::get('/edit/{id}', 'ServiceController@edit')->name('edit');
+        Route::post('/lock', 'ServiceController@lock')->name('lock');
+        Route::post('/unlock', 'ServiceController@unlock')->name('unlock');
     });
 
     //questions
     Route::group(['prefix' => 'questions', 'as' => 'questions.'], function () {
         Route::get('', 'QuestionAswerServiceController@list')->name('list');
         Route::get('/create', 'QuestionAswerServiceController@create')->name('create');
-        Route::post('/store/{id?}', 'QuestionAswerServiceController@store')->name('store');
+        Route::post('/save/{id?}', 'QuestionAswerServiceController@save')->name('save');
         Route::get('/edit/{id}', 'QuestionAswerServiceController@edit')->name('edit');
         Route::post('/approve', 'QuestionAswerServiceController@approve')->name('approved');
         Route::post('/lock', 'QuestionAswerServiceController@lock')->name('lock');

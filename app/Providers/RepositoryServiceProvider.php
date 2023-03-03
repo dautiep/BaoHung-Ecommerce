@@ -11,13 +11,13 @@ use App\Repositories\Interfaces\GroupRepositoryInterface;
 use App\Repositories\Interfaces\OtherFagRepositoryInterface;
 use App\Repositories\Interfaces\QuestionAswerServiceInterface;
 use App\Repositories\Interfaces\RoleRepositoryInterface;
-use App\Repositories\Interfaces\TypeOfServiceRepositoryInterface;
+use App\Repositories\Interfaces\ServiceRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Repositories\OtherFagRepository;
 use App\Repositories\QuestionAswerServiceRepository;
 use App\Repositories\RoleRepository;
-use App\Repositories\TypeOfServiceRepository;
 use App\Repositories\UserRepository;
+use App\Repositories\ServiceRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -47,8 +47,8 @@ class RepositoryServiceProvider extends ServiceProvider
                 'repository' => RoleRepository::class
             ],
             [
-                'interface' => TypeOfServiceRepositoryInterface::class,
-                'repository' => TypeOfServiceRepository::class
+                'interface' => ServiceRepositoryInterface::class,
+                'repository' => ServiceRepository::class
             ],
             [
                 'interface' => UserRepositoryInterface::class,
