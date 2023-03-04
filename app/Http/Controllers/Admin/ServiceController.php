@@ -78,11 +78,11 @@ class ServiceController extends Controller
         try {
             $input = $request->all();
             $this->_serviceInterFace->lockOrUnlockByID($input);
-            return Response::json(['success' => $this::$TYPE_MESSAGES_SUCCESS, 'message' => config('global.default.messages.type_of_services.lock')]);
+            return Response::json(['success' => $this::$TYPE_MESSAGES_SUCCESS, 'message' => config('global.default.messages.services.lock')]);
         } catch (Exception $e) {
             dd($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
             logger($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
-            return Response::json(['success' => $this::$TYPE_MESSAGES_ERROR, 'message' => config('global.default.messages.type_of_services.error')]);
+            return Response::json(['success' => $this::$TYPE_MESSAGES_ERROR, 'message' => config('global.default.messages.services.error')]);
         }
     }
 
@@ -92,10 +92,10 @@ class ServiceController extends Controller
         try {
             $input = $request->all();
             $this->_serviceInterFace->lockOrUnlockByID($input);
-            return Response::json(['success' => $this::$TYPE_MESSAGES_SUCCESS, 'message' => config('global.default.messages.type_of_services.unlock')]);
+            return Response::json(['success' => $this::$TYPE_MESSAGES_SUCCESS, 'message' => config('global.default.messages.services.unlock')]);
         } catch (Exception $e) {
             logger($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
-            return Response::json(['success' => $this::$TYPE_MESSAGES_ERROR, 'message' => config('global.default.messages.type_of_services.error')]);
+            return Response::json(['success' => $this::$TYPE_MESSAGES_ERROR, 'message' => config('global.default.messages.services.error')]);
         }
     }
 

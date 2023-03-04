@@ -1,4 +1,4 @@
-@extends('admin.layouts.app', ['activePage' => 'list-services'])
+@extends('admin.layouts.app', ['activePage' => 'list-categories'])
 
 @section('content')
 <div class="content">
@@ -7,16 +7,16 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        @if (empty($service))
-                            <h1 class="m-0">Thêm Dịch Vụ</h1>
+                        @if (empty($category))
+                            <h1 class="m-0">Thêm Danh Mục</h1>
                         @else
-                            <h1 class="m-0">cập Nhật Dịch Vụ</h1>
+                            <h1 class="m-0">cập Nhật Danh Mục</h1>
                         @endif
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a class="text-fibo" href="#">Service</a></li>
-                            @if (empty($service))
+                            <li class="breadcrumb-item"><a class="text-fibo" href="#">Category</a></li>
+                            @if (empty($category))
                                 <li class="breadcrumb-item active">Create</li>
                             @else
                                 <li class="breadcrumb-item active">Edit</li>
@@ -32,26 +32,19 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    @if (empty($service))
-                        <form action="{{ route('services.save') }}" method="POST">
+                    @if (empty($category))
+                        <form action="{{ route('categories.save') }}" method="POST">
                             @csrf
                             <div class="card card-success">
                                 <div class="card-header">
-                                    <h3 class="card-title">Thông Tin Dịch Vụ</h3>
+                                    <h3 class="card-title">Thông Tin Danh Mục</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="row mt-4">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="text-capitalize">Tên Dịch Vụ <sup class="text-danger">*</sup></label>
-                                                <input type="text" name="serviceName" value="{{ old('serviceName') }}" class="form-control" placeholder="Hướng dẫn mở tài khoản" autocomplete="off">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label class="text-capitalize">Mô Tả Dịch Vụ <sup
-                                                        class="text-danger">*</sup></label>
-                                                <textarea type="text" name="serviceDescription" class="form-control" rows="2">{{ old('serviceDescription') }}</textarea>
+                                                <label class="text-capitalize">Tên Danh Mục <sup class="text-danger">*</sup></label>
+                                                <input type="text" name="categoryName" value="{{ old('categoryName') }}" class="form-control" placeholder="Hướng dẫn mở tài khoản" autocomplete="off">
                                             </div>
                                         </div>
                                     </div>
@@ -63,30 +56,23 @@
                                 </div>
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-success">Lưu</button>
-                                    <a href="{{ route("services.list") }}" class="btn btn-primary ml-4">Trở Về</a>
+                                    <a href="{{ route("categories.list") }}" class="btn btn-primary ml-4">Trở Về</a>
                                 </div>
                             </div>
                         </form>
                     @else
-                    <form action="{{ route('services.save', $service->id) }}" method="POST">
+                    <form action="{{ route('categories.save', $category->id) }}" method="POST">
                         @csrf
                         <div class="card card-success">
                             <div class="card-header">
-                                <h3 class="card-title">Thông Tin Dịch Vụ</h3>
+                                <h3 class="card-title">Thông Tin Danh Mục</h3>
                             </div>
                             <div class="card-body">
                                 <div class="row mt-4">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="text-capitalize">Tên Dịch Vụ <sup class="text-danger">*</sup></label>
-                                            <input type="text" name="serviceName" value="{{ $service->name }}" class="form-control" placeholder="Hướng dẫn mở tài khoản" autocomplete="off">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="text-capitalize">Mô tả dịch vụ <sup
-                                                    class="text-danger">*</sup></label>
-                                            <textarea type="text" name="serviceDescription" class="form-control" rows="2">{{ $service->description }}</textarea>
+                                            <label class="text-capitalize">Tên Danh Mục <sup class="text-danger">*</sup></label>
+                                            <input type="text" name="categoryName" value="{{ $category->name }}" class="form-control" placeholder="Hướng dẫn mở tài khoản" autocomplete="off">
                                         </div>
                                     </div>
                                 </div>
@@ -98,7 +84,7 @@
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-success">Lưu</button>
-                                <a href="{{ route("services.list") }}" class="btn btn-primary ml-4">Trở Về</a>
+                                <a href="{{ route("categories.list") }}" class="btn btn-primary ml-4">Trở Về</a>
                             </div>
                         </div>
                     </form>
@@ -112,11 +98,6 @@
 @endsection
 
 @section('scripts')
-    <script>
-        $("#statusBlogCategory").select2({
-                theme: 'bootstrap4'
-        });
-    </script>
 @endsection
 
 

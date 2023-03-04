@@ -53,6 +53,7 @@ class ServiceRepository extends BaseRepository implements ServiceRepositoryInter
         return $this->update(['name' => $request['serviceName']], $id);
     }
 
+    //lock or unlock data
     public function lockOrUnlockByID($input)
     {
         $status = config('global.default.status.services');
