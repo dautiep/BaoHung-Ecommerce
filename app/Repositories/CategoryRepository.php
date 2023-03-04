@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 
 class CategoryRepository extends BaseRepository implements CategoryRepositoryInterface
@@ -40,17 +41,23 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
     //handle save or update data
     public function handleCreateOrUpdate($id, $request)
     {
+        $url = Str::slug($request['categoryName']);
         if ($id == null) {
             $status = config('global.default.status.categories');
             return $this->_model->create(
                 [
                     'name' => $request['categoryName'],
+                    'slug' => $url,
                     'user_id' => Auth::user()->id,
                     'status' => $status[0]['key']
                 ]
             );
         }
-        return $this->update(['name' => $request['categoryName']], $id);
+        return $this->update(
+            [
+                'name' => $request['categoryName'],
+                'slug' => $url
+        ], $id);
     }
 
     //lock or unlock data
