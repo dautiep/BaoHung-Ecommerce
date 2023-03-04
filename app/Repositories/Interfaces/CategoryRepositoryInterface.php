@@ -6,7 +6,6 @@ use App\Repositories\Interfaces\BaseRepositoryInterface;
 
 interface CategoryRepositoryInterface extends BaseRepositoryInterface
 {
-<<<<<<< HEAD
     /**
      * get all data
      * @return mixed
@@ -34,7 +33,7 @@ interface CategoryRepositoryInterface extends BaseRepositoryInterface
      * @return mixed
      */
     public function lockOrUnlockByID(array $request);
-=======
+
     public function getCategoryWithProduct($action = '');
->>>>>>> 57d830ed5beb40cb15e137806a19a7cf6295fac6
+
 }
