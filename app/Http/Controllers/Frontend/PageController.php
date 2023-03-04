@@ -3,21 +3,24 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
     private $_prefix;
     private $_prefix_router = 'frontend.';
-
-    public function __construct()
+    private $_repo_category;
+    public function __construct(CategoryRepositoryInterface $categoryRepositoryInterface)
     {
         $this->_prefix = config('template.config.blade_dir') . 'pages.';
+        $this->_repo_category = $categoryRepositoryInterface;
     }
 
     public function index()
     {
         $this->setHeaderCarouel(true);
+        $categories = $this->_repo_category->getCategoryWithProduct();
         return view($this->_prefix . 'index');
     }
 
