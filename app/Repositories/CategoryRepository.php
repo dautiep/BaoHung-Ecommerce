@@ -13,4 +13,8 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
         $this->_model = $model;
         parent::__construct($model);
     }
+
+    public function getCategoryWithProduct($action = '') {
+        return $this->_model->with('productWithCategory')->get();
+    }
 }

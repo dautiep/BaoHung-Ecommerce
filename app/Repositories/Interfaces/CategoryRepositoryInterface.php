@@ -6,5 +6,5 @@ use App\Repositories\Interfaces\BaseRepositoryInterface;
 
 interface CategoryRepositoryInterface extends BaseRepositoryInterface
 {
-
+    public function getCategoryWithProduct($action = '');
 }
