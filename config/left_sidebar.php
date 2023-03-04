@@ -63,7 +63,7 @@ return [
         'icon' => 'nav-icon fas fa-address-book',
         'active' => true,
         'hasActivePage' => [
-            'list-services', 'question.list', 'other_faqs.list'
+            'list-services', 'list-categories', 'other_faqs.list'
         ],
         'position' => 0,
         'authorize' => [],
@@ -80,11 +80,11 @@ return [
                 'active' => true
             ],
             [
-                'router' => 'questions.list',
+                'router' => 'categories.list',
                 'name' => 'QL danh mục',
                 'icon' => 'far fa-circle nav-icon',
                 'hasActivePage' => [
-                    'question.list'
+                    'list-categories'
                 ],
                 'position' => 1,
                 'authorize' => [],

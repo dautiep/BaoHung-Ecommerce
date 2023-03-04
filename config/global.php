@@ -50,12 +50,7 @@ return [
                     'name' => 'Bị block'
                 ],
             ],
-            'question' => [
-                [
-                    'key' => 2,
-                    'name' => 'Đang chờ duyệt',
-                    'action' => 'Duyệt câu hỏi'
-                ],
+            'categories' => [
                 [
                     'key' => 1,
                     'name' => 'Đang chạy',
@@ -102,13 +97,12 @@ return [
                 'unlock' => 'Đã mở khóa dịch vụ',
                 'edit'   => 'Chỉnh sửa dịch vụ thành công',
             ],
-            'question_answer_service' => [
-                'store' => 'Lưu thông tin câu hỏi thành công',
+            'categories' => [
+                'store' => 'Lưu danh mục thành công',
                 'error' => 'Đã xảy ra lỗi!',
-                'approved' => 'Đã duyệt câu hỏi',
-                'lock' => 'Đã khóa câu hỏi',
-                'unlock' => 'Đã mở khóa câu hỏi',
-                'edit'   => 'Chỉnh sửa câu hỏi thành công',
+                'lock' => 'Đã khóa danh mục',
+                'unlock' => 'Đã mở khóa danh mục',
+                'edit'   => 'Chỉnh sửa danh mục thành công',
 
             ],
             'roles' => [

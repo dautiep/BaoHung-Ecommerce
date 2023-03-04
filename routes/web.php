@@ -74,15 +74,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     });
 
     //questions
-    Route::group(['prefix' => 'questions', 'as' => 'questions.'], function () {
-        Route::get('', 'QuestionAswerServiceController@list')->name('list');
-        Route::get('/create', 'QuestionAswerServiceController@create')->name('create');
-        Route::post('/save/{id?}', 'QuestionAswerServiceController@save')->name('save');
-        Route::get('/edit/{id}', 'QuestionAswerServiceController@edit')->name('edit');
-        Route::post('/approve', 'QuestionAswerServiceController@approve')->name('approved');
-        Route::post('/lock', 'QuestionAswerServiceController@lock')->name('lock');
-        Route::post('/unlock', 'QuestionAswerServiceController@unlock')->name('unlock');
-        Route::post('/upload-image', 'QuestionAswerServiceController@uploadImage')->name('upload-image');
+    Route::group(['prefix' => 'questions', 'as' => 'categories.'], function () {
+        Route::get('', 'CategoryController@list')->name('list');
+        Route::get('/create', 'CategoryController@create')->name('create');
+        Route::post('/save/{id?}', 'CategoryController@save')->name('save');
+        Route::get('/edit/{id}', 'CategoryController@edit')->name('edit');
+        Route::post('/lock', 'CategoryController@lock')->name('lock');
+        Route::post('/unlock', 'CategoryController@unlock')->name('unlock');
+        // Route::post('/upload-image', 'CategoryController@uploadImage')->name('upload-image');
     });
 
     Route::group(['prefix' => 'other_faqs', 'as' => 'other_faqs.'], function () {
