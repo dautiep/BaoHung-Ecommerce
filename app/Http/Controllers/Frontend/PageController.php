@@ -20,21 +20,37 @@ class PageController extends Controller
     public function index()
     {
         $this->setHeaderCarouel(true);
-        $categories = $this->_repo_category->getCategoryWithProduct();
+        $categories_with_product = $this->_repo_category->getCategoryWithProduct();
+        $this->setCategoriesWithProduct($categories_with_product);
         return view($this->_prefix . 'index');
     }
 
-    public function category()
+    public function category(Request $request)
     {
-        $this->setHeaderPage('Loại sản phẩm', [
+        $categories_with_product = $this->_repo_category->queryGlobal([
+            'name',
+            'id',
+            'slug'
+        ], [
+            'productWithCategory'
+        ])->first();
+        if (!$categories_with_product) {
+            return abort(404);
+        }
+        $this->setHeaderPage($categories_with_product->name, [
             $this->configPage('Trang chủ', $this->_prefix_router . 'index'),
-            $this->configPage('Loại sản phẩm', $this->_prefix_router . 'category')
+            $this->configPage($categories_with_product->name, $this->_prefix_router . 'category', ['slug' => $categories_with_product->slug])
         ]);
+
+        $categories_with_product->setRelation('productWithCategory', $categories_with_product->productWithCategory()->paginate(10));
+        $this->setCategoriesWithProduct($categories_with_product);
         return view($this->_prefix . 'category');
     }
 
-    public function productDetail()
+    public function productDetail(Request $request)
     {
+        $this->setHeaderCarouel(false);
+
         return view($this->_prefix . 'product_detail');
     }
 
@@ -82,6 +98,15 @@ class PageController extends Controller
             ]
         ];
         view()->share('header_carouel', $config_page);
+    }
+
+    private function setCategoriesWithProduct($data)
+    {
+        view()->share('categories_with_product', $data);
+    }
+
+    private function setProductDetail($data) {
+        view()->share('product_detail', $data);
     }
 
     private function configPage($name_page, $name_router, $child = [], $status = true)

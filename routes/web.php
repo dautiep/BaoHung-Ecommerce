@@ -19,8 +19,8 @@ Route::group([
     'as' => 'frontend.'
 ], function () {
     Route::get('/', 'PageController@index')->name('index');
-    Route::get('category', 'PageController@category')->name('category');
-    Route::get('product/detail', 'PageController@productDetail')->name('product.detail');
+    Route::get('category/{slug?}', 'PageController@category')->name('category');
+    Route::get('product/detail/{slug?}', 'PageController@productDetail')->name('product.detail');
     Route::get('contact', 'PageController@contact')->name('contact');
 });
 Route::group(['prefix' => 'admin', 'namespace' => 'Auth'], function () {

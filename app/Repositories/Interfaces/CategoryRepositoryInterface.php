@@ -36,4 +36,7 @@ interface CategoryRepositoryInterface extends BaseRepositoryInterface
 
     public function getCategoryWithProduct($action = '');
 
+    public function getSelectData($fields = [], $limit = 12);
+    public function queryGlobal($columns, $with);
+
 }
