@@ -235,3 +235,11 @@
         width: 40% !important;
     }
 
+    .img-product {
+        width: 200px !important;
+    }
+
+    .img-product-item {
+        height: 150px;
+    }
+

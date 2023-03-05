@@ -36,18 +36,16 @@ return [
                     'action' => 'Mở khóa dịch vụ'
                 ]
             ],
-            'orther_faqs' => [
-                'unanswered' => [
-                    'key' => 0,
-                    'name' => 'Chưa giải đáp',
-                ],
-                'answered' => [
+            'products' => [
+                'actived' => [
                     'key' => 1,
-                    'name' => 'Đã giải đáp',
+                    'name' => 'Đang kinh doanh',
+                    'action' => 'Ngừng kinh doanh'
                 ],
-                'refuses_answer' => [
-                    'key' => 2,
-                    'name' => 'Bị block'
+                'unactived' => [
+                    'key' => 0,
+                    'name' => 'Đã ngừng kinh doanh',
+                    'action' => 'Kinh doanh'
                 ],
             ],
             'categories' => [
@@ -71,18 +69,7 @@ return [
                     'key' => 0,
                     'name' => 'Khóa'
                 ]
-            ],
-            'department' => [
-                'active' => [
-                    'key' => '1',
-                    'name' => 'Hoạt động'
-                ],
-                'deactive' => [
-                    'key' => 0,
-                    'name' => 'Khóa'
-                ]
             ]
-
         ],
         'messages' => [
             'users' => [
@@ -119,19 +106,11 @@ return [
             'errors' => [
                 'update' => 'Lỗi phát sinh khi cập nhật dữ liệu',
             ],
-            'orther_faqs' => [
-                'confirm_delete'   => 'Xác nhận có xóa câu hỏi',
-                'not_found' => 'Không tìm thấy kết quả',
-                'content_to_consult' => 'Cập nhật câu trả lời thành công',
-                'not_required_answer' => 'Vui lòng điền câu trả lời',
-                'delete' => 'Đã xóa thành công',
-                'not_assgiment_answer' => 'Vui lòng chọn người phụ trách',
-            ],
-            'department' => [
-                'create' => 'Tạo phòng ban thành công',
-                'edit' => 'Cập nhật phòng ban thành công',
-                'delete'   => 'Xóa phòng ban thành công',
-                'edit_status' => 'Chỉnh sửa trạng thái phòng ban thành công',
+            'products' => [
+                'save'   => 'lưu thông tin sản phẩm thành công',
+                'edit' => 'Cập nhật sản phẩm thành công',
+                'edit_status' => 'Đã thay đổi trạng thái sản phẩm',
+                'error' => 'Đã xảy ra lỗi!',
             ]
         ]
     ]

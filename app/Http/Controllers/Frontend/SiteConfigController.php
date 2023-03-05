@@ -47,14 +47,6 @@ class SiteConfigController extends Controller
                     'router_category' => route($this->_prefix_router . 'contact'),
                     'name_router' => $this->_prefix_router . 'contact',
                     'status_category' => true,
-                    'child_category' => [
-                        [
-                            'name_category' => 'Sản phẩm loại',
-                            'router_category' => route($this->_prefix_router . 'contact'),
-                            'name_router' => $this->_prefix_router . 'contact',
-                            'status_category' => true,
-                        ]
-                    ],
                 ],
                 [
                     'name_category' => 'Sản phẩm B',
