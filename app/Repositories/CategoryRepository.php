@@ -91,12 +91,15 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
     public function queryGlobal($columns, $with)
     {
 
-        $query = $this->_model->selectRaw(implode(", ",$columns));
+        $query = $this->_model->selectRaw(implode(", ", $columns));
         $query = $with ? $query->with($with) : $query;
-        return $query;
+        $status = config('global.default.status.categories');
+
+        return $query->where('status',  $status[0]['key']);
     }
 
-    public function queryRequestWithRelated($columns,$where, $with) {
+    public function queryRequestWithRelated($columns, $where, $with)
+    {
         return $this->queryGlobal($columns, $with)->where($where)->with($with);
     }
 }

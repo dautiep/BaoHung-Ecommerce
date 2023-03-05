@@ -23,6 +23,7 @@ class PageController extends Controller
 
     public function index()
     {
+        $this->setTitlePage('Trang chủ');
         $this->setHeaderCarouel(true);
         $categories_with_product = $this->_repo_category->getCategoryWithProduct();
         $this->setCategoriesWithProduct($categories_with_product);
@@ -31,6 +32,7 @@ class PageController extends Controller
 
     public function category(Request $request)
     {
+
         $categories_with_product = $this->_repo_category->queryGlobal([
             'name',
             'id',
@@ -38,13 +40,12 @@ class PageController extends Controller
         ], [
             'productWithCategory'
         ])->where([['slug', '=', $request->slug]])->firstOrFail();
-        if (!$categories_with_product) {
-            return abort(404);
-        }
         $this->setHeaderPage($categories_with_product->name, [
             $this->configPage('Trang chủ', $this->_prefix_router . 'index'),
             $this->configPage($categories_with_product->name, $this->_prefix_router . 'category', ['slug' => $categories_with_product->slug])
         ]);
+
+        $this->setTitlePage($categories_with_product->name);
         $all_products =  collect($categories_with_product->productWithCategory()->get()->toArray());
         $categories_with_product_filter = collect(config('page.filter_product.filter_range'))->map(function ($item) use ($all_products) {
             if (@$item['id'] == 'price-all') {
@@ -54,8 +55,7 @@ class PageController extends Controller
             } else {
                 $ranger_filter = explode('-', $item['target']);
                 $count_ranger = $all_products->whereBetween('price', [
-                    $ranger_filter[0],
-                    $ranger_filter[1]
+                    $ranger_filter
                 ]);
                 return array_merge([
                     'total_product' => $count_ranger->count()
@@ -77,9 +77,7 @@ class PageController extends Controller
         ], [
             'productWithCategory'
         ])->where([['slug', '=', $request->slug]])->firstOrFail();
-        if (!$categories_with_product) {
-            return abort(404);
-        }
+
         $all_products =  collect($categories_with_product->productWithCategory()->get());
         $config_filter = collect(config('page.filter_product.filter_range'));
         $categories_with_product_filter = $config_filter->map(function ($item) use ($all_products) {
@@ -107,7 +105,7 @@ class PageController extends Controller
                 }
             }
         })->paginate(10);
-        $categories_with_product->setRelation('productWithCategory',$product_with_category);
+        $categories_with_product->setRelation('productWithCategory', $product_with_category);
         $this->setCategoriesWithProductFilterRanger($categories_with_product_filter);
         $this->setCategoriesWithProduct($categories_with_product);
         return view(config('template.config.blade_dir') . 'components.product_category')->render();
@@ -125,25 +123,32 @@ class PageController extends Controller
             'price',
             'category_id',
             'image_url'
-        ], false)->where('slug', '=', $request->slug)->first();
+        ], false)->where(function($builder) use($request) {
+             $builder->where('slug', '=', $request->slug)->orWhere('name', 'like', '%' . $request->name . '%');
+        })->firstOrFail();
         $categories_with_product = $this->_repo_category->queryGlobal([
             'name',
             'id',
             'slug'
         ], [
             'productWithCategory'
-        ])->where([['id', '=', $product_detail->category_id]])->first();
+        ])->where([['id', '=', $product_detail->category_id]])->firstOrFail();
+        $this->setTitlePage($product_detail->name);
+
         $this->setCategoriesWithProduct($categories_with_product);
         $categories_with_product->setRelation('productWithCategory', $categories_with_product->productWithCategory()->take(4)->get());
         $this->setProductDetail($product_detail);
         return view($this->_prefix . 'product_detail');
     }
 
-    public function serives() {
+    public function serives()
+    {
         $this->setHeaderPage('Dịch vụ', [
             $this->configPage('Trang chủ', $this->_prefix_router . 'index'),
             $this->configPage('Dịch vụ', $this->_prefix_router . 'service')
         ]);
+        $this->setTitlePage('Dịch vụ');
+
         return view($this->_prefix . 'services');
     }
 
@@ -156,6 +161,14 @@ class PageController extends Controller
         return view($this->_prefix . 'contact');
     }
 
+    public function error404()
+    {
+        $this->setHeaderPage(config('page.error.404.label'), [
+            $this->configPage('Trang chủ', $this->_prefix_router . 'index'),
+            $this->configPage(config('page.error.404.error'), $this->_prefix_router . 'contact')
+        ]);
+    }
+
     private function setHeaderPage($pageName, $breadcrumbs = [])
     {
         $config_page = [
@@ -163,6 +176,11 @@ class PageController extends Controller
             'bread_crumbs' => $breadcrumbs,
         ];
         view()->share('header_setting', $config_page);
+    }
+
+    private function setTitlePage($data)
+    {
+        view()->share('title_page', $data);
     }
 
     private function setHeaderCarouel($status = false, $carousel_item = [])
@@ -214,7 +232,6 @@ class PageController extends Controller
             'name_router' => $name_router,
             'status_page' => $status,
             'child_page' => [],
-
         ];
     }
 }
