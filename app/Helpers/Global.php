@@ -77,3 +77,9 @@ if (!function_exists('bladeAsset')) {
         return $pathFile;
     }
 }
+
+if(!function_exists('formatPrice')) {
+    function formatPrice($price) {
+        return '₫ '. number_format($price, 0, '', ','); // 1,000,000
+    }
+}

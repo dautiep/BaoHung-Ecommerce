@@ -60,8 +60,8 @@
 
                     </div>
                     <div class="navbar-nav ml-auto py-0">
-                        {{-- <a href="" class="nav-item nav-link">Login</a>
-                        <a href="" class="nav-item nav-link">Register</a> --}}
+                        <a href="{{ route(config('page.login_admin.route_name')) }}"
+                            class="nav-item nav-link">{{ config('page.login_admin.name') }}</a>
                     </div>
                 </div>
             </nav>

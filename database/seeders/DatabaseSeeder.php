@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         //user admin
+        FactoryItemSeeder::class;
         User::truncate();
         $userAdmin = User::create([
             'name' => 'admin',

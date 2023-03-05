@@ -33,4 +33,10 @@ interface CategoryRepositoryInterface extends BaseRepositoryInterface
      * @return mixed
      */
     public function lockOrUnlockByID(array $request);
+
+    public function getCategoryWithProduct($action = '');
+
+    public function getSelectData($fields = [], $limit = 12);
+    public function queryGlobal($columns, $with);
+
 }
