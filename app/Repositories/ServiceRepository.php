@@ -15,6 +15,11 @@ class ServiceRepository extends BaseRepository implements ServiceRepositoryInter
         parent::__construct($model);
     }
 
+    //get data by status
+    public function getAllDataByStatus($status) {
+        return $this->_model->where('status', $status['key'])->select('name', 'description')->get();
+    }
+
     //get all data
     public function getAllData() {
         return $this->_model->select('name')->get();
@@ -45,12 +50,16 @@ class ServiceRepository extends BaseRepository implements ServiceRepositoryInter
             return $this->_model->create(
                 [
                     'name' => $request['serviceName'],
+                    'description' => $request['serviceDescription'],
                     'user_id' => Auth::user()->id,
                     'status' => $status[0]['key']
                 ]
             );
         }
-        return $this->update(['name' => $request['serviceName']], $id);
+        return $this->update([
+            'name' => $request['serviceName'],
+            'description' => $request['serviceDescription']
+        ], $id);
     }
 
     //lock or unlock data

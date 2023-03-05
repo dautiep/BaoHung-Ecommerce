@@ -14,6 +14,13 @@ interface ServiceRepositoryInterface extends BaseRepositoryInterface
     public function getAllData();
 
     /**
+     * get all data
+     * @param int $status
+     * @return mixed
+     */
+    public function getAllDataByStatus($status);
+
+    /**
      * search with info
      * @param array $info
      * @return mixed
