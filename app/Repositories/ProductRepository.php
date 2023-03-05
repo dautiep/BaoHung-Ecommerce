@@ -78,4 +78,12 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             return $this->update(['status' => $status['actived']['key']], $input['productId']);
         }
     }
+
+    public function queryGlobal($columns, $with)
+    {
+
+        $query = $this->_model->selectRaw(implode(", ",$columns));
+        $query = $with ? $query->with($with) : $query;
+        return $query;
+    }
 }

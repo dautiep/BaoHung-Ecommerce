@@ -6,11 +6,15 @@ use App\Repositories\Interfaces\BaseRepositoryInterface;
 
 interface ProductRepositoryInterface extends BaseRepositoryInterface
 {
+
     /**
      * get all data
      * @return mixed
      */
     public function getAllData();
+
+    public function queryGlobal($columns, $with);
+
 
     /**
      * search with info

@@ -2,5 +2,9 @@
 
 @section('content')
     @include(bladeAsset('components.page_header'))
-    @include(bladeAsset('components.product_category'))
+    <div id='product_filter'>
+        @include(bladeAsset('components.product_category'))
+    </div>
+
 @endsection
+

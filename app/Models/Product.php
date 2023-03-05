@@ -20,6 +20,7 @@ class Product extends Model
         'category_id',
         'image_url',
         'status'
+
     ];
 
 

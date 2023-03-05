@@ -16,6 +16,15 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
         parent::__construct($model);
     }
 
+    public function getCategoryWithProduct($action = '')
+    {
+        return $this->_model->with([
+            'productWithCategory' => function ($builder) {
+                $builder->orderByDesc('created_at');
+            }
+        ])->take(6)->orderByDesc('created_at')->get();
+    }
+
     //get all data
     public function getAllData() {
         return $this->_model->select('id','name')->get();
@@ -57,7 +66,9 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
             [
                 'name' => $request['categoryName'],
                 'slug' => $url
-        ], $id);
+            ],
+            $id
+        );
     }
 
     //lock or unlock data
@@ -71,5 +82,23 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
         }
     }
 
+    public function getSelectData($fields = [], $limit = 12)
+    {
+        return $this->_model->selectRaw(implode(", ", $fields))->take($limit)->get();
+    }
 
+    public function queryGlobal($columns, $with)
+    {
+
+        $query = $this->_model->selectRaw(implode(", ", $columns));
+        $query = $with ? $query->with($with) : $query;
+        $status = config('global.default.status.categories');
+
+        return $query->where('status',  $status[0]['key']);
+    }
+
+    public function queryRequestWithRelated($columns, $where, $with)
+    {
+        return $this->queryGlobal($columns, $with)->where($where)->with($with);
+    }
 }

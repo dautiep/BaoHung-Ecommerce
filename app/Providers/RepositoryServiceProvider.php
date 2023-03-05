@@ -4,11 +4,9 @@ namespace App\Providers;
 
 use App\Repositories\BaseRepository;
 use App\Repositories\CategoryRepository;
-use App\Repositories\DepartmentRepository;
 use App\Repositories\GroupRepository;
 use App\Repositories\Interfaces\BaseRepositoryInterface;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
-use App\Repositories\Interfaces\DepartmentRepositoryInterface;
 use App\Repositories\Interfaces\GroupRepositoryInterface;
 use App\Repositories\Interfaces\ProductRepositoryInterface;
 use App\Repositories\Interfaces\RoleRepositoryInterface;
@@ -57,6 +55,10 @@ class RepositoryServiceProvider extends ServiceProvider
             [
                 'interface' => DepartmentRepositoryInterface::class,
                 'repository' => DepartmentRepository::class
+            ],
+            [
+                'interface' => ProductRepositoryInterface::class,
+                'repository' => ProductRepository::class
             ]
         ];
 
