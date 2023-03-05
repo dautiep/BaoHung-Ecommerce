@@ -21,8 +21,9 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ templateAsset('css/style.css') }}" rel="stylesheet">
-    @include(bladeAsset('scripts.scripts'))
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
 
 
 </head>
@@ -33,7 +34,9 @@
     @yield('content')
     @include(bladeAsset('components.footer'))
     @include(bladeAsset('components.scroll_top'))
+    @include(bladeAsset('scripts.scripts'))
     @yield('scripts')
+
 </body>
 
 </html>

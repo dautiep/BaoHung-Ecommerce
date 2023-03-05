@@ -22,6 +22,7 @@ Route::group([
     Route::get('category/{slug?}', 'PageController@category')->name('category');
     Route::get('product/detail/{slug?}', 'PageController@productDetail')->name('product.detail');
     Route::get('contact', 'PageController@contact')->name('contact');
+    Route::get('category_filter/ranger', 'PageController@categoryFilter')->name('category_filter');
 });
 Route::group(['prefix' => 'admin', 'namespace' => 'Auth'], function () {
     Route::resource('login', 'LoginController');

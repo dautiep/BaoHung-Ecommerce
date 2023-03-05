@@ -22,20 +22,20 @@ class SiteConfigController extends Controller
                 'child_page' => [],
             ],
             [
-                'name_page' => 'Loại sản phẩm',
-                'router_page' => route($this->_prefix_router . 'category'),
-                'name_router' => $this->_prefix_router . 'category',
-                'status_page' => true,
-                'child_page' => [],
-            ],
-            [
                 'name_page' => 'Liên hệ',
                 'router_page' => route($this->_prefix_router . 'contact'),
                 'name_router' => $this->_prefix_router . 'contact',
                 'status_page' => true,
                 'child_page' => [],
 
-            ]
+            ],
+            [
+                'name_page' => 'Dịch vụ',
+                'router_page' => route($this->_prefix_router . 'category'),
+                'name_router' => $this->_prefix_router . 'category',
+                'status_page' => true,
+                'child_page' => [],
+            ],
         ];
     }
 

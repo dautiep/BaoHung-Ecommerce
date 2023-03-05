@@ -5,43 +5,24 @@
             <div class="col-lg-3 col-md-12">
                 <!-- Price Start -->
                 <div class="border-bottom mb-4 pb-4">
-                    <h5 class="font-weight-semi-bold mb-4">Filter by price</h5>
+                    <h5 class="font-weight-semi-bold mb-4">{{ config('page.filter_product.name') }}</h5>
                     <form>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" checked id="price-all">
-                            <label class="custom-control-label" for="price-all">All Price</label>
-                            <span class="badge border font-weight-normal">1000</span>
-                        </div>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-1">
-                            <label class="custom-control-label" for="price-1">$0 - $100</label>
-                            <span class="badge border font-weight-normal">150</span>
-                        </div>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-2">
-                            <label class="custom-control-label" for="price-2">$100 - $200</label>
-                            <span class="badge border font-weight-normal">295</span>
-                        </div>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-3">
-                            <label class="custom-control-label" for="price-3">$200 - $300</label>
-                            <span class="badge border font-weight-normal">246</span>
-                        </div>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-4">
-                            <label class="custom-control-label" for="price-4">$300 - $400</label>
-                            <span class="badge border font-weight-normal">145</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                            <input type="checkbox" class="custom-control-input" id="price-5">
-                            <label class="custom-control-label" for="price-5">$400 - $500</label>
-                            <span class="badge border font-weight-normal">168</span>
-                        </div>
+                        @php
+                            $request_target_filter = request()->targetRanger ? json_decode(request()->targetRanger) : ['price-all'];
+                        @endphp
+                        @foreach (@$categories_with_product_filter as $rangerFilter)
+                            <div
+                                class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                                <input type="checkbox" class="custom-control-input filter-ranger"
+                                    {{ in_array(@$rangerFilter['id'], @$request_target_filter) ? 'checked' : '' }}
+                                    id="{{ @$rangerFilter['id'] }}">
+                                <label class="custom-control-label"
+                                    for="{{ @$rangerFilter['id'] }}">{{ $rangerFilter['label'] }}</label>
+                                <span
+                                    class="badge border font-weight-normal">{{ @$rangerFilter['total_product'] }}</span>
+                            </div>
+                        @endforeach
+
                     </form>
                 </div>
 
@@ -52,31 +33,6 @@
             <!-- Shop Product Start -->
             <div class="col-lg-9 col-md-12">
                 <div class="row pb-3">
-                    <div class="col-12 pb-1">
-                        {{-- <div class="d-flex align-items-center justify-content-between mb-4">
-                            <form action="">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search by name">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text bg-transparent text-primary">
-                                            <i class="fa fa-search"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="dropdown ml-4">
-                                <button class="btn border dropdown-toggle" type="button" id="triggerId"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Sort by
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                                    <a class="dropdown-item" href="#">Latest</a>
-                                    <a class="dropdown-item" href="#">Popularity</a>
-                                    <a class="dropdown-item" href="#">Best Rating</a>
-                                </div>
-                            </div>
-                        </div> --}}
-                    </div>
                     @foreach ($categories_with_product->productWithCategory as $product)
                         <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
                             <div class="card product-item border-0 mb-4">
@@ -93,8 +49,8 @@
                                 </div>
                                 <div class="card-footer d-flex justify-content-between bg-light border">
                                     <a href="{{ route('frontend.product.detail', ['slug' => $product->slug]) }}"
-                                        class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Xem
-                                        chi tiết</a>
+                                        class="btn btn-sm text-dark p-0"><i
+                                            class="fas fa-eye text-primary mr-1"></i>{{ config('page.btn_view_product') }}</a>
                                     {{-- <a href="" class="btn btn-sm text-dark p-0"><i
                                             class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a> --}}
                                 </div>
@@ -109,3 +65,22 @@
         </div>
     </div>
     <!-- Shop End -->
+        <script>
+            $(document).ready(() => {
+                $('.custom-control-input').on('click', function(event) {
+                    var targetRanger = [];
+                    $('.filter-ranger').not(this).prop('checked', false);
+                    $(".filter-ranger").each(function() {
+                        if ($(this).is(":checked")) {
+                            targetRanger.push($(this).attr('id'));
+                        }
+                    });
+                    $.get("{{ route('frontend.category_filter') }}", {
+                        targetRanger: JSON.stringify(targetRanger),
+                        slug: "{{ request()->slug }}"
+                    }, function($data) {
+                        $('#product_filter').html($data);
+                    });
+                });
+            });
+        </script>

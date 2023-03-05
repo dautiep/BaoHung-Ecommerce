@@ -11,10 +11,12 @@ use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Repositories\Interfaces\DepartmentRepositoryInterface;
 use App\Repositories\Interfaces\GroupRepositoryInterface;
 use App\Repositories\Interfaces\OtherFagRepositoryInterface;
+use App\Repositories\Interfaces\ProductRepositoryInterface;
 use App\Repositories\Interfaces\RoleRepositoryInterface;
 use App\Repositories\Interfaces\ServiceRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Repositories\OtherFagRepository;
+use App\Repositories\ProductRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\ServiceRepository;
@@ -57,6 +59,10 @@ class RepositoryServiceProvider extends ServiceProvider
             [
                 'interface' => DepartmentRepositoryInterface::class,
                 'repository' => DepartmentRepository::class
+            ],
+            [
+                'interface' => ProductRepositoryInterface::class,
+                'repository' => ProductRepository::class
             ]
         ];
 
