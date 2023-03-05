@@ -2,8 +2,10 @@
 
 return [
     'title' => 'Project',
+    'short_title' => 'P',
     'btn_view_product' => 'Xem chi tiết',
-    'total_product_with_category'=> 'Sản phẩm',
+    'input_search_on_page' => 'Tìm kiếm sản phẩm',
+    'total_product_with_category' => 'Sản phẩm',
     'login_admin' => [
         'name' => 'Đăng nhập',
         'route_name' => 'dashboard'
@@ -32,5 +34,17 @@ return [
                 'id' => 'price-3'
             ]
         ],
+    ],
+    'error' => [
+        '404' => [
+            'label' => 'Không tìm thấy trang yêu cầu',
+            'error' => '404'
+        ]
+    ],
+    'footer' => [
+        'description' => 'Giới thiệu về shop',
+        'map_market' => 'Địa chỉ shop',
+        'phone_number' => '(+084) 123456',
+        'email' => 'sample@email.com'
     ]
 ];
