@@ -37,7 +37,7 @@ class PageController extends Controller
             'slug'
         ], [
             'productWithCategory'
-        ])->where([['slug', '=', $request->slug]])->first();
+        ])->where([['slug', '=', $request->slug]])->firstOrFail();
         if (!$categories_with_product) {
             return abort(404);
         }
@@ -76,7 +76,7 @@ class PageController extends Controller
             'slug'
         ], [
             'productWithCategory'
-        ])->where([['slug', '=', $request->slug]])->first();
+        ])->where([['slug', '=', $request->slug]])->firstOrFail();
         if (!$categories_with_product) {
             return abort(404);
         }
@@ -137,6 +137,14 @@ class PageController extends Controller
         $categories_with_product->setRelation('productWithCategory', $categories_with_product->productWithCategory()->take(4)->get());
         $this->setProductDetail($product_detail);
         return view($this->_prefix . 'product_detail');
+    }
+
+    public function serives() {
+        $this->setHeaderPage('Dịch vụ', [
+            $this->configPage('Trang chủ', $this->_prefix_router . 'index'),
+            $this->configPage('Dịch vụ', $this->_prefix_router . 'service')
+        ]);
+        return view($this->_prefix . 'services');
     }
 
     public function contact()

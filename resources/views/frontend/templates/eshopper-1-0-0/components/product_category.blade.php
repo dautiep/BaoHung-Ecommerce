@@ -65,22 +65,22 @@
         </div>
     </div>
     <!-- Shop End -->
-        <script>
-            $(document).ready(() => {
-                $('.custom-control-input').on('click', function(event) {
-                    var targetRanger = [];
-                    $('.filter-ranger').not(this).prop('checked', false);
-                    $(".filter-ranger").each(function() {
-                        if ($(this).is(":checked")) {
-                            targetRanger.push($(this).attr('id'));
-                        }
-                    });
-                    $.get("{{ route('frontend.category_filter') }}", {
-                        targetRanger: JSON.stringify(targetRanger),
-                        slug: "{{ request()->slug }}"
-                    }, function($data) {
-                        $('#product_filter').html($data);
-                    });
+    <script>
+        $(document).ready(() => {
+            $('.custom-control-input').on('click', function(event) {
+                var targetRanger = [];
+                $('.filter-ranger').not(this).prop('checked', false);
+                $(".filter-ranger").each(function() {
+                    if ($(this).is(":checked")) {
+                        targetRanger.push($(this).attr('id'));
+                    }
+                });
+                $.get("{{ route('frontend.category_filter') }}", {
+                    targetRanger: JSON.stringify(targetRanger),
+                    slug: "{{ request()->slug }}"
+                }, function($data) {
+                    $('#product_filter').html($data);
                 });
             });
-        </script>
+        });
+    </script>

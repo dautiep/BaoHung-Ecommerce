@@ -95,4 +95,8 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
         $query = $with ? $query->with($with) : $query;
         return $query;
     }
+
+    public function queryRequestWithRelated($columns,$where, $with) {
+        return $this->queryGlobal($columns, $with)->where($where)->with($with);
+    }
 }

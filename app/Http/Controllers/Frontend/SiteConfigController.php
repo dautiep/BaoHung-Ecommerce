@@ -31,8 +31,8 @@ class SiteConfigController extends Controller
             ],
             [
                 'name_page' => 'Dịch vụ',
-                'router_page' => route($this->_prefix_router . 'category'),
-                'name_router' => $this->_prefix_router . 'category',
+                'router_page' => route($this->_prefix_router . 'service'),
+                'name_router' => $this->_prefix_router . 'service',
                 'status_page' => true,
                 'child_page' => [],
             ],

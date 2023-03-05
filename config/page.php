@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'title' => 'Project',
     'btn_view_product' => 'Xem chi tiết',
     'total_product_with_category'=> 'Sản phẩm',
     'login_admin' => [
