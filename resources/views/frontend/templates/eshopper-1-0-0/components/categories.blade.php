@@ -8,7 +8,7 @@
                           <p class="text-right">{{ $category->productWithCategory->count() }} {{ config('page.total_product_with_category') }}</p>
                           <a href="{{ route('frontend.category', ['slug' => $category->slug]) }}"
                               class="cat-img position-relative overflow-hidden mb-3">
-                              <img class="img-fluid" src="{{ @$category->productWithCategory[0]->image_url }}"
+                              <img class="img-fluid" src="{{ asset('admin/images/products/' . @$category->productWithCategory[0]->image_url) }}"
                                   alt="{{ @$category->description }}">
                           </a>
                           <h5 class="font-weight-semi-bold m-0">{{ $category->name }}</h5>
