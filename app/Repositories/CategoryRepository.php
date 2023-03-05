@@ -26,9 +26,8 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
     }
 
     //get all data
-    public function getAllData()
-    {
-        return $this->_model->select('name')->get();
+    public function getAllData() {
+        return $this->_model->select('id','name')->get();
     }
 
     //search with info from fe

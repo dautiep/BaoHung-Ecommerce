@@ -77,7 +77,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     });
 
     //questions
-    Route::group(['prefix' => 'questions', 'as' => 'categories.'], function () {
+    Route::group(['prefix' => 'categories', 'as' => 'categories.'], function () {
         Route::get('', 'CategoryController@list')->name('list');
         Route::get('/create', 'CategoryController@create')->name('create');
         Route::post('/save/{id?}', 'CategoryController@save')->name('save');
@@ -87,12 +87,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
         // Route::post('/upload-image', 'CategoryController@uploadImage')->name('upload-image');
     });
 
-    Route::group(['prefix' => 'other_faqs', 'as' => 'other_faqs.'], function () {
-        Route::get('/', 'OtherFaqController@index')->name('list');
-        Route::get('state')->name('state');
-        Route::post('/delete', 'OtherFaqController@delete')->name('delete');
-        Route::get('edit/{id}', 'OtherFaqController@edit')->name('edit');
-        Route::post('content-to-consult/{id}', 'OtherFaqController@postContentToConsult')->name('content_to_consult');
+    Route::group(['prefix' => 'products', 'as' => 'products.'], function () {
+        Route::get('/', 'ProductController@list')->name('list');
+        Route::get('/create','ProductController@create')->name('create');
+        Route::post('/save/{id?}', 'ProductController@save')->name('save');
+        Route::get('/edit/{id}', 'ProductController@edit')->name('edit');
+        Route::post('/lock', 'ProductController@lock')->name('lock');
+        Route::post('/unlock', 'ProductController@unlock')->name('unlock');
+        Route::post('/upload-image', 'ProductController@uploadImage')->name('upload-image');
     });
 
     Route::group(['prefix' => 'department', 'as' => 'department.'], function () {

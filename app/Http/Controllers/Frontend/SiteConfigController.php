@@ -41,7 +41,6 @@ class SiteConfigController extends Controller
 
     public function loadConfigurationCategories()
     {
-
         $ins_repo = app(CategoryRepository::class)->getSelectData([
             'name',
             'slug'

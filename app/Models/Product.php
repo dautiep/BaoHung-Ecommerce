@@ -18,6 +18,14 @@ class Product extends Model
         'content',
         'price',
         'category_id',
-        'image_url'
+        'image_url',
+        'status'
+
     ];
+
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
 }
