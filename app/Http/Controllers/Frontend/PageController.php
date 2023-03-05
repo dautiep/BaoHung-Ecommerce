@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\BaseRepository;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Repositories\Interfaces\ProductRepositoryInterface;
+use App\Repositories\Interfaces\ServiceRepositoryInterface;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -14,11 +15,17 @@ class PageController extends Controller
     private $_prefix_router = 'frontend.';
     private $_repo_category;
     private $_repo_product;
-    public function __construct(CategoryRepositoryInterface $categoryRepositoryInterface, ProductRepositoryInterface $productRepositoryInterface)
+    private $_repo_service;
+    public function __construct(
+        CategoryRepositoryInterface $categoryRepositoryInterface,
+        ProductRepositoryInterface $productRepositoryInterface,
+        ServiceRepositoryInterface $serviceRepositoryInterface
+    )
     {
         $this->_prefix = config('template.config.blade_dir') . 'pages.';
         $this->_repo_category = $categoryRepositoryInterface;
         $this->_repo_product = $productRepositoryInterface;
+        $this->_repo_service = $serviceRepositoryInterface;
     }
 
     public function index()
@@ -148,8 +155,8 @@ class PageController extends Controller
             $this->configPage('Dịch vụ', $this->_prefix_router . 'service')
         ]);
         $this->setTitlePage('Dịch vụ');
-
-        return view($this->_prefix . 'services');
+        $services = $this->_repo_service->getAllDataByStatus(config('global.default.status.services')[0]);
+        return view($this->_prefix . 'services', compact('services'));
     }
 
     public function contact()
