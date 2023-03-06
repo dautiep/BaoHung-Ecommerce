@@ -38,7 +38,7 @@
                             <div class="card product-item border-0 mb-4">
                                 <a href="{{ route('frontend.product.detail', ['slug' => $product->slug]) }}">
                                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                                        <img style="height: 250px;" class="img-fluid w-100" src="{{ asset('admin/images/products/' . $product->image_url) }}" alt="{{ $product->name }}">
+                                        <img  class="img-fluid w-100 image_product" src="{{ asset('admin/images/products/' . $product->image_url) }}" alt="{{ $product->name }}">
                                     </div>
                                 </a>
                                 <div class="card-body border-left border-right text-left p-0 pt-4 pb-3">
