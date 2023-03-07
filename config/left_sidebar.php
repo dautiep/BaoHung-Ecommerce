@@ -1,62 +1,62 @@
 <?php
 return [
-    [
-        'router' => '',
-        'name' => 'QL Tài khoản',
-        'icon' => 'nav-icon fas fa-users',
-        'active' => true,
-        'hasActivePage' => [
-            'users.list', 'roles.list', 'groups.list', 'department.list'
-        ],
-        'position' => 0,
-        'authorize' => ['super-admin'],
-        'children' => [
-            [
-                'router' => 'users.list',
-                'name' => 'Danh sách tài khoản',
-                'icon' => 'far fa-circle nav-icon',
-                'hasActivePage' => [
-                    'users.list'
-                ],
-                'position' => 1,
-                'authorize' => ['users.list'],
-                'active' => true
-            ],
-            [
-                'router' => 'department.list',
-                'name' => 'Danh sách phòng ban',
-                'icon' => 'far fa-circle nav-icon',
-                'hasActivePage' => [
-                    'department.list'
-                ],
-                'position' => 1,
-                'authorize' => ['department.list'],
-                'active' => true
-            ],
-            [
-                'router' => 'groups.list',
-                'name' => 'Danh sách nhóm quyền',
-                'icon' => 'far fa-circle nav-icon',
-                'hasActivePage' => [
-                    'groups.list'
-                ],
-                'position' => 1,
-                'authorize' => [],
-                'active' => true
-            ],
-            [
-                'router' => 'roles.list',
-                'name' => 'Danh sách bộ quyền',
-                'icon' => 'far fa-circle nav-icon',
-                'hasActivePage' => [
-                    'roles.list'
-                ],
-                'position' => 1,
-                'authorize' => [],
-                'active' => true
-            ],
-        ]
-    ],
+    // [
+    //     'router' => '',
+    //     'name' => 'QL Tài khoản',
+    //     'icon' => 'nav-icon fas fa-users',
+    //     'active' => true,
+    //     'hasActivePage' => [
+    //         'users.list', 'roles.list', 'groups.list', 'department.list'
+    //     ],
+    //     'position' => 0,
+    //     'authorize' => ['super-admin'],
+    //     'children' => [
+    //         [
+    //             'router' => 'users.list',
+    //             'name' => 'Danh sách tài khoản',
+    //             'icon' => 'far fa-circle nav-icon',
+    //             'hasActivePage' => [
+    //                 'users.list'
+    //             ],
+    //             'position' => 1,
+    //             'authorize' => ['users.list'],
+    //             'active' => true
+    //         ],
+    //         [
+    //             'router' => 'department.list',
+    //             'name' => 'Danh sách phòng ban',
+    //             'icon' => 'far fa-circle nav-icon',
+    //             'hasActivePage' => [
+    //                 'department.list'
+    //             ],
+    //             'position' => 1,
+    //             'authorize' => ['department.list'],
+    //             'active' => true
+    //         ],
+    //         [
+    //             'router' => 'groups.list',
+    //             'name' => 'Danh sách nhóm quyền',
+    //             'icon' => 'far fa-circle nav-icon',
+    //             'hasActivePage' => [
+    //                 'groups.list'
+    //             ],
+    //             'position' => 1,
+    //             'authorize' => [],
+    //             'active' => true
+    //         ],
+    //         [
+    //             'router' => 'roles.list',
+    //             'name' => 'Danh sách bộ quyền',
+    //             'icon' => 'far fa-circle nav-icon',
+    //             'hasActivePage' => [
+    //                 'roles.list'
+    //             ],
+    //             'position' => 1,
+    //             'authorize' => [],
+    //             'active' => true
+    //         ],
+    //     ]
+    // ],
     [
         'router' => '',
         'name' => 'Dịch vụ - Sản phẩm',
