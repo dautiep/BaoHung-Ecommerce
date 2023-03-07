@@ -12,7 +12,7 @@ class ConfigController extends Controller
     public function artisanCache(Request $request)
     {
         try {
-            $redirect = redirect()->route('users.list')->with(array(
+            $redirect = redirect()->route('dashboard')->with(array(
                 'message' => 'Cập nhật cache hệ thống thành công',
                 'alert-type' => 'success'
             ));
@@ -21,7 +21,7 @@ class ConfigController extends Controller
             Artisan::call('storage:link');
             return $redirect;
         } catch (Exception $e) {
-            return redirect()->route('users.list')->with(array(
+            return redirect()->route('dashboard')->with(array(
                 'message' => 'Cập nhật cache hệ thống thành công',
                 'alert-type' => 'success'
             ));

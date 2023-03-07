@@ -38,33 +38,33 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::post('get-data-chart', 'HomeController@getDataChart')->name('dashboard.get.data.chart');
 
     // users
-    Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
-        Route::get('/', 'UserController@list')->name('list')->middleware('role:users.list');
-        Route::get('create', 'UserController@create')->name('create');
-        Route::post('/delete', 'UserController@delete')->name('delete');
-        Route::get('edit/{id}', 'UserController@edit')->name('edit');
-        Route::post('state', 'UserController@state')->name('state');
-        Route::post('store/{id?}', 'UserController@store')->name('store');
-    });
+    // Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
+    //     Route::get('/', 'UserController@list')->name('list')->middleware('role:users.list');
+    //     Route::get('create', 'UserController@create')->name('create');
+    //     Route::post('/delete', 'UserController@delete')->name('delete');
+    //     Route::get('edit/{id}', 'UserController@edit')->name('edit');
+    //     Route::post('state', 'UserController@state')->name('state');
+    //     Route::post('store/{id?}', 'UserController@store')->name('store');
+    // });
     // roles
-    Route::group(['prefix' => 'roles', 'as' => 'roles.'], function () {
-        Route::get('/', 'RoleController@list')->name('list');
-        Route::get('create', 'RoleController@create')->name('create');
-        Route::post('/delete', 'RoleController@delete')->name('delete');
-        Route::get('edit/{id}', 'RoleController@edit')->name('edit');
-        Route::post('store/{id?}', 'RoleController@store')->name('store');
-        Route::get('config', 'RoleController@config')->name('config');
-    });
+    // Route::group(['prefix' => 'roles', 'as' => 'roles.'], function () {
+    //     Route::get('/', 'RoleController@list')->name('list');
+    //     Route::get('create', 'RoleController@create')->name('create');
+    //     Route::post('/delete', 'RoleController@delete')->name('delete');
+    //     Route::get('edit/{id}', 'RoleController@edit')->name('edit');
+    //     Route::post('store/{id?}', 'RoleController@store')->name('store');
+    //     Route::get('config', 'RoleController@config')->name('config');
+    // });
 
     // groups
-    Route::group(['prefix' => 'groups', 'as' => 'groups.'], function () {
-        Route::get('/', 'GroupController@list')->name('list')->middleware('role:services.list');
-        Route::get('create', 'GroupController@create')->name('create');
-        Route::post('state', 'GroupController@state')->name('state');
-        Route::post('/delete', 'GroupController@delete')->name('delete');
-        Route::get('edit/{id}', 'GroupController@edit')->name('edit');
-        Route::post('store/{id?}', 'GroupController@store')->name('store');
-    });
+    // Route::group(['prefix' => 'groups', 'as' => 'groups.'], function () {
+    //     Route::get('/', 'GroupController@list')->name('list')->middleware('role:services.list');
+    //     Route::get('create', 'GroupController@create')->name('create');
+    //     Route::post('state', 'GroupController@state')->name('state');
+    //     Route::post('/delete', 'GroupController@delete')->name('delete');
+    //     Route::get('edit/{id}', 'GroupController@edit')->name('edit');
+    //     Route::post('store/{id?}', 'GroupController@store')->name('store');
+    // });
 
     //services
     Route::group(['prefix' => 'services', 'as' => 'services.'], function () {
@@ -84,7 +84,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
         Route::get('/edit/{id}', 'CategoryController@edit')->name('edit');
         Route::post('/lock', 'CategoryController@lock')->name('lock');
         Route::post('/unlock', 'CategoryController@unlock')->name('unlock');
-        // Route::post('/upload-image', 'CategoryController@uploadImage')->name('upload-image');
     });
 
     Route::group(['prefix' => 'products', 'as' => 'products.'], function () {
@@ -97,13 +96,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
         Route::post('/upload-image', 'ProductController@uploadImage')->name('upload-image');
     });
 
-    Route::group(['prefix' => 'department', 'as' => 'department.'], function () {
-        Route::get('/', 'DepartmentController@index')->name('list');
-        Route::get('/create', 'DepartmentController@create')->name('create');
-        Route::get('/edit/{id}', 'DepartmentController@edit')->name('edit');
-        Route::post('/store/{id?}', 'DepartmentController@store')->name('store');
-        Route::post('state', 'DepartmentController@state')->name('state');
-    });
+    // Route::group(['prefix' => 'department', 'as' => 'department.'], function () {
+    //     Route::get('/', 'DepartmentController@index')->name('list');
+    //     Route::get('/create', 'DepartmentController@create')->name('create');
+    //     Route::get('/edit/{id}', 'DepartmentController@edit')->name('edit');
+    //     Route::post('/store/{id?}', 'DepartmentController@store')->name('store');
+    //     Route::post('state', 'DepartmentController@state')->name('state');
+    // });
     Route::group(['prefix' => 'file_upload', 'as' => 'file_manager.'], function () {
         Route::post('upload', 'FileManagerController@fileUpload')->name('file_upload');
     });
