@@ -24,12 +24,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <style>
-
         .image_product {
-            height: 500px;
-            width: 500px;
+            object-fit: cover;
+            margin-left: auto;
+            margin-right: auto;
         }
-
     </style>
     @yield('css')
 
@@ -43,7 +42,42 @@
     @include(bladeAsset('components.scroll_top'))
     @include(bladeAsset('scripts.scripts'))
     @yield('scripts')
+    <script>
+        $(document).ready(function() {
+            // get the img element
+            const resizeImage = () => {
+                const queryAllImg = document.querySelectorAll('.image_product');
+                if (queryAllImg.length < 2) {
+                    return;
+                }
+                const closestDiv = queryAllImg[0];
+                var height = closestDiv.height;
+                const eachImage = function(array, callback, scope) {
+                    for (var i = 0; i < array.length; i++) {
+                        callback.call(scope, i, array[i]);
+                    }
+                };
+                eachImage(queryAllImg, function(index, img) {
+                    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                    var width = img.width;
 
+                    svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+                    svg.setAttribute('width', width);
+                    svg.setAttribute('height', height);
+                    var svgImg = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+                    svgImg.setAttribute('x', 0);
+                    svgImg.setAttribute('y', 0);
+                    svgImg.setAttribute('width', width);
+                    svgImg.setAttribute('height', height);
+                    svgImg.setAttributeNS('http://www.w3.org/1999/xlink', 'href', img.src);
+                    svg.appendChild(svgImg);
+                    img.parentNode.replaceChild(svg, img);
+                });
+
+            };
+            resizeImage();
+        });
+    </script>
 </body>
 
 </html>

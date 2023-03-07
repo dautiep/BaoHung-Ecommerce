@@ -63,7 +63,7 @@ return [
         'icon' => 'nav-icon fas fa-address-book',
         'active' => true,
         'hasActivePage' => [
-            'list-services', 'list-categories', 'list-products'
+            'list-services', 'list-categories', 'list-products', 'list-banners'
         ],
         'position' => 0,
         'authorize' => [],
@@ -96,6 +96,17 @@ return [
                 'icon' => 'far fa-circle nav-icon',
                 'hasActivePage' => [
                     'list-products'
+                ],
+                'position' => 1,
+                'authorize' => [],
+                'active' => true
+            ],
+            [
+                'router' => 'config_banner.index',
+                'name' => 'QL banner',
+                'icon' => 'far fa-circle nav-icon',
+                'hasActivePage' => [
+                    'list-banners'
                 ],
                 'position' => 1,
                 'authorize' => [],

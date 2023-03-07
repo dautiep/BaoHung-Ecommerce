@@ -5,7 +5,8 @@
                 <div id="product-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner border">
                         <div class="carousel-item active">
-                            <img class="w-100 h-100 image_product" src="{{ asset('admin/images/products/' . @$product_detail->image_url) }}" alt="Image">
+                            <img class="w-100 h-100 image_product"
+                                src="{{ asset('admin/images/products/' . @$product_detail->image_url) }}" alt="Image">
                         </div>
                     </div>
                     <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
@@ -28,7 +29,7 @@
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-1">
                         <h4 class="mb-3">Miêu tả</h4>
-                        {!!html_entity_decode($product_detail->content)!!}
+                        {!! html_entity_decode($product_detail->content) !!}
                     </div>
                 </div>
             </div>

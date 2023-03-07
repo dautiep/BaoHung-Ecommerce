@@ -64,6 +64,7 @@ class SiteConfigController extends Controller
 
     public function hasActiveRoutePage($route_name, $className = 'active')
     {
-        return $route_name === request()->route()->getName() ? $className : '';
+        $route_request = request()->route() ? request()->route()->getName() : '';
+        return $route_name === $route_request ? $className : '';
     }
 }

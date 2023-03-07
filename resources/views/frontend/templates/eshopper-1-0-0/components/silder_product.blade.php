@@ -8,23 +8,26 @@
             <div class="col">
                 <div class="owl-carousel related-carousel">
                     @foreach (@$categories_with_product->productWithCategory as $product)
-                        <div class="card product-item border-0">
-                            <div
-                                class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                                <img class="img-fluid w-100 image_product" src="{{ @$product->image_url }}" alt="">
-                            </div>
-                            <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                                <h6 class="text-truncate mb-3">{{ @$product->name }}</h6>
-                                <div class="d-flex justify-content-center">
-                                    <h6>{{ formatPrice($product->price) }}</h6>
-                                    <h6 class="text-muted ml-2"><del>{{ formatPrice($product->price) }}</del></h6>
+                            <div class="card product-item border-0">
+                                <div
+                                    class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                                    <img class="img-fluid w-100 image_product"
+                                        src="{{ asset('admin/images/products/' . $product->image_url) }}"
+                                        alt="">
+                                </div>
+                                <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                                    <h6 class="text-truncate mb-3">{{ @$product->name }}</h6>
+                                    <div class="d-flex justify-content-center">
+                                        <h6>{{ formatPrice($product->price) }}</h6>
+                                        <h6 class="text-muted ml-2"><del>{{ formatPrice($product->price) }}</del></h6>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between bg-light border">
+                                    <a href="{{ route('frontend.product.detail', ['slug' => $product->slug]) }}"
+                                        class="btn btn-sm text-dark p-0"><i
+                                            class="fas fa-eye text-primary mr-1"></i>{{ config('page.btn_view_product') }}</a>
                                 </div>
                             </div>
-                            <div class="card-footer d-flex justify-content-between bg-light border">
-                                <a href="{{ route('frontend.product.detail', ['slug' => $product->slug]) }}" class="btn btn-sm text-dark p-0"><i
-                                        class="fas fa-eye text-primary mr-1"></i>{{ config('page.btn_view_product') }}</a>
-                            </div>
-                        </div>
                     @endforeach
 
                 </div>

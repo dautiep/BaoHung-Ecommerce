@@ -110,6 +110,18 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::group(['prefix' => 'config_cache', 'as' => 'config_cache.'], function () {
         Route::get('clear/cache', 'ConfigController@artisanCache')->name('artisanCache');
     });
+    Route::group(['prefix' => 'config_banner', 'as' => 'config_banner.'], function () {
+        Route::get('/', 'BannerController@index')->name('index');
+        Route::get('/create', 'BannerController@create')->name('create');
+        Route::get('/edit/{id}', 'BannerController@edit')->name('edit');
+        Route::post('/store/{id?}', 'BannerController@store')->name('store');
+        Route::post('/delete', 'BannerController@delete')->name('delete');
+        Route::post('/status', 'BannerController@status')->name('status');
+
+        Route::post('/upload-image', 'ProductController@uploadImage')->name('upload');
+
+
+    });
     Route::group(['prefix' => 'filemanager'], function () {
         \UniSharp\LaravelFilemanager\Lfm::routes();
     });

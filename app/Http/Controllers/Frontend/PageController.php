@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\BaseRepository;
+use App\Repositories\Interfaces\BannerRespositoryInterface;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Repositories\Interfaces\ProductRepositoryInterface;
 use App\Repositories\Interfaces\ServiceRepositoryInterface;
@@ -16,16 +17,18 @@ class PageController extends Controller
     private $_repo_category;
     private $_repo_product;
     private $_repo_service;
+    private $_repo_banner;
     public function __construct(
         CategoryRepositoryInterface $categoryRepositoryInterface,
         ProductRepositoryInterface $productRepositoryInterface,
-        ServiceRepositoryInterface $serviceRepositoryInterface
-    )
-    {
+        ServiceRepositoryInterface $serviceRepositoryInterface,
+        BannerRespositoryInterface $bannerRespositoryInterface
+    ) {
         $this->_prefix = config('template.config.blade_dir') . 'pages.';
         $this->_repo_category = $categoryRepositoryInterface;
         $this->_repo_product = $productRepositoryInterface;
         $this->_repo_service = $serviceRepositoryInterface;
+        $this->_repo_banner = $bannerRespositoryInterface;
     }
 
     public function index()
@@ -130,8 +133,8 @@ class PageController extends Controller
             'price',
             'category_id',
             'image_url'
-        ], false)->where(function($builder) use($request) {
-             $builder->where('slug', '=', $request->slug)->orWhere('name', 'like', '%' . $request->name . '%');
+        ], false)->where(function ($builder) use ($request) {
+            $builder->where('slug', '=', $request->slug)->orWhere('name', 'like', '%' . $request->name . '%');
         })->firstOrFail();
         $categories_with_product = $this->_repo_category->queryGlobal([
             'name',
@@ -192,28 +195,24 @@ class PageController extends Controller
 
     private function setHeaderCarouel($status = false, $carousel_item = [])
     {
+        $data = $this->_repo_banner->findBy([
+            'status' => config('global.default.status.banner.active'),
+        ])->map(function ($item) {
+            return  [
+                'title' => @$item->title,
+                'description' => @$item->description,
+                'href' => '#',
+                'btn_title' => '',
+                'btn_href' =>  @$item->btn_href,
+                'img_src' => asset('admin/images/banners/' . @$item->img_src),
+                'img_alt' =>  @$item->title,
+            ];
+        })->toArray();
+
+
         $config_page = [
             'status' => $status,
-            'carousel_item' => [
-                [
-                    'title' => '10% Off Your First Order',
-                    'description' => 'Fashionable Dress',
-                    'href' => '#',
-                    'btn_title' => 'Shop now',
-                    'btn_href' => '',
-                    'img_src' => templateAsset('img/carousel-1.jpg'),
-                    'img_alt' => '',
-                ],
-                [
-                    'title' => '10% Off Your First Order',
-                    'description' => 'Fashionable Dress',
-                    'href' => '#',
-                    'btn_title' => 'Shop now',
-                    'btn_href' => '#',
-                    'img_src' => templateAsset('img/carousel-2.jpg'),
-                    'img_alt' => '',
-                ]
-            ]
+            'carousel_item' => @$data
         ];
         view()->share('header_carouel', $config_page);
     }
