@@ -26,6 +26,8 @@
     <style>
         .image_product {
             object-fit: cover;
+            margin-left: auto;
+            margin-right: auto;
         }
     </style>
     @yield('css')
@@ -43,42 +45,37 @@
     <script>
         $(document).ready(function() {
             // get the img element
-            const queryAllImg = document.querySelectorAll('img');
-            if (queryAllImg.length > 0) {
-
-            }
-            const closestDiv = queryAllImg[0].closest('div');
-
-            const eachImage = function(array, callback, scope) {
-                for (var i = 0; i < array.length; i++) {
-                    callback.call(scope, i, array[i]);
+            const resizeImage = () => {
+                const queryAllImg = document.querySelectorAll('.image_product');
+                if (queryAllImg.length < 2) {
+                    return;
                 }
+                const closestDiv = queryAllImg[0];
+                var height = closestDiv.height;
+                const eachImage = function(array, callback, scope) {
+                    for (var i = 0; i < array.length; i++) {
+                        callback.call(scope, i, array[i]);
+                    }
+                };
+                eachImage(queryAllImg, function(index, img) {
+                    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                    var width = img.width;
+
+                    svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+                    svg.setAttribute('width', width);
+                    svg.setAttribute('height', height);
+                    var svgImg = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+                    svgImg.setAttribute('x', 0);
+                    svgImg.setAttribute('y', 0);
+                    svgImg.setAttribute('width', width);
+                    svgImg.setAttribute('height', height);
+                    svgImg.setAttributeNS('http://www.w3.org/1999/xlink', 'href', img.src);
+                    svg.appendChild(svgImg);
+                    img.parentNode.replaceChild(svg, img);
+                });
+
             };
-            eachImage(queryAllImg, function(index, img) {
-
-                // create a new SVG element
-                var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-
-                // set attributes for the SVG element
-                svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-                svg.setAttribute('width', closestDiv.offsetHeight);
-                svg.setAttribute('height', closestDiv.offsetHeight);
-
-                // create an image element inside the SVG element
-                var svgImg = document.createElementNS('http://www.w3.org/2000/svg', 'image');
-                svgImg.setAttribute('x', 0);
-                svgImg.setAttribute('y', 0);
-                svgImg.setAttribute('width', closestDiv.offsetHeight);
-                svgImg.setAttribute('height', closestDiv.offsetHeight);
-                svgImg.setAttributeNS('http://www.w3.org/1999/xlink', 'href', img.src);
-
-                // add the image element to the SVG element
-                svg.appendChild(svgImg);
-
-                // replace the img element with the new SVG element
-                img.parentNode.replaceChild(svg, img);
-            });
-
+            resizeImage();
         });
     </script>
 </body>

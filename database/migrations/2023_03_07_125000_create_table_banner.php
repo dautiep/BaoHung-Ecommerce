@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableService extends Migration
+class CreateTableBanner extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,15 @@ class CreateTableService extends Migration
      */
     public function up()
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('banner', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
+            $table->text('title');
             $table->text('description');
-            $table->tinyInteger('status')->nullable();
+            $table->text('slug');
+            $table->text('btn_title');
+            $table->text('btn_href');
+            $table->text('img_src');
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }
@@ -29,6 +33,6 @@ class CreateTableService extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('banner');
     }
 }

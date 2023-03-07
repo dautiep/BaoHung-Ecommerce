@@ -28,7 +28,7 @@ class ProductFactory extends Factory
             'content' => $this->faker->text,
             'price' => $this->faker->numberBetween($min = 1500, $max = 6000),
             'category_id' => Category::all()->random()->id,
-            'image_url' => "https://imgboats.com/assets/images/img400_".$this->faker->numberBetween($min = 1, $max = 5).".jpg"
+            'image_url' => "400x".$this->faker->numberBetween($min = 300, $max = 400).".png"
         ];
     }
 }

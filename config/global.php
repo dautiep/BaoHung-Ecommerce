@@ -69,7 +69,17 @@ return [
                     'key' => 0,
                     'name' => 'Khóa'
                 ]
-            ]
+            ],
+            'banner' => [
+                'active' => [
+                    'key' => 1,
+                    'name' => 'Hoạt động'
+                ],
+                'deactive' => [
+                    'key' => 0,
+                    'name' => 'Khóa'
+                ]
+            ],
         ],
         'messages' => [
             'users' => [
@@ -111,7 +121,14 @@ return [
                 'edit' => 'Cập nhật sản phẩm thành công',
                 'edit_status' => 'Đã thay đổi trạng thái sản phẩm',
                 'error' => 'Đã xảy ra lỗi!',
-            ]
+            ],
+            'banner' => [
+                'create' => 'Thêm hình ảnh thành công',
+                'edit' => 'Chỉnh sửa hình ảnh thành công',
+                'edit_status' => 'Chỉnh sửa trạng thái hình ảnh thành công',
+                'delete'   => 'Xóa hình ảnh thành công',
+
+            ],
         ]
     ]
 ];

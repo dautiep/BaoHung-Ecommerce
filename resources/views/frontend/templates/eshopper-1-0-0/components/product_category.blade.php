@@ -52,8 +52,8 @@
                                     <a href="{{ route('frontend.product.detail', ['slug' => $product->slug]) }}"
                                         class="btn btn-sm text-dark p-0"><i
                                             class="fas fa-eye text-primary mr-1"></i>{{ config('page.btn_view_product') }}</a>
-                                    <a href="" class="btn btn-sm text-dark p-0"><i
-                                            class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                                    {{-- <a href="" class="btn btn-sm text-dark p-0"><i
+                                            class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a> --}}
                                 </div>
                             </div>
                         </div>
