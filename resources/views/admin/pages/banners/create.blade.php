@@ -43,8 +43,7 @@
                                     <div class="row mt-4">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="text-capitalize">Tên Tiêu Đề <sup
-                                                        class="text-danger">*</sup></label>
+                                                <label class="text-capitalize">Tên Tiêu Đề </label>
                                                 <input type="text" name="title"
                                                     value="{{ old('title', @$data->title) }}" class="form-control"
                                                     placeholder="Hình Ảnh..." autocomplete="off">
@@ -52,8 +51,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="text-capitalize">Đường dẫn liên kết <sup
-                                                        class="text-danger">*</sup></label>
+                                                <label class="text-capitalize">Đường dẫn liên kết </label>
                                                 <textarea type="text" name="btn_href" class="form-control" rows="2">{{ old('btn_href', @$data->btn_href) }}</textarea>
                                             </div>
                                         </div>

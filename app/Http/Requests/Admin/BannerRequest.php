@@ -24,10 +24,7 @@ class BannerRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'max:255'],
-            'btn_href' => ['required', 'max:255'],
-            'description' => ['required', 'max:255'],
-            'img_src' => [''],
+            'img_src' => ['required'],
         ];
     }
 
