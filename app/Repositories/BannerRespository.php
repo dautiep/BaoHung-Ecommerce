@@ -62,28 +62,27 @@ class BannerRespository extends BaseRepository implements BannerRespositoryInter
 
         $data = $request->all();
         $input = [
-            'title' => @$data['title'],
-            'description' => @$data['description'],
-            'slug' => \Str::slug($data['title']),
-            'btn_title' => @$data['title'],
-            'btn_href' => @$data['btn_href'],
-            'img_src' => @$data['img_src'],
+            'title' => @$data['title'] ?? "",
+            'description' => @$data['description'] ?? "",
+            'slug' => \Str::slug($data['title']) ?? "",
+            'btn_title' => @$data['title'] ?? "",
+            'btn_href' => @$data['btn_href'] ?? "",
+            'img_src' => @$data['img_src'] ?? "",
         ];
-
         $rec = $this->_model->find($id);
-        $input['img_src'] = $this->handleUpdateImage($rec, $input);
+        $input['img_src'] = $this->handleUpdateImage($rec, $input) ?? "";
         if ($rec) {
             return $this->update($input, $id);
         }
 
-        return $this->create($data);
+        return $this->create($input);
     }
 
     public function handleUpdateImage($data, $input)
     {
         try {
             if (request()->file('img_src')) {
-                $slug = \Str::slug($data['title']);
+                $slug = \Str::slug($data['title'] ?? "");
                 $imageName = time() . '-' . $slug . '.' . $input['img_src']->extension();
                 $input['img_src']->move(public_path('admin/images/banners'), $imageName);
                 $input['img_src'] = $imageName;
