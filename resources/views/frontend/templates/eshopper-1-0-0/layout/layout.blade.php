@@ -23,6 +23,7 @@
     <link href="{{ templateAsset('css/style.css') }}" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="{{ templateAsset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
     <style>
         .image_product {
             object-fit: cover;

@@ -67,7 +67,7 @@ class BannerRespository extends BaseRepository implements BannerRespositoryInter
             'slug' => \Str::slug($data['title']) ?? "",
             'btn_title' => @$data['title'] ?? "",
             'btn_href' => @$data['btn_href'] ?? "",
-            'status' => config('global.status.banner.key.active'),
+            'status' => config('global.default.status.banner.active.key'),
             'img_src' => @$data['img_src'] ?? "",
         ];
         $rec = $this->_model->find($id);
