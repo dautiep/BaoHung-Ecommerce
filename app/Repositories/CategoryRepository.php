@@ -20,9 +20,9 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
     {
         return $this->_model->with([
             'productWithCategory' => function ($builder) {
-                $builder->orderByDesc('created_at');
+                $builder->where('status',  config('global.default.status.products.actived.key'))->orderByDesc('created_at');
             }
-        ])->take(6)->orderByDesc('created_at')->get();
+        ])->where('status', config('global.default.status.categories')[0]['key'])->take(6)->orderByDesc('created_at')->get();
     }
 
     //get all data

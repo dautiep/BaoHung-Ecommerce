@@ -39,13 +39,18 @@
                 </a>
             </div>
             <div class="col-lg-6 col-6 text-left">
-                <form action="{{ route('frontend.product.detail') }}">
+                <form action="{{ route('frontend.product.detail') }}" method="GET">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="name" placeholder="{{ config('page.input_search_on_page') }}" value="{{ request()->name }}">
+                        <input type="text" class="form-control input-search-top" name="name"
+                            placeholder="{{ config('page.input_search_on_page') }}" value="{{ request()->name }}">
                         <div class="input-group-append">
                             <span class="input-group-text bg-transparent text-primary">
-                                <i class="fa fa-search"></i>
+                                <button type="submit" class="btn-link"> <i class="fa fa-search"></i>
+                                    </a>
                             </span>
+                            <div class="dropdown-menu inline-search-top">
+                                @include(bladeAsset('components.search_item'))
+                            </div>
                         </div>
                     </div>
                 </form>

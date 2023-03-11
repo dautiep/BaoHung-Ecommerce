@@ -134,7 +134,9 @@ class PageController extends Controller
             'category_id',
             'image_url'
         ], false)->where(function ($builder) use ($request) {
-            $builder->where('slug', '=', $request->slug)->orWhere('name', 'like', '%' . $request->name . '%');
+            $builder->where('slug', '=', $request->slug)
+            ->orWhere('name', 'like', '%' . $request->name . '%')
+            ->where('status', config('global.default.status.products.actived.key'));
         })->firstOrFail();
         $categories_with_product = $this->_repo_category->queryGlobal([
             'name',
@@ -161,6 +163,28 @@ class PageController extends Controller
         $services = $this->_repo_service->getAllDataByStatus(config('global.default.status.services')[0]);
         return view($this->_prefix . 'services', compact('services'));
     }
+
+    public function search(Request $request)
+    {
+        if (request()->ajax()) {
+            $product_detail = $this->_repo_product->queryGlobal([
+                'id',
+                'name',
+                'slug',
+                'description',
+                'content',
+                'price',
+                'category_id',
+                'image_url'
+            ], false)->where(function ($builder) use ($request) {
+                $builder->where('name', 'like', '%' . $request->name . '%')
+                ->where('status', config('global.default.status.products.actived.key'));
+            })->take(5)->get();
+            return view(config('template.config.blade_dir') . 'components.search_item', compact('product_detail'))->render();
+        }
+        abort(404);
+    }
+
 
     public function contact()
     {
