@@ -37,7 +37,7 @@
             margin: auto;
             object-fit: cover;
             right: 10px;
-            bottom: 100px;
+            bottom: 50px;
             z-index: 100;
             width: 100px;
             height: 269px;
