@@ -2,6 +2,6 @@
     @if (@$product_detail)
         @foreach ($product_detail as $product)
             <a class="dropdown-item"
-                href="{{ route('frontend.product.detail', ['slug' => $product->slug]) }}">{{ @$product->name }}</a>
+                href="{{ route('frontend.product.detail', ['slug' => @$product->slug]) }}">{{ @$product->name }}</a>
         @endforeach
     @endif
