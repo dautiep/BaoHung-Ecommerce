@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Project',
+    'title' => 'Công Nghệ và hơn thế nữa...',
     'short_title' => 'P',
     'btn_view_product' => 'Xem chi tiết',
     'input_search_on_page' => 'Tìm kiếm sản phẩm',
@@ -42,9 +42,11 @@ return [
         ]
     ],
     'footer' => [
-        'description' => 'Giới thiệu về shop',
-        'map_market' => 'Địa chỉ shop',
-        'phone_number' => '(+084) 123456',
-        'email' => 'sample@email.com'
+        'description' => 'Giới thiệu về showroom',
+        'map_market' => 'Địa chỉ showroom: 572A/11 Trần Hưng Đạo, Phường 2, Quận 5, TP.HCM',
+        'phone_number' => '(+84) 2838382054',
+        'hotline-1' => 'Hotline 1: Cô Thảo - 0909085634',
+        'hotline-2' => 'Hotline 2: Anh Duy - 0932121063',
+        'email' => 'Email: peterduy@gmail.com'
     ]
 ];
