@@ -69,24 +69,19 @@
                 <div id="header-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         @foreach ($header_carouel['carousel_item'] as $item)
-                            <a href="{{ @$item['btn_href'] }}">
-                                <div class="carousel-item {{ @$loop->first == true ? 'active' : '' }}"
-                                    style="height: 410px;">
-                                    <img class="img-fluid" src="{{ @$item['img_src'] }}"
-                                        alt="{{ @$item['img_alt'] }}">
-                                    <div
-                                        class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                        <div class="p-3" style="max-width: 700px;">
-                                            <h4 class="text-light text-uppercase font-weight-medium mb-3">
-                                                {!! @$item['title'] !!}</h4>
-                                            <h3 class="display-4 text-white font-weight-semi-bold mb-4">
-                                                {!! @$item['description'] !!}
-                                            </h3>
-
-                                        </div>
-                                    </div>
+                        <div class="carousel-item {{ @$loop->first == true ? 'active' : '' }}" style="height: 410px;">
+                            <img class="img-fluid" src="{{ @$item['img_src'] }}" alt="{{ @$item['img_alt'] }}">
+                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                <div class="p-3" style="max-width: 700px;">
+                                    <a href="{{ @$item['btn_href'] }}">
+                                        <h4 class="text-light text-uppercase font-weight-medium mb-3">{!! @$item['title'] !!}</h4>
+                                    </a>
+                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4">
+                                        {!! @$item['description'] !!}
+                                    </h3>
                                 </div>
-                            </a>
+                            </div>
+                        </div>
                         @endforeach
                     </div>
                     <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
@@ -101,6 +96,7 @@
                     </a>
                 </div>
             @endif
+
         </div>
     </div>
 </div>
