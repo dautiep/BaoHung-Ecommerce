@@ -11,7 +11,7 @@
                 <div class="col-lg-6">
                     <div class="section-title">
                         <h2>DỊCH VỤ</h2>
-                        <p>Dịch vụ chuyên nghiệp giúp doanh nghiệp/ tổ chức tập trung vào các chuyên môn cốt lõi, giảm tải công tác quản trị, tối ưu vận hành. Đội ngũ triển khai dịch vụ đạt trình độ cao, dày dạn kinh nghiệm, đạt cam kết chất lượng vượt trội.</p>
+                        <p>Dịch vụ của chúng tôi chuyên nghiệp giúp doanh nghiệp/ tổ chức tập trung vào các chuyên môn cốt lõi, giảm tải công tác quản trị, tối ưu vận hành. Đội ngũ triển khai dịch vụ đạt trình độ cao, dày dạn kinh nghiệm, đạt cam kết chất lượng vượt trội.</p>
                     </div>
                 </div>
             </div>
