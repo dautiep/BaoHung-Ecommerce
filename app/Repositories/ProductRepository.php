@@ -84,6 +84,6 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
         $query = $this->_model->selectRaw(implode(", ",$columns));
         $query = $with ? $query->with($with) : $query;
-        return $query;
+        return $query->where('status', config('global.default.status.products.actived.key'));
     }
 }

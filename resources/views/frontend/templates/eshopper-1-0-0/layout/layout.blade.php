@@ -29,6 +29,39 @@
             margin-left: auto;
             margin-right: auto;
         }
+
+        .icon-chat-bot {
+            position: fixed;
+            display: inline;
+            margin: auto;
+            object-fit: cover;
+            right: 10px;
+            bottom: 100px;
+            z-index: 100;
+            width: 100px;
+            height: 269px;
+            width: 174px;
+            background: url("{{ asset('frontend/img/botchat.jpg') }}");
+            background-repeat: no-repeat;
+            border: none;
+            animation: action 1s infinite alternate;
+        }
+
+        .btn-link {
+            border: none;
+            outline: none;
+            background: none;
+            cursor: pointer;
+            color: #0000EE;
+            padding: 0;
+            text-decoration: underline;
+            font-family: inherit;
+            font-size: inherit;
+        }
+
+        .inline-search-top {
+            width: 100%;
+        }
     </style>
     @yield('css')
 
@@ -76,6 +109,37 @@
 
             };
             resizeImage();
+            const inputTopSearch = $('.input-search-top');
+            const appendInputTopSearch = $('.inline-search-top');
+            $(function() {
+                var minlength = 2;
+                inputTopSearch.keyup(function() {
+                    var that = this,
+                        value = $(this).val();
+                    if (value.length < minlength) {
+                        appendInputTopSearch.html('');
+                        appendInputTopSearch.hide();
+                    }
+                    if (value.length >= minlength) {
+
+                        searchRequest = $.ajax({
+                            type: "GET",
+                            url: "{{ route('frontend.search') }}",
+                            data: {
+                                'name': value
+                            },
+                            dataType: "text",
+                            success: function(msg) {
+                                //we need to check if the value is the same
+                                if (value == $(that).val()) {
+                                    appendInputTopSearch.html(msg);
+                                    appendInputTopSearch.show();
+                                }
+                            },
+                        });
+                    }
+                });
+            });
         });
     </script>
 </body>
