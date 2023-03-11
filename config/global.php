@@ -127,6 +127,7 @@ return [
                 'edit' => 'Chỉnh sửa hình ảnh thành công',
                 'edit_status' => 'Chỉnh sửa trạng thái hình ảnh thành công',
                 'delete'   => 'Xóa hình ảnh thành công',
+                'confirm_delete' => 'Bạn có muốn xóa banner này không?'
 
             ],
         ]
