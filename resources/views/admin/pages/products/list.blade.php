@@ -110,7 +110,11 @@
                                             <td class="align-middle">
                                                 Tên: {{ $product->name }} <br>
                                                 Danh mục: {{ $product->category->name }} <br>
-                                                Giá: {{ number_format($product->price) }} VND
+                                                @if ($product->price == 'Liên hệ')
+                                                    Giá: {{ $product->price }}
+                                                @else
+                                                    Giá: {{ number_format($product->price) }} VND
+                                                @endif
                                             </td>
                                             <td class="text-center"><img class="img-fluid img-product-item" src="{{ asset('admin/images/products/' .'/'. $product->image_url) }}" alt="{{ $product->name }}"></td>
                                             <td class="align-middle text-center">

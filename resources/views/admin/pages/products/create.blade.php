@@ -159,7 +159,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="text-capitalize">Giá Sản Phẩm <sup class="text-danger">*</sup></label>
-                                            <input type="number" name="productPrice" value="{{ $product->price }}" class="form-control" placeholder="" autocomplete="off">
+                                            <input type="text" name="productPrice" value="{{ $product->price }}" class="form-control" placeholder="" autocomplete="off">
                                         </div>
                                     </div>
                                     <div class="col-md-12">

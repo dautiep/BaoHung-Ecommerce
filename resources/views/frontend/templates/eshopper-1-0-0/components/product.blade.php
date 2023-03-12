@@ -21,7 +21,11 @@
                                 <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                                     <h6 class="text-truncate mb-3 ml-2">{{ $product->name }}</h6>
                                     <div class="d-flex justify-content-left">
-                                        <h6 class="ml-2">Giá: {{ formatPrice($product->price) }}</h6>
+                                        @if ($product->price == 'Liên hệ')
+                                            <h6 class="ml-2">Giá: {{ $product->price }}</h6>
+                                        @else
+                                            <h6 class="ml-2">Giá: {{ formatPrice(floatval($product->price)) }}</h6>
+                                        @endif
                                         {{-- <h6 class="text-muted ml-2"><del>{{ formatPrice($product->price) }}</del></h6> --}}
                                     </div>
                                 </div>
