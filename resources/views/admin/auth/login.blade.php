@@ -7,9 +7,9 @@
     <div class="login-box">
         <!-- /.login-logo -->
         <div class="card card-azoffice">
-            <div class="card-header text-center">
+            {{-- <div class="card-header text-center">
                 <div><img src="{{ addVersionTo('admin/images/logo.png') }}" alt="logo" width="90"></div>
-            </div>
+            </div> --}}
             <div class="card-body">
                 <p class="login-box-msg">Đăng nhập vào hệ thống</p>
                 {!! Form::open(array('route' => 'login.store', 'method' => 'POST')) !!}
