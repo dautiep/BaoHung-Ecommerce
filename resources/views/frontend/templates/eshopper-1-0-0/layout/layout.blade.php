@@ -31,7 +31,7 @@
             margin-right: auto;
         }
 
-        .icon-chat-bot {
+        /* .icon-chat-bot {
             position: fixed;
             display: inline;
             margin: auto;
@@ -46,7 +46,7 @@
             background-repeat: no-repeat;
             border: none;
             animation: action 1s infinite alternate;
-        }
+        } */
 
         .btn-link {
             border: none;
