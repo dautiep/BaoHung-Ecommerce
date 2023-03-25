@@ -33,7 +33,7 @@
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-1">
                         <h4 class="mb-3">Miêu tả</h4>
-                        <div class="container">
+                        <div class="table-responsive">
                             {!! html_entity_decode($product_detail->content) !!}
                         </div>
                     </div>
