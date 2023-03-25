@@ -33,7 +33,9 @@
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-1">
                         <h4 class="mb-3">Miêu tả</h4>
-                        {!! html_entity_decode($product_detail->content) !!}
+                        <div class="container">
+                            {!! html_entity_decode($product_detail->content) !!}
+                        </div>
                     </div>
                 </div>
             </div>
