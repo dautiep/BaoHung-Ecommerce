@@ -135,8 +135,7 @@ class PageController extends Controller
             'image_url'
         ], false)->where(function ($builder) use ($request) {
             $builder->where('slug', '=', $request->slug)
-            ->orWhere('name', 'like', '%' . $request->name . '%')
-            ->where('status', config('global.default.status.products.actived.key'));
+                ->where('status', config('global.default.status.products.actived.key'));
         })->firstOrFail();
         $categories_with_product = $this->_repo_category->queryGlobal([
             'name',
@@ -144,7 +143,10 @@ class PageController extends Controller
             'slug'
         ], [
             'productWithCategory'
-        ])->where([['id', '=', $product_detail->category_id]])->firstOrFail();
+        ])->where([
+            ['id', '=', $product_detail->category_id],
+            ['status', config('global.default.status.categories')[0]['key']]
+        ])->firstOrFail();
         $this->setTitlePage($product_detail->name);
 
         $this->setCategoriesWithProduct($categories_with_product);
@@ -155,11 +157,12 @@ class PageController extends Controller
 
     public function serives()
     {
+        $this->setTitlePage('Dịch vụ');
+
         $this->setHeaderPage('Dịch vụ', [
             $this->configPage('Trang chủ', $this->_prefix_router . 'index'),
             $this->configPage('Dịch vụ', $this->_prefix_router . 'service')
         ]);
-        $this->setTitlePage('Dịch vụ');
         $services = $this->_repo_service->getAllDataByStatus(config('global.default.status.services')[0]);
         return view($this->_prefix . 'services', compact('services'));
     }
@@ -178,7 +181,7 @@ class PageController extends Controller
                 'image_url'
             ], false)->where(function ($builder) use ($request) {
                 $builder->where('name', 'like', '%' . $request->name . '%')
-                ->where('status', config('global.default.status.products.actived.key'));
+                    ->where('status', config('global.default.status.products.actived.key'));
             })->take(5)->get();
             return view(config('template.config.blade_dir') . 'components.search_item', compact('product_detail'))->render();
         }
