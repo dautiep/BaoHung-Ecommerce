@@ -150,10 +150,12 @@ class PageController extends Controller
             ['id', '=', $product_detail->category_id],
             ['status', config('global.default.status.categories')[0]['key']]
         ])->firstOrFail();
+        $categories_with_product->setRelation(
+            'productWithCategoryActive',
+            $categories_with_product->productWithCategoryActive()->where('id', '<>', $product_detail->id)->take(4)->get()
+        );
         $this->setTitlePage($product_detail->name);
-
         $this->setCategoriesWithProduct($categories_with_product);
-        $categories_with_product->setRelation('productWithCategoryActive', $categories_with_product->productWithCategoryActive()->take(4)->get());
         $this->setProductDetail($product_detail);
         return view($this->_prefix . 'product_detail');
     }
