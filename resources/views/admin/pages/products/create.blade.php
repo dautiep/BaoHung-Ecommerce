@@ -71,6 +71,13 @@
                                                 <input type="number" name="productPrice" value="{{ old('productPrice') }}" class="form-control" placeholder="" autocomplete="off">
                                             </div>
                                         </div>
+                                        <div class="col-md-12 mb-3">
+                                            <div class="form-check">
+                                                <input id="tagPrice" name="productPrriceDisplayed" class="form-check-input" type="checkbox" value="1" {{ (old('productPrriceDisplayed') == '1') ? 'checked' : '' }}>
+                                                <label class="form-check-label">Hiển thị giá sản phẩm</label>
+                                            </div>
+                                            <i>Chú ý: Nếu không click vào checkbox thì giá sẽ sẽ là Liên hệ</i>
+                                        </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <div class="form-group w-100">
@@ -159,8 +166,15 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="text-capitalize">Giá Sản Phẩm <sup class="text-danger">*</sup></label>
-                                            <input type="text" name="productPrice" value="{{ $product->price }}" class="form-control" placeholder="" autocomplete="off">
+                                            <input type="number" name="productPrice" value="{{ $product->price }}" class="form-control" placeholder="" autocomplete="off">
                                         </div>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-check">
+                                            <input name="productPrriceDisplayed" class="form-check-input" type="checkbox" value="{{ $product->is_displayed_price }}" {{ ($product->is_displayed_price == '1') ? 'checked' : '' }}>
+                                            <label class="form-check-label">Hiển thị giá sản phẩm</label>
+                                        </div>
+                                        <i>Chú ý: Nếu không click vào checkbox thì giá sẽ sẽ là Liên hệ</i>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -289,26 +303,34 @@
         });
     }
 
-        //upload image and preview
-        document.getElementById('readUrl').addEventListener('change', function(){
-            if (this.files[0] ) {
-                const file = this.files[0];
-                const  fileType = file['type'];
-                const validImageTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/jpg'];
-                if (!validImageTypes.includes(fileType)) {
-                    toastr.error('File không hợp lệ! Vui lòng chọn lại');
-                    $('#readUrl').val('')
-                } else {
-                    var picture = new FileReader();
-                    $("#uploadedImageOld").css('display', 'none');
-                    picture.readAsDataURL(this.files[0]);
-                    picture.addEventListener('load', function(event) {
-                        document.getElementById('uploadedImage').setAttribute('src', event.target.result);
-                        document.getElementById('uploadedImage').style.display = 'block';
-                    });
-                }
+    //upload image and preview
+    document.getElementById('readUrl').addEventListener('change', function(){
+        if (this.files[0] ) {
+            const file = this.files[0];
+            const  fileType = file['type'];
+            const validImageTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/jpg'];
+            if (!validImageTypes.includes(fileType)) {
+                toastr.error('File không hợp lệ! Vui lòng chọn lại');
+                $('#readUrl').val('')
+            } else {
+                var picture = new FileReader();
+                $("#uploadedImageOld").css('display', 'none');
+                picture.readAsDataURL(this.files[0]);
+                picture.addEventListener('load', function(event) {
+                    document.getElementById('uploadedImage').setAttribute('src', event.target.result);
+                    document.getElementById('uploadedImage').style.display = 'block';
+                });
             }
-        });
+        }
+    });
+
+    //checked input checkbox if value = 1
+    const checkbox = document.getElementById('tagPrice');
+    if (checkbox && checkbox.value == 1) {
+       checkbox.checked = true;
+    }
+
+
     </script>
 @endsection
 

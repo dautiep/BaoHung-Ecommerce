@@ -60,8 +60,17 @@ class ProductController extends Controller
     //save data
     public function save(ProductRequest $request, $id = null) {
         $input = $request->all();
+
         //slug product
         $input['productSlug'] = Str::slug($request['productName']);
+
+        // display price product
+        if (isset($input['productPrriceDisplayed'])) {
+            $input['productPrriceDisplayed'] = 1;
+        } else {
+            $input['productPrriceDisplayed'] = 0;
+        }
+
         //image product
         if (!empty($input['productImage'])) {
             $imageName = time() . '-' . $input['productSlug']. '.' .$input['productImage']->extension();

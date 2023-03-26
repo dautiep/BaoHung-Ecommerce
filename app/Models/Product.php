@@ -19,7 +19,8 @@ class Product extends Model
         'price',
         'category_id',
         'image_url',
-        'status'
+        'status',
+        'is_displayed_price'
 
     ];
 

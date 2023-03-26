@@ -21,8 +21,8 @@
                                 <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                                     <h6 class="text-truncate mb-3 ml-2">{{ $product->name }}</h6>
                                     <div class="d-flex justify-content-left">
-                                        @if ($product->price == 'Liên hệ')
-                                            <h6 class="ml-2">Giá: {{ $product->price }}</h6>
+                                        @if ($product->is_displayed_price == 0)
+                                            <h6 class="ml-2">Giá: Liên hệ</h6>
                                         @else
                                             <h6 class="ml-2">Giá: {{ formatPrice(floatval($product->price)) }}</h6>
                                         @endif
