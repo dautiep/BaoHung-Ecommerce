@@ -23,6 +23,7 @@
     <link href="{{ templateAsset('css/style.css') }}" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="{{ templateAsset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
     <style>
         .image_product {
             object-fit: cover;
@@ -30,13 +31,13 @@
             margin-right: auto;
         }
 
-        .icon-chat-bot {
+        /* .icon-chat-bot {
             position: fixed;
             display: inline;
             margin: auto;
             object-fit: cover;
             right: 10px;
-            bottom: 100px;
+            bottom: 50px;
             z-index: 100;
             width: 100px;
             height: 269px;
@@ -45,7 +46,7 @@
             background-repeat: no-repeat;
             border: none;
             animation: action 1s infinite alternate;
-        }
+        } */
 
         .btn-link {
             border: none;

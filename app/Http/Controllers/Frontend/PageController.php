@@ -240,7 +240,6 @@ class PageController extends Controller
             ];
         })->toArray();
 
-
         $config_page = [
             'status' => $status,
             'carousel_item' => @$data

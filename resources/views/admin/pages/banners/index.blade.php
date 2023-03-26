@@ -135,17 +135,17 @@
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     @php
-                                                        $lablel = $item->status == $config_active ? 'Khóa hình ảnh' : 'Mở khóa hình ảnh';
+                                                        $label = $item->status == $config_active ? 'Khóa hình ảnh' : 'Mở khóa hình ảnh';
                                                     @endphp
                                                     <button role="button" class="btn btn-sm btn-danger"
                                                         onclick="callAjax('{{ $item->id }}','{{ route('config_banner.delete') }}', '{{ $label_delete }}')"
-                                                        data-toggle="tooltip" title="{{ $lablel }}"><i
+                                                        data-toggle="tooltip" title="{{ $label }}"><i
                                                             class="fas fa-times"></i>
                                                     </button>
                                                     <button role="button"
                                                         class="btn btn-sm {{ @$bg_status[$item->status] }}"
-                                                        onclick="callAjax('{{ $item->id }}','{{ route('config_banner.status') }}', '{{ $lablel }}')"
-                                                        data-toggle="tooltip" title="{{ $lablel }}"><i
+                                                        onclick="callAjax('{{ $item->id }}','{{ route('config_banner.status') }}', '{{ $label }}')"
+                                                        data-toggle="tooltip" title="{{ $label }}"><i
                                                             class="fas fa-key"></i>
                                                     </button>
 

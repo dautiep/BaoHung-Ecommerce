@@ -2,7 +2,7 @@
     <div class="container-fluid pt-5">
         <div class="row px-xl-5">
             <!-- Shop Sidebar Start -->
-            <div class="col-lg-3 col-md-12">
+            {{-- <div class="col-lg-3 col-md-12">
                 <!-- Price Start -->
                 <div class="border-bottom mb-4 pb-4">
                     <h5 class="font-weight-semi-bold mb-4">{{ config('page.filter_product.name') }}</h5>
@@ -26,7 +26,7 @@
                     </form>
                 </div>
 
-            </div>
+            </div> --}}
             <!-- Shop Sidebar End -->
 
 
@@ -44,7 +44,11 @@
                                 <div class="card-body border-left border-right text-left p-0 pt-4 pb-3">
                                     <h6 class="text-truncate mb-3 ml-2">Tên: {{ $product->name }}</h6>
                                     <div class="d-flex justify-content-left">
-                                        <h6 class="ml-2">Giá: {{ formatPrice($product->price) }}</h6>
+                                        @if ($product->is_displayed_price == 0)
+                                            <h6 class="ml-2">Giá: Liên hệ</h6>
+                                        @else
+                                            <h6 class="ml-2">Giá: {{ formatPrice(floatval($product->price)) }}</h6>
+                                        @endif
                                         {{-- <h6 class="text-muted ml-2"><del>{{ formatPrice($product->price) }}</del></h6> --}}
                                     </div>
                                 </div>

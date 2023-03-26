@@ -12,9 +12,6 @@
             </div>
             <div class="col-lg-6 text-center text-lg-right">
                 <div class="d-inline-flex align-items-center">
-                    <a class="text-dark px-2" href="">
-                        <i class="fab fa-tiktok"></i>
-                    </a>
                     <a class="text-dark px-2" href="https://www.facebook.com/peterduy" target="_blank">
                         <i class="fab fa-facebook-f"></i>
                     </a>
