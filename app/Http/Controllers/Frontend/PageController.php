@@ -48,7 +48,7 @@ class PageController extends Controller
             'id',
             'slug'
         ], [
-            'productWithCategory'
+            'productWithCategoryActive'
         ])->where([['slug', '=', $request->slug]])->firstOrFail();
         $this->setHeaderPage($categories_with_product->name, [
             $this->configPage('Trang chủ', $this->_prefix_router . 'index'),
@@ -56,7 +56,7 @@ class PageController extends Controller
         ]);
 
         $this->setTitlePage($categories_with_product->name);
-        $all_products =  collect($categories_with_product->productWithCategory()->get()->toArray());
+        $all_products =  collect($categories_with_product->productWithCategoryActive()->get()->toArray());
         $categories_with_product_filter = collect(config('page.filter_product.filter_range'))->map(function ($item) use ($all_products) {
             if (@$item['id'] == 'price-all') {
                 return array_merge([
@@ -72,7 +72,7 @@ class PageController extends Controller
                 ], $item);
             }
         });
-        $categories_with_product->setRelation('productWithCategory', $categories_with_product->productWithCategory()->paginate(10));
+        $categories_with_product->setRelation('productWithCategoryActive', $categories_with_product->productWithCategoryActive()->paginate(10));
         $this->setCategoriesWithProductFilterRanger($categories_with_product_filter);
         $this->setCategoriesWithProduct($categories_with_product);
         return view($this->_prefix . 'category');
@@ -85,10 +85,13 @@ class PageController extends Controller
             'id',
             'slug'
         ], [
-            'productWithCategory'
-        ])->where([['slug', '=', $request->slug]])->firstOrFail();
+            'productWithCategoryActive'
+        ])->where([
+            ['slug', '=', $request->slug],
+            ['status', config('global.default.status.categories')[0]['key']]
+        ])->firstOrFail();
 
-        $all_products =  collect($categories_with_product->productWithCategory()->get());
+        $all_products =  collect($categories_with_product->productWithCategoryActive()->get());
         $config_filter = collect(config('page.filter_product.filter_range'));
         $categories_with_product_filter = $config_filter->map(function ($item) use ($all_products) {
             if (@$item['id'] == 'price-all') {
@@ -105,7 +108,7 @@ class PageController extends Controller
                 ], $item);
             }
         });
-        $product_with_category =  $categories_with_product->productWithCategory()->where(function ($query) use ($request, $config_filter) {
+        $product_with_category =  $categories_with_product->productWithCategoryActive()->where(function ($query) use ($request, $config_filter) {
             if ($request->get('targetRanger')) {
                 $json_decode_target = json_decode($request->get('targetRanger'), true);
                 $config_filter = $config_filter->where('id', $json_decode_target[0])->first();
@@ -115,7 +118,7 @@ class PageController extends Controller
                 }
             }
         })->paginate(10);
-        $categories_with_product->setRelation('productWithCategory', $product_with_category);
+        $categories_with_product->setRelation('productWithCategoryActive', $product_with_category);
         $this->setCategoriesWithProductFilterRanger($categories_with_product_filter);
         $this->setCategoriesWithProduct($categories_with_product);
         return view(config('template.config.blade_dir') . 'components.product_category')->render();
@@ -142,7 +145,7 @@ class PageController extends Controller
             'id',
             'slug'
         ], [
-            'productWithCategory'
+            'productWithCategoryActive'
         ])->where([
             ['id', '=', $product_detail->category_id],
             ['status', config('global.default.status.categories')[0]['key']]
@@ -150,7 +153,7 @@ class PageController extends Controller
         $this->setTitlePage($product_detail->name);
 
         $this->setCategoriesWithProduct($categories_with_product);
-        $categories_with_product->setRelation('productWithCategory', $categories_with_product->productWithCategory()->take(4)->get());
+        $categories_with_product->setRelation('productWithCategoryActive', $categories_with_product->productWithCategoryActive()->take(4)->get());
         $this->setProductDetail($product_detail);
         return view($this->_prefix . 'product_detail');
     }
