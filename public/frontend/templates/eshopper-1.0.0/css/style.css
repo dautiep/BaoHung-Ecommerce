@@ -9583,3 +9583,7 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 
+.navbar-displayed {
+    z-index: 9999;
+}
+
