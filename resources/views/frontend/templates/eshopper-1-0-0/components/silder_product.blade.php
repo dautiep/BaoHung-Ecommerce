@@ -7,7 +7,7 @@
         <div class="row px-xl-5">
             <div class="col">
                 <div class="owl-carousel related-carousel">
-                    @foreach (@$categories_with_product->productWithCategory as $product)
+                    @foreach (@$categories_with_product->productWithCategoryActive as $product)
                             <div class="card product-item border-0">
                                 <div
                                     class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
