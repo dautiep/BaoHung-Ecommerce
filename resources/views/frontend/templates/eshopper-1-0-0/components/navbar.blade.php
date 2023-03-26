@@ -1,26 +1,26 @@
 @php
     $instanceConfig = app(\App\Http\Controllers\Frontend\SiteConfigController::class);
     $navbars = $instanceConfig->loadConfigurationNavigation();
-    $categories = $instanceConfig->loadConfigurationCategories();
+    $config_nav_bar = $instanceConfig->loadConfigurationCategories();
     @$classNameNavbar = @$header_carouel['status'] === true;
 @endphp
 <!-- Navbar Start -->
 <div class="container-fluid">
     <div class="row border-top px-xl-5">
         <div class="col-lg-3 d-none d-lg-block">
-            @if (@$categories && @$categories['name_category'])
+            @if (@$config_nav_bar && @$config_nav_bar['name_category'])
                 <a class="{{ $classNameNavbar ? '' : 'collapse' }} btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100"
                     data-toggle="collapse" href="#navbar-vertical"
                     style="height: 65px; margin-top: -1px; padding: 0 30px;">
-                    <h6 class="m-0">{{ @$categories['name_category'] }}</h6>
+                    <h6 class="m-0">{{ @$config_nav_bar['name_category'] }}</h6>
                     <i class="fa fa-angle-down text-dark"></i>
                 </a>
-                @if (!empty(@$categories['child_category']))
+                @if (!empty(@$config_nav_bar['child_category']))
                     <nav class="{{ $classNameNavbar ? 'collapse show' : 'collapse' }} position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light"
                         id="navbar-vertical" style="width: calc(100% - 30px); z-index: 1;">
                         <div class="navbar-nav w-100 overflow-hidden">
-                            @foreach (@$categories['child_category'] as $item)
-                                @include(bladeAsset('components.nav_item'), ['categories' => $item])
+                            @foreach (@$config_nav_bar['child_category'] as $item)
+                                @include(bladeAsset('components.nav_item'), ['config_nav_bar' => $item])
                             @endforeach
                         </div>
                     </nav>
