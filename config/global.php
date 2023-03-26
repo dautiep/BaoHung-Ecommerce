@@ -120,6 +120,7 @@ return [
                 'save'   => 'lưu thông tin sản phẩm thành công',
                 'edit' => 'Cập nhật sản phẩm thành công',
                 'edit_status' => 'Đã thay đổi trạng thái sản phẩm',
+                'remove' => 'Đã xóa sản phẩm',
                 'error' => 'Đã xảy ra lỗi!',
             ],
             'banner' => [
