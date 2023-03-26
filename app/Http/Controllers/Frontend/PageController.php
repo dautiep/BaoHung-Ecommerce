@@ -158,7 +158,6 @@ class PageController extends Controller
     public function serives()
     {
         $this->setTitlePage('Dịch vụ');
-
         $this->setHeaderPage('Dịch vụ', [
             $this->configPage('Trang chủ', $this->_prefix_router . 'index'),
             $this->configPage('Dịch vụ', $this->_prefix_router . 'service')
