@@ -20,4 +20,8 @@ class Category extends Model
     public function productWithCategory() {
         return $this->hasMany(Product::class, 'category_id', 'id');
     }
+
+    public function productWithCategoryActive() {
+        return $this->hasMany(Product::class, 'category_id', 'id')->where('status', config('global.default.status.products.actived.key'));
+    }
 }
