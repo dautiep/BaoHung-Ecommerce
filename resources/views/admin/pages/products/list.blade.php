@@ -126,21 +126,24 @@
                                             </td>
                                             <td class="align-middle text-center">{{ date_format(date_create($product->created_at), 'd-m-Y') }}</td>
                                             <td class="align-middle text-center">
-
                                                 @if ($product->status == $status['actived']['key'])
                                                     <a class="btn btn-sm btn-primary" href="{{ route('products.edit', $product->id) }}" title="Cập nhật thông tin">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <button role="button" class="btn btn-sm btn-warning"
-                                                            onclick="deactiveService('{{ $product->id }}')" data-toggle="tooltip"
+                                                            onclick="deactiveProduct('{{ $product->id }}')" data-toggle="tooltip"
                                                             title="{{ $status['actived']['action'] }}"><i class="fa fa-key"></i>
                                                     </button>
                                                 @else
                                                     <button role="button" class="btn btn-sm btn-success"
-                                                            onclick="activeService('{{ $product->id }}')" data-toggle="tooltip"
+                                                            onclick="activeProduct('{{ $product->id }}')" data-toggle="tooltip"
                                                             title="{{ $status['unactived']['action'] }}"><i class="fa fa-key"></i>
                                                     </button>
                                                 @endif
+                                                <button role="button" class="btn btn-sm btn-danger"
+                                                    onclick="removeProduct('{{ $product->id }}')" data-toggle="tooltip"
+                                                    title="Xóa sản phẩm"><i class="fa fa-times"></i>
+                                                </button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -185,7 +188,7 @@
             $(this).val('');
         });
 
-        function deactiveService(id_product) {
+        function deactiveProduct(id_product) {
             var data = {
                 productId: id_product,
                 productStatus: 1
@@ -233,7 +236,7 @@
             })
         }
 
-        function activeService(id_product) {
+        function activeProduct(id_product) {
             var data = {
                 productId: id_product,
                 productStatus: 0
@@ -260,6 +263,53 @@
                                     Swal.fire({
                                     title: 'Thành công',
                                     text: "Đã kích hoạt kinh doanh sản phẩm",
+                                    icon: 'success',
+                                    confirmButtonColor: '#3085d6',
+                                    confirmButtonText: 'Xác nhận'
+                                }).then((result) => {
+                                    if (result.value) {
+                                        window.location.reload();
+                                    }
+                                })
+                            } else {
+                                toastr.error('Có lỗi xảy ra vui lòng thử lại sau.')
+                            }
+                        },
+                        error: function(response) {
+                            toastr.error('Có lỗi xảy ra vui lòng thử lại sau.')
+                        }
+                    });
+
+                }
+            })
+        }
+
+        function removeProduct(id_product) {
+            var data = {
+                    productId: id_product,
+                };
+            Swal.fire({
+                title: 'Bạn có chắc muốn xóa sản phẩm này không?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Xác nhận',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Hủy'
+            }).then((result) => {
+                if (result.value) {
+                    $('.loader').show();
+                    $.ajax({
+                        url: "{{ route('products.remove') }}",
+                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                        type: 'POST',
+                        data: data,
+                        success: function(response) {
+                            $('.loader').hide();
+                            if (response.success == 'success') {
+                                    Swal.fire({
+                                    title: 'Thành công',
+                                    text: "Đã xóa sản phẩm",
                                     icon: 'success',
                                     confirmButtonColor: '#3085d6',
                                     confirmButtonText: 'Xác nhận'
