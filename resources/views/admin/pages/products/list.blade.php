@@ -110,8 +110,8 @@
                                             <td class="align-middle">
                                                 Tên: {{ $product->name }} <br>
                                                 Danh mục: {{ $product->category->name }} <br>
-                                                @if ($product->price == 'Liên hệ')
-                                                    Giá: {{ $product->price }}
+                                                @if ($product->is_displayed_price == 0)
+                                                    Giá: Liên hệ
                                                 @else
                                                     Giá: {{ number_format($product->price) }} VND
                                                 @endif

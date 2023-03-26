@@ -20,8 +20,8 @@
 
             <div class="col-lg-7 pb-5">
                 <h3 class="font-weight-semi-bold">{{ @$product_detail->name }}</h3>
-                @if ($product_detail->price == 'Liên hệ')
-                    <h3 class="font-weight-semi-bold mb-4">Giá: {{ $product_detail->price }}</h3>
+                @if ($product_detail->is_displayed_price == 0)
+                    <h3 class="font-weight-semi-bold mb-4">Giá: Liên hệ</h3>
                 @else
                     <h3 class="font-weight-semi-bold mb-4">Giá: {{ formatPrice(floatval($product_detail->price)) }}</h3>
                 @endif

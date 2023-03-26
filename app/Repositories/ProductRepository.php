@@ -53,7 +53,8 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                     'category_id' => $request['productCategory'],
                     'content' => $request['productContent'],
                     'status' => $status['actived']['key'],
-                    'image_url' => $request['productImageUrl']
+                    'image_url' => $request['productImageUrl'],
+                    'is_displayed_price' => $request['productPrriceDisplayed']
                 ]
             );
         }
@@ -64,7 +65,8 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             'description' => $request['productDescription'],
             'category_id' => $request['productCategory'],
             'content' => $request['productContent'],
-            'image_url' => $request['productImageUrl']
+            'image_url' => $request['productImageUrl'],
+            'is_displayed_price' => $request['productPrriceDisplayed']
         ], $id);
     }
 
