@@ -33,7 +33,7 @@
             <!-- Shop Product Start -->
             <div class="col-lg-9 col-md-12">
                 <div class="row pb-3">
-                    @foreach ($categories_with_product->productWithCategory as $product)
+                    @foreach ($categories_with_product->productWithCategoryActive as $product)
                         <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
                             <div class="card product-item border-0 mb-4">
                                 <a href="{{ route('frontend.product.detail', ['slug' => $product->slug]) }}">
@@ -59,7 +59,7 @@
                         </div>
                     @endforeach
 
-                    {{ $categories_with_product->productWithCategory->links(bladeAsset('components.pagination')) }}
+                    {{ $categories_with_product->productWithCategoryActive->links(bladeAsset('components.pagination')) }}
                 </div>
             </div>
             <!-- Shop Product End -->

@@ -1,6 +1,6 @@
     <!-- Products Start -->
     @foreach ($categories_with_product as $category)
-        @if ($category->productWithCategory->count() == 0)
+        @if ($category->productWithCategoryActive->count() == 0)
             @continue;
         @endif
         <div class="container-fluid pt-5">
@@ -8,7 +8,7 @@
                 <h2 class="section-title px-5"><span class="px-2">{{ $category->name }}</span></h2>
             </div>
             <div class="row px-xl-5 pb-3">
-                @foreach ($category->productWithCategory->take(4) as $product)
+                @foreach ($category->productWithCategoryActive->take(4) as $product)
                     <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                         <div class="card product-item border-0 mb-4">
                             <a href="{{ route('frontend.product.detail', ['slug' => $product->slug]) }}">
