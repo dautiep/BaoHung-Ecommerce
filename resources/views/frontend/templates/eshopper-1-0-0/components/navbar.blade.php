@@ -7,7 +7,7 @@
 <!-- Navbar Start -->
 <div class="container-fluid">
     <div class="row border-top px-xl-5">
-        <div class="col-lg-3 d-none d-lg-block">
+        <div class="col-lg-3 d-none d-lg-block navbar-displayed">
             @if (@$config_nav_bar && @$config_nav_bar['name_category'])
                 <a class="{{ $classNameNavbar ? '' : 'collapse' }} btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100"
                     data-toggle="collapse" href="#navbar-vertical"
