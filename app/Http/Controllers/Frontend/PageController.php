@@ -135,7 +135,8 @@ class PageController extends Controller
             'content',
             'price',
             'category_id',
-            'image_url'
+            'image_url',
+            'is_displayed_price'
         ], false)->where(function ($builder) use ($request) {
             $builder->where('slug', '=', $request->slug)
                 ->where('status', config('global.default.status.products.actived.key'));
