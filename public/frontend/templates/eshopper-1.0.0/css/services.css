@@ -14,7 +14,7 @@
     -webkit-transition: ease all 0.35s;
     transition: ease all 0.35s;
     top: 0;
-    height: 250px;
+    height: 350px;
 }
 .feature-box-1 * {
     -moz-transition: ease all 0.35s;
@@ -23,8 +23,8 @@
     transition: ease all 0.35s;
 }
 .feature-box-1 .icon {
-    width: 70px;
-    height: 70px;
+    /* width: 70px;
+    height: 70px; */
     line-height: 70px;
     background: #fc5356;
     color: #ffffff;
@@ -60,7 +60,7 @@
     transition: ease all 0.35s;
 }
 .feature-box-1:hover {
-    top: -5px;
+    /* top: -5px; */
 }
 .feature-box-1:hover h5 {
     color: #ffffff;
