@@ -21,7 +21,7 @@
                     <div class="col-sm-6 col-lg-4">
                         <div class="feature-box-1">
                             <div class="icon">
-                                <i class="fa fa-desktop"></i>
+                                <img class="img-fluid" src="https://noithatbinhminh.com.vn/wp-content/uploads/2022/12/anh-hoa-mau-don-dep.jpg" alt="">
                             </div>
                             <div class="feature-content">
                                 <h5>{{ $service->name }}</h5>
@@ -30,72 +30,6 @@
                         </div>
                     </div>
                 @endforeach
-                <!-- / -->
-                <!-- feaure box -->
-                {{-- <div class="col-sm-6 col-lg-4">
-                    <div class="feature-box-1">
-                        <div class="icon">
-                            <i class="fa fa-user"></i>
-                        </div>
-                        <div class="feature-content">
-                            <h5>Lorem, ipsum.</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, officiis.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- / -->
-                <!-- feaure box -->
-                <div class="col-sm-6 col-lg-4">
-                    <div class="feature-box-1">
-                        <div class="icon">
-                            <i class="fa fa-comment"></i>
-                        </div>
-                        <div class="feature-content">
-                            <h5>Lorem, ipsum.</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, officiis.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- / -->
-                <!-- feaure box -->
-                <div class="col-sm-6 col-lg-4">
-                    <div class="feature-box-1">
-                        <div class="icon">
-                            <i class="fa fa-image"></i>
-                        </div>
-                        <div class="feature-content">
-                            <h5>Lorem, ipsum.</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, officiis.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- / -->
-                <!-- feaure box -->
-                <div class="col-sm-6 col-lg-4">
-                    <div class="feature-box-1">
-                        <div class="icon">
-                            <i class="fa fa-th"></i>
-                        </div>
-                        <div class="feature-content">
-                            <h5>Lorem, ipsum.</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, officiis.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- / -->
-                <!-- feaure box -->
-                <div class="col-sm-6 col-lg-4">
-                    <div class="feature-box-1">
-                        <div class="icon">
-                            <i class="fa fa-cog"></i>
-                        </div>
-                        <div class="feature-content">
-                            <h5>Lorem, ipsum.</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, officiis.</p>
-                        </div>
-                    </div>
-                </div> --}}
-                <!-- / -->
             </div>
         </div>
     </section>
