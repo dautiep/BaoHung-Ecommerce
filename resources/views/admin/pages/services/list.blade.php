@@ -85,6 +85,7 @@
                                     <tr>
                                         <th class="bg-info" style="width: 10px">#</th>
                                         <th class="text-center bg-info w-50">Tên</th>
+                                        <th class="text-center bg-info">Hình ảnh</th>
                                         <th class="text-center bg-info">Trạng thái</th>
                                         <th class="text-center bg-info">Ngày Tạo</th>
                                         <th class="text-center bg-info">Hành Động</th>
@@ -97,6 +98,9 @@
                                             <td class="align-middle">
                                                 {{ $service->name }}
                                             </td>
+                                            <td class="text-center"><img class="img-fluid img-product-item"
+                                                src="{{ asset('admin/images/services/' . $service->img_src) }}"
+                                                alt="{{ $service->name }}"></td>
                                             <td class="align-middle text-center">
                                                 @if ($service->status == $status[0]['key'])
                                                     <span class="badge bg-success">{{ $status[0]['name'] }}</span>

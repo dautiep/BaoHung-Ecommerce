@@ -16,6 +16,7 @@ class ConfigController extends Controller
                 'message' => 'Cập nhật cache hệ thống thành công',
                 'alert-type' => 'success'
             ));
+            Artisan::call('migrate');
             Artisan::call('optimize');
             Artisan::call('route:clear');
             Artisan::call('storage:link');

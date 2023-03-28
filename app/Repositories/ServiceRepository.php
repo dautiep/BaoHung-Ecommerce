@@ -16,12 +16,14 @@ class ServiceRepository extends BaseRepository implements ServiceRepositoryInter
     }
 
     //get data by status
-    public function getAllDataByStatus($status) {
-        return $this->_model->where('status', $status['key'])->select('name', 'description')->get();
+    public function getAllDataByStatus($status)
+    {
+        return $this->_model->where('status', $status['key'])->select('name', 'description', 'img_src')->get();
     }
 
     //get all data
-    public function getAllData() {
+    public function getAllData()
+    {
         return $this->_model->select('name')->get();
     }
 
@@ -45,6 +47,8 @@ class ServiceRepository extends BaseRepository implements ServiceRepositoryInter
     //handle save or update data
     public function handleCreateOrUpdate($id, $request)
     {
+        $rec = $this->_model->find($id);
+        $request['img_src'] = $this->handleUpdateImage($rec, $request) ?? "";
         if ($id == null) {
             $status = config('global.default.status.services');
             return $this->_model->create(
@@ -52,13 +56,15 @@ class ServiceRepository extends BaseRepository implements ServiceRepositoryInter
                     'name' => $request['serviceName'],
                     'description' => $request['serviceDescription'],
                     'user_id' => Auth::user()->id,
-                    'status' => $status[0]['key']
+                    'status' => $status[0]['key'],
+                    'img_src' => $request['img_src'],
                 ]
             );
         }
         return $this->update([
             'name' => $request['serviceName'],
-            'description' => $request['serviceDescription']
+            'description' => $request['serviceDescription'],
+            'img_src' => $request['img_src'],
         ], $id);
     }
 
@@ -71,5 +77,31 @@ class ServiceRepository extends BaseRepository implements ServiceRepositoryInter
         } else {
             return $this->update(['status' => $status[0]['key']], $input['serviceId']);
         }
+    }
+
+    public function handleUpdateImage($data, $input)
+    {
+        try {
+            if (request()->file('img_src')) {
+                $slug = \Str::slug($data['name'] ?? "");
+                $imageName = time() . '-' . $slug . '.' . $input['img_src']->extension();
+                $input['img_src']->move(public_path('admin/images/services'), $imageName);
+                $input['img_src'] = $imageName;
+                //delete old image when update
+                if (@$data->img_src) {
+                    $this->deleteImage(@$data->img_src);
+                }
+                return $input['img_src'];
+            } else {
+                return  @$data->img_src;
+            }
+        } catch (Exception $e) {
+            return  @$data->img_src;
+        }
+    }
+
+    public function deleteImage($src)
+    {
+        \File::delete(public_path('admin/images/services/' . @$src));
     }
 }

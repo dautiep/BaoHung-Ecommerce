@@ -75,6 +75,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
         Route::get('/edit/{id}', 'ServiceController@edit')->name('edit');
         Route::post('/lock', 'ServiceController@lock')->name('lock');
         Route::post('/unlock', 'ServiceController@unlock')->name('unlock');
+        Route::post('/upload-image', 'ProductController@uploadImage')->name('upload');
+
     });
 
     //questions
