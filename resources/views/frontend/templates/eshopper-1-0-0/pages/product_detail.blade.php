@@ -7,7 +7,7 @@
         @include(bladeAsset('components.silder_product'))
     @else
         @include(bladeAsset('components.product'), ['categories_with_product' => [
-            $categories_with_product
+            @$categories_with_product
         ]])
     @endif
 @endsection
