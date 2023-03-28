@@ -94,6 +94,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
         Route::get('/edit/{id}', 'ProductController@edit')->name('edit');
         Route::post('/lock', 'ProductController@lock')->name('lock');
         Route::post('/unlock', 'ProductController@unlock')->name('unlock');
+        Route::post('/remove', 'ProductController@remove')->name('remove');
         Route::post('/upload-image', 'ProductController@uploadImage')->name('upload-image');
     });
 

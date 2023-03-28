@@ -144,4 +144,23 @@ class ProductController extends Controller
             return Response::json(['error' => $this::$TYPE_MESSAGES_ERROR, 'message' => 'Lỗi! Upload Fike']);
         }
     }
+
+    //unlock data
+    public function remove(Request $request)
+    {
+        try {
+            $input = $request->all();
+            $product = $this->_productInterFace->find($input['productId']);
+            if ($product) {
+                File::delete(public_path('admin/images/products/' . $product->image_url));
+                $product->delete();
+                return Response::json(['success' => $this::$TYPE_MESSAGES_SUCCESS, 'message' => config('global.default.messages.products.remove')]);
+            } else {
+                return Response::json(['success' => $this::$TYPE_MESSAGES_ERROR, 'message' => config('global.default.messages.products.error')]);
+            }
+        } catch (Exception $e) {
+            logger($e->getMessage() . ' at ' . $e->getLine() .  ' in ' . $e->getFile());
+            return Response::json(['success' => $this::$TYPE_MESSAGES_ERROR, 'message' => config('global.default.messages.products.error')]);
+        }
+    }
 }
