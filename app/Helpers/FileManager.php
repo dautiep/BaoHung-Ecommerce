@@ -55,4 +55,30 @@ class FileManager
             throw new \Exception($e);
         }
     }
+
+    public function handleUpdateImage($data, $input, $path)
+    {
+        try {
+            if (request()->file('img_src')) {
+                $slug = \Str::slug($data['name'] ?? "");
+                $imageName = time() . '-' . $slug . '.' . $input['img_src']->extension();
+                $input['img_src']->move(public_path($path), $imageName);
+                $input['img_src'] = $imageName;
+                //delete old image when update
+                if (@$data->img_src) {
+                    $this->deleteImage($path, @$data->img_src);
+                }
+                return $input['img_src'];
+            } else {
+                return  @$data->img_src;
+            }
+        } catch (Exception $e) {
+            return  @$data->img_src;
+        }
+    }
+
+    public function deleteImage($path, $src)
+    {
+        \File::delete(public_path($path . @$src));
+    }
 }

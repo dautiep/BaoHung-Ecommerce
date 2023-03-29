@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Helpers\FileManager;
 use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\Interfaces\ServiceRepositoryInterface;
@@ -48,7 +49,7 @@ class ServiceRepository extends BaseRepository implements ServiceRepositoryInter
     public function handleCreateOrUpdate($id, $request)
     {
         $rec = $this->_model->find($id);
-        $request['img_src'] = $this->handleUpdateImage($rec, $request) ?? "";
+        $request['img_src'] = app(FileManager::class)->handleUpdateImage($rec, $request, 'admin/images/services/') ?? "";
         if ($id == null) {
             $status = config('global.default.status.services');
             return $this->_model->create(
@@ -77,31 +78,5 @@ class ServiceRepository extends BaseRepository implements ServiceRepositoryInter
         } else {
             return $this->update(['status' => $status[0]['key']], $input['serviceId']);
         }
-    }
-
-    public function handleUpdateImage($data, $input)
-    {
-        try {
-            if (request()->file('img_src')) {
-                $slug = \Str::slug($data['name'] ?? "");
-                $imageName = time() . '-' . $slug . '.' . $input['img_src']->extension();
-                $input['img_src']->move(public_path('admin/images/services'), $imageName);
-                $input['img_src'] = $imageName;
-                //delete old image when update
-                if (@$data->img_src) {
-                    $this->deleteImage(@$data->img_src);
-                }
-                return $input['img_src'];
-            } else {
-                return  @$data->img_src;
-            }
-        } catch (Exception $e) {
-            return  @$data->img_src;
-        }
-    }
-
-    public function deleteImage($src)
-    {
-        \File::delete(public_path('admin/images/services/' . @$src));
     }
 }
