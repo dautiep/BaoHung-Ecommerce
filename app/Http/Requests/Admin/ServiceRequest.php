@@ -32,8 +32,9 @@ class ServiceRequest extends FormRequest
     {
         if (!request()->id) {
             return [
-                'serviceName' => ['required','unique:services,name,'],
-                'serviceDescription' => 'required'
+                'serviceName' => ['required', 'unique:services,name,'],
+                'serviceDescription' => 'required',
+                'img_src' => 'required'
             ];
         }
         $service = $this->_serviceInterFace->find(request()->id);
@@ -49,7 +50,8 @@ class ServiceRequest extends FormRequest
                     }
                 }
             ],
-            'serviceDescription' => 'required'
+            'serviceDescription' => 'required',
+            'img_src' => 'required'
         ];
     }
 
@@ -63,7 +65,8 @@ class ServiceRequest extends FormRequest
         return [
             'serviceName.required' => 'Tên dịch vụ không được bỏ trống!',
             'serviceName.unique' => 'Tên dịch vụ đã tồn tại!',
-            'serviceDescription.required' =>'Mô tả dịch vụ không được bỏ trống!'
+            'serviceDescription.required' => 'Mô tả dịch vụ không được bỏ trống!',
+            'img_src.required' => 'Vui lòng chọn hình dịch vụ!'
         ];
     }
 }
